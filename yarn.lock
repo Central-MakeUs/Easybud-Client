@@ -5196,6 +5196,7 @@ __metadata:
     react-native-safe-area-context: ^4.4.1
     react-native-web: ^0.18.10
     react-test-renderer: 18.2.0
+    recoil: ^0.7.7
     typescript: 4.8.4
   languageName: unknown
   linkType: soft
@@ -9885,6 +9886,13 @@ __metadata:
   version: 1.4.0
   resolution: "graphemer@npm:1.4.0"
   checksum: bab8f0be9b568857c7bec9fda95a89f87b783546d02951c40c33f84d05bb7da3fd10f863a9beb901463669b6583173a8c8cc6d6b306ea2b9b9d5d3d943c3a673
+  languageName: node
+  linkType: hard
+
+"hamt_plus@npm:1.0.2":
+  version: 1.0.2
+  resolution: "hamt_plus@npm:1.0.2"
+  checksum: af26ea32db03009019cc83dfa9411521a2fa16079443de1a502c9be46d8b3c975acda8ed93fc5750ef08d3186d35901e2d8cfe717dd54bea67b358601fa74e4c
   languageName: node
   linkType: hard
 
@@ -15452,6 +15460,22 @@ __metadata:
     source-map: ~0.6.1
     tslib: ^2.0.1
   checksum: 03cc7f57562238ba258d468be67bf7446ce7a707bc87a087891dad15afead46c36e9aaeedf2130e2ab5a465244a9c62bfd4127849761cf8f4085abe2f3e5f485
+  languageName: node
+  linkType: hard
+
+"recoil@npm:^0.7.7":
+  version: 0.7.7
+  resolution: "recoil@npm:0.7.7"
+  dependencies:
+    hamt_plus: 1.0.2
+  peerDependencies:
+    react: ">=16.13.1"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 65edecbcb8d2cde89bfd61ec679c200483472a6cd343c33e4e9142b6ce524fb17d1fecc2bfd8c392926aaa8178c81457f165b32abce2a9662f51f98822c0a9cc
   languageName: node
   linkType: hard
 
