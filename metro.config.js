@@ -15,6 +15,6 @@ module.exports = {
     }),
   },
   resolver: {
-    resolverMainFields: ["sbmodern", "react-native", "browser", "main"],
+    resolverMainFields: ['sbmodern', 'react-native', 'browser', 'main'],
   },
 };

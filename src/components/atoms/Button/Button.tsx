@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export const MyButton = ({text, onPress, color, textColor}: ButtonProps) => (
+export const Button = ({text, onPress, color, textColor}: ButtonProps) => (
   <View style={styles.buttonContainer}>
     <TouchableOpacity
       style={[styles.button, !!color && {backgroundColor: color}]}
