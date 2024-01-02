@@ -4211,6 +4211,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tanstack/query-core@npm:5.17.0":
+  version: 5.17.0
+  resolution: "@tanstack/query-core@npm:5.17.0"
+  checksum: 8230e99ed4e21fd9f3618c20e1be1fa12bd68ec1f91de6832435c0de4616e4f61c6ae8db24e8cd8d013010442f01a446cbb8ca695e46da9c5be26b594b01900e
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:^5.17.0":
+  version: 5.17.0
+  resolution: "@tanstack/react-query@npm:5.17.0"
+  dependencies:
+    "@tanstack/query-core": 5.17.0
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 1f6be4a71b39441ea5361278685059473a71c68de7340131a00a93a8924b5ca9e0e81c9d31756ffdaaba0f1a87efbb603802570b3aaa4aff413fdf79b054f5c4
+  languageName: node
+  linkType: hard
+
 "@testing-library/dom@npm:^8.3.0":
   version: 8.20.1
   resolution: "@testing-library/dom@npm:8.20.1"
@@ -5174,6 +5192,7 @@ __metadata:
     "@storybook/react": ^6.5.14
     "@storybook/react-native": ^6.5.1
     "@storybook/testing-library": ^0.0.13
+    "@tanstack/react-query": ^5.17.0
     "@tsconfig/react-native": ^2.0.2
     "@types/jest": ^29.2.1
     "@types/react": ^18.0.24
@@ -5181,6 +5200,7 @@ __metadata:
     "@types/react-test-renderer": ^18.0.0
     "@typescript-eslint/eslint-plugin": ^5.37.0
     "@typescript-eslint/parser": ^5.37.0
+    axios: ^1.6.3
     babel-jest: ^29.2.1
     babel-loader: ^8.2.4
     babel-plugin-module-resolver: ^5.0.0
@@ -5881,6 +5901,17 @@ __metadata:
   version: 1.0.5
   resolution: "available-typed-arrays@npm:1.0.5"
   checksum: 20eb47b3cefd7db027b9bbb993c658abd36d4edd3fe1060e83699a03ee275b0c9b216cc076ff3f2db29073225fb70e7613987af14269ac1fe2a19803ccc97f1a
+  languageName: node
+  linkType: hard
+
+"axios@npm:^1.6.3":
+  version: 1.6.3
+  resolution: "axios@npm:1.6.3"
+  dependencies:
+    follow-redirects: ^1.15.0
+    form-data: ^4.0.0
+    proxy-from-env: ^1.1.0
+  checksum: 07ef3bb83fc2dacc1ae2c97f2bbd04ef7701f5655f9037789d79ee78b698ffa50eaa8465c2017d4d3e9ce7d94cb779f730acaab32ce9036d0a4933c1e89df4da
   languageName: node
   linkType: hard
 
@@ -9336,6 +9367,16 @@ __metadata:
     inherits: ^2.0.3
     readable-stream: ^2.3.6
   checksum: 42e07747f83bcd4e799da802e621d6039787749ffd41f5517f8c4f786ee967e31ba32b09f8b28a9c6f67bd4f5346772e604202df350e8d99f4141771bae31279
+  languageName: node
+  linkType: hard
+
+"follow-redirects@npm:^1.15.0":
+  version: 1.15.4
+  resolution: "follow-redirects@npm:1.15.4"
+  peerDependenciesMeta:
+    debug:
+      optional: true
+  checksum: e178d1deff8b23d5d24ec3f7a94cde6e47d74d0dc649c35fc9857041267c12ec5d44650a0c5597ef83056ada9ea6ca0c30e7c4f97dbf07d035086be9e6a5b7b6
   languageName: node
   linkType: hard
 
@@ -14912,6 +14953,13 @@ __metadata:
     forwarded: 0.2.0
     ipaddr.js: 1.9.1
   checksum: 29c6990ce9364648255454842f06f8c46fcd124d3e6d7c5066df44662de63cdc0bad032e9bf5a3d653ff72141cc7b6019873d685708ac8210c30458ad99f2b74
+  languageName: node
+  linkType: hard
+
+"proxy-from-env@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "proxy-from-env@npm:1.1.0"
+  checksum: ed7fcc2ba0a33404958e34d95d18638249a68c430e30fcb6c478497d72739ba64ce9810a24f53a7d921d0c065e5b78e3822759800698167256b04659366ca4d4
   languageName: node
   linkType: hard
 

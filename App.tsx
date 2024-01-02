@@ -1,11 +1,16 @@
 import {View} from 'react-native';
 import {RecoilRoot} from 'recoil';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <RecoilRoot>
-      <View />
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <View />
+      </RecoilRoot>
+    </QueryClientProvider>
   );
 };
 
