@@ -1,15 +1,16 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
+  plugins: ['@typescript-eslint', 'jest', 'prettier'],
   extends: [
     'eslint:recommended',
     '@react-native-community',
-    'airbnb',
-    'airbnb/hooks',
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended',
   ],
+  env: {
+    'jest/globals': true,
+  },
   ignorePatterns: ['android', 'ios', '.ondevice'],
   settings: {
     'import/resolver': {
@@ -24,5 +25,7 @@ module.exports = {
       },
     ],
     'react/react-in-jsx-scope': 'off',
+    '@typescript-eslint/ban-types': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
   },
 };
