@@ -1,8 +1,8 @@
 // stories/MyButton.stories.tsx
 import React from 'react';
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import {ComponentMeta, ComponentStory} from '@storybook/react';
 
-import { Button } from 'components/atoms/Button/Button';
+import {Button} from 'components/atoms/Button/Button';
 
 export default {
   title: 'atoms/Button',
