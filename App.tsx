@@ -1,21 +1,16 @@
-import {RecoilRoot} from 'recoil';
-import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-
 import Navigator from 'navigators/Navigator';
-
-const queryClient = new QueryClient();
+import AppSetupWrapper from 'libs/AppSetupWrapper';
 
 const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <RecoilRoot>
-        <Navigator />
-      </RecoilRoot>
-    </QueryClientProvider>
+    <AppSetupWrapper>
+      <Navigator />
+    </AppSetupWrapper>
   );
 };
 
 export default App;
 
+/** storybook 실행용 */
 // import StorybookUIRoot from './.ondevice/Storybook';
 // export {StorybookUIRoot as default};

@@ -1,4 +1,4 @@
-import {TypeOfPalette} from 'types/theme';
+import {TypeOfPalette} from 'styles/types';
 
 const commonPalette = {
   gray1: '#F9FAFB',
@@ -11,14 +11,14 @@ const commonPalette = {
   black: '#000000',
 };
 
-export const lightPalette: TypeOfPalette = {
+export const palette: TypeOfPalette = {
   primary: '#5856D6',
   secondary: '#DEDDF7',
   ...commonPalette,
 };
 
-export const darkPalette: TypeOfPalette = {
-  primary: '#5E5CE6',
-  secondary: '#1C1C45',
-  ...commonPalette,
-};
+// export const darkPalette: TypeOfPalette = {
+//   primary: '#5E5CE6',
+//   secondary: '#1C1C45',
+//   ...commonPalette,
+// };

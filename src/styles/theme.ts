@@ -1,10 +1,10 @@
-import {TypeOfTheme} from 'types/theme';
-import {darkPalette, lightPalette} from 'styles';
+import {palette} from 'styles';
+import {TypeOfTheme} from 'styles/types';
 
-export const lightTheme: TypeOfTheme = {
-  palette: lightPalette,
+export const theme: TypeOfTheme = {
+  palette,
 };
 
-export const darkTheme: TypeOfTheme = {
-  palette: darkPalette,
-};
+// export const darkTheme: TypeOfTheme = {
+//   palette: darkPalette,
+// };
