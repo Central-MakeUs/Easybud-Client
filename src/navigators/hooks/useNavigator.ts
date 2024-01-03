@@ -1,6 +1,5 @@
 import {NavigationProp, useNavigation} from '@react-navigation/native';
-
-import {StackParamList, TabParamList} from 'types/navigator';
+import {StackParamList, TabParamList} from 'navigators/types';
 
 const useNavigator = () => {
   const stackNavigation = useNavigation<NavigationProp<StackParamList>>();
