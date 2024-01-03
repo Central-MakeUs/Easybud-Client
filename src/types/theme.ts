@@ -1,5 +1,3 @@
-import {lightPalette, theme} from 'styles';
-
 export type TypeOfTheme = {
   palette: TypeOfPalette;
 };
@@ -17,6 +15,6 @@ export type TypeOfPalette = Readonly<{
   black: string;
 }>;
 
-export type KeyOfPalette = keyof typeof lightPalette;
+export type KeyOfPalette = keyof TypeOfPalette;
 
-export type KeyofTheme = keyof typeof theme;
+export type KeyofTheme = keyof TypeOfPalette;
