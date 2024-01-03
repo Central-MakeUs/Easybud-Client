@@ -1,5 +1,5 @@
-import {TypeOfTheme} from 'models/theme';
-import {palette} from './palette';
+import { TypeOfTheme } from 'types/theme';
+import { palette } from 'styles';
 
 export const theme: TypeOfTheme = {
   palette,

@@ -1,5 +1,6 @@
-import {NavigationContainer} from '@react-navigation/native';
-import StackNavigator from './StackNavigator';
+import { NavigationContainer } from '@react-navigation/native';
+
+import StackNavigator from 'navigators/StackNavigator';
 
 const Navigator = () => {
   return (
