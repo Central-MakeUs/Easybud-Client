@@ -1,4 +1,4 @@
-export type StackParamList = {};
+export type StackParamList = {Home: undefined};
 
 export type TabParamList = {};
 
