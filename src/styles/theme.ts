@@ -1,8 +1,8 @@
-import {palette} from 'styles';
+import {lightPalette} from 'styles';
 import {TypeOfTheme} from 'styles/types';
 
 export const theme: TypeOfTheme = {
-  palette,
+  palette: lightPalette,
 };
 
 // export const darkTheme: TypeOfTheme = {
