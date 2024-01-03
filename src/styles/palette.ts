@@ -11,14 +11,14 @@ const commonPalette = {
   black: '#000000',
 };
 
-export const palette: TypeOfPalette = {
+export const lightPalette: TypeOfPalette = {
   primary: '#5856D6',
   secondary: '#DEDDF7',
   ...commonPalette,
 };
 
-// export const darkPalette: TypeOfPalette = {
-//   primary: '#5E5CE6',
-//   secondary: '#1C1C45',
-//   ...commonPalette,
-// };
+export const darkPalette: TypeOfPalette = {
+  primary: '#5E5CE6',
+  secondary: '#1C1C45',
+  ...commonPalette,
+};
