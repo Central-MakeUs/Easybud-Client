@@ -1,3 +1,3 @@
-export const enum stackMenu {
+export const enum StackMenu {
   Home = 'Home',
 }
