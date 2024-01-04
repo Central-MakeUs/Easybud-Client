@@ -82,6 +82,7 @@
     "lint-staged": "^15.2.0",
     "metro-react-native-babel-preset": "0.73.8",
     "prettier": "^3.1.1",
+    "react-docgen-typescript-plugin": "^1.0.5",
     "react-native-svg-transformer": "1.0.0",
     "react-test-renderer": "18.2.0",
     "tsconfig-paths-webpack-plugin": "4.0.1",
