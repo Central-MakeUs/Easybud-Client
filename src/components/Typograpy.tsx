@@ -1,9 +1,9 @@
 import {Text, TextProps} from 'react-native';
 import {theme} from 'styles';
-import {KeyofTypography} from 'styles/types';
+import {KeyOfTypography} from 'styles/types';
 
 type TypographyProps = {
-  type?: KeyofTypography;
+  type?: KeyOfTypography;
 } & TextProps;
 
 export default function Typography({

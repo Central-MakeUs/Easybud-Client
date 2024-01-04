@@ -24,8 +24,8 @@ export type TypeOfPalette = Readonly<{
 
 /** keyof styles */
 
-export type KeyofTheme = keyof TypeOfPalette;
+export type KeyOfTheme = keyof TypeOfPalette;
 
 export type KeyOfPalette = keyof TypeOfPalette;
 
-export type KeyofTypography = keyof TypeOfTypography;
+export type KeyOfTypography = keyof TypeOfTypography;
