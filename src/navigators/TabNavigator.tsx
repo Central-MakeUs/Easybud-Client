@@ -32,6 +32,7 @@ const screenOptions = ({route}: TabRouteProps) => ({
   tabBarActiveTintColor: theme.palette.primary,
   tabBarInactiveTintColor: theme.palette.gray4,
   tabBarStyle: {
+    borderTopColor: theme.palette.gray1,
     marginBottom: 7,
   },
   tabBarLabelStyle: {
