@@ -7,6 +7,7 @@ type IconProps = SvgProps & {
   name: keyof typeof Icons;
   size?: number;
   fill?: KeyOfPalette;
+  style?: React.CSSProperties | Array<React.CSSProperties>;
 };
 
 export default function Icon({
@@ -18,6 +19,11 @@ export default function Icon({
   const SvgIcon = Icons[name];
 
   return (
-    <SvgIcon fill={theme.palette[fill]} width={size} height={size} {...props} />
+    <SvgIcon
+      width={size}
+      height={size}
+      style={{color: theme.palette[fill]}}
+      {...props}
+    />
   );
 }
