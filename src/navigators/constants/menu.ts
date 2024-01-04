@@ -6,6 +6,7 @@ export const enum StackMenu {
 export const enum TabMenu {
   Ledger = 'Ledger',
   Transaction = 'Transaction',
+  AddTransaction = 'AddTransaction',
   Account = 'Account',
   Setting = 'Setting',
 }
