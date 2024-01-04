@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigator from 'navigators/TabNavigator';
-import {StackMenu} from 'navigators/constants';
+import {StackMenu} from 'navigators/constants/menu';
 import {StackParamList} from 'navigators/types';
 import Home from 'screens/Home';
 
