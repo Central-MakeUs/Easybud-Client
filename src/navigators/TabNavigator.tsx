@@ -32,13 +32,12 @@ const screenOptions = ({route}: TabRouteProps) => ({
   tabBarActiveTintColor: theme.palette.primary,
   tabBarInactiveTintColor: theme.palette.gray4,
   tabBarStyle: {
-    height: 79.2,
+    marginBottom: 7,
   },
   tabBarLabelStyle: {
     // 타이포 변경 시 변경 필요
     fontSize: 10,
     fontWeight: '500' as const,
-    marginBottom: route.name === 'AddTransaction' ? 29 : 32,
   },
   headerShown: false,
   headerShadowVisible: false,
