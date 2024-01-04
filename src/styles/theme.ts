@@ -1,6 +1,12 @@
+import {lightPalette} from 'styles';
 import {TypeOfTheme} from 'styles/types';
-import {palette} from 'styles';
+import {typographyStyles} from 'styles/typography';
 
 export const theme: TypeOfTheme = {
-  palette,
+  palette: lightPalette,
+  typography: typographyStyles,
 };
+
+// export const darkTheme: TypeOfTheme = {
+//   palette: darkPalette,
+// };
