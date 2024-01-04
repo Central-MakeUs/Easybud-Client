@@ -1,6 +1,13 @@
+import {typographyStyles} from 'styles/typography';
+
+/** typeof styles */
+
 export type TypeOfTheme = {
   palette: TypeOfPalette;
+  typography: TypeOfTypography;
 };
+
+export type TypeOfTypography = typeof typographyStyles;
 
 export type TypeOfPalette = Readonly<{
   primary: string;
@@ -15,6 +22,10 @@ export type TypeOfPalette = Readonly<{
   black: string;
 }>;
 
-export type KeyOfPalette = keyof TypeOfPalette;
+/** keyof styles */
 
 export type KeyofTheme = keyof TypeOfPalette;
+
+export type KeyOfPalette = keyof TypeOfPalette;
+
+export type KeyofTypography = keyof TypeOfTypography;
