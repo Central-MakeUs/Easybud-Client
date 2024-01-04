@@ -2818,7 +2818,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/bottom-tabs@npm:^6.5.11":
+"@react-navigation/bottom-tabs@npm:^6.5.8":
   version: 6.5.11
   resolution: "@react-navigation/bottom-tabs@npm:6.5.11"
   dependencies:
@@ -2851,7 +2851,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/elements@npm:^1.3.21":
+"@react-navigation/elements@npm:^1.3.18, @react-navigation/elements@npm:^1.3.21":
   version: 1.3.21
   resolution: "@react-navigation/elements@npm:1.3.21"
   peerDependencies:
@@ -2863,11 +2863,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-navigation/native-stack@npm:^6.9.17":
-  version: 6.9.17
-  resolution: "@react-navigation/native-stack@npm:6.9.17"
+"@react-navigation/native-stack@npm:6.9.13":
+  version: 6.9.13
+  resolution: "@react-navigation/native-stack@npm:6.9.13"
   dependencies:
-    "@react-navigation/elements": ^1.3.21
+    "@react-navigation/elements": ^1.3.18
     warn-once: ^0.1.0
   peerDependencies:
     "@react-navigation/native": ^6.0.0
@@ -2875,11 +2875,11 @@ __metadata:
     react-native: "*"
     react-native-safe-area-context: ">= 3.0.0"
     react-native-screens: ">= 3.0.0"
-  checksum: 6bb838b7ce19c521b1da12a147f78671259fb3921761f678d9b24d02f9e536428fffe82045ad66ef59dcd4920c1e5230b0d4aaba6f12a20726ffacfeba719f06
+  checksum: 10d1f2ef4f1f2f4543f77b9c378dd3b49ee3c20e6e9d15b1b3ce3489d46c634411f6bc4c3cda379e47e7f3a669fb765c99954229479cd20aff5fae800e886574
   languageName: node
   linkType: hard
 
-"@react-navigation/native@npm:^6.1.9":
+"@react-navigation/native@npm:^6.1.7":
   version: 6.1.9
   resolution: "@react-navigation/native@npm:6.1.9"
   dependencies:
@@ -2900,6 +2900,24 @@ __metadata:
   dependencies:
     nanoid: ^3.1.23
   checksum: 3a3392ce095d6a2bd2aad69856f513b35774f943a3dc73d8ffb75127de6773203e3264188d87058bdea4c0c9a7d43ed28d0cbf3a1f1cdc086df3ee255d8e1e27
+  languageName: node
+  linkType: hard
+
+"@react-navigation/stack@npm:^6.3.17":
+  version: 6.3.20
+  resolution: "@react-navigation/stack@npm:6.3.20"
+  dependencies:
+    "@react-navigation/elements": ^1.3.21
+    color: ^4.2.3
+    warn-once: ^0.1.0
+  peerDependencies:
+    "@react-navigation/native": ^6.0.0
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: ">= 1.0.0"
+    react-native-safe-area-context: ">= 3.0.0"
+    react-native-screens: ">= 3.0.0"
+  checksum: ce4b4d74003ac70afa6b01c66acffcfe34925506283968dcfd1547208374c5c7561957c0eae0f93604f4d3fcb2ff9a4ed7d8ca17abc20a109339b363a02b72b3
   languageName: node
   linkType: hard
 
@@ -5723,9 +5741,10 @@ __metadata:
     "@react-native-community/masked-view": ^0.1.11
     "@react-native-community/slider": ^4.3.3
     "@react-native/eslint-config": ^0.72.1
-    "@react-navigation/bottom-tabs": ^6.5.11
-    "@react-navigation/native": ^6.1.9
-    "@react-navigation/native-stack": ^6.9.17
+    "@react-navigation/bottom-tabs": ^6.5.8
+    "@react-navigation/native": ^6.1.7
+    "@react-navigation/native-stack": 6.9.13
+    "@react-navigation/stack": ^6.3.17
     "@storybook/addon-actions": ^6.5.14
     "@storybook/addon-controls": ^6.5.14
     "@storybook/addon-essentials": ^6.5.14
