@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator<TabParamList>();
 
 const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
   const iconColor =
-    routeName === 'AddTransaction' ? 'primary' : focused ? 'primary' : 'gray4';
+    routeName === 'AddTransaction' || focused ? 'primary' : 'gray4';
   const iconSize = routeName === 'AddTransaction' ? 44 : 24;
 
   return (
