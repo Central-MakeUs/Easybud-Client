@@ -1,4 +1,4 @@
-import {lightPalette} from 'styles';
+import {lightPalette} from 'styles/palette';
 import {TypeOfTheme} from 'styles/types';
 import {typographyStyles} from 'styles/typography';
 
