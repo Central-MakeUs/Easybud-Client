@@ -11,7 +11,7 @@ type IconProps = SvgProps & {
 
 export default function Icon({
   name,
-  fill = 'primary',
+  fill = 'gray4',
   size = 24,
   ...props
 }: IconProps) {
