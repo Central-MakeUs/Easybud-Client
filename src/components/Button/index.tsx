@@ -15,12 +15,12 @@ const TEXT_COLOR = {
 
 const BACKGROUND_COLOR = {
   normal: {
-    primary: theme.palette.primary,
-    secondary: theme.palette.gray2,
+    primary: 'primary',
+    secondary: 'gray2',
   },
   disabled: {
-    primary: theme.palette.gray3,
-    secondary: theme.palette.gray2,
+    primary: 'gray3',
+    secondary: 'gray2',
   },
 } as const;
 
@@ -46,27 +46,27 @@ export default function Button({
   onPress,
   children,
 }: ButtonProps) {
-  const getBackgroundColor = () => {
-    return BACKGROUND_COLOR[isActive ? 'normal' : 'disabled'][variant];
+  const getStyle = () => {
+    const activeVariant = isActive ? 'normal' : 'disabled';
+    const backgroundColor =
+      theme.palette[BACKGROUND_COLOR[activeVariant][variant]];
+    const textColor = TEXT_COLOR[activeVariant][variant];
+    const width = fullWidth ? 335 : 163.5;
+
+    return {backgroundColor, textColor, width};
   };
 
-  const getTextColor = () => {
-    return TEXT_COLOR[isActive ? 'normal' : 'disabled'][variant];
-  };
-
-  const getWidth = () => {
-    return fullWidth ? 335 : 163.5;
-  };
+  const {backgroundColor, textColor, width} = getStyle();
 
   return (
     <TouchableOpacity
       onPress={() => onPress?.()}
       style={{
         ...buttonStyles.button,
-        backgroundColor: getBackgroundColor(),
-        width: getWidth(),
+        backgroundColor: backgroundColor,
+        width: width,
       }}>
-      <Typography type={'Body1Semibold'} color={getTextColor()}>
+      <Typography type={'Body1Semibold'} color={textColor}>
         {children}
       </Typography>
     </TouchableOpacity>
