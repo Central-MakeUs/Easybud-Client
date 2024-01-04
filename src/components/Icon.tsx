@@ -6,7 +6,7 @@ import * as Icons from 'assets/icons';
 type IconProps = SvgProps & {
   name: keyof typeof Icons;
   size?: number;
-  fill: KeyOfPalette;
+  fill?: KeyOfPalette;
 };
 
 export default function Icon({
