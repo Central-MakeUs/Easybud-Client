@@ -14,10 +14,9 @@ import Icon from 'components/Icon';
 const Tab = createBottomTabNavigator<TabParamList>();
 
 const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
-  const iconColor = focused ? 'primary' : 'gray4';
+  const iconColor =
+    routeName === 'AddTransaction' ? 'primary' : focused ? 'primary' : 'gray4';
   const iconSize = routeName === 'AddTransaction' ? 44 : 24;
-
-  console.log(routeName, focused);
 
   return (
     <Icon name={TabNavigatorIcon[routeName]} fill={iconColor} size={iconSize} />
@@ -41,7 +40,7 @@ const screenOptions = ({route}: TabRouteProps) => ({
     fontWeight: '500' as const,
     marginBottom: route.name === 'AddTransaction' ? 29 : 32,
   },
-  headerShown: true,
+  headerShown: false,
   headerShadowVisible: false,
 });
 
