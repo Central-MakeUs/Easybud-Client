@@ -15,11 +15,11 @@ export default function Typography({
   return (
     <Text
       {...props}
-      style={Object.assign(
+      style={[
+        props.style,
         {color: theme.palette[color]},
-        props.style ?? {},
         theme.typography[type],
-      )}>
+      ]}>
       {props.children}
     </Text>
   );

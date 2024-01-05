@@ -1,5 +1,9 @@
 import Typography from 'components/Typography';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  TouchableOpacity,
+  TouchableOpacityProps,
+} from 'react-native';
 import {theme} from 'styles';
 
 const TEXT_COLOR = {
@@ -27,44 +31,35 @@ const BACKGROUND_COLOR = {
 /**
  * @param variant 버튼 종류: 'primary' | 'secondary'
  * @param fullWidth 버튼 크기: 고정된 크기 / 화면에 꽉 차게
- * @param isActive active 여부
- * @param onPress 버튼 클릭 시 발생할 함수
  * @param children 버튼 텍스트
  */
 type ButtonProps = {
   variant?: 'primary' | 'secondary';
   fullWidth?: boolean;
-  isActive?: boolean;
-  onPress?: () => void;
   children: string;
-};
+} & TouchableOpacityProps;
 
 export default function Button({
   variant = 'primary',
   fullWidth = true,
-  isActive = true,
-  onPress,
   children,
+  ...props
 }: ButtonProps) {
-  const getStyle = () => {
-    const activeVariant = isActive ? 'normal' : 'disabled';
-    const backgroundColor =
-      theme.palette[BACKGROUND_COLOR[activeVariant][variant]];
-    const textColor = TEXT_COLOR[activeVariant][variant];
-    const width = fullWidth ? 335 : 163.5;
+  const activeVariant = props.disabled ? 'disabled' : 'normal';
 
-    return {backgroundColor, textColor, width};
+  const {backgroundColor, textColor, width} = {
+    backgroundColor: theme.palette[BACKGROUND_COLOR[activeVariant][variant]],
+    textColor: TEXT_COLOR[activeVariant][variant],
+    width: fullWidth ? '100%' : '50%',
   };
-
-  const {backgroundColor, textColor, width} = getStyle();
 
   return (
     <TouchableOpacity
-      onPress={() => onPress?.()}
+      {...props}
       style={{
         ...buttonStyles.button,
-        backgroundColor: backgroundColor,
-        width: width,
+        backgroundColor,
+        width,
       }}>
       <Typography type={'Body1Semibold'} color={textColor}>
         {children}
@@ -80,5 +75,6 @@ const buttonStyles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    maxWidth: '100%',
   },
 });
