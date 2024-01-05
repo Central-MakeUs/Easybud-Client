@@ -1,4 +1,4 @@
-import Icon from 'components/Icon';
+import Icon from 'components/@common/Icon';
 import React, {useState} from 'react';
 import {
   StyleSheet,
