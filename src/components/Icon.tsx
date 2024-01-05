@@ -5,7 +5,7 @@ import * as Icons from 'assets/icons';
 
 type IconProps = SvgProps & {
   name: keyof typeof Icons;
-  size?: number;
+  size?: number | undefined;
   fill?: KeyOfPalette;
   style?: React.CSSProperties | Array<React.CSSProperties>;
 };

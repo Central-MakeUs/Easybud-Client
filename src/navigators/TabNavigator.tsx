@@ -1,4 +1,7 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  BottomTabNavigationOptions,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 import {theme} from 'styles';
 import {TabMenu} from 'navigators/constants/menu';
 import {TabNavigatorIcon} from 'navigators/constants/icon';
@@ -10,43 +13,16 @@ import Setting from 'screens/Setting';
 import Transaction from 'screens/Transaction';
 import AddTransaction from 'screens/AddTransaction';
 import Icon from 'components/Icon';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
-const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
-  const iconColor =
-    routeName === 'AddTransaction' || focused ? 'primary' : 'gray4';
-  const iconSize = routeName === 'AddTransaction' ? 44 : 24;
-
-  return (
-    <Icon name={TabNavigatorIcon[routeName]} fill={iconColor} size={iconSize} />
-  );
-};
-
-const screenOptions = ({route}: TabRouteProps) => ({
-  tabBarIcon: ({focused}: {focused: boolean}) =>
-    getTabBarIcon(route.name, focused),
-  tabBarIconStyle: {
-    marginTop: route.name === 'AddTransaction' ? 15 : 7,
-  },
-  tabBarActiveTintColor: theme.palette.primary,
-  tabBarInactiveTintColor: theme.palette.gray4,
-  tabBarStyle: {
-    height: 79.2,
-  },
-  tabBarLabelStyle: {
-    // 타이포 변경 시 변경 필요
-    fontSize: 10,
-    fontWeight: '500' as const,
-    marginBottom: route.name === 'AddTransaction' ? 29 : 32,
-  },
-  headerShown: false,
-  headerShadowVisible: false,
-});
-
 export default function TabNavigator() {
+  const {bottom: bottomSize} = useSafeAreaInsets();
+
   return (
-    <Tab.Navigator screenOptions={screenOptions}>
+    <Tab.Navigator
+      screenOptions={({route}) => screenOptions({route, bottomSize})}>
       <Tab.Screen
         name={TabMenu.Ledger}
         component={Ledger}
@@ -75,3 +51,41 @@ export default function TabNavigator() {
     </Tab.Navigator>
   );
 }
+
+const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
+  const iconColor =
+    routeName === TabMenu.AddTransaction || focused ? 'primary' : 'gray4';
+  const iconSize = routeName === TabMenu.AddTransaction ? 44 : 24;
+
+  return (
+    <Icon name={TabNavigatorIcon[routeName]} fill={iconColor} size={iconSize} />
+  );
+};
+
+const screenOptions: (
+  props: TabRouteProps & {bottomSize: number},
+) => BottomTabNavigationOptions = ({route, bottomSize}) => ({
+  tabBarIcon: ({focused}: {focused: boolean}) =>
+    getTabBarIcon(route.name, focused),
+  tabBarIconStyle: {
+    marginTop: route.name === TabMenu.AddTransaction ? 17 : 4,
+  },
+  tabBarActiveTintColor: theme.palette.primary,
+  tabBarInactiveTintColor: theme.palette.gray4,
+  tabBarStyle: {
+    height: bottomSize ? 50 + bottomSize : 60,
+    borderTopColor: theme.palette.gray1,
+  },
+  tabBarItemStyle: {
+    gap: 0,
+    paddingVertical: 4,
+  },
+  tabBarLabelStyle: {
+    // Todo: 타이포 변경 시 변경 필요
+    fontSize: 10,
+    fontWeight: '500' as const,
+    marginBottom: bottomSize ? 0 : 4,
+  },
+  headerShown: false,
+  headerShadowVisible: false,
+});
