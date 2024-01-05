@@ -49,7 +49,7 @@ try {
 
 const getStories = () => {
   return {
-    './src/components/atoms/Button/Button.stories': require('../src/components/atoms/Button/Button.stories'),
+    './src/components/Button/Button.stories': require('../src/components/Button/Button.stories'),
   };
 };
 
