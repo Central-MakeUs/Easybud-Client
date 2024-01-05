@@ -14,6 +14,7 @@ import Transaction from 'screens/Transaction';
 import AddTransaction from 'screens/AddTransaction';
 import Icon from 'components/Icon';
 import {RouteProp} from '@react-navigation/native';
+import {Platform} from 'react-native';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -65,13 +66,14 @@ const screenOptions: (props: {
   tabBarIcon: ({focused}: {focused: boolean}) =>
     getTabBarIcon(route.name, focused),
   tabBarIconStyle: {
-    paddingBottom: 2,
     marginTop: route.name === TabMenu.AddTransaction ? 17 : 0,
   },
   tabBarActiveTintColor: theme.palette.primary,
   tabBarInactiveTintColor: theme.palette.gray4,
   tabBarStyle: {
+    height: Platform.OS === 'ios' ? 80 : 70,
     borderTopColor: theme.palette.gray1,
+    paddingBottom: Platform.OS === 'ios' ? 20 : 0,
   },
   tabBarItemStyle: {
     paddingVertical: 4,
