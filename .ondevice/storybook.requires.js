@@ -8,16 +8,6 @@ import {
   clearDecorators,
 } from '@storybook/react-native';
 
-global.STORIES = [
-  {
-    titlePrefix: '',
-    directory: './src',
-    files: '**/*.stories.?(ts|tsx|js|jsx)',
-    importPathMatcher:
-      '^\\.[\\\\/](?:src(?:\\/(?!\\.)(?:(?:(?!(?:^|\\/)\\.).)*?)\\/|\\/|$)(?!\\.)(?=.)[^/]*?\\.stories\\.(?:ts|tsx|js|jsx)?)$',
-  },
-];
-
 import '@storybook/addon-ondevice-notes/register';
 import '@storybook/addon-ondevice-controls/register';
 import '@storybook/addon-ondevice-backgrounds/register';
@@ -26,6 +16,16 @@ import '@storybook/addon-ondevice-actions/register';
 import {argsEnhancers} from '@storybook/addon-actions/dist/modern/preset/addArgs';
 
 import {decorators, parameters} from './preview';
+
+global.STORIES = [
+  {
+    titlePrefix: '',
+    directory: './src',
+    files: '**/*.stories.?(ts|tsx|js|jsx)',
+    importPathMatcher:
+      '^\\.[\\\\/](?:src(?:[\\\\/](?!\\.)(?:(?:(?!(?:^|[\\\\/])\\.).)*?)[\\\\/]|[\\\\/]|$)(?!\\.)(?=.)[^\\\\/]*?\\.stories\\.(?:ts|tsx|js|jsx)?)$',
+  },
+];
 
 if (decorators) {
   if (__DEV__) {
@@ -49,7 +49,7 @@ try {
 
 const getStories = () => {
   return {
-    './src/components/Button/Button.stories': require('../src/components/Button/Button.stories'),
+    './src/components/atoms/Button/Button.stories': require('../src/components/atoms/Button/Button.stories'),
   };
 };
 
