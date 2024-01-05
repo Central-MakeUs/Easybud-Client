@@ -63,8 +63,8 @@ export default function Button({
       onPress={() => onPress?.()}
       style={{
         ...buttonStyles.button,
-        backgroundColor: backgroundColor,
-        width: width,
+        backgroundColor,
+        width,
       }}>
       <Typography type={'Body1Semibold'} color={textColor}>
         {children}
