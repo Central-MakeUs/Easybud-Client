@@ -7,7 +7,7 @@ const theme = {
   colors: {...DefaultTheme.colors, ...lightPalette},
 };
 
-const Navigator = () => {
+const NavigatorContainer = () => {
   return (
     <NavigationContainer theme={theme}>
       <StackNavigator />
@@ -15,4 +15,4 @@ const Navigator = () => {
   );
 };
 
-export default Navigator;
+export default NavigatorContainer;

@@ -1,5 +1,5 @@
-import Navigator from 'navigators/Navigator';
-import AppSetupWrapper from 'libs/AppSetupWrapper';
+import Navigator from 'containers/NavigatorContainer';
+import AppSetupWrapper from 'containers/AppSetupContainer';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {

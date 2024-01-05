@@ -3,9 +3,11 @@ import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
 
-type ReactQuerySettingProps = {children: ReactNode};
+type ReactQueryContainerProps = {children: ReactNode};
 
-export default function ReactQuerySetting({children}: ReactQuerySettingProps) {
+export default function ReactQueryContainer({
+  children,
+}: ReactQueryContainerProps) {
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
