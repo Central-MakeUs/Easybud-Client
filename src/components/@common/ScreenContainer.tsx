@@ -37,7 +37,7 @@ export default function ScreenContainer({
           ]}>
           {loading ? (
             <View style={styles.loadingContainer}>
-              <ActivityIndicator size="large" color="#0000ff" />
+              <ActivityIndicator size="large" color={theme.palette.primary} />
             </View>
           ) : (
             children
@@ -58,7 +58,6 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     flexGrow: 1,
-    backgroundColor: 'red',
     padding: 18,
   },
   loadingContainer: {
