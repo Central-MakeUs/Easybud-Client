@@ -9,10 +9,15 @@ import {
 } from 'react-native';
 import {theme} from 'styles';
 
+/**
+ * @param value 텍스트 필드에 표시될 값
+ * @param onChangeText 값이 변경될 때 호출. 변경된 텍스트가 매개변수로 전달
+ * @param ...props - react native TextInputProps
+ */
 type TextFieldProps = {
   value: string;
   onChangeText: (text: string) => void;
-} & TextInputProps;
+} & Omit<TextInputProps, 'value' | 'onChangeText'>;
 
 export default function TextField({
   value,
