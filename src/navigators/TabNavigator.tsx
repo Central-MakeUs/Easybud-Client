@@ -13,14 +13,16 @@ import Setting from 'screens/Setting';
 import Transaction from 'screens/Transaction';
 import AddTransaction from 'screens/AddTransaction';
 import Icon from 'components/Icon';
-import {RouteProp} from '@react-navigation/native';
-import {Platform} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
+  const {bottom: bottomSize} = useSafeAreaInsets();
+
   return (
-    <Tab.Navigator screenOptions={screenOptions}>
+    <Tab.Navigator
+      screenOptions={({route}) => screenOptions({route, bottomSize})}>
       <Tab.Screen
         name={TabMenu.Ledger}
         component={Ledger}
@@ -60,28 +62,29 @@ const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
   );
 };
 
-const screenOptions: (props: {
-  route: RouteProp<TabParamList, keyof TabParamList>;
-}) => BottomTabNavigationOptions = ({route}: TabRouteProps) => ({
+const screenOptions: (
+  props: TabRouteProps & {bottomSize: number},
+) => BottomTabNavigationOptions = ({route, bottomSize}) => ({
   tabBarIcon: ({focused}: {focused: boolean}) =>
     getTabBarIcon(route.name, focused),
   tabBarIconStyle: {
-    marginTop: route.name === TabMenu.AddTransaction ? 17 : 0,
+    marginTop: route.name === TabMenu.AddTransaction ? 17 : 4,
   },
   tabBarActiveTintColor: theme.palette.primary,
   tabBarInactiveTintColor: theme.palette.gray4,
   tabBarStyle: {
-    height: Platform.OS === 'ios' ? 80 : 70,
+    height: bottomSize ? 50 + bottomSize : 60,
     borderTopColor: theme.palette.gray1,
-    paddingBottom: Platform.OS === 'ios' ? 20 : 0,
   },
   tabBarItemStyle: {
+    gap: 0,
     paddingVertical: 4,
   },
   tabBarLabelStyle: {
     // Todo: 타이포 변경 시 변경 필요
     fontSize: 10,
     fontWeight: '500' as const,
+    marginBottom: bottomSize ? 0 : 4,
   },
   headerShown: false,
   headerShadowVisible: false,
