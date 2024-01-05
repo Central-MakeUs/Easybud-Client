@@ -5787,6 +5787,7 @@ __metadata:
     metro-react-native-babel-preset: 0.73.8
     prettier: ^3.1.1
     react: 18.2.0
+    react-docgen-typescript-plugin: ^1.0.5
     react-dom: ^18.2.0
     react-native: 0.71.4
     react-native-gesture-handler: ^2.14.0
@@ -16374,6 +16375,24 @@ __metadata:
     shell-quote: ^1.6.1
     ws: ^7
   checksum: d8e4b32ffcfe1ada5c9f7decffd04afc4707a3d6261953a92b8aed1c8abe15cd57d6eb4ce711f842180a2f5c60d2947209e3c1202f7ea29303ee150c55da59e0
+  languageName: node
+  linkType: hard
+
+"react-docgen-typescript-plugin@npm:^1.0.5":
+  version: 1.0.5
+  resolution: "react-docgen-typescript-plugin@npm:1.0.5"
+  dependencies:
+    debug: ^4.1.1
+    endent: ^2.0.1
+    find-cache-dir: ^3.3.1
+    flat-cache: ^3.0.4
+    micromatch: ^4.0.2
+    react-docgen-typescript: ^2.2.2
+    tslib: ^2.0.0
+  peerDependencies:
+    typescript: ">= 4.x"
+    webpack: ">= 4"
+  checksum: 0f83d33c7b6dc82fef34ee820c94485c374d853774c5c26b04754ba3674fe4db2c7fc210b30fa0ca77c5033633553c12742aab6305a7f16cd263c70fedf27589
   languageName: node
   linkType: hard
 
