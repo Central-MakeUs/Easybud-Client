@@ -31,7 +31,6 @@ const BACKGROUND_COLOR = {
 /**
  * @param variant 버튼 종류: 'primary' | 'secondary'
  * @param fullWidth 버튼 크기: 고정된 크기 / 화면에 꽉 차게
- * @param isActive active 여부
  * @param children 버튼 텍스트
  */
 type ButtonProps = {
