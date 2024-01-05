@@ -1,5 +1,5 @@
 import Icon from 'components/Icon';
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -19,20 +19,28 @@ export default function TextField({
   onChangeText,
   ...props
 }: TextFieldProps) {
-  const clearInput = () => {
-    onChangeText('');
-  };
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
+
+  const clearInput = () => onChangeText('');
 
   return (
     <View
-      style={{
-        ...styles.container,
-        borderBottomColor: theme.palette[value ? 'primary' : 'gray3'],
-      }}>
+      style={[
+        styles.container,
+        {
+          borderBottomColor:
+            theme.palette[isFocused || value ? 'primary' : 'gray3'],
+        },
+      ]}>
       <TextInput
         value={value}
         onChangeText={onChangeText}
         placeholder={props.placeholder ?? '내용을 입력해주세요.'}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         style={styles.text}
       />
       {value !== '' && (
@@ -57,6 +65,7 @@ const styles = StyleSheet.create({
   },
   text: {
     ...theme.typography.Title1Semibold1,
+    placeholderTextColor: theme.palette.gray3,
     maxWidth: '93%',
   },
   clearButton: {},
