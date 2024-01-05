@@ -1,4 +1,7 @@
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {
+  BottomTabNavigationOptions,
+  createBottomTabNavigator,
+} from '@react-navigation/bottom-tabs';
 import {theme} from 'styles';
 import {TabMenu} from 'navigators/constants/menu';
 import {TabNavigatorIcon} from 'navigators/constants/icon';
@@ -10,39 +13,9 @@ import Setting from 'screens/Setting';
 import Transaction from 'screens/Transaction';
 import AddTransaction from 'screens/AddTransaction';
 import Icon from 'components/Icon';
+import {RouteProp} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator<TabParamList>();
-
-const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
-  const iconColor =
-    routeName === 'AddTransaction' || focused ? 'primary' : 'gray4';
-  const iconSize = routeName === 'AddTransaction' ? 44 : 24;
-
-  return (
-    <Icon name={TabNavigatorIcon[routeName]} fill={iconColor} size={iconSize} />
-  );
-};
-
-const screenOptions = ({route}: TabRouteProps) => ({
-  tabBarIcon: ({focused}: {focused: boolean}) =>
-    getTabBarIcon(route.name, focused),
-  tabBarIconStyle: {
-    marginTop: route.name === 'AddTransaction' ? 15 : 7,
-  },
-  tabBarActiveTintColor: theme.palette.primary,
-  tabBarInactiveTintColor: theme.palette.gray4,
-  tabBarStyle: {
-    borderTopColor: theme.palette.gray1,
-    marginBottom: 7,
-  },
-  tabBarLabelStyle: {
-    // 타이포 변경 시 변경 필요
-    fontSize: 10,
-    fontWeight: '500' as const,
-  },
-  headerShown: false,
-  headerShadowVisible: false,
-});
 
 export default function TabNavigator() {
   return (
@@ -75,3 +48,39 @@ export default function TabNavigator() {
     </Tab.Navigator>
   );
 }
+
+const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
+  const iconColor =
+    routeName === TabMenu.AddTransaction || focused ? 'primary' : 'gray4';
+  const iconSize = routeName === TabMenu.AddTransaction ? 44 : 24;
+
+  return (
+    <Icon name={TabNavigatorIcon[routeName]} fill={iconColor} size={iconSize} />
+  );
+};
+
+const screenOptions: (props: {
+  route: RouteProp<TabParamList, keyof TabParamList>;
+}) => BottomTabNavigationOptions = ({route}: TabRouteProps) => ({
+  tabBarIcon: ({focused}: {focused: boolean}) =>
+    getTabBarIcon(route.name, focused),
+  tabBarIconStyle: {
+    paddingBottom: 2,
+    marginTop: route.name === TabMenu.AddTransaction ? 17 : 0,
+  },
+  tabBarActiveTintColor: theme.palette.primary,
+  tabBarInactiveTintColor: theme.palette.gray4,
+  tabBarStyle: {
+    borderTopColor: theme.palette.gray1,
+  },
+  tabBarItemStyle: {
+    paddingVertical: 4,
+  },
+  tabBarLabelStyle: {
+    // Todo: 타이포 변경 시 변경 필요
+    fontSize: 10,
+    fontWeight: '500' as const,
+  },
+  headerShown: false,
+  headerShadowVisible: false,
+});

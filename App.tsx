@@ -1,10 +1,13 @@
 import Navigator from 'navigators/Navigator';
 import AppSetupWrapper from 'libs/AppSetupWrapper';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const App = () => {
   return (
     <AppSetupWrapper>
-      <Navigator />
+      <SafeAreaProvider>
+        <Navigator />
+      </SafeAreaProvider>
     </AppSetupWrapper>
   );
 };
