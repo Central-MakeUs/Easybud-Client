@@ -12,7 +12,7 @@ import Ledger from 'screens/Ledger';
 import Setting from 'screens/Setting';
 import Transaction from 'screens/Transaction';
 import AddTransaction from 'screens/AddTransaction';
-import Icon from 'components/Icon';
+import Icon from 'components/@common/Icon';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator<TabParamList>();
