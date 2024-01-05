@@ -17,7 +17,6 @@ export const FullWidthPrimary = Template.bind({});
 FullWidthPrimary.args = {
   variant: 'primary',
   fullWidth: true,
-  isActive: true,
   children: '내용',
 };
 
@@ -25,7 +24,7 @@ export const DisabledPrimary = Template.bind({});
 DisabledPrimary.args = {
   variant: 'primary',
   fullWidth: true,
-  isActive: false,
+  disabled: true,
   children: '내용',
 };
 
@@ -33,7 +32,6 @@ export const Primary = Template.bind({});
 Primary.args = {
   variant: 'primary',
   fullWidth: false,
-  isActive: true,
   children: '내용',
 };
 
@@ -41,6 +39,5 @@ export const Secondary = Template.bind({});
 Secondary.args = {
   variant: 'secondary',
   fullWidth: false,
-  isActive: true,
   children: '내용',
 };
