@@ -1,10 +1,6 @@
 import {atom} from 'recoil';
-import {Steps} from 'navigators/constants/steps';
 import {RecoilStateKeys} from 'libs/recoil/keys';
-
-type StepsType = {
-  currentStep: keyof typeof Steps;
-};
+import {StepsType} from 'libs/recoil/types';
 
 const initialState: StepsType = {
   currentStep: 'Step1',

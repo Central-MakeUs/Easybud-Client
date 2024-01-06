@@ -1,4 +1,5 @@
 import {tokenState} from 'libs/recoil/states/token';
+import {TokenType} from 'libs/recoil/types';
 import {useCallback} from 'react';
 import {useRecoilState} from 'recoil';
 
@@ -8,7 +9,7 @@ export default function useAuthStorage() {
 
   const isEmptyToken = token?.length === 0;
 
-  function setAuthData({accessToken}: {accessToken: string | null}) {
+  function setAuthData({accessToken}: {accessToken: TokenType}) {
     setToken(accessToken);
   }
 
