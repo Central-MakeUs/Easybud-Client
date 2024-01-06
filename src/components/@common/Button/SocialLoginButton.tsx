@@ -1,11 +1,12 @@
 import Icon from 'components/@common/Icon';
 import {
   StyleSheet,
-  Text,
   TouchableOpacity,
   TouchableOpacityProps,
+  Image,
 } from 'react-native';
 import kakaoLogo from 'assets/images/kakao.png';
+import Typography from 'components/@common/Typography';
 
 const BUTTON_TEXT = {
   kakao: '카카오 로그인',
@@ -33,12 +34,11 @@ export default function SocialLoginButton({
   variant,
   ...props
 }: SocialLoginButtonProps) {
-  const {backgroundColor, textColor, borderColor, borderWidth, paddingLeft} = {
+  const {backgroundColor, textColor, borderColor, borderWidth} = {
     backgroundColor: BACKGROUND_COLOR[variant],
     textColor: TEXT_COLOR[variant],
     borderColor: variant === 'apple' ? '#000000' : 'transparent',
     borderWidth: variant === 'apple' ? 1 : 0,
-    paddingLeft: variant === 'apple' ? 2 : 15,
   };
 
   return (
@@ -50,16 +50,18 @@ export default function SocialLoginButton({
           backgroundColor,
           borderColor,
           borderWidth,
-          paddingLeft,
         }}>
         {variant === 'apple' ? (
           <Icon name={'AppleLogo'} width={56} height={56} />
         ) : (
-          <img src={kakaoLogo} width={30} height={30} />
+          <Image
+            source={kakaoLogo}
+            style={{width: 30, height: 30, marginRight: 14}}
+          />
         )}
-        <Text style={{color: textColor, marginHorizontal: 'auto'}}>
+        <Typography style={{color: textColor, textAlign: 'center', flex: 1}}>
           {BUTTON_TEXT[variant]}
-        </Text>
+        </Typography>
       </TouchableOpacity>
     </>
   );
@@ -70,6 +72,7 @@ const socialLoginButtonStyles = StyleSheet.create({
     width: '100%',
     height: 56,
     borderRadius: 12,
+    padding: 10,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
