@@ -1,4 +1,4 @@
-import {NonEmptyArray} from '@types/funnel';
+import {NonEmptyArray} from 'types/funnel';
 
 export type StepProps<Steps extends NonEmptyArray<string>> = {
   name: Steps[number];

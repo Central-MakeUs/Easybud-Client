@@ -1,4 +1,4 @@
-import {NonEmptyArray} from '@types/funnel';
+import {NonEmptyArray} from 'types/funnel';
 import {StepProps} from 'components/@common/Funnel/Step';
 import {Children, ReactElement, isValidElement} from 'react';
 
