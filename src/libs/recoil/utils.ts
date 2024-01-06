@@ -1,12 +1,14 @@
 import localStorage from 'libs/async-storage';
 import {DefaultValue, SerializableParam} from 'recoil';
 
-type EffectType<T> = {
-  setSelf: (value: T | DefaultValue) => void;
+type EffectValue<T> = T | DefaultValue;
+
+type EffectProps<T> = {
+  setSelf: (value: EffectValue<T>) => void;
   onSet: (
     effect: (
-      newValue: T | DefaultValue,
-      oldValue: T | DefaultValue,
+      newValue: EffectValue<T>,
+      oldValue: EffectValue<T>,
       isReset: boolean,
     ) => void,
   ) => void;
@@ -14,7 +16,7 @@ type EffectType<T> = {
 
 export const localStorageEffect =
   <T extends SerializableParam>(key: string) =>
-  ({setSelf, onSet}: EffectType<T>) => {
+  ({setSelf, onSet}: EffectProps<T>) => {
     const loadSavedValue = async () => {
       const savedValue = await localStorage.get(key);
       if (savedValue !== null) {
