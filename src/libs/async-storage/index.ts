@@ -1,5 +1,13 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {SerializableParam} from 'recoil';
+
+type SerializableParam =
+  | string
+  | number
+  | boolean
+  | object
+  | null
+  | undefined
+  | symbol;
 
 type StorageType = {
   get(key: string): Promise<string | null>;
@@ -9,7 +17,7 @@ type StorageType = {
 };
 
 export class LocalStorage implements StorageType {
-  private serialize = <T extends SerializableParam>(value: T) => {
+  private serialize = <T extends SerializableParam>(value: T): string => {
     return JSON.stringify(value);
   };
 
