@@ -59,7 +59,13 @@ export default function SocialLoginButton({
             style={{width: 30, height: 30, marginRight: 14, marginLeft: 14}}
           />
         )}
-        <Typography style={{color: textColor, textAlign: 'center', flex: 1}}>
+        <Typography
+          style={{
+            color: textColor,
+            textAlign: 'center',
+            flex: 1,
+            marginLeft: -44,
+          }}>
           {BUTTON_TEXT[variant]}
         </Typography>
       </TouchableOpacity>
