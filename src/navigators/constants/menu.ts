@@ -1,7 +1,5 @@
 export const enum StackMenu {
-  Description = 'Description',
-  Login = 'Login',
-  UserInfo = 'UserInfo',
+  OnBoarding = 'OnBoarding',
   TabNavigator = 'TabNavigator',
 }
 

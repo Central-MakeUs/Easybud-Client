@@ -1,5 +1,10 @@
 import ScreenContainer from 'components/@common/ScreenContainer';
+import Typography from 'components/@common/Typography';
 
 export default function Description() {
-  return <ScreenContainer>설명</ScreenContainer>;
+  return (
+    <ScreenContainer>
+      <Typography>설명</Typography>
+    </ScreenContainer>
+  );
 }

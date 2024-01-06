@@ -1,9 +1,7 @@
 import {RouteProp} from '@react-navigation/native';
 
 export type StackParamList = {
-  Description: undefined;
-  Login: undefined;
-  UserInfo: undefined;
+  OnBoarding: undefined;
   TabNavigator: undefined;
 };
 

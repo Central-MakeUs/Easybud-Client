@@ -10,7 +10,7 @@ const theme = {
 
 const NavigatorContainer = () => {
   // TODO 로그인 처리 후 상태 변경 필요
-  const [isLoggedIn, _] = useState(true);
+  const [isLoggedIn, _] = useState(false);
 
   return (
     <NavigationContainer theme={theme}>
