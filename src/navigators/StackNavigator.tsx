@@ -28,16 +28,14 @@ export default function StackNavigator({isLoggedIn}: StackNavigatorProps) {
           isLoggedIn
             ? TabNavigator
             : () => (
-                <Funnel
-                  steps={['Description', 'Login', 'UserInfo']}
-                  step={'UserInfo'}>
-                  <Step name={'Description'}>
+                <Funnel steps={['Step1', 'Step2', 'Step3']} step={'Step1'}>
+                  <Step name={'Step1'}>
                     <Description />
                   </Step>
-                  <Step name={'Login'}>
+                  <Step name={'Step2'}>
                     <Login />
                   </Step>
-                  <Step name={'UserInfo'}>
+                  <Step name={'Step3'}>
                     <UserInfo />
                   </Step>
                 </Funnel>
