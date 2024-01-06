@@ -27,6 +27,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-var-requires': 'off',
-    'react/no-unstable-nested-components': 'off'
+    'react/no-unstable-nested-components': 'off',
+    'react-native/no-inline-styles': 'off',
   },
 };
