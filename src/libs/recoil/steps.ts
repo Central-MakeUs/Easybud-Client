@@ -1,5 +1,5 @@
 import {atom} from 'recoil';
-import {Steps} from 'navigators/constants/step';
+import {Steps} from 'navigators/constants/steps';
 
 type StepsType = {
   currentStep: keyof typeof Steps;
