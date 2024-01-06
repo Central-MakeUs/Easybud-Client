@@ -1,6 +1,6 @@
 import {ComponentMeta, ComponentStory} from '@storybook/react';
 
-import Button from 'components/@common/Button';
+import Button from 'components/@common/Button/Button';
 
 const meta = {
   title: 'components/Button',
