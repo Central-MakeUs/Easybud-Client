@@ -1,7 +1,2 @@
-import {Steps} from 'navigators/constants/steps';
-
-export type TokenType = string | null;
-
-export type StepsType = {
-  currentStep: keyof typeof Steps;
-};
+export * from './steps';
+export * from './token';
