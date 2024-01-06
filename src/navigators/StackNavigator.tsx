@@ -1,5 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import useAppInitial from 'hooks/useAppInitial';
+import useInitialData from 'hooks/useInitialData';
 import TabNavigator from 'navigators/TabNavigator';
 import {StackMenu} from 'navigators/constants/menu';
 import {StackParamList} from 'navigators/types';
@@ -13,7 +13,7 @@ const screenOptions = {
 };
 
 export default function StackNavigator() {
-  const {isAuthenticated, isVerifyTokenLoading} = useAppInitial();
+  const {isAuthenticated, isVerifyTokenLoading} = useInitialData();
 
   if (isVerifyTokenLoading) {
     return null; // Todo: global loading
