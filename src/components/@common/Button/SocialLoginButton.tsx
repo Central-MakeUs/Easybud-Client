@@ -56,7 +56,7 @@ export default function SocialLoginButton({
         ) : (
           <Image
             source={kakaoLogo}
-            style={{width: 30, height: 30, marginRight: 14}}
+            style={{width: 30, height: 30, marginRight: 14, marginLeft: 14}}
           />
         )}
         <Typography style={{color: textColor, textAlign: 'center', flex: 1}}>
@@ -72,7 +72,7 @@ const socialLoginButtonStyles = StyleSheet.create({
     width: '100%',
     height: 56,
     borderRadius: 12,
-    padding: 10,
+    paddingRight: 14,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'flex-start',
