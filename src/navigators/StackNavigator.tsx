@@ -15,15 +15,17 @@ const screenOptions = {
 export default function StackNavigator() {
   const {isAuthenticated, isVerifyTokenLoading} = useInitialData();
 
+  const initialRouteName = isAuthenticated
+    ? StackMenu.TabNavigator
+    : StackMenu.OnBoarding;
+
   if (isVerifyTokenLoading) {
     return null; // Todo: global loading
   }
 
   return (
     <Stack.Navigator
-      initialRouteName={
-        isAuthenticated ? StackMenu.TabNavigator : StackMenu.OnBoarding
-      }
+      initialRouteName={initialRouteName}
       screenOptions={screenOptions}>
       {isAuthenticated ? (
         <Stack.Screen name={StackMenu.TabNavigator} component={TabNavigator} />
