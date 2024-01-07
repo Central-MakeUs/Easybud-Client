@@ -1,6 +1,5 @@
 import {Children, ReactElement, isValidElement} from 'react';
 import {NonEmptyArray, StepProps} from 'types/funnel';
-import ScreenContainer from 'components/@common/ScreenContainer';
 
 type FunnelProps<Steps extends NonEmptyArray<string>> = {
   steps: Steps;
@@ -25,5 +24,5 @@ export default function Funnel<Steps extends NonEmptyArray<string>>({
     (child: ReactElement<StepProps<Steps>>) => child.props.name === step,
   );
 
-  return <ScreenContainer>{targetStep}</ScreenContainer>;
+  return <>{targetStep}</>;
 }
