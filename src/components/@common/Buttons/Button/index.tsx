@@ -30,37 +30,30 @@ const BACKGROUND_COLOR = {
 
 /**
  * @param variant 버튼 종류: 'primary' | 'secondary'
- * @param fullWidth 버튼 크기: 고정된 크기 / 화면에 꽉 차게
+ * @param width 버튼 크기
  * @param children 버튼 텍스트
  */
 type ButtonProps = {
   variant?: 'primary' | 'secondary';
-  fullWidth?: boolean;
   children: string;
 } & TouchableOpacityProps;
 
 export default function Button({
   variant = 'primary',
-  fullWidth = true,
   children,
   ...props
 }: ButtonProps) {
   const activeVariant = props.disabled ? 'disabled' : 'normal';
 
-  const {backgroundColor, textColor, width} = {
+  const {backgroundColor, textColor} = {
     backgroundColor: theme.palette[BACKGROUND_COLOR[activeVariant][variant]],
     textColor: TEXT_COLOR[activeVariant][variant],
-    width: fullWidth ? '100%' : '50%',
   };
 
   return (
     <TouchableOpacity
       {...props}
-      style={{
-        ...buttonStyles.button,
-        backgroundColor,
-        width,
-      }}>
+      style={[props.style, buttonStyles.button, {backgroundColor}]}>
       <Typography type={'Body1Semibold'} color={textColor}>
         {children}
       </Typography>
@@ -70,11 +63,12 @@ export default function Button({
 
 const buttonStyles = StyleSheet.create({
   button: {
+    paddingHorizontal: 16,
     height: 56,
     borderRadius: 12,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    maxWidth: '100%',
+    flex: 1,
   },
 });
