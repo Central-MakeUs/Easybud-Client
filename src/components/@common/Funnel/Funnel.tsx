@@ -1,6 +1,5 @@
-import {NonEmptyArray} from 'types/funnel';
-import {StepProps} from 'components/@common/Funnel/Step';
 import {Children, ReactElement, isValidElement} from 'react';
+import {NonEmptyArray, StepProps} from 'types/funnel';
 
 type FunnelProps<Steps extends NonEmptyArray<string>> = {
   steps: Steps;

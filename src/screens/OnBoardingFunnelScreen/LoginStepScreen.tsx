@@ -1,10 +1,10 @@
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 
-export default function Description() {
+export default function LoginStepScreen() {
   return (
     <ScreenContainer>
-      <Typography>설명</Typography>
+      <Typography>로그인</Typography>
     </ScreenContainer>
   );
 }

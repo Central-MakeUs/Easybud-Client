@@ -1,5 +1,5 @@
 import {View} from 'react-native';
 
-export default function Account() {
+export default function LedgerScreen() {
   return <View />;
 }

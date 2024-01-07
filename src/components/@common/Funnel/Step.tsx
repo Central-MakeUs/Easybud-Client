@@ -1,9 +1,4 @@
-import {NonEmptyArray} from 'types/funnel';
-
-export type StepProps<Steps extends NonEmptyArray<string>> = {
-  name: Steps[number];
-  children: React.ReactNode;
-};
+import {NonEmptyArray, StepProps} from 'types/funnel';
 
 export default function Step<Steps extends NonEmptyArray<string>>({
   children,
