@@ -4,16 +4,15 @@ import {
 } from '@react-navigation/bottom-tabs';
 import {theme} from 'styles';
 import {TabMenu} from 'navigators/constants/menu';
-import {TabNavigatorIcon} from 'navigators/constants/icon';
 import {TabBarLabel} from 'navigators/constants/label';
-import {TabRouteProps, TabParamList, TabScreenName} from 'navigators/types';
+import {TabRouteProps, TabParamList} from 'navigators/types';
 import Account from 'screens/Account';
 import Ledger from 'screens/Ledger';
 import Setting from 'screens/Setting';
 import Transaction from 'screens/Transaction';
 import AddTransaction from 'screens/AddTransaction';
-import Icon from 'components/@common/Icon';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import TabBarIcon from 'navigators/components/TabBarIcon';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -52,21 +51,12 @@ export default function TabNavigator() {
   );
 }
 
-const getTabBarIcon = (routeName: TabScreenName, focused: boolean) => {
-  const iconColor =
-    routeName === TabMenu.AddTransaction || focused ? 'primary' : 'gray4';
-  const iconSize = routeName === TabMenu.AddTransaction ? 44 : 24;
-
-  return (
-    <Icon name={TabNavigatorIcon[routeName]} fill={iconColor} size={iconSize} />
-  );
-};
-
 const screenOptions: (
   props: TabRouteProps & {bottomSize: number},
 ) => BottomTabNavigationOptions = ({route, bottomSize}) => ({
-  tabBarIcon: ({focused}: {focused: boolean}) =>
-    getTabBarIcon(route.name, focused),
+  tabBarIcon: ({focused}: {focused: boolean}) => (
+    <TabBarIcon routeName={route.name} focused={focused} />
+  ),
   tabBarIconStyle: {
     marginTop: route.name === TabMenu.AddTransaction ? 17 : 4,
   },
