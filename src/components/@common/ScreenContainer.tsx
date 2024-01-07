@@ -15,12 +15,14 @@ import {theme} from 'styles';
 type ScreenContainerProps = {
   children: ReactNode;
   loading?: boolean;
+  fixedBottomComponent?: ReactNode;
 } & ScrollViewProps;
 
 /** Use ScrollViewProps */
 export default function ScreenContainer({
   children,
   loading,
+  fixedBottomComponent,
   ...props
 }: ScreenContainerProps) {
   return (
@@ -43,6 +45,11 @@ export default function ScreenContainer({
             children
           )}
         </ScrollView>
+        {fixedBottomComponent && (
+          <View style={styles.fixedBottomContainer}>
+            {fixedBottomComponent}
+          </View>
+        )}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -65,4 +72,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  fixedBottomContainer: {},
 });
