@@ -1,5 +1,5 @@
-import Funnel from 'components/@common/Funnel/Funnel';
-import Step from 'components/@common/Funnel/Step';
+import Funnel from 'components/@common/funnel/Funnel';
+import Step from 'components/@common/funnel/Step';
 import React, {useState} from 'react';
 import DescriptionFunnelStep from 'components/onboarding/steps/DescriptionFunnelStep';
 import LoginFunnelStep from 'components/onboarding/steps/LoginFunnelStep';
