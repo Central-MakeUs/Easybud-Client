@@ -1,15 +1,19 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {
+  NativeStackNavigationOptions,
+  createNativeStackNavigator,
+} from '@react-navigation/native-stack';
 import useInitialData from 'hooks/useInitialData';
 import TabNavigator from 'navigators/TabNavigator';
 import {RootStackParamList} from 'navigators/types';
 import AddTransaction from 'screens/AddTransaction';
-import OnBoardingFunnel from 'screens/OnBoarding';
+import OnBoardingFunnelScreen from 'screens/OnBoarding';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-const screenOptions = {
+const screenOptions: NativeStackNavigationOptions = {
   headerShown: false,
   headerShadowVisible: false,
+  headerBackTitleVisible: false,
 };
 
 export default function RootStackNavigator() {
@@ -28,10 +32,17 @@ export default function RootStackNavigator() {
       {isAuthenticated ? (
         <>
           <Stack.Screen name={'TabNavigator'} component={TabNavigator} />
-          <Stack.Screen name={'AddTransaction'} component={AddTransaction} />
+          <Stack.Screen
+            name={'AddTransaction'}
+            component={AddTransaction}
+            options={{
+              headerShown: true,
+              headerTitle: '거래 추가',
+            }}
+          />
         </>
       ) : (
-        <Stack.Screen name={'OnBoarding'} component={OnBoardingFunnel} />
+        <Stack.Screen name={'OnBoarding'} component={OnBoardingFunnelScreen} />
       )}
     </Stack.Navigator>
   );
