@@ -3,7 +3,6 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {theme} from 'styles';
-import {TabMenu} from 'navigators/constants/menu';
 import {TabBarLabel} from 'navigators/constants/label';
 import {TabRouteProps, TabParamList} from 'navigators/types';
 import Account from 'screens/Account';
@@ -24,27 +23,27 @@ export default function TabNavigator() {
     <Tab.Navigator
       screenOptions={({route}) => screenOptions({route, bottomSize})}>
       <Tab.Screen
-        name={TabMenu.Ledger}
+        name={'Ledger'}
         component={Ledger}
         options={{tabBarLabel: TabBarLabel.Ledger}}
       />
       <Tab.Screen
-        name={TabMenu.Transaction}
+        name={'Transaction'}
         component={Transaction}
         options={{tabBarLabel: TabBarLabel.Transaction}}
       />
       <Tab.Screen
-        name={TabMenu.NavigateAddTransaction}
+        name={'NavigateAddTransaction'}
         component={NullScreen}
         options={{tabBarLabel: TabBarLabel.AddTransaction}}
       />
       <Tab.Screen
-        name={TabMenu.Account}
+        name={'Account'}
         component={Account}
         options={{tabBarLabel: TabBarLabel.Account}}
       />
       <Tab.Screen
-        name={TabMenu.Setting}
+        name={'Setting'}
         component={Setting}
         options={{tabBarLabel: TabBarLabel.Setting}}
       />
@@ -52,17 +51,18 @@ export default function TabNavigator() {
   );
 }
 
-const screenOptions: (
-  props: TabRouteProps & {bottomSize: number},
-) => BottomTabNavigationOptions = ({route, bottomSize}) => ({
+const screenOptions: (props: {
+  route: TabRouteProps;
+  bottomSize: number;
+}) => BottomTabNavigationOptions = ({route, bottomSize}) => ({
   tabBarIcon:
-    route.name === TabMenu.NavigateAddTransaction
+    route.name === 'NavigateAddTransaction'
       ? AddTransactionButton
       : ({focused}: {focused: boolean}) => (
           <TabBarIcon routeName={route.name} focused={focused} />
         ),
   tabBarIconStyle: {
-    marginTop: route.name === TabMenu.NavigateAddTransaction ? 18 : 4,
+    marginTop: route.name === 'NavigateAddTransaction' ? 18 : 4,
   },
   tabBarActiveTintColor: theme.palette.primary,
   tabBarInactiveTintColor: theme.palette.gray4,
