@@ -4,9 +4,14 @@ import {StackScreenProps} from '@react-navigation/stack';
 /** param list */
 
 export type RootStackParamList = {
-  TabNavigator: NavigatorScreenParams<TabParamList>;
+  Tab: NavigatorScreenParams<TabParamList>;
   OnBoarding: undefined;
+  AddTransactionStack: NavigatorScreenParams<AddTransactionStackParamList>;
+};
+
+export type AddTransactionStackParamList = {
   AddTransaction: undefined;
+  BasicTransaction: undefined;
 };
 
 export type TabParamList = {

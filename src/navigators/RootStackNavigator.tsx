@@ -3,9 +3,9 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import useInitialData from 'hooks/useInitialData';
+import AddTransactionStackNavigator from 'navigators/AddTransactionStackNavigator';
 import TabNavigator from 'navigators/TabNavigator';
 import {RootStackParamList} from 'navigators/types';
-import AddTransactionScreen from 'screens/AddTransactionScreen';
 import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -19,7 +19,7 @@ const screenOptions: NativeStackNavigationOptions = {
 export default function RootStackNavigator() {
   const {isAuthenticated, isVerifyTokenLoading} = useInitialData();
 
-  const initialRouteName = isAuthenticated ? 'TabNavigator' : 'OnBoarding';
+  const initialRouteName = isAuthenticated ? 'Tab' : 'OnBoarding';
 
   if (isVerifyTokenLoading) {
     return null; // Todo: global loading
@@ -31,10 +31,10 @@ export default function RootStackNavigator() {
       screenOptions={screenOptions}>
       {isAuthenticated ? (
         <>
-          <Stack.Screen name={'TabNavigator'} component={TabNavigator} />
+          <Stack.Screen name={'Tab'} component={TabNavigator} />
           <Stack.Screen
-            name={'AddTransaction'}
-            component={AddTransactionScreen}
+            name={'AddTransactionStack'}
+            component={AddTransactionStackNavigator}
             options={{
               headerShown: true,
               headerTitle: '거래 추가',

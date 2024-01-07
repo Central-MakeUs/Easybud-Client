@@ -7,8 +7,11 @@ import {TouchableOpacity} from 'react-native';
 export default function AddTransactionButton() {
   const navigation = useNavigation();
 
+  const navigateAddTransaction = () =>
+    navigation.navigate('AddTransactionStack', {screen: 'BasicTransaction'});
+
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('AddTransaction')}>
+    <TouchableOpacity onPress={navigateAddTransaction}>
       <Icon name={TabNavigatorIcon.AddTransaction} fill={'primary'} size={44} />
     </TouchableOpacity>
   );
