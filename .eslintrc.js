@@ -29,5 +29,6 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     'react/no-unstable-nested-components': 'off',
     'react-native/no-inline-styles': 'off',
+    '@typescript-eslint/no-namespace': 'off',
   },
 };

@@ -1,23 +1,21 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import useInitialData from 'hooks/useInitialData';
 import TabNavigator from 'navigators/TabNavigator';
-import {StackMenu} from 'navigators/constants/menu';
-import {StackParamList} from 'navigators/types';
+import {RootStackParamList} from 'navigators/types';
+import AddTransaction from 'screens/AddTransaction';
 import OnBoardingFunnel from 'screens/OnBoarding';
 
-const Stack = createNativeStackNavigator<StackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const screenOptions = {
   headerShown: false,
   headerShadowVisible: false,
 };
 
-export default function StackNavigator() {
+export default function RootStackNavigator() {
   const {isAuthenticated, isVerifyTokenLoading} = useInitialData();
 
-  const initialRouteName = isAuthenticated
-    ? StackMenu.TabNavigator
-    : StackMenu.OnBoarding;
+  const initialRouteName = isAuthenticated ? 'TabNavigator' : 'OnBoarding';
 
   if (isVerifyTokenLoading) {
     return null; // Todo: global loading
@@ -28,12 +26,12 @@ export default function StackNavigator() {
       initialRouteName={initialRouteName}
       screenOptions={screenOptions}>
       {isAuthenticated ? (
-        <Stack.Screen name={StackMenu.TabNavigator} component={TabNavigator} />
+        <>
+          <Stack.Screen name={'TabNavigator'} component={TabNavigator} />
+          <Stack.Screen name={'AddTransaction'} component={AddTransaction} />
+        </>
       ) : (
-        <Stack.Screen
-          name={StackMenu.OnBoarding}
-          component={OnBoardingFunnel}
-        />
+        <Stack.Screen name={'OnBoarding'} component={OnBoardingFunnel} />
       )}
     </Stack.Navigator>
   );
