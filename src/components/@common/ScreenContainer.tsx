@@ -34,6 +34,7 @@ export default function ScreenContainer({
         <ScrollView
           {...props}
           contentContainerStyle={[
+            fixedBottomComponent ? {paddingBottom: 100} : {},
             styles.scrollViewContent,
             props.contentContainerStyle,
           ]}>
@@ -46,9 +47,7 @@ export default function ScreenContainer({
           )}
         </ScrollView>
         {fixedBottomComponent && (
-          <View style={styles.fixedBottomContainer}>
-            {fixedBottomComponent}
-          </View>
+          <View style={styles.fixBottomComponent}>{fixedBottomComponent}</View>
         )}
       </KeyboardAvoidingView>
     </SafeAreaView>
@@ -64,13 +63,30 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollViewContent: {
-    flexGrow: 1,
     padding: 20,
+    flexGrow: 1,
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  fixedBottomContainer: {},
+  fixBottomComponent: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    margin: 20,
+    borderRadius: 12,
+    shadowColor: theme.palette.black,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    elevation: 5, // Android용 그림자 효과
+    alignItems: 'center', // 자식 컴포넌트를 중앙에 배치
+    justifyContent: 'center', // 자식 컴포넌트를 중앙에 배치
+  },
 });
