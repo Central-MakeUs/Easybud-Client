@@ -5,10 +5,10 @@ import {
 import {theme} from 'styles';
 import {TabBarLabel} from 'navigators/constants/label';
 import {TabRouteProps, TabParamList} from 'navigators/types';
-import AccountScreen from 'screens/AccountScreen';
-import LedgerScreen from 'screens/LedgerScreen';
-import SettingScreen from 'screens/SettingScreen';
-import TransactionScreen from 'screens/TransactionScreen';
+import AccountScreen from 'screens/Tab/AccountScreen';
+import LedgerScreen from 'screens/Tab/LedgerScreen';
+import SettingScreen from 'screens/Tab/SettingScreen';
+import TransactionScreen from 'screens/Tab/TransactionScreen';
 import AddTransactionButton from 'navigators/components/AddTransactionButton';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import TabBarIcon from 'navigators/components/TabBarIcon';
