@@ -3,6 +3,7 @@ import useInitialData from 'hooks/useInitialData';
 import TabNavigator from 'navigators/TabNavigator';
 import {StackMenu} from 'navigators/constants/menu';
 import {StackParamList} from 'navigators/types';
+import AddTransaction from 'screens/AddTransaction';
 import OnBoardingFunnel from 'screens/OnBoarding';
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -28,7 +29,16 @@ export default function StackNavigator() {
       initialRouteName={initialRouteName}
       screenOptions={screenOptions}>
       {isAuthenticated ? (
-        <Stack.Screen name={StackMenu.TabNavigator} component={TabNavigator} />
+        <>
+          <Stack.Screen
+            name={StackMenu.TabNavigator}
+            component={TabNavigator}
+          />
+          <Stack.Screen
+            name={StackMenu.AddTransaction}
+            component={AddTransaction}
+          />
+        </>
       ) : (
         <Stack.Screen
           name={StackMenu.OnBoarding}
