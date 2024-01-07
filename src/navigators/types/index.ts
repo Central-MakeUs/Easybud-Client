@@ -1,4 +1,5 @@
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {StackScreenProps} from '@react-navigation/stack';
 
 /** param list */
@@ -22,7 +23,7 @@ export type TabParamList = {
   Setting: undefined;
 };
 
-/** screen list */
+/** screen name */
 
 export type TabScreenName = keyof TabParamList;
 export type RootStackScreenName = keyof RootStackParamList;
@@ -30,6 +31,11 @@ export type RootStackScreenName = keyof RootStackParamList;
 /** route props */
 
 export type TabRouteProps = RouteProp<TabParamList, TabScreenName>;
+
+/** navigation props */
+
+export type RootStackNavigationProp =
+  NativeStackNavigationProp<RootStackParamList>;
 
 /** screen props - unused*/
 

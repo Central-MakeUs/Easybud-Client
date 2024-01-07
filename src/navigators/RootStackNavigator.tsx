@@ -1,27 +1,17 @@
+import {TouchableOpacity} from 'react-native';
 import {
   NativeStackNavigationOptions,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import Icon from 'components/@common/Icon';
 import useInitialData from 'hooks/useInitialData';
 import AddTransactionStackNavigator from 'navigators/AddTransactionStackNavigator';
 import TabNavigator from 'navigators/TabNavigator';
-import {RootStackParamList} from 'navigators/types';
+import {RootStackNavigationProp, RootStackParamList} from 'navigators/types';
 import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
+import Icon from 'components/@common/Icon';
 import {theme} from 'styles';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
-
-const screenOptions: NativeStackNavigationOptions = {
-  headerShown: false,
-  headerShadowVisible: false,
-  headerBackTitleVisible: false,
-  headerLeft: () => <Icon name="X" />,
-  headerStyle: {
-    backgroundColor: theme.palette.gray1,
-  },
-  headerTitleStyle: theme.typography.Body1Semibold,
-};
 
 export default function RootStackNavigator() {
   const {isAuthenticated, isVerifyTokenLoading} = useInitialData();
@@ -44,6 +34,7 @@ export default function RootStackNavigator() {
             component={AddTransactionStackNavigator}
             options={{
               headerShown: true,
+              headerBackTitleVisible: true,
               headerTitle: '거래 추가',
             }}
           />
@@ -54,3 +45,20 @@ export default function RootStackNavigator() {
     </Stack.Navigator>
   );
 }
+
+const screenOptions: (props: {
+  navigation: RootStackNavigationProp;
+}) => NativeStackNavigationOptions = ({navigation}) => ({
+  headerShown: false,
+  headerShadowVisible: false,
+  headerBackTitleVisible: false,
+  headerLeft: props => (
+    <TouchableOpacity
+      {...props}
+      onPress={() => (navigation.canGoBack() ? navigation.goBack() : null)}>
+      <Icon name="X" />
+    </TouchableOpacity>
+  ),
+  headerStyle: {backgroundColor: theme.palette.gray1},
+  headerTitleStyle: theme.typography.Body1Semibold,
+});
