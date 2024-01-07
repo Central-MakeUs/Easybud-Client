@@ -1,5 +1,5 @@
 import Funnel from 'components/@common/Funnel/Funnel';
-import StepContainer from 'components/@common/Funnel/StepContainer';
+import Step from 'components/@common/Funnel/Step';
 import React, {useState} from 'react';
 import DescriptionFunnelStep from 'components/onboarding/steps/DescriptionFunnelStep';
 import LoginFunnelStep from 'components/onboarding/steps/LoginFunnelStep';
@@ -20,9 +20,9 @@ export default function OnBoardingFunnelScreen() {
   return (
     <Funnel steps={steps} step={currentStep}>
       {stepInfoList.map(({name, component}) => (
-        <StepContainer key={name} name={name}>
+        <Step key={name} name={name}>
           {component}
-        </StepContainer>
+        </Step>
       ))}
     </Funnel>
   );
