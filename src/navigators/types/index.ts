@@ -1,6 +1,8 @@
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 
+/** param list */
+
 export type RootStackParamList = {
   TabNavigator: NavigatorScreenParams<TabParamList>;
   OnBoarding: undefined;
@@ -15,11 +17,21 @@ export type TabParamList = {
   Setting: undefined;
 };
 
-export type TabRouteProps = RouteProp<TabParamList, keyof TabParamList>;
+/** screen list */
 
-export type MainStackScreenProps<T extends keyof RootStackParamList> =
+export type TabScreenName = keyof TabParamList;
+export type RootStackScreenName = keyof RootStackParamList;
+
+/** route props */
+
+export type TabRouteProps = RouteProp<TabParamList, TabScreenName>;
+
+/** screen props - unused*/
+
+export type MainStackScreenProps<T extends RootStackScreenName> =
   StackScreenProps<RootStackParamList, T>;
 
+/** global type for navigation */
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
