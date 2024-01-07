@@ -2,11 +2,13 @@ import {
   NativeStackNavigationOptions,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
+import Icon from 'components/@common/Icon';
 import useInitialData from 'hooks/useInitialData';
 import AddTransactionStackNavigator from 'navigators/AddTransactionStackNavigator';
 import TabNavigator from 'navigators/TabNavigator';
 import {RootStackParamList} from 'navigators/types';
 import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
+import {theme} from 'styles';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -14,6 +16,11 @@ const screenOptions: NativeStackNavigationOptions = {
   headerShown: false,
   headerShadowVisible: false,
   headerBackTitleVisible: false,
+  headerLeft: () => <Icon name="X" />,
+  headerStyle: {
+    backgroundColor: theme.palette.gray1,
+  },
+  headerTitleStyle: theme.typography.Body1Semibold,
 };
 
 export default function RootStackNavigator() {
