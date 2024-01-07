@@ -31,9 +31,8 @@ export type TabRouteProps = RouteProp<TabParamList, TabScreenName>;
 export type MainStackScreenProps<T extends RootStackScreenName> =
   StackScreenProps<RootStackParamList, T>;
 
-/** global type for navigation */
+/** navigation에 type 지정 */
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
     interface RootParamList extends RootStackParamList {}
   }
