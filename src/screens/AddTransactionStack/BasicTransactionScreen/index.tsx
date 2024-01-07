@@ -9,6 +9,7 @@ import Step from 'components/@common/funnel/Step';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import {View} from 'react-native';
 import InputCompletionCheckStepScreen from 'screens/AddTransactionStack/BasicTransactionScreen/InputCompletionCheckStepScreen';
+import {useNavigation} from '@react-navigation/native';
 
 export type BasicTransactionStep = 'Step1' | 'Step2' | 'Step3' | 'Step4';
 
@@ -29,14 +30,17 @@ const stepInfoList: Steps<typeof steps> = {
 export default function BasicTransactionScreen() {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
   const currentStep = steps[currentStepIndex];
-
+  const navigation = useNavigation();
   const isLastStep = currentStepIndex === steps.length - 1;
 
   const goToNextStep = () => {
     if (!isLastStep) {
       setCurrentStepIndex(currentStepIndex + 1);
     } else {
-      console.log('finish');
+      navigation.navigate('AddTransactionStack', {
+        screen: 'AddTransaction',
+        params: {transaction: {}},
+      });
     }
   };
 

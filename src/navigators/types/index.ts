@@ -1,6 +1,7 @@
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {StackScreenProps} from '@react-navigation/stack';
+import {Transaction} from 'types/transaction';
 
 /** param list */
 
@@ -11,7 +12,7 @@ export type RootStackParamList = {
 };
 
 export type AddTransactionStackParamList = {
-  AddTransaction: undefined;
+  AddTransaction: {transaction: Partial<Transaction>};
   BasicTransaction: undefined;
 };
 
