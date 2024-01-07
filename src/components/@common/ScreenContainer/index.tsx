@@ -15,6 +15,7 @@ import {theme} from 'styles';
 type ScreenContainerProps = {
   children: ReactNode;
   loading?: boolean;
+  style?: React.CSSProperties | Array<React.CSSProperties>;
 } & ScrollViewProps;
 
 /** Use ScrollViewProps */
@@ -32,6 +33,7 @@ export default function ScreenContainer({
         <ScrollView
           {...props}
           contentContainerStyle={[
+            {flexDirection: 'row', flexWrap: 'wrap'},
             styles.scrollViewContent,
             props.contentContainerStyle,
           ]}>
