@@ -10,9 +10,10 @@ import Account from 'screens/Account';
 import Ledger from 'screens/Ledger';
 import Setting from 'screens/Setting';
 import Transaction from 'screens/Transaction';
-import AddTransaction from 'screens/AddTransaction';
+import AddTransactionButton from 'navigators/components/AddTransactionButton';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import TabBarIcon from 'navigators/components/TabBarIcon';
+import NullScreen from 'navigators/components/NullScreen';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -33,9 +34,13 @@ export default function TabNavigator() {
         options={{tabBarLabel: TabBarLabel.Transaction}}
       />
       <Tab.Screen
-        name={TabMenu.AddTransaction}
-        component={AddTransaction}
-        options={{tabBarLabel: TabBarLabel.AddTransaction}}
+        name={TabMenu.NavigateAddTransaction}
+        component={NullScreen}
+        options={{
+          tabBarLabel: TabBarLabel.AddTransaction,
+          tabBarIcon: undefined,
+          tabBarButton: AddTransactionButton,
+        }}
       />
       <Tab.Screen
         name={TabMenu.Account}
@@ -58,7 +63,7 @@ const screenOptions: (
     <TabBarIcon routeName={route.name} focused={focused} />
   ),
   tabBarIconStyle: {
-    marginTop: route.name === TabMenu.AddTransaction ? 17 : 4,
+    marginTop: 4,
   },
   tabBarActiveTintColor: theme.palette.primary,
   tabBarInactiveTintColor: theme.palette.gray4,
