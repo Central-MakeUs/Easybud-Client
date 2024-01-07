@@ -25,7 +25,7 @@ export default function ScreenContainer({
   ...props
 }: ScreenContainerProps) {
   return (
-    <SafeAreaView {...props} style={[styles.safeArea, props.style]}>
+    <SafeAreaView {...props} style={styles.safeArea}>
       <StatusBar />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -33,7 +33,8 @@ export default function ScreenContainer({
         <ScrollView
           contentContainerStyle={[
             styles.scrollViewContent,
-            props.contentContainerStyle,
+            props?.style,
+            props?.contentContainerStyle,
           ]}>
           {loading ? (
             <View style={styles.loadingContainer}>
