@@ -1,5 +1,5 @@
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
-import RootStackNavigator from 'navigators/StackNavigator';
+import RootStackNavigator from 'navigators/RootStackNavigator';
 import {lightPalette} from 'styles';
 
 const theme = {
