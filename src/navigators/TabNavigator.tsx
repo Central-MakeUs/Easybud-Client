@@ -3,7 +3,6 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {theme} from 'styles';
-import {TabBarLabel} from 'navigators/constants/label';
 import {TabRouteProps, TabParamList} from 'navigators/types';
 import AccountScreen from 'screens/Tab/AccountScreen';
 import LedgerScreen from 'screens/Tab/LedgerScreen';
@@ -25,27 +24,27 @@ export default function TabNavigator() {
       <Tab.Screen
         name={'Ledger'}
         component={LedgerScreen}
-        options={{tabBarLabel: TabBarLabel.Ledger}}
+        options={{tabBarLabel: '장부'}}
       />
       <Tab.Screen
         name={'Transaction'}
         component={TransactionScreen}
-        options={{tabBarLabel: TabBarLabel.Transaction}}
+        options={{tabBarLabel: '거래'}}
       />
       <Tab.Screen
         name={'NavigateAddTransaction'}
         component={NullScreen}
-        options={{tabBarLabel: TabBarLabel.NavigateAddTransaction}}
+        options={{tabBarLabel: ''}}
       />
       <Tab.Screen
         name={'Account'}
         component={AccountScreen}
-        options={{tabBarLabel: TabBarLabel.Account}}
+        options={{tabBarLabel: '계정'}}
       />
       <Tab.Screen
         name={'Setting'}
         component={SettingScreen}
-        options={{tabBarLabel: TabBarLabel.Setting}}
+        options={{tabBarLabel: '설정'}}
       />
     </Tab.Navigator>
   );
