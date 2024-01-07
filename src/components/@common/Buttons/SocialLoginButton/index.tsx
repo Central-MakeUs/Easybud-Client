@@ -42,34 +42,28 @@ export default function SocialLoginButton({
   };
 
   return (
-    <>
-      <TouchableOpacity
-        {...props}
-        style={{
-          ...socialLoginButtonStyles.button,
-          backgroundColor,
-          borderColor,
-          borderWidth,
-        }}>
-        {variant === 'apple' ? (
-          <Icon name={'AppleLogo'} width={56} height={56} />
-        ) : (
-          <Image
-            source={kakaoLogo}
-            style={{width: 30, height: 30, marginRight: 14, marginLeft: 14}}
-          />
-        )}
-        <Typography
-          style={{
-            color: textColor,
-            textAlign: 'center',
-            flex: 1,
-            marginLeft: -44,
-          }}>
-          {BUTTON_TEXT[variant]}
-        </Typography>
-      </TouchableOpacity>
-    </>
+    <TouchableOpacity
+      {...props}
+      style={{
+        ...socialLoginButtonStyles.button,
+        backgroundColor,
+        borderColor,
+        borderWidth,
+      }}>
+      {variant === 'apple' ? (
+        <Icon
+          name={'AppleLogo'}
+          width={56}
+          height={56}
+          style={socialLoginButtonStyles.appleImage}
+        />
+      ) : (
+        <Image source={kakaoLogo} style={socialLoginButtonStyles.kakaoImage} />
+      )}
+      <Typography style={[{color: textColor}, socialLoginButtonStyles.text]}>
+        {BUTTON_TEXT[variant]}
+      </Typography>
+    </TouchableOpacity>
   );
 }
 
@@ -83,5 +77,17 @@ const socialLoginButtonStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  kakaoImage: {
+    width: 30,
+    height: 30,
+    marginRight: 58,
+    marginLeft: 14,
+  },
+  appleImage: {
+    marginRight: 40,
+  },
+  text: {
+    textAlign: 'center',
   },
 });

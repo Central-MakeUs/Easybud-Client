@@ -33,7 +33,6 @@ export default function ScreenContainer({
         <ScrollView
           {...props}
           contentContainerStyle={[
-            {flexDirection: 'row', flexWrap: 'wrap'},
             styles.scrollViewContent,
             props.contentContainerStyle,
           ]}>
