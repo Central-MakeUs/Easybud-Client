@@ -1,18 +1,18 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import useInitialData from 'hooks/useInitialData';
 import TabNavigator from 'navigators/TabNavigator';
-import {MainStackParamList} from 'navigators/types';
+import {RootStackParamList} from 'navigators/types';
 import AddTransaction from 'screens/AddTransaction';
 import OnBoardingFunnel from 'screens/OnBoarding';
 
-const Stack = createNativeStackNavigator<MainStackParamList>();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const screenOptions = {
   headerShown: false,
   headerShadowVisible: false,
 };
 
-export default function StackNavigator() {
+export default function RootStackNavigator() {
   const {isAuthenticated, isVerifyTokenLoading} = useInitialData();
 
   const initialRouteName = isAuthenticated ? 'TabNavigator' : 'OnBoarding';

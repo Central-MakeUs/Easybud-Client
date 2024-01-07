@@ -1,7 +1,7 @@
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 
-export type MainStackParamList = {
+export type RootStackParamList = {
   TabNavigator: NavigatorScreenParams<TabParamList>;
   OnBoarding: undefined;
   AddTransaction: undefined;
@@ -17,12 +17,12 @@ export type TabParamList = {
 
 export type TabRouteProps = RouteProp<TabParamList, keyof TabParamList>;
 
-export type MainStackScreenProps<T extends keyof MainStackParamList> =
-  StackScreenProps<MainStackParamList, T>;
+export type MainStackScreenProps<T extends keyof RootStackParamList> =
+  StackScreenProps<RootStackParamList, T>;
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace ReactNavigation {
-    interface RootParamList extends MainStackParamList {}
+    interface RootParamList extends RootStackParamList {}
   }
 }
