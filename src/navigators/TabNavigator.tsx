@@ -35,7 +35,7 @@ export default function TabNavigator() {
       <Tab.Screen
         name={'NavigateAddTransaction'}
         component={NullScreen}
-        options={{tabBarLabel: TabBarLabel.AddTransaction}}
+        options={{tabBarLabel: TabBarLabel.NavigateAddTransaction}}
       />
       <Tab.Screen
         name={'Account'}
