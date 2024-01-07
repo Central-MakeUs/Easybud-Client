@@ -1,10 +1,10 @@
-import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
+import {RouteProp} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 
 /** param list */
 
 export type RootStackParamList = {
-  TabNavigator: NavigatorScreenParams<TabParamList>;
+  TabNavigator: undefined;
   OnBoarding: undefined;
   AddTransaction: undefined;
 };
