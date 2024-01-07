@@ -5,8 +5,8 @@ import {
 import useInitialData from 'hooks/useInitialData';
 import TabNavigator from 'navigators/TabNavigator';
 import {RootStackParamList} from 'navigators/types';
-import AddTransaction from 'screens/AddTransaction';
-import OnBoardingFunnelScreen from 'screens/OnBoarding';
+import AddTransactionScreen from 'screens/AddTransactionScreen';
+import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -34,7 +34,7 @@ export default function RootStackNavigator() {
           <Stack.Screen name={'TabNavigator'} component={TabNavigator} />
           <Stack.Screen
             name={'AddTransaction'}
-            component={AddTransaction}
+            component={AddTransactionScreen}
             options={{
               headerShown: true,
               headerTitle: '거래 추가',
