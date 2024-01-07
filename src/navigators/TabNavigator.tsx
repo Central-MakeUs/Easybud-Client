@@ -36,11 +36,7 @@ export default function TabNavigator() {
       <Tab.Screen
         name={TabMenu.NavigateAddTransaction}
         component={NullScreen}
-        options={{
-          tabBarLabel: TabBarLabel.AddTransaction,
-          tabBarIcon: undefined,
-          tabBarButton: AddTransactionButton,
-        }}
+        options={{tabBarLabel: TabBarLabel.AddTransaction}}
       />
       <Tab.Screen
         name={TabMenu.Account}
@@ -59,11 +55,14 @@ export default function TabNavigator() {
 const screenOptions: (
   props: TabRouteProps & {bottomSize: number},
 ) => BottomTabNavigationOptions = ({route, bottomSize}) => ({
-  tabBarIcon: ({focused}: {focused: boolean}) => (
-    <TabBarIcon routeName={route.name} focused={focused} />
-  ),
+  tabBarIcon:
+    route.name === TabMenu.NavigateAddTransaction
+      ? AddTransactionButton
+      : ({focused}: {focused: boolean}) => (
+          <TabBarIcon routeName={route.name} focused={focused} />
+        ),
   tabBarIconStyle: {
-    marginTop: 4,
+    marginTop: route.name === TabMenu.NavigateAddTransaction ? 18 : 4,
   },
   tabBarActiveTintColor: theme.palette.primary,
   tabBarInactiveTintColor: theme.palette.gray4,
