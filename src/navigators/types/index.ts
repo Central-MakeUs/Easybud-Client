@@ -1,13 +1,28 @@
-import {RouteProp} from '@react-navigation/native';
-import {StackMenu, TabMenu} from 'navigators/constants/menu';
+import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
+import {StackScreenProps} from '@react-navigation/stack';
 
-export type StackParamList = Record<StackMenu, undefined>;
-
-export type TabParamList = Record<TabMenu, undefined>;
-
-export type StackScreenName = keyof StackParamList;
-export type TabScreenName = keyof TabParamList;
-
-export type TabRouteProps = {
-  route: RouteProp<TabParamList, TabScreenName>;
+export type MainStackParamList = {
+  TabNavigator: NavigatorScreenParams<TabParamList>;
+  OnBoarding: undefined;
+  AddTransaction: undefined;
 };
+
+export type TabParamList = {
+  Ledger: undefined;
+  Transaction: undefined;
+  NavigateAddTransaction: undefined;
+  Account: undefined;
+  Setting: undefined;
+};
+
+export type TabRouteProps = RouteProp<TabParamList, keyof TabParamList>;
+
+export type MainStackScreenProps<T extends keyof MainStackParamList> =
+  StackScreenProps<MainStackParamList, T>;
+
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace ReactNavigation {
+    interface RootParamList extends MainStackParamList {}
+  }
+}
