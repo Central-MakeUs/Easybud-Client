@@ -1,8 +1,6 @@
 import Funnel from 'components/@common/Funnel/Funnel';
 import StepContainer from 'components/@common/Funnel/StepContainer';
-import {onboardingFunnelStepsState} from 'libs/recoil/states/steps';
-import React from 'react';
-import {useRecoilValue} from 'recoil';
+import React, {useState} from 'react';
 import DescriptionFunnelStep from 'components/onboarding/steps/DescriptionFunnelStep';
 import LoginFunnelStep from 'components/onboarding/steps/LoginFunnelStep';
 import UserInfoFunnelStep from 'components/onboarding/steps/UserInfoFunnelStep';
@@ -17,7 +15,7 @@ const stepInfoList: StepInfo<'Step'>[] = [
 ];
 
 export default function OnBoardingFunnelScreen() {
-  const currentStep = useRecoilValue(onboardingFunnelStepsState);
+  const [currentStep] = useState<OnBoardinStep>('Step1');
 
   return (
     <Funnel steps={steps} step={currentStep}>
