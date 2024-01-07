@@ -3,7 +3,7 @@ import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import {StyleSheet, View} from 'react-native';
 
-export default function Login() {
+export default function LoginStepScreen() {
   return (
     <ScreenContainer style={loginStyles.container}>
       <View style={loginStyles.titleContainer}>

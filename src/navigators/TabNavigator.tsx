@@ -5,10 +5,10 @@ import {
 import {theme} from 'styles';
 import {TabBarLabel} from 'navigators/constants/label';
 import {TabRouteProps, TabParamList} from 'navigators/types';
-import Account from 'screens/Account';
-import Ledger from 'screens/Ledger';
-import Setting from 'screens/Setting';
-import Transaction from 'screens/Transaction';
+import AccountScreen from 'screens/AccountScreen';
+import LedgerScreen from 'screens/LedgerScreen';
+import SettingScreen from 'screens/SettingScreen';
+import TransactionScreen from 'screens/TransactionScreen';
 import AddTransactionButton from 'navigators/components/AddTransactionButton';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import TabBarIcon from 'navigators/components/TabBarIcon';
@@ -24,12 +24,12 @@ export default function TabNavigator() {
       screenOptions={({route}) => screenOptions({route, bottomSize})}>
       <Tab.Screen
         name={'Ledger'}
-        component={Ledger}
+        component={LedgerScreen}
         options={{tabBarLabel: TabBarLabel.Ledger}}
       />
       <Tab.Screen
         name={'Transaction'}
-        component={Transaction}
+        component={TransactionScreen}
         options={{tabBarLabel: TabBarLabel.Transaction}}
       />
       <Tab.Screen
@@ -39,12 +39,12 @@ export default function TabNavigator() {
       />
       <Tab.Screen
         name={'Account'}
-        component={Account}
+        component={AccountScreen}
         options={{tabBarLabel: TabBarLabel.Account}}
       />
       <Tab.Screen
         name={'Setting'}
-        component={Setting}
+        component={SettingScreen}
         options={{tabBarLabel: TabBarLabel.Setting}}
       />
     </Tab.Navigator>

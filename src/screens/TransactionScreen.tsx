@@ -1,5 +1,5 @@
 import {View} from 'react-native';
 
-export default function Transaction() {
+export default function TransactionScreen() {
   return <View />;
 }
