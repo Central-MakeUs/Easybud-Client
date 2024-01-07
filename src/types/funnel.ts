@@ -14,4 +14,4 @@ export type StepProps<T extends NonEmptyArray<string>> = {
 
 /** onboarding */
 
-export type OnBoardinStep = 'Step1' | 'Step2' | 'Step3';
+export type OnBoardingStep = 'Step1' | 'Step2' | 'Step3';

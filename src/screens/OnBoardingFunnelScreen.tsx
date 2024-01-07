@@ -4,9 +4,9 @@ import React, {useState} from 'react';
 import DescriptionFunnelStep from 'components/onboarding/steps/DescriptionFunnelStep';
 import LoginFunnelStep from 'components/onboarding/steps/LoginFunnelStep';
 import UserInfoFunnelStep from 'components/onboarding/steps/UserInfoFunnelStep';
-import {NonEmptyArray, OnBoardinStep, StepInfo} from 'types/funnel';
+import {NonEmptyArray, OnBoardingStep, StepInfo} from 'types/funnel';
 
-const steps: NonEmptyArray<OnBoardinStep> = ['Step1', 'Step2', 'Step3'];
+const steps: NonEmptyArray<OnBoardingStep> = ['Step1', 'Step2', 'Step3'];
 
 const stepInfoList: StepInfo<'Step'>[] = [
   {name: 'Step1', component: <DescriptionFunnelStep />},
@@ -15,7 +15,7 @@ const stepInfoList: StepInfo<'Step'>[] = [
 ];
 
 export default function OnBoardingFunnelScreen() {
-  const [currentStep] = useState<OnBoardinStep>('Step1');
+  const [currentStep] = useState<OnBoardingStep>('Step1');
 
   return (
     <Funnel steps={steps} step={currentStep}>
