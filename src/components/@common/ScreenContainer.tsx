@@ -15,6 +15,7 @@ import {theme} from 'styles';
 type ScreenContainerProps = {
   children: ReactNode;
   loading?: boolean;
+  style?: React.CSSProperties | Array<React.CSSProperties>;
 } & ScrollViewProps;
 
 /** Use ScrollViewProps */
@@ -30,10 +31,10 @@ export default function ScreenContainer({
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardAvoidingView}>
         <ScrollView
-          {...props}
           contentContainerStyle={[
             styles.scrollViewContent,
-            props.contentContainerStyle,
+            props?.style,
+            props?.contentContainerStyle,
           ]}>
           {loading ? (
             <View style={styles.loadingContainer}>

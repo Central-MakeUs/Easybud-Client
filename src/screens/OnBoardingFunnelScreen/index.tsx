@@ -15,7 +15,7 @@ const stepInfoList: StepInfo<'Step'>[] = [
 ];
 
 export default function OnBoardingFunnelScreen() {
-  const [currentStep] = useState<OnBoardingStep>('Step1');
+  const [currentStep] = useState<OnBoardingStep>('Step2');
 
   return (
     <Funnel steps={steps} step={currentStep}>
