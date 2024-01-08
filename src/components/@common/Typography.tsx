@@ -12,15 +12,18 @@ export default function Typography({
   color = 'black',
   ...props
 }: TypographyProps) {
-  return (
+  const words = (props.children as string).split(' ');
+
+  return words.map((word, index) => (
     <Text
       {...props}
+      key={index}
       style={[
         props.style,
         {color: theme.palette[color]},
         theme.typography[type],
       ]}>
-      {props.children}
+      {word}{' '}
     </Text>
-  );
+  ));
 }
