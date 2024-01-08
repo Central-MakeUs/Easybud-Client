@@ -8,15 +8,16 @@ import Typography from 'components/@common/Typography';
 import useNavigator from 'navigators/hooks/useNavigator';
 
 type FallbackErrorScreenProps = {
+  error: Error;
   resetError: () => void;
 };
 
 export default function FallbackErrorScreen({
+  error,
   resetError,
 }: FallbackErrorScreenProps) {
-  const {reset} = useQueryErrorResetBoundary();
   const queryClient = useQueryClient();
-
+  const {reset} = useQueryErrorResetBoundary();
   const {stackNavigation} = useNavigator();
 
   const resetErrorState = () => {
@@ -33,8 +34,11 @@ export default function FallbackErrorScreen({
 
   return (
     <ScreenContainer>
-      <Typography>에러 발생</Typography>
-      <TouchableOpacity onPress={handlePressButton} />
+      <Typography>문제가 발생했습니다</Typography>
+      <Typography>{error.message}</Typography>
+      <TouchableOpacity onPress={handlePressButton}>
+        홈으로 돌아가기
+      </TouchableOpacity>
     </ScreenContainer>
   );
 }
