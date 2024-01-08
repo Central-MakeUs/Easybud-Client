@@ -5790,6 +5790,7 @@ __metadata:
     react-docgen-typescript-plugin: ^1.0.5
     react-dom: ^18.2.0
     react-native: 0.71.4
+    react-native-error-boundary: ^1.2.4
     react-native-gesture-handler: ^2.14.0
     react-native-safe-area-context: ^4.8.2
     react-native-screens: ^3.29.0
@@ -16503,6 +16504,20 @@ eslint-plugin-jsx-a11y@latest:
     jscodeshift: ^0.14.0
     nullthrows: ^1.1.1
   checksum: 3624f18f4a3d12d3ab304b2c5beaeb59bdf7eb2ce74a44a660cb028846a0993437ab733fe2423f9455d96838628853c8e26cea004c1720b358ee5aed2d46278b
+  languageName: node
+  linkType: hard
+
+"react-native-error-boundary@npm:^1.2.4":
+  version: 1.2.4
+  resolution: "react-native-error-boundary@npm:1.2.4"
+  peerDependencies:
+    "@types/react-native": ">=0.57.7"
+    react: ">=16.6.0"
+    react-native: ">=0.57.7"
+  peerDependenciesMeta:
+    "@types/react-native":
+      optional: true
+  checksum: c047da0b40b840941e2f9f1447a755b35d45957fbefe4f8e9e05156f0d84df4da46bf5df21fecc18272be1570a14452db80ab5c26aef1611c9488be932f84b1d
   languageName: node
   linkType: hard
 

@@ -4,7 +4,7 @@ import {StackScreenProps} from '@react-navigation/stack';
 /** param list */
 
 export type RootStackParamList = {
-  TabNavigator: NavigatorScreenParams<TabParamList>;
+  TabNavigator?: NavigatorScreenParams<TabParamList>;
   OnBoarding: undefined;
   AddTransaction: undefined;
 };
