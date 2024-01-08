@@ -1,15 +1,19 @@
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
 import RootStackNavigator from 'navigators/RootStackNavigator';
-import {lightPalette} from 'styles';
+import {lightPalette, theme} from 'styles';
 
-const theme = {
+const globalTheme = {
   ...DefaultTheme,
-  colors: {...DefaultTheme.colors, ...lightPalette},
+  colors: {
+    ...DefaultTheme.colors,
+    ...lightPalette,
+    background: theme.palette.white,
+  },
 };
 
 const NavigatorContainer = () => {
   return (
-    <NavigationContainer theme={theme}>
+    <NavigationContainer theme={globalTheme}>
       <RootStackNavigator />
     </NavigationContainer>
   );

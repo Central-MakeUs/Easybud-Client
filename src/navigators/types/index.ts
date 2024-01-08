@@ -6,7 +6,7 @@ import {Transaction} from 'types/transaction';
 /** param list */
 
 export type RootStackParamList = {
-  Tab: NavigatorScreenParams<TabParamList>;
+  Tab?: NavigatorScreenParams<TabParamList>;
   OnBoarding: undefined;
   AddTransactionStack: NavigatorScreenParams<AddTransactionStackParamList>;
 };
