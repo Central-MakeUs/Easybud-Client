@@ -1,5 +1,5 @@
 import {atom} from 'recoil';
-import {RecoilStateKeys} from 'libs/recoil/keys';
+import {RecoilStateKeys} from 'libs/recoil/constants/keys';
 import {localStorageEffect} from 'libs/recoil/utils';
 import {TokenType} from 'libs/recoil/types';
 

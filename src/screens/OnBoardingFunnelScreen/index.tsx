@@ -1,10 +1,10 @@
-import Funnel from 'components/@common/funnel/Funnel';
-import Step from 'components/@common/funnel/Step';
 import React, {useState} from 'react';
+import {NonEmptyArray, OnBoardingStep, StepInfo} from 'types/funnel';
 import DescriptionStepScreen from 'screens/OnBoardingFunnelScreen/DescriptionStepScreen';
 import LoginStepScreen from 'screens/OnBoardingFunnelScreen/LoginStepScreen';
 import UserInfoStepScreen from 'screens/OnBoardingFunnelScreen/UserInfoStepScreen';
-import {NonEmptyArray, OnBoardingStep, StepInfo} from 'types/funnel';
+import Funnel from 'components/@common/Funnel/Funnel';
+import Step from 'components/@common/Funnel/Step';
 
 const steps: NonEmptyArray<OnBoardingStep> = ['Step1', 'Step2', 'Step3'];
 
@@ -15,7 +15,7 @@ const stepInfoList: StepInfo<'Step'>[] = [
 ];
 
 export default function OnBoardingFunnelScreen() {
-  const [currentStep] = useState<OnBoardingStep>('Step1');
+  const [currentStep] = useState<OnBoardingStep>('Step2');
 
   return (
     <Funnel steps={steps} step={currentStep}>
