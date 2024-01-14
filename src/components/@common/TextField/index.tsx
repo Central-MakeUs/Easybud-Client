@@ -46,7 +46,7 @@ export default function TextField({
         placeholder={props.placeholder ?? '내용을 입력해주세요.'}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        style={styles.text}
+        style={styles.textInput}
       />
       {value !== '' && (
         <TouchableOpacity onPress={clearInput}>
@@ -70,9 +70,10 @@ const styles = StyleSheet.create({
     width: '100%',
     flex: 1,
   },
-  text: {
+  textInput: {
     ...theme.typography.Title2Regular,
     placeholderTextColor: theme.palette.gray3,
     maxWidth: '93%',
+    flex: 1,
   },
 });
