@@ -36,12 +36,14 @@ const BACKGROUND_COLOR = {
 type ButtonProps = {
   variant?: 'primary' | 'secondary';
   fullWidth?: boolean;
+  fixedWidth: number;
   children: string;
 } & TouchableOpacityProps;
 
 export default function Button({
   variant = 'primary',
   fullWidth = true,
+  fixedWidth,
   children,
   ...props
 }: ButtonProps) {
@@ -50,7 +52,7 @@ export default function Button({
   const {backgroundColor, textColor, width} = {
     backgroundColor: theme.palette[BACKGROUND_COLOR[activeVariant][variant]],
     textColor: TEXT_COLOR[activeVariant][variant],
-    width: fullWidth ? '100%' : '50%',
+    width: fixedWidth ? fixedWidth : fullWidth ? '100%' : '50%',
   };
 
   return (

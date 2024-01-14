@@ -1,10 +1,8 @@
 import Icon from 'components/@common/Icon';
 import React, {useState} from 'react';
 import {
-  NativeSyntheticEvent,
   StyleSheet,
   TextInput,
-  TextInputContentSizeChangeEventData,
   TextInputProps,
   TouchableOpacity,
   View,
@@ -12,34 +10,26 @@ import {
 import {theme} from 'styles';
 
 /**
- * @param defaultValue 텍스트 필드에 맨 처음에 표시될 기본값
- * @param placeholder 텍스트 필드 placeholder
+ * @param value 텍스트 필드에 표시될 값
+ * @param onChangeText 값이 변경될 때 호출. 변경된 텍스트가 매개변수로 전달
+ * @param ...props - react native TextInputProps
  */
+type TextFieldProps = {
+  value: string;
+  onChangeText: (text: string) => void;
+} & Omit<TextInputProps, 'value' | 'onChangeText'>;
 
-type TextFieldProps = {defaultValue: string} & Pick<
-  TextInputProps,
-  'placeholder'
->;
-
-export default function TextField({defaultValue, ...props}: TextFieldProps) {
-  const [text, setText] = useState(defaultValue ?? '');
-  const [height, setHeight] = useState(0);
+export default function TextField({
+  value,
+  onChangeText,
+  ...props
+}: TextFieldProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
 
-  const clearInput = () => {
-    setText('');
-    setHeight(0);
-  };
-
-  const handleInputHeight = (
-    e: NativeSyntheticEvent<TextInputContentSizeChangeEventData>,
-  ) => {
-    e.nativeEvent.contentSize.height &&
-      setHeight(e.nativeEvent.contentSize.height);
-  };
+  const clearInput = () => onChangeText('');
 
   return (
     <View
@@ -47,21 +37,18 @@ export default function TextField({defaultValue, ...props}: TextFieldProps) {
         styles.container,
         {
           borderBottomColor:
-            theme.palette[isFocused || text ? 'primary' : 'gray3'],
+            theme.palette[isFocused || value ? 'primary' : 'gray3'],
         },
       ]}>
       <TextInput
-        value={text}
-        onChangeText={setText}
+        value={value}
+        onChangeText={onChangeText}
         placeholder={props.placeholder ?? '내용을 입력해주세요.'}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        multiline={true}
-        underlineColorAndroid="transparent"
-        onContentSizeChange={handleInputHeight}
-        style={[styles.text, {height}]}
+        style={styles.text}
       />
-      {text !== '' && (
+      {value !== '' && (
         <TouchableOpacity onPress={clearInput}>
           <Icon name="XCircle" color={theme.palette.gray3} />
         </TouchableOpacity>
@@ -80,11 +67,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 11,
     paddingHorizontal: 16,
+    width: '100%',
+    flex: 1,
   },
   text: {
-    ...theme.typography.Title1Semibold1,
+    ...theme.typography.Title2Regular,
     placeholderTextColor: theme.palette.gray3,
-    width: '100%',
-    height: '100%',
+    maxWidth: '93%',
   },
 });
