@@ -22,7 +22,7 @@ export const typographyStyles = StyleSheet.create({
   /** Title2 - size: 16, weight: 700 */
   Title2Bold: {
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: 20,
     lineHeight: 36,
   },
   /** Title2_l - size: 16, weight: 400 */
