@@ -46,10 +46,10 @@ export default function TextField({
         placeholder={props.placeholder ?? '내용을 입력해주세요.'}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        style={styles.text}
+        style={styles.textInput}
       />
       {value !== '' && (
-        <TouchableOpacity onPress={clearInput} style={styles.clearButton}>
+        <TouchableOpacity onPress={clearInput}>
           <Icon name="XCircle" color={theme.palette.gray3} />
         </TouchableOpacity>
       )}
@@ -67,11 +67,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 11,
     paddingHorizontal: 16,
+    width: '100%',
+    flex: 1,
   },
-  text: {
-    ...theme.typography.Title1Semibold1,
+  textInput: {
+    ...theme.typography.Title2Regular,
     placeholderTextColor: theme.palette.gray3,
     maxWidth: '93%',
+    flex: 1,
   },
-  clearButton: {},
 });
