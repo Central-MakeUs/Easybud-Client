@@ -10,6 +10,6 @@ export default meta;
 
 type Story = ComponentStory<typeof Calculator>;
 
-const Template: Story = args => <Calculator {...args} />;
+const Template: Story = () => <Calculator />;
 
 export const DefaultCalculator = Template.bind({});
