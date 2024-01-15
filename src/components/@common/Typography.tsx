@@ -14,16 +14,21 @@ export default function Typography({
 }: TypographyProps) {
   const words = (props.children as string).split(' ');
 
-  return words.map((word, index) => (
-    <Text
-      {...props}
-      key={index}
-      style={[
-        props.style,
-        {color: theme.palette[color]},
-        theme.typography[type],
-      ]}>
-      {word}{' '}
-    </Text>
-  ));
+  return (
+    <>
+      {words.map((word, index) => (
+        <Text
+          {...props}
+          key={index}
+          style={[
+            props.style,
+            {color: theme.palette[color]},
+            theme.typography[type],
+          ]}>
+          {word}
+          {index >= 1 && ' '}
+        </Text>
+      ))}
+    </>
+  );
 }

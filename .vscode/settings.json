@@ -2,5 +2,6 @@
   "typescript.preferences.importModuleSpecifier": "non-relative",
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
-  }
+  },
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
 }

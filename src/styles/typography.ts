@@ -14,7 +14,7 @@ export const typographyStyles = StyleSheet.create({
   },
   /** Title1_m: size: 20, weight: 600, line-height: 150%(36px) */
   Title1Semibold2: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: '600',
     lineHeight: 36,
   },
@@ -22,7 +22,7 @@ export const typographyStyles = StyleSheet.create({
   /** Title2 - size: 16, weight: 700 */
   Title2Bold: {
     fontWeight: '700',
-    fontSize: 20,
+    fontSize: 16,
     lineHeight: 36,
   },
   /** Title2_l - size: 16, weight: 400 */
