@@ -36,6 +36,7 @@ export {default as Coin} from './coin.svg';
 export {default as Copy} from './copy.svg';
 export {default as Crop} from './crop.svg';
 export {default as Crown} from './crown.svg';
+export {default as Delete} from './delete.svg';
 export {default as Document} from './document.svg';
 export {default as DotsSixHorizontal} from './dots-six-horizontal.svg';
 export {default as DotsSixVertical} from './dots-six-vertical.svg';
