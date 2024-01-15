@@ -1,8 +1,10 @@
 import Icon from 'components/@common/Icon';
 import React, {useState} from 'react';
 import {
+  NativeSyntheticEvent,
   StyleSheet,
   TextInput,
+  TextInputContentSizeChangeEventData,
   TextInputProps,
   TouchableOpacity,
   View,
@@ -25,11 +27,22 @@ export default function TextField({
   ...props
 }: TextFieldProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [height, setHeight] = useState(0);
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
 
-  const clearInput = () => onChangeText('');
+  const clearInput = () => {
+    onChangeText('');
+    setHeight(0);
+  };
+
+  const handleInputHeight = (
+    e: NativeSyntheticEvent<TextInputContentSizeChangeEventData>,
+  ) => {
+    e.nativeEvent.contentSize.height &&
+      setHeight(e.nativeEvent.contentSize.height);
+  };
 
   return (
     <View
@@ -46,10 +59,13 @@ export default function TextField({
         placeholder={props.placeholder ?? '내용을 입력해주세요.'}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        style={styles.text}
+        multiline={true}
+        underlineColorAndroid="transparent"
+        onContentSizeChange={handleInputHeight}
+        style={[styles.textInput, {height}]}
       />
       {value !== '' && (
-        <TouchableOpacity onPress={clearInput} style={styles.clearButton}>
+        <TouchableOpacity onPress={clearInput}>
           <Icon name="XCircle" color={theme.palette.gray3} />
         </TouchableOpacity>
       )}
@@ -67,11 +83,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 11,
     paddingHorizontal: 16,
+    width: '100%',
+    flex: 1,
   },
-  text: {
-    ...theme.typography.Title1Semibold1,
+  textInput: {
+    ...theme.typography.Title2Regular,
     placeholderTextColor: theme.palette.gray3,
     maxWidth: '93%',
+    flex: 1,
   },
-  clearButton: {},
 });
