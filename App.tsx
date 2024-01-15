@@ -1,10 +1,10 @@
-import Navigator from 'containers/NavigatorContainer';
 import AppSetupWrapper from 'containers/AppSetupContainer';
+import RootStackNavigator from 'navigators/RootStackNavigator';
 
 const App = () => {
   return (
     <AppSetupWrapper>
-      <Navigator />
+      <RootStackNavigator />
     </AppSetupWrapper>
   );
 };
