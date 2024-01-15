@@ -1,7 +1,7 @@
-import SocialLoginButton from 'components/@common/Buttons/SocialLoginButton';
+import {StyleSheet, View} from 'react-native';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import {StyleSheet, View} from 'react-native';
+import SocialLoginButton from 'components/@common/buttons/SocialLoginButton';
 
 export default function LoginStepScreen() {
   return (

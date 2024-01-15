@@ -49,8 +49,9 @@ try {
 
 const getStories = () => {
   return {
-    "./src/components/Button/Button.stories.tsx": require("../src/components/Button/Button.stories.tsx"),
-    "./src/components/TextField/TextField.stories.tsx": require("../src/components/TextField/TextField.stories.tsx"),
+    "./src/components/@common/buttons/Button/Button.stories.tsx": require("../src/components/@common/buttons/Button/Button.stories.tsx"),
+    "./src/components/@common/buttons/SocialLoginButton/SocialLoginButton.stories.tsx": require("../src/components/@common/buttons/SocialLoginButton/SocialLoginButton.stories.tsx"),
+    "./src/components/@common/TextField/TextField.stories.tsx": require("../src/components/@common/TextField/TextField.stories.tsx"),
   };
 };
 

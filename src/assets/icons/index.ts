@@ -1,4 +1,6 @@
 export {default as AppleLogo} from './apple-logo.svg';
+export {default as KakaoLogo} from './kakao-logo.svg';
+
 export {default as ArrowBackAndroid} from './arrow-back-android.svg';
 export {default as ArrowDecrease} from './arrow-decrease.svg';
 export {default as ArrowDiagonal} from './arrow-diagonal.svg';

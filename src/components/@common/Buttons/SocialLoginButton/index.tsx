@@ -1,27 +1,12 @@
-import Icon from 'components/@common/Icon';
 import {
   StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
-  Image,
+  View,
 } from 'react-native';
-import kakaoLogo from 'assets/images/kakao.png';
+import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
-
-const BUTTON_TEXT = {
-  kakao: '카카오 로그인',
-  apple: 'Apple로 로그인',
-};
-
-const TEXT_COLOR = {
-  kakao: 'rgba(0, 0, 0, 0.85)',
-  apple: '#000000',
-};
-
-const BACKGROUND_COLOR = {
-  kakao: '#FEE500',
-  apple: '#FFFFFF',
-};
+import {LogoIcons} from 'types/icon';
 
 /**
  * @param variant 버튼 종류: 'kakao' | 'apple'
@@ -34,60 +19,72 @@ export default function SocialLoginButton({
   variant,
   ...props
 }: SocialLoginButtonProps) {
-  const {backgroundColor, textColor, borderColor, borderWidth} = {
-    backgroundColor: BACKGROUND_COLOR[variant],
-    textColor: TEXT_COLOR[variant],
-    borderColor: variant === 'apple' ? '#000000' : 'transparent',
-    borderWidth: variant === 'apple' ? 1 : 0,
-  };
+  const {logo, text, size}: {logo: LogoIcons; text: string; size: number} =
+    (() => {
+      switch (variant) {
+        case 'kakao':
+          return {
+            logo: 'KakaoLogo',
+            text: '카카오 로그인',
+            size: 32,
+          };
+        case 'apple':
+          return {
+            logo: 'AppleLogo',
+            text: 'Apple로 로그인',
+            size: 56,
+          };
+      }
+    })();
 
   return (
     <TouchableOpacity
       {...props}
-      style={{
-        ...socialLoginButtonStyles.button,
-        backgroundColor,
-        borderColor,
-        borderWidth,
-      }}>
-      {variant === 'apple' ? (
-        <Icon
-          name={'AppleLogo'}
-          width={56}
-          height={56}
-          style={socialLoginButtonStyles.appleImage}
-        />
-      ) : (
-        <Image source={kakaoLogo} style={socialLoginButtonStyles.kakaoImage} />
-      )}
-      <Typography style={[{color: textColor}, socialLoginButtonStyles.text]}>
-        {BUTTON_TEXT[variant]}
+      style={[
+        socialLoginButtonStyles.button,
+        socialLoginButtonStyles[variant],
+      ]}>
+      <Icon
+        name={logo}
+        size={size}
+        style={[
+          socialLoginButtonStyles.logo,
+          socialLoginButtonStyles[`${variant}Icon`],
+        ]}
+      />
+      <Typography
+        style={[
+          {color: socialLoginButtonStyles[variant].color},
+          socialLoginButtonStyles.text,
+        ]}>
+        {text}
       </Typography>
+      <View style={{width: 56}} />
     </TouchableOpacity>
   );
 }
 
 const socialLoginButtonStyles = StyleSheet.create({
   button: {
-    width: '100%',
+    paddingHorizontal: 16,
     height: 56,
     borderRadius: 12,
-    paddingRight: 14,
-    display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  kakaoImage: {
-    width: 30,
-    height: 30,
-    marginRight: 58,
-    marginLeft: 14,
+  apple: {
+    borderWidth: 1,
+    borderColor: '#000000',
+    color: '#000000',
+    backgroundColor: '#FFFFFF',
   },
-  appleImage: {
-    marginRight: 40,
+  kakao: {
+    backgroundColor: '#FEE500',
+    color: 'rgba(0, 0, 0, 0.85)',
   },
-  text: {
-    textAlign: 'center',
-  },
+  logo: {},
+  appleIcon: {},
+  kakaoIcon: {margin: 12}, // 28-16
+  text: {textAlign: 'center'},
 });

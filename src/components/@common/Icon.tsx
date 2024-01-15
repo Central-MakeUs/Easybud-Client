@@ -2,9 +2,10 @@ import {SvgProps} from 'react-native-svg';
 import {theme} from 'styles';
 import {KeyOfPalette} from 'styles/types';
 import * as Icons from 'assets/icons';
+import {KeyOfIcons} from 'types/icon';
 
 type IconProps = SvgProps & {
-  name: keyof typeof Icons;
+  name: KeyOfIcons;
   size?: number | undefined;
   fill?: KeyOfPalette;
   style?: React.CSSProperties | Array<React.CSSProperties>;
