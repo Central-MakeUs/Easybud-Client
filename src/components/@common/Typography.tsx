@@ -12,7 +12,7 @@ export default function Typography({
   color = 'black',
   ...props
 }: TypographyProps) {
-  const words = (props.children as string).split(' ');
+  const words = (props.children as string)?.split(' ');
 
   return (
     <>
