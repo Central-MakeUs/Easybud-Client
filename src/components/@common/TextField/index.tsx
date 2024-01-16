@@ -48,8 +48,6 @@ export default function TextField({defaultValue, ...props}: TextFieldProps) {
         const parsedValue = parseNumberFromString(value).slice(0, -1);
 
         setValue(`${formatNumberToLocaleString(parsedValue)}원`);
-      } else {
-        setValue(`0원`);
       }
 
       e.preventDefault();
