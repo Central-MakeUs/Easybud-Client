@@ -1,31 +1,26 @@
-import Icon from 'components/@common/Icon';
 import React, {useState} from 'react';
 import {
   NativeSyntheticEvent,
   StyleSheet,
   TextInput,
   TextInputContentSizeChangeEventData,
+  TextInputKeyPressEventData,
   TextInputProps,
   TouchableOpacity,
   View,
 } from 'react-native';
 import {theme} from 'styles';
+import {
+  formatNumberToLocaleString,
+  formatValue,
+  parseNumberFromString,
+} from 'utils/formatValue';
+import Icon from 'components/@common/Icon';
 
-/**
- * @param value 텍스트 필드에 표시될 값
- * @param onChangeText 값이 변경될 때 호출. 변경된 텍스트가 매개변수로 전달
- * @param ...props - react native TextInputProps
- */
-type TextFieldProps = {
-  value: string;
-  onChangeText: (text: string) => void;
-} & Omit<TextInputProps, 'value' | 'onChangeText'>;
+type TextFieldProps = TextInputProps;
 
-export default function TextField({
-  value,
-  onChangeText,
-  ...props
-}: TextFieldProps) {
+export default function TextField({defaultValue, ...props}: TextFieldProps) {
+  const [value, setValue] = useState(formatValue(defaultValue) ?? '');
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [height, setHeight] = useState(0);
 
@@ -33,8 +28,7 @@ export default function TextField({
   const handleBlur = () => setIsFocused(false);
 
   const clearInput = () => {
-    onChangeText('');
-    setHeight(0);
+    setValue(`0원`);
   };
 
   const handleInputHeight = (
@@ -42,6 +36,24 @@ export default function TextField({
   ) => {
     e.nativeEvent.contentSize.height &&
       setHeight(e.nativeEvent.contentSize.height);
+  };
+
+  const onChangeText = (text: string) => setValue(formatValue(text));
+
+  const handleKeyPress = (
+    e: NativeSyntheticEvent<TextInputKeyPressEventData>,
+  ) => {
+    if (e.nativeEvent.key === 'Backspace') {
+      if (value !== '0원') {
+        const parsedValue = parseNumberFromString(value).slice(0, -1);
+
+        setValue(`${formatNumberToLocaleString(parsedValue)}원`);
+      } else {
+        setValue(`0원`);
+      }
+
+      e.preventDefault();
+    }
   };
 
   return (
@@ -59,6 +71,7 @@ export default function TextField({
         placeholder={props.placeholder ?? '내용을 입력해주세요.'}
         onFocus={handleFocus}
         onBlur={handleBlur}
+        onKeyPress={handleKeyPress}
         multiline={true}
         underlineColorAndroid="transparent"
         onContentSizeChange={handleInputHeight}
@@ -87,7 +100,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   textInput: {
-    ...theme.typography.Title2Regular,
+    ...theme.typography.Title1Bold,
     placeholderTextColor: theme.palette.gray3,
     maxWidth: '93%',
     flex: 1,
