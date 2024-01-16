@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   NativeSyntheticEvent,
   StyleSheet,
@@ -63,27 +63,22 @@ export default function TextField({
   };
 
   const calculateCurrentBalance = () => {
+    return (
+      -parseNumberFromString(defaultCurrentBalance!) +
+      Number(parseNumberFromString(value))
+    );
+  };
+
+  const getCurrentBalance = () => {
     const currentBalance = formatNumberToLocaleString(
-      String(
-        -parseNumberFromString(defaultCurrentBalance!) +
-          Number(parseNumberFromString(value)),
-      ),
+      String(calculateCurrentBalance()),
     );
 
     return currentBalance;
   };
 
   const handlePressCurrentBalanceButton = () => {
-    setValue(
-      formatValue(
-        String(
-          -(
-            -parseNumberFromString(defaultCurrentBalance!) +
-            Number(parseNumberFromString(value))
-          ),
-        ),
-      ),
-    );
+    setValue(formatValue(String(-calculateCurrentBalance())));
   };
 
   return (
@@ -121,7 +116,7 @@ export default function TextField({
             type={'Body2Regular'}
             onPress={handlePressCurrentBalanceButton}
             style={textFieldStyles.currentBalanceText}>
-            {`${calculateCurrentBalance()}원`}
+            {`${getCurrentBalance()}원`}
           </Typography>
         </TouchableOpacity>
       </View>
