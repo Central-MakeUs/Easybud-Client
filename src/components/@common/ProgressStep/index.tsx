@@ -1,6 +1,10 @@
 import {StyleSheet, View} from 'react-native';
 import {theme} from 'styles';
 
+/**
+ * @param stepCount 총 step 수
+ * @param currentStep 현재 step
+ */
 type ProgressStepProps = {
   stepCount: number;
   currentStep: number;
