@@ -133,7 +133,7 @@ const textFieldStyles = StyleSheet.create({
     gap: 10,
     alignItems: 'center',
     paddingVertical: 11,
-    paddingHorizontal: 16,
+    paddingRight: 16,
     width: '100%',
     flex: 1,
     marginBottom: 10,
