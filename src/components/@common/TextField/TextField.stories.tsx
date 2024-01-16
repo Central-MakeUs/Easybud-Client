@@ -13,4 +13,6 @@ type Story = ComponentStory<typeof TextField>;
 const Template: Story = args => <TextField {...args} />;
 
 export const DefaultStatus = Template.bind({});
-DefaultStatus.args = {};
+DefaultStatus.args = {
+  defaultCurrentBalance: '-8500000',
+};
