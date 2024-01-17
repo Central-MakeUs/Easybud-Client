@@ -2,17 +2,8 @@ import {useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {theme} from 'styles';
+import {getFormattedDate} from 'utils/formatDate';
 import Typography from 'components/@common/Typography';
-
-const getFormattedDate = (date: Date): string => {
-  const amPm = date.getHours() < 12 ? '오전' : '오후';
-
-  return `${date.getFullYear()}년 ${
-    date.getMonth() + 1
-  }월 ${date.getDate()}일 ${amPm} ${
-    date.getHours() % 12 || 12
-  }:${date.getMinutes()}`;
-};
 
 export default function DatePicker() {
   const [formattedDate, setFormattedDate] = useState<string>(
