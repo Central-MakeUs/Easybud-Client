@@ -12,7 +12,7 @@ const commonPalette = {
 };
 
 export const lightPalette: TypeOfPalette = {
-  primary: '#5856D6',
+  primary: '#0057FF',
   secondary: '#DEDDF7',
   ...commonPalette,
 };
