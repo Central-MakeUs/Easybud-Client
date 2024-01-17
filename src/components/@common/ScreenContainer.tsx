@@ -1,8 +1,6 @@
 import React, {ReactNode} from 'react';
 import {
-  SafeAreaView,
   ScrollView,
-  StatusBar,
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
@@ -27,8 +25,7 @@ export default function ScreenContainer({
   ...props
 }: ScreenContainerProps) {
   return (
-    <SafeAreaView {...props} style={styles.safeArea}>
-      <StatusBar />
+    <>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardAvoidingView}>
@@ -51,7 +48,7 @@ export default function ScreenContainer({
           <View style={styles.fixBottomComponent}>{fixedBottomComponent}</View>
         )}
       </KeyboardAvoidingView>
-    </SafeAreaView>
+    </>
   );
 }
 
