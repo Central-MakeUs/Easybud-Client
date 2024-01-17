@@ -15,6 +15,7 @@ import Typography from 'components/@common/Typography';
 type CommonTextFieldProps = TextInputProps & {
   isAmountField?: boolean;
   isFocused: boolean;
+  label?: string;
   height: number;
   handleBlur: () => void;
   handleFocus: () => void;
@@ -38,8 +39,10 @@ export default function CommonTextField({
   handleInputHeight,
   handleClearInput,
   handleKeyPress,
-  placeholder = '이름',
+  placeholder,
+  label,
 }: CommonTextFieldProps) {
+  console.log(placeholder);
   return (
     <View
       style={[
@@ -53,8 +56,8 @@ export default function CommonTextField({
         <Typography
           type={'Body2Regular'}
           color={'gray3'}
-          style={commonTextFieldStyles.placeholderText}>
-          {placeholder}
+          style={commonTextFieldStyles.label}>
+          {label}
         </Typography>
       )}
       <TextInput
@@ -86,8 +89,8 @@ const commonTextFieldStyles = StyleSheet.create({
     borderBottomWidth: 1.5,
     borderBottomColor: theme.palette.primary,
     justifyContent: 'space-between',
-    gap: 10,
     alignItems: 'center',
+    gap: 10,
     paddingVertical: 11,
     paddingRight: 16,
     width: '100%',
@@ -100,7 +103,7 @@ const commonTextFieldStyles = StyleSheet.create({
     flex: 1,
     color: theme.palette.black,
   },
-  placeholderText: {
+  label: {
     position: 'absolute',
     top: -4,
     height: 20,
