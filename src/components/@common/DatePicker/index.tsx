@@ -1,6 +1,7 @@
 import {useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import {theme} from 'styles';
 import Typography from 'components/@common/Typography';
 
 const getFormattedDate = (date: Date): string => {
@@ -57,8 +58,8 @@ const dateStyles = StyleSheet.create({
   container: {
     width: '100%',
     height: 68,
+    borderBottomColor: theme.palette.gray2,
     borderWidth: 1,
-    borderColor: 'black',
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
