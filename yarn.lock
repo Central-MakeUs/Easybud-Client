@@ -2709,12 +2709,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native-community/datetimepicker@npm:^6.7.1":
-  version: 6.7.5
-  resolution: "@react-native-community/datetimepicker@npm:6.7.5"
+"@react-native-community/datetimepicker@npm:^7.6.2":
+  version: 7.6.2
+  resolution: "@react-native-community/datetimepicker@npm:7.6.2"
   dependencies:
     invariant: ^2.2.4
-  checksum: b7670fb23a5e0306ef08fb1434048b445782a568990b83360924b9c964c3bc29fbeed7d45710c0348e3d596354d19d3d2679c36703bfa127f560d8f530af57ba
+  checksum: 24c718c01e7ff6bc4b47867bfdf77b98fb8e3a872a627ce057062c37bf24a27264ac40c46cc66c27b134fc56392dc90d5b81dfb3ad5073af2477da055c13cb17
   languageName: node
   linkType: hard
 
@@ -5736,7 +5736,7 @@ __metadata:
     "@babel/preset-env": ^7.20.0
     "@babel/runtime": ^7.20.0
     "@react-native-async-storage/async-storage": ^1.17.3
-    "@react-native-community/datetimepicker": ^6.7.1
+    "@react-native-community/datetimepicker": ^7.6.2
     "@react-native-community/eslint-config": ^3.2.0
     "@react-native-community/masked-view": ^0.1.11
     "@react-native-community/slider": ^4.3.3
@@ -5792,6 +5792,7 @@ __metadata:
     react-native: 0.71.4
     react-native-error-boundary: ^1.2.4
     react-native-gesture-handler: ^2.14.0
+    react-native-modal-datetime-picker: ^17.1.0
     react-native-safe-area-context: ^4.8.2
     react-native-screens: ^3.29.0
     react-native-svg: 13.10.0
@@ -16553,6 +16554,18 @@ eslint-plugin-jsx-a11y@latest:
     "@react-native-community/datetimepicker": ">=3.0.0"
     react-native: ">=0.65.0"
   checksum: 15df05f76bea0303a0130fee435ec6e42def6e7cb5d113f45b16edba92ddf482264dc3d34b23b31ec37a64ff7a5330e58cd553987cb1fdf25b6163e281d1e3da
+  languageName: node
+  linkType: hard
+
+"react-native-modal-datetime-picker@npm:^17.1.0":
+  version: 17.1.0
+  resolution: "react-native-modal-datetime-picker@npm:17.1.0"
+  dependencies:
+    prop-types: ^15.7.2
+  peerDependencies:
+    "@react-native-community/datetimepicker": ">=6.7.0"
+    react-native: ">=0.65.0"
+  checksum: 8a5bb21167799cc5410c0fb6c39bb3495fbaa463ef57d8f90c65429697c2b02b2e4e046e3e91c6246e1f4bd187c5fbcd30f61a6449b8d68808e68715b1332779
   languageName: node
   linkType: hard
 
