@@ -67,8 +67,4 @@ const dateStyles = StyleSheet.create({
     alignItems: 'center',
     gap: 15,
   },
-  icon: {
-    borderWidth: 1,
-    borderColor: 'red',
-  },
 });
