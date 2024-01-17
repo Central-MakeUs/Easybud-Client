@@ -36,6 +36,7 @@ export default function RootStackNavigator() {
               headerShown: true,
               headerBackTitleVisible: true,
               headerTitle: '거래 추가',
+              presentation: 'containedModal',
             }}
           />
         </>
