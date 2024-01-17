@@ -1,26 +1,21 @@
 import {useState} from 'react';
 import {
-  View,
-  TextInput,
-  TouchableOpacity,
-  StyleSheet,
   TextInputProps,
   NativeSyntheticEvent,
   TextInputContentSizeChangeEventData,
 } from 'react-native';
-import {theme} from 'styles';
-import Icon from 'components/@common/Icon';
+import CommonTextField from 'components/@common/TextFields/CommonTextField';
 
 type TextFieldProps = TextInputProps;
 
-export default function TextField({defaultValue, ...props}: TextFieldProps) {
+export default function TextField({defaultValue}: TextFieldProps) {
   const [value, setValue] = useState(defaultValue ?? '');
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [height, setHeight] = useState(0);
 
   const onChangeText = (text: string) => setValue(text);
 
-  const clearInput = () => {
+  const handleClearInput = () => {
     setValue('');
     setHeight(0);
   };
@@ -37,52 +32,15 @@ export default function TextField({defaultValue, ...props}: TextFieldProps) {
   };
 
   return (
-    <View
-      style={[
-        textFieldStyles.textFieldContainer,
-        {
-          borderBottomColor:
-            theme.palette[isFocused || value ? 'primary' : 'gray3'],
-        },
-      ]}>
-      <TextInput
-        value={value}
-        onChangeText={onChangeText}
-        placeholder={props.placeholder ?? '내용을 입력해주세요.'}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        multiline={true}
-        underlineColorAndroid="transparent"
-        onContentSizeChange={handleInputHeight}
-        style={[textFieldStyles.textInput, {height}]}
-      />
-      {value !== '' && (
-        <TouchableOpacity onPress={clearInput}>
-          <Icon name="XCircle" color={theme.palette.gray3} />
-        </TouchableOpacity>
-      )}
-    </View>
+    <CommonTextField
+      value={value}
+      isFocused={isFocused}
+      height={height}
+      onChangeText={onChangeText}
+      handleBlur={handleBlur}
+      handleFocus={handleFocus}
+      handleInputHeight={handleInputHeight}
+      handleClearInput={handleClearInput}
+    />
   );
 }
-
-const textFieldStyles = StyleSheet.create({
-  textFieldContainer: {
-    flexDirection: 'row',
-    borderBottomWidth: 1.5,
-    borderBottomColor: theme.palette.primary,
-    justifyContent: 'space-between',
-    gap: 10,
-    alignItems: 'center',
-    paddingVertical: 11,
-    paddingRight: 16,
-    width: '100%',
-    flex: 1,
-    marginBottom: 10,
-  },
-  textInput: {
-    ...theme.typography.Title1Bold,
-    placeholderTextColor: theme.palette.gray3,
-    maxWidth: '93%',
-    flex: 1,
-  },
-});

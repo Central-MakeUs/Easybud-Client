@@ -1,22 +1,17 @@
 import React, {useState} from 'react';
 import {
   NativeSyntheticEvent,
-  StyleSheet,
-  TextInput,
   TextInputContentSizeChangeEventData,
   TextInputKeyPressEventData,
   TextInputProps,
-  TouchableOpacity,
-  View,
 } from 'react-native';
-import {theme} from 'styles';
 import {
   formatNumberToLocaleString,
   formatValue,
   parseNumberFromString,
 } from 'utils/formatValue';
-import Icon from 'components/@common/Icon';
-import Typography from 'components/@common/Typography';
+import CommonTextField from 'components/@common/TextFields/CommonTextField';
+import DescriptionText from 'components/@common/TextFields/DescriptionText';
 
 /**
  * @param defaultCurrentBalance 현재 대차를 나타내는 텍스트
@@ -26,7 +21,6 @@ type TextFieldProps = {defaultCurrentBalance?: string} & TextInputProps;
 export default function AmountTextField({
   defaultValue,
   defaultCurrentBalance,
-  ...props
 }: TextFieldProps) {
   const [value, setValue] = useState(formatValue(defaultValue) ?? '');
   const [isFocused, setIsFocused] = useState<boolean>(false);
@@ -36,8 +30,8 @@ export default function AmountTextField({
 
   const handleBlur = () => setIsFocused(false);
 
-  const clearInput = () => {
-    setValue(`0원`);
+  const handleClearInput = () => {
+    setValue('0원');
     setHeight(0);
   };
 
@@ -64,93 +58,24 @@ export default function AmountTextField({
     }
   };
 
-  const calculateCurrentBalance = () => {
-    return (
-      -parseNumberFromString(defaultCurrentBalance!) +
-      Number(parseNumberFromString(value))
-    );
-  };
-
-  const getCurrentBalance = () => {
-    const currentBalance = formatNumberToLocaleString(
-      String(calculateCurrentBalance()),
-    );
-
-    return currentBalance;
-  };
-
-  const handlePressCurrentBalanceButton = () => {
-    setValue(formatValue(String(-calculateCurrentBalance())));
-  };
-
   return (
     <>
-      <View
-        style={[
-          textFieldStyles.textFieldContainer,
-          {
-            borderBottomColor:
-              theme.palette[isFocused || value ? 'primary' : 'gray3'],
-          },
-        ]}>
-        <TextInput
-          value={value}
-          onChangeText={onChangeText}
-          placeholder={props.placeholder ?? '내용을 입력해주세요.'}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onKeyPress={handleKeyPress}
-          multiline={true}
-          underlineColorAndroid="transparent"
-          onContentSizeChange={handleInputHeight}
-          style={[textFieldStyles.textInput, {height}]}
-        />
-        {value !== '' && (
-          <TouchableOpacity onPress={clearInput}>
-            <Icon name="XCircle" color={theme.palette.gray3} />
-          </TouchableOpacity>
-        )}
-      </View>
-      <View style={textFieldStyles.currentBalanceContainer}>
-        <Typography type={'Body2Regular'}>현재 대차 : </Typography>
-        <TouchableOpacity>
-          <Typography
-            type={'Body2Regular'}
-            onPress={handlePressCurrentBalanceButton}
-            style={textFieldStyles.currentBalanceText}>
-            {`${getCurrentBalance()}원`}
-          </Typography>
-        </TouchableOpacity>
-      </View>
+      <CommonTextField
+        value={value}
+        isFocused={isFocused}
+        height={height}
+        onChangeText={onChangeText}
+        handleBlur={handleBlur}
+        handleFocus={handleFocus}
+        handleInputHeight={handleInputHeight}
+        handleClearInput={handleClearInput}
+        handleKeyPress={handleKeyPress}
+      />
+      <DescriptionText
+        value={value}
+        setValue={setValue}
+        defaultCurrentBalance={defaultCurrentBalance}
+      />
     </>
   );
 }
-
-const textFieldStyles = StyleSheet.create({
-  textFieldContainer: {
-    flexDirection: 'row',
-    borderBottomWidth: 1.5,
-    borderBottomColor: theme.palette.primary,
-    justifyContent: 'space-between',
-    gap: 10,
-    alignItems: 'center',
-    paddingVertical: 11,
-    paddingRight: 16,
-    width: '100%',
-    flex: 1,
-    marginBottom: 10,
-  },
-  textInput: {
-    ...theme.typography.Title1Bold,
-    placeholderTextColor: theme.palette.gray3,
-    maxWidth: '93%',
-    flex: 1,
-  },
-  currentBalanceContainer: {
-    display: 'flex',
-    flexDirection: 'row',
-  },
-  currentBalanceText: {
-    borderBottomWidth: 1,
-  },
-});
