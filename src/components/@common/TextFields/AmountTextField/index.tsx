@@ -63,6 +63,7 @@ export default function AmountTextField({
       <CommonTextField
         isAmountField={true}
         value={value}
+        placeholder="금액"
         isFocused={isFocused}
         height={height}
         onChangeText={onChangeText}

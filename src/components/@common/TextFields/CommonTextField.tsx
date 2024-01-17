@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {theme} from 'styles';
 import Icon from 'components/@common/Icon';
+import Typography from 'components/@common/Typography';
 
 type CommonTextFieldProps = TextInputProps & {
   isAmountField?: boolean;
@@ -37,7 +38,7 @@ export default function CommonTextField({
   handleInputHeight,
   handleClearInput,
   handleKeyPress,
-  ...props
+  placeholder = '이름',
 }: CommonTextFieldProps) {
   return (
     <View
@@ -48,10 +49,18 @@ export default function CommonTextField({
             theme.palette[isFocused || value ? 'primary' : 'gray3'],
         },
       ]}>
+      {value && (
+        <Typography
+          type={'Body2Regular'}
+          color={'gray3'}
+          style={commonTextFieldStyles.placeholderText}>
+          {placeholder}
+        </Typography>
+      )}
       <TextInput
         value={value}
         onChangeText={onChangeText}
-        placeholder={props.placeholder ?? '내용을 입력해주세요.'}
+        placeholder={placeholder}
         placeholderTextColor={theme.palette.gray3}
         onFocus={handleFocus}
         onBlur={handleBlur}
@@ -83,11 +92,18 @@ const commonTextFieldStyles = StyleSheet.create({
     paddingRight: 16,
     width: '100%',
     marginBottom: 10,
+    position: 'relative',
   },
   textInput: {
     ...theme.typography.Title1Bold,
     maxWidth: '93%',
     flex: 1,
     color: theme.palette.black,
+  },
+  placeholderText: {
+    position: 'absolute',
+    top: -4,
+    height: 20,
+    width: '100%',
   },
 });
