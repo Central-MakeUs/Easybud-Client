@@ -53,14 +53,9 @@ export default function ScreenContainer({
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: theme.palette.gray1,
-  },
-  keyboardAvoidingView: {
-    flex: 1,
-  },
+  keyboardAvoidingView: {flex: 1},
   scrollViewContent: {
+    backgroundColor: theme.palette.gray1,
     padding: 20,
     flexGrow: 1,
   },
