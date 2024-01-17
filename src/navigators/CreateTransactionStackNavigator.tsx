@@ -1,18 +1,20 @@
 import {
-  NativeStackNavigationOptions,
-  createNativeStackNavigator,
-} from '@react-navigation/native-stack';
+  CardStyleInterpolators,
+  StackNavigationOptions,
+  createStackNavigator,
+} from '@react-navigation/stack';
 import {CreateTransactionStackParamList} from 'navigators/types';
 import AccountAmountScreen from 'screens/CreateTransactionStack/AccountAmountScreen';
 import AccountTypeScreen from 'screens/CreateTransactionStack/AccountTypeScreen';
 import DebitCreditDeciderScreen from 'screens/CreateTransactionStack/DebitCreditDeciderScreen';
 import TransactionConfirmationScreen from 'screens/CreateTransactionStack/TransactionConfirmationScreen';
 
-const Stack = createNativeStackNavigator<CreateTransactionStackParamList>();
+const Stack = createStackNavigator<CreateTransactionStackParamList>();
 
-const screenOptions: NativeStackNavigationOptions = {
+const screenOptions: StackNavigationOptions = {
   headerShown: false,
   headerShadowVisible: false,
+  cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
 };
 
 export default function CreateTransactionStackNavigator() {

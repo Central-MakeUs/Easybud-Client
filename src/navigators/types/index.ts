@@ -1,7 +1,9 @@
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
-import {NativeStackNavigationProp} from '@react-navigation/native-stack';
-import {StackScreenProps} from '@react-navigation/stack';
-import {Transaction} from 'types/transaction';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import {NewTransaction} from 'types/transaction';
 
 /** param list */
 
@@ -12,10 +14,10 @@ export type RootStackParamList = {
 };
 
 export type CreateTransactionStackParamList = {
-  DebitCreditDecider: {transaction: Partial<Transaction>} | undefined;
-  AccountType: undefined;
-  AccountAmount: undefined;
-  TransactionConfirmation: undefined;
+  DebitCreditDecider: {transaction: NewTransaction} | undefined;
+  AccountType: {transaction: NewTransaction} | undefined;
+  AccountAmount: {transaction: NewTransaction} | undefined;
+  TransactionConfirmation: {transaction: NewTransaction} | undefined;
 };
 
 export type TabParamList = {
@@ -43,7 +45,7 @@ export type RootStackNavigationProp =
 /** screen props - unused*/
 
 export type MainStackScreenProps<T extends RootStackScreenName> =
-  StackScreenProps<RootStackParamList, T>;
+  NativeStackScreenProps<RootStackParamList, T>;
 
 /** navigation에 type 지정 */
 declare global {
