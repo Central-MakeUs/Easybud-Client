@@ -1,5 +1,5 @@
 import {ComponentStory} from '@storybook/react';
-import TextField from 'components/@common/TextField';
+import TextField from 'components/@common/TextFields/TextField';
 
 const meta = {
   title: 'components/TextField',
