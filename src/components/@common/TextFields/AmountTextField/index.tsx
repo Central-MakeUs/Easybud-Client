@@ -23,7 +23,7 @@ import Typography from 'components/@common/Typography';
  */
 type TextFieldProps = {defaultCurrentBalance?: string} & TextInputProps;
 
-export default function TextField({
+export default function AmountTextField({
   defaultValue,
   defaultCurrentBalance,
   ...props
@@ -33,10 +33,12 @@ export default function TextField({
   const [height, setHeight] = useState(0);
 
   const handleFocus = () => setIsFocused(true);
+
   const handleBlur = () => setIsFocused(false);
 
   const clearInput = () => {
     setValue(`0원`);
+    setHeight(0);
   };
 
   const handleInputHeight = (

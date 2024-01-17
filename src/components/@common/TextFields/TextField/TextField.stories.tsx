@@ -1,5 +1,5 @@
 import {ComponentStory} from '@storybook/react';
-import TextField from 'components/@common/TextField';
+import TextField from 'components/@common/TextFields/TextField';
 
 const meta = {
   title: 'components/TextField',
@@ -13,6 +13,4 @@ type Story = ComponentStory<typeof TextField>;
 const Template: Story = args => <TextField {...args} />;
 
 export const DefaultStatus = Template.bind({});
-DefaultStatus.args = {
-  defaultCurrentBalance: '-8500000',
-};
+DefaultStatus.args = {};
