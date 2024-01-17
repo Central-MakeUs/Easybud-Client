@@ -1,30 +1,33 @@
-import {useNavigation} from '@react-navigation/native';
 import Typography from 'components/@common/Typography';
 import Button from 'components/@common/buttons/Button';
 import CreateTransactionScreenContainer from 'components/CreateTransactionStack/CreateTransactionScreenContainer';
+import {RootStackNavigationProp} from 'navigators/types';
 
-export default function TransactionConfirmationScreen() {
-  const navigation = useNavigation();
+type TransactionConfirmationScreenProps = {
+  navigation: RootStackNavigationProp;
+};
 
-  const handlePressNextButton = () => {
-    // Todo: new stack으로 쌓이도록 변경
+export default function TransactionConfirmationScreen({
+  navigation,
+}: TransactionConfirmationScreenProps) {
+  const handlePressSaveButton = () => {
     navigation.navigate('Tab', {screen: 'Ledger'});
   };
 
-  const handlePressPrevButton = () => {
-    navigation.navigate('CreateTransactionStack', {
-      screen: 'DebitCreditDecider',
-    });
+  const handlePressCreateNewTransactionButton = () => {
+    navigation.push('CreateTransactionStack', {screen: 'DebitCreditDecider'});
   };
 
   return (
     <CreateTransactionScreenContainer
       leftButton={
-        <Button variant="secondary" onPress={handlePressPrevButton}>
+        <Button
+          variant="secondary"
+          onPress={handlePressCreateNewTransactionButton}>
           새 계정 추가
         </Button>
       }
-      rightButton={<Button onPress={handlePressNextButton}>저장</Button>}>
+      rightButton={<Button onPress={handlePressSaveButton}>저장</Button>}>
       <Typography>TransactionConfirmationScreen</Typography>
     </CreateTransactionScreenContainer>
   );
