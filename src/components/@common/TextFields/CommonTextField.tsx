@@ -12,6 +12,7 @@ import {theme} from 'styles';
 import Icon from 'components/@common/Icon';
 
 type CommonTextFieldProps = TextInputProps & {
+  isAmountField?: boolean;
   isFocused: boolean;
   height: number;
   handleBlur: () => void;
@@ -26,6 +27,7 @@ type CommonTextFieldProps = TextInputProps & {
 };
 
 export default function CommonTextField({
+  isAmountField = false,
   isFocused,
   value,
   height,
@@ -56,6 +58,7 @@ export default function CommonTextField({
         multiline={true}
         underlineColorAndroid="transparent"
         onContentSizeChange={handleInputHeight}
+        keyboardType={isAmountField ? 'phone-pad' : 'default'}
         style={[commonTextFieldStyles.textInput, {height}]}
       />
       {value !== '' && (

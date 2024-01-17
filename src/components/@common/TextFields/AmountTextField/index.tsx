@@ -61,6 +61,7 @@ export default function AmountTextField({
   return (
     <>
       <CommonTextField
+        isAmountField={true}
         value={value}
         isFocused={isFocused}
         height={height}
