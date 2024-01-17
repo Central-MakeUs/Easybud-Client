@@ -1,6 +1,6 @@
+import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import Button from 'components/@common/buttons/Button';
-import CreateTransactionScreenContainer from 'components/CreateTransactionStack/CreateTransactionScreenContainer';
 import {RootStackNavigationProp} from 'navigators/types';
 
 type TransactionConfirmationScreenProps = {
@@ -19,16 +19,19 @@ export default function TransactionConfirmationScreen({
   };
 
   return (
-    <CreateTransactionScreenContainer
-      leftButton={
-        <Button
-          variant="secondary"
-          onPress={handlePressCreateNewTransactionButton}>
-          새 계정 추가
-        </Button>
-      }
-      rightButton={<Button onPress={handlePressSaveButton}>저장</Button>}>
+    <ScreenContainer
+      fixedBottomComponent={
+        <>
+          {/* note: 이 페이지엔 이전 버튼 없어도 되나 */}
+          <Button
+            variant="secondary"
+            onPress={handlePressCreateNewTransactionButton}>
+            새 계정 추가
+          </Button>
+          <Button onPress={handlePressSaveButton}>저장</Button>
+        </>
+      }>
       <Typography>TransactionConfirmationScreen</Typography>
-    </CreateTransactionScreenContainer>
+    </ScreenContainer>
   );
 }

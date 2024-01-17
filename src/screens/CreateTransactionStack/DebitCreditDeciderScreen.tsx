@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
+import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import CreateTransactionScreenContainer from 'components/CreateTransactionStack/CreateTransactionScreenContainer';
 import NextButton from 'components/CreateTransactionStack/NextButton';
 import PrevButton from 'components/CreateTransactionStack/PrevButton';
 
@@ -15,10 +15,14 @@ export default function DebitCreditDeciderScreen() {
   };
 
   return (
-    <CreateTransactionScreenContainer
-      leftButton={<PrevButton onPress={handlePressPrevButton} />}
-      rightButton={<NextButton onPress={handlePressNextButton} />}>
+    <ScreenContainer
+      fixedBottomComponent={
+        <>
+          <PrevButton onPress={handlePressPrevButton} />
+          <NextButton onPress={handlePressNextButton} />
+        </>
+      }>
       <Typography>DebitCreditDecider</Typography>
-    </CreateTransactionScreenContainer>
+    </ScreenContainer>
   );
 }

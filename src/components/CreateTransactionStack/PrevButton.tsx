@@ -5,7 +5,7 @@ type PrevButtonProps = {onPress: () => void};
 
 export default function PrevButton({onPress}: PrevButtonProps) {
   return (
-    <Button style={{maxWidth: 100}} variant="secondary" onPress={onPress}>
+    <Button style={{maxWidth: 60}} variant="secondary" onPress={onPress}>
       이전
     </Button>
   );
