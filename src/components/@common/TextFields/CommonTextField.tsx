@@ -52,6 +52,7 @@ export default function CommonTextField({
         value={value}
         onChangeText={onChangeText}
         placeholder={props.placeholder ?? '내용을 입력해주세요.'}
+        placeholderTextColor={theme.palette.gray3}
         onFocus={handleFocus}
         onBlur={handleBlur}
         onKeyPress={e => handleKeyPress?.(e)}
@@ -85,7 +86,6 @@ const commonTextFieldStyles = StyleSheet.create({
   },
   textInput: {
     ...theme.typography.Title1Bold,
-    placeholderTextColor: theme.palette.gray3,
     maxWidth: '93%',
     flex: 1,
     color: theme.palette.black,
