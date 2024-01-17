@@ -81,7 +81,6 @@ const commonTextFieldStyles = StyleSheet.create({
     paddingVertical: 11,
     paddingRight: 16,
     width: '100%',
-    flex: 1,
     marginBottom: 10,
   },
   textInput: {
@@ -89,5 +88,6 @@ const commonTextFieldStyles = StyleSheet.create({
     placeholderTextColor: theme.palette.gray3,
     maxWidth: '93%',
     flex: 1,
+    color: theme.palette.black,
   },
 });

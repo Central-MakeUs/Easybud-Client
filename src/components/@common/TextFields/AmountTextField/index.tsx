@@ -32,7 +32,7 @@ export default function AmountTextField({
 
   const handleClearInput = () => {
     setValue('0원');
-    setHeight(0);
+    setHeight(56);
   };
 
   const handleInputHeight = (
