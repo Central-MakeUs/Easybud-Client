@@ -44,7 +44,7 @@ export type RootStackNavigationProp =
 
 /** screen props - unused*/
 
-export type MainStackScreenProps<T extends RootStackScreenName> =
+export type RootStackScreenProps<T extends RootStackScreenName> =
   NativeStackScreenProps<RootStackParamList, T>;
 
 /** navigation에 type 지정 */
