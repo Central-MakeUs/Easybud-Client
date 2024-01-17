@@ -23,7 +23,8 @@ export default function Typography({
         {color: theme.palette[color]},
         theme.typography[type],
       ]}>
-      {word}{' '}
+      {word}
+      {index >= 1 && ' '}
     </Text>
   ));
 }
