@@ -38,13 +38,13 @@ export default function DescriptionText({
   };
 
   return (
-    <View style={textFieldStyles.currentBalanceContainer}>
+    <View style={descriptionTextStyles.currentBalanceContainer}>
       <Typography type={'Body2Regular'}>현재 대차 : </Typography>
       <TouchableOpacity>
         <Typography
           type={'Body2Regular'}
           onPress={handlePressCurrentBalanceButton}
-          style={textFieldStyles.currentBalanceText}>
+          style={descriptionTextStyles.currentBalanceText}>
           {`${getCurrentBalance()}원`}
         </Typography>
       </TouchableOpacity>
@@ -52,7 +52,7 @@ export default function DescriptionText({
   );
 }
 
-const textFieldStyles = StyleSheet.create({
+const descriptionTextStyles = StyleSheet.create({
   currentBalanceContainer: {
     display: 'flex',
     flexDirection: 'row',
