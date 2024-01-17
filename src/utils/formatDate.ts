@@ -3,7 +3,8 @@ export const getFormattedDate = (date: Date): string => {
 
   return `${date.getFullYear()}년 ${
     date.getMonth() + 1
-  }월 ${date.getDate()}일 ${amPm} ${
-    date.getHours() % 12 || 12
-  }:${date.getMinutes()}`;
+  }월 ${date.getDate()}일 ${amPm} ${date.getHours() % 12 || 12}:${date
+    .getMinutes()
+    .toString()
+    .padStart(2, '0')}`;
 };
