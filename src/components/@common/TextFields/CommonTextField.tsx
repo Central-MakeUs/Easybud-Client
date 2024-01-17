@@ -42,7 +42,6 @@ export default function CommonTextField({
   placeholder,
   label,
 }: CommonTextFieldProps) {
-  console.log(placeholder);
   return (
     <View
       style={[
