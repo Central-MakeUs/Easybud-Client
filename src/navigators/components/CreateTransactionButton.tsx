@@ -15,7 +15,7 @@ export default function CreateTransactionButton() {
   return (
     <TouchableOpacity onPress={navigateAddTransaction}>
       <Icon
-        name={TabNavigatorIcon.NavigateAddTransaction}
+        name={TabNavigatorIcon.NavigateCreateTransaction}
         fill={'primary'}
         size={44}
       />
