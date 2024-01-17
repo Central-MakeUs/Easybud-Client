@@ -41,7 +41,7 @@ export default function DatePicker() {
       </TouchableOpacity>
       <DateTimePickerModal
         isVisible={isDateTimePickerVisible}
-        mode="datetime"
+        mode="date"
         onConfirm={handleConfirmDateTimePicker}
         onCancel={handleCancelDateTimePicker}
       />
