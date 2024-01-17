@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'react';
+import {useState} from 'react';
 import CreditStepScreen from 'screens/AddTransactionStack/BasicTransactionScreen/CreditStepScreen';
 import DebitStepScreen from 'screens/AddTransactionStack/BasicTransactionScreen/DebitStepScreen';
 import TransactionCategoryStepScreen from 'screens/AddTransactionStack/BasicTransactionScreen/TransactionCategoryStepScreen';
@@ -7,11 +7,12 @@ import type {NonEmptyArray, Steps} from 'types/funnel';
 import Funnel from 'components/@common/funnel/Funnel';
 import Step from 'components/@common/funnel/Step';
 import ScreenContainer from 'components/@common/ScreenContainer';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import InputCompletionCheckStepScreen from 'screens/AddTransactionStack/BasicTransactionScreen/InputCompletionCheckStepScreen';
 import {useNavigation} from '@react-navigation/native';
+import {theme} from 'styles';
 
-export type BasicTransactionStep = 'Step1' | 'Step2' | 'Step3' | 'Step4';
+type BasicTransactionStep = 'Step1' | 'Step2' | 'Step3' | 'Step4';
 
 const steps: NonEmptyArray<BasicTransactionStep> = [
   'Step1',
@@ -28,52 +29,47 @@ const stepInfoList: Steps<typeof steps> = {
 };
 
 export default function BasicTransactionScreen() {
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
-  const currentStep = steps[currentStepIndex];
   const navigation = useNavigation();
+
+  const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
   const isLastStep = currentStepIndex === steps.length - 1;
 
-  const goToNextStep = () => {
-    if (!isLastStep) {
-      setCurrentStepIndex(currentStepIndex + 1);
-    } else {
-      navigation.navigate('AddTransactionStack', {
-        screen: 'AddTransaction',
-        params: {transaction: {}},
-      });
-    }
-  };
-
   const goToPreviousStep = () => {
-    if (currentStepIndex !== 0) {
-      setCurrentStepIndex(currentStepIndex - 1);
-    }
+    setCurrentStepIndex(step => step - 1);
   };
 
-  const disabled = useMemo(() => {
-    return false;
-  }, []);
+  const goToNextStep = () => {
+    setCurrentStepIndex(step => step + 1);
+  };
 
-  const buttons = () => (
-    <View style={{flexDirection: 'row', gap: 16}}>
+  const onSubmit = () => {
+    navigation.navigate('AddTransactionStack', {
+      screen: 'AddTransaction',
+      params: {transaction: {}},
+    });
+  };
+
+  const renderButtons = () => (
+    <View style={styles.buttonsContainer}>
       {currentStepIndex === 0 ? null : (
         <Button
           variant="secondary"
           onPress={goToPreviousStep}
-          disabled={currentStepIndex === 0}
-          style={{maxWidth: 100}}>
+          style={{maxWidth: 80}}>
           이전
         </Button>
       )}
-      <Button onPress={goToNextStep} disabled={disabled}>
+      <Button
+        onPress={isLastStep ? onSubmit : goToNextStep}
+        style={styles.button}>
         {isLastStep ? '확인' : '다음'}
       </Button>
     </View>
   );
 
   return (
-    <ScreenContainer fixedBottomComponent={buttons()}>
-      <Funnel steps={steps} step={currentStep}>
+    <ScreenContainer fixedBottomComponent={renderButtons()}>
+      <Funnel steps={steps} step={steps[currentStepIndex]}>
         {Object.entries(stepInfoList).map(([name, component]) => (
           <Step key={name} name={name}>
             {component}
@@ -83,3 +79,17 @@ export default function BasicTransactionScreen() {
     </ScreenContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  buttonsContainer: {flexDirection: 'row', gap: 16},
+  button: {
+    shadowColor: theme.palette.black,
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.4,
+    shadowRadius: 4,
+    elevation: 5, // Android용 그림자 효과
+  },
+});

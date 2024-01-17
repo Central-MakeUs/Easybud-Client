@@ -79,15 +79,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     margin: 20,
     borderRadius: 12,
-    shadowColor: theme.palette.black,
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
-    elevation: 5, // Android용 그림자 효과
-    alignItems: 'center', // 자식 컴포넌트를 중앙에 배치
-    justifyContent: 'center', // 자식 컴포넌트를 중앙에 배치
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
