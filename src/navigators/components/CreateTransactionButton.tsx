@@ -4,11 +4,13 @@ import {useNavigation} from '@react-navigation/native';
 import Icon from 'components/@common/Icon';
 import {TabNavigatorIcon} from 'navigators/constants/icon';
 
-export default function AddTransactionButton() {
+export default function CreateTransactionButton() {
   const navigation = useNavigation();
 
   const navigateAddTransaction = () =>
-    navigation.navigate('AddTransactionStack', {screen: 'BasicTransaction'});
+    navigation.navigate('CreateTransactionStack', {
+      screen: 'DebitCreditDecider',
+    });
 
   return (
     <TouchableOpacity onPress={navigateAddTransaction}>

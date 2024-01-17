@@ -4,7 +4,7 @@ import {
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
 import useInitialData from 'hooks/useInitialData';
-import AddTransactionStackNavigator from 'navigators/AddTransactionStackNavigator';
+import CreateTransactionStackNavigator from 'navigators/CreateTransactionStackNavigator';
 import TabNavigator from 'navigators/TabNavigator';
 import {RootStackNavigationProp, RootStackParamList} from 'navigators/types';
 import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
@@ -30,8 +30,8 @@ export default function RootStackNavigator() {
         <>
           <Stack.Screen name={'Tab'} component={TabNavigator} />
           <Stack.Screen
-            name={'AddTransactionStack'}
-            component={AddTransactionStackNavigator}
+            name={'CreateTransactionStack'}
+            component={CreateTransactionStackNavigator}
             options={{
               headerShown: true,
               headerBackTitleVisible: true,

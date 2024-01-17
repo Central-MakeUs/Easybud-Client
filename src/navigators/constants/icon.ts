@@ -4,7 +4,7 @@ import {KeyOfIcons} from 'types/icon';
 export const TabNavigatorIcon: Record<TabScreenName, KeyOfIcons> = {
   Ledger: 'MoneyOut',
   Transaction: 'GraphBarUp',
-  NavigateAddTransaction: 'PlusCircle',
+  NavigateCreateTransaction: 'PlusCircle',
   Account: 'CircleStackUp',
   Setting: 'Setting',
 };

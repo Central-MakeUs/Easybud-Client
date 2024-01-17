@@ -8,7 +8,7 @@ import AccountScreen from 'screens/Tab/AccountScreen';
 import LedgerScreen from 'screens/Tab/LedgerScreen';
 import SettingScreen from 'screens/Tab/SettingScreen';
 import TransactionScreen from 'screens/Tab/TransactionScreen';
-import AddTransactionButton from 'navigators/components/AddTransactionButton';
+import CreateTransactionButton from 'navigators/components/CreateTransactionButton';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import TabBarIcon from 'navigators/components/TabBarIcon';
 import NullScreen from 'navigators/components/NullScreen';
@@ -32,7 +32,7 @@ export default function TabNavigator() {
         options={{tabBarLabel: '거래'}}
       />
       <Tab.Screen
-        name={'NavigateAddTransaction'}
+        name={'NavigateCreateTransaction'}
         component={NullScreen}
         options={{tabBarLabel: ''}}
       />
@@ -55,13 +55,13 @@ const screenOptions: (props: {
   bottomSize: number;
 }) => BottomTabNavigationOptions = ({route, bottomSize}) => ({
   tabBarIcon:
-    route.name === 'NavigateAddTransaction'
-      ? AddTransactionButton
+    route.name === 'NavigateCreateTransaction'
+      ? CreateTransactionButton
       : ({focused}: {focused: boolean}) => (
           <TabBarIcon routeName={route.name} focused={focused} />
         ),
   tabBarIconStyle: {
-    marginTop: route.name === 'NavigateAddTransaction' ? 18 : 4,
+    marginTop: route.name === 'NavigateCreateTransaction' ? 18 : 4,
   },
   tabBarActiveTintColor: theme.palette.primary,
   tabBarInactiveTintColor: theme.palette.gray4,

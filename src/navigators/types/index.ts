@@ -8,18 +8,20 @@ import {Transaction} from 'types/transaction';
 export type RootStackParamList = {
   Tab?: NavigatorScreenParams<TabParamList>;
   OnBoarding: undefined;
-  AddTransactionStack: NavigatorScreenParams<AddTransactionStackParamList>;
+  CreateTransactionStack: NavigatorScreenParams<CreateTransactionStackParamList>;
 };
 
-export type AddTransactionStackParamList = {
-  AddTransaction: {transaction: Partial<Transaction>};
-  BasicTransaction: undefined;
+export type CreateTransactionStackParamList = {
+  DebitCreditDecider: {transaction: Partial<Transaction>} | undefined;
+  AccountType: undefined;
+  AccountAmount: undefined;
+  TransactionConfirmation: undefined;
 };
 
 export type TabParamList = {
   Ledger: undefined;
   Transaction: undefined;
-  NavigateAddTransaction: undefined;
+  NavigateCreateTransaction: undefined;
   Account: undefined;
   Setting: undefined;
 };

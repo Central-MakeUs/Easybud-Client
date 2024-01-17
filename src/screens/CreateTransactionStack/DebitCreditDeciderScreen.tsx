@@ -1,10 +1,10 @@
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 
-export default function AddTransactionScreen() {
+export default function DebitCreditDeciderScreen() {
   return (
     <ScreenContainer>
-      <Typography>AddTransactionScreen</Typography>
+      <Typography>DebitCreditDecider</Typography>
     </ScreenContainer>
   );
 }
