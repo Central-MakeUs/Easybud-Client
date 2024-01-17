@@ -36,7 +36,8 @@ export default function RootStackNavigator() {
               headerShown: true,
               headerBackTitleVisible: true,
               headerTitle: '거래 추가',
-              presentation: 'containedModal',
+              // note: navigation.push()로 인해 새 계정 추가 시 아래 설정으로 stack이 쌓이기에 통일성을 위해 변경하지 않음
+              // presentation: 'containedModal',
             }}
           />
         </>
