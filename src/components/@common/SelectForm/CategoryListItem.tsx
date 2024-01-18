@@ -2,6 +2,7 @@ import {Dispatch, SetStateAction} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
+import {AddCategoryText} from 'constants/SelectForm';
 import {CategoryType} from 'libs/recoil/types/category';
 import {categoryState} from 'libs/recoil/states/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
@@ -18,7 +19,7 @@ export default function CategoryListItem({
   const setSelectedCategory = useSetRecoilState(categoryState);
 
   const handlePressCategoryItem = () => {
-    if (data === '항목 추가') {
+    if (data === AddCategoryText) {
       setInputState(true);
     } else {
       setInputState(false);

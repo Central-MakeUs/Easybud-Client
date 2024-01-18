@@ -2,7 +2,11 @@ import {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
-import {themeVariants} from 'constants/SelectForm';
+import {
+  AddCategoryText,
+  CategoryName,
+  ThemeVariants,
+} from 'constants/SelectForm';
 import {categoryState} from 'libs/recoil/states/category';
 import {CategoryType} from 'libs/recoil/types/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
@@ -34,10 +38,10 @@ export default function SelectForm({
   const selectedCategory = useRecoilValue(categoryState);
 
   useEffect(() => {
-    if (label !== '대분류' && label !== '중분류') {
+    if (label !== CategoryName.primary && label !== CategoryName.secondary) {
       const newCategoryList = addItemToCategoryList(
         dummyCategories,
-        '항목 추가',
+        AddCategoryText,
       );
 
       setCategoryList(newCategoryList);
@@ -53,7 +57,7 @@ export default function SelectForm({
     labelTextColor,
     valueTextColor,
     placeholderTextColor,
-  } = themeVariants[variant];
+  } = ThemeVariants[variant];
 
   return (
     <>

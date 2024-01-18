@@ -5,6 +5,7 @@ import {theme} from 'styles';
 import {categoryState} from 'libs/recoil/states/category';
 import {CategoryType} from 'libs/recoil/types/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
+import {AddCategoryText} from 'constants/SelectForm';
 import BottomSheet from 'components/@common/BottomSheet';
 import Typography from 'components/@common/Typography';
 import CategoryList from 'components/@common/SelectForm/CategoryList';
@@ -84,7 +85,7 @@ function renderBottomSheetChildren({
       setCategoryList(prevCategoryList => [
         ...prevCategoryList.slice(0, -1),
         inputText,
-        '항목 추가',
+        AddCategoryText,
       ]);
       setSelectedCategory(inputText);
       setIsBottomSheetOpen(false);
