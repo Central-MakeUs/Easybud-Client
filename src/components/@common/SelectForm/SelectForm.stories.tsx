@@ -27,6 +27,5 @@ export const PrimarySelectForm = Template.bind({});
 PrimarySelectForm.args = {
   label: '대분류',
   placeholder: '대분류를 선택하세요',
-  value: '168-910315-05607',
   variant: 'primary',
 };

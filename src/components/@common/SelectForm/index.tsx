@@ -2,6 +2,8 @@ import {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import {theme} from 'styles';
+import {KeyOfPalette} from 'styles/types';
+import {themeVariants} from 'constants/SelectForm';
 import {categoryState} from 'libs/recoil/states/category';
 import {CategoryType} from 'libs/recoil/types/category';
 import {addItemToCategoryList} from 'utils/addItemToCategoryList';
@@ -18,14 +20,12 @@ const dummyCategories = [
 
 type SelectFormProps = {
   label: string;
-  value: string;
   placeholder?: string;
   variant?: 'primary' | 'gray';
 };
 
 export default function SelectForm({
   label,
-  value,
   placeholder,
   variant = 'gray',
 }: SelectFormProps) {
@@ -41,32 +41,32 @@ export default function SelectForm({
     setCategoryList(newCategoryList);
   }, []);
 
-  useEffect(() => {
-    console.log(selectedCategory.name, selectedCategory.value);
-  }, [selectedCategory]);
+  const handlePressCategoryItem = () => setIsBottomSheetOpen(true);
+
+  const {
+    backgroundColor,
+    labelTextColor,
+    valueTextColor,
+    placeholderTextColor,
+  }: {
+    backgroundColor: string;
+    labelTextColor: KeyOfPalette;
+    valueTextColor: KeyOfPalette;
+    placeholderTextColor: KeyOfPalette;
+  } = themeVariants[variant];
 
   return (
     <>
       <TouchableOpacity
-        onPress={() => setIsBottomSheetOpen(true)}
-        style={[
-          selectFormStyles.container,
-          {
-            backgroundColor:
-              variant === 'primary'
-                ? theme.palette.primary
-                : theme.palette.gray2,
-          },
-        ]}>
-        <Typography
-          type={'Body1Semibold'}
-          color={variant === 'primary' ? 'white' : 'gray6'}>
+        onPress={handlePressCategoryItem}
+        style={[selectFormStyles.container, {backgroundColor}]}>
+        <Typography type={'Body1Semibold'} color={labelTextColor}>
           {label}
         </Typography>
         <Typography
           type={'Body1Semibold'}
-          color={!value ? 'gray4' : variant === 'primary' ? 'white' : 'gray6'}>
-          {value ?? placeholder}
+          color={selectedCategory.name ? valueTextColor : placeholderTextColor}>
+          {selectedCategory.name || placeholder}
         </Typography>
       </TouchableOpacity>
       <SelectFormBottomSheet
@@ -85,8 +85,7 @@ const selectFormStyles = StyleSheet.create({
     height: 49,
     borderRadius: 18,
     backgroundColor: theme.palette.gray2,
-    paddingLeft: 21,
-    paddingRight: 11,
+    paddingHorizontal: 21,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
