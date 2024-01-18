@@ -31,7 +31,6 @@ export default function CommonSelectItem({
   return (
     <>
       <TouchableOpacity
-        disabled={!value.length}
         onPress={handlePressSelectItem}
         style={[selectFormStyles.container, {backgroundColor}]}>
         <Typography type={'Body1Semibold'} color={labelTextColor}>
