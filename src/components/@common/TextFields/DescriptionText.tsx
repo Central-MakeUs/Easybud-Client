@@ -4,7 +4,7 @@ import {
   formatNumberToLocaleString,
   formatValue,
   parseNumberFromString,
-} from 'utils/formatValue';
+} from 'utils/formatAmountValue';
 import Typography from 'components/@common/Typography';
 
 type DescriptionTextProps = {

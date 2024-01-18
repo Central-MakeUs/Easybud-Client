@@ -9,7 +9,7 @@ import {
   formatNumberToLocaleString,
   formatValue,
   parseNumberFromString,
-} from 'utils/formatValue';
+} from 'utils/formatAmountValue';
 import CommonTextField from 'components/@common/TextFields/CommonTextField';
 import DescriptionText from 'components/@common/TextFields/DescriptionText';
 
