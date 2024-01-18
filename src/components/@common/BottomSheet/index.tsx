@@ -6,12 +6,14 @@ import {theme} from 'styles';
 type BottomSheetProps = {
   isBottomSheetOpen: boolean;
   setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
+  height?: number;
   children: ReactNode;
 };
 
 export default function BottomSheet({
   isBottomSheetOpen,
   setIsBottomSheetOpen,
+  height,
   children,
 }: BottomSheetProps) {
   const bottomSheetRef = useRef<RBSheet>(null);
@@ -36,7 +38,7 @@ export default function BottomSheet({
       onOpen={handleOpenBottomSheet}
       onClose={handleCloseBottomSheet}
       keyboardAvoidingViewEnabled={true}
-      height={200}
+      height={height ?? 200}
       customStyles={bottomSheetStyles}>
       {children}
     </RBSheet>
