@@ -35,12 +35,17 @@ export default function SelectForm({
   const selectedCategory = useRecoilValue(categoryState);
 
   useEffect(() => {
-    const newCategoryList = addItemToCategoryList(dummyCategories, {
-      name: '항목 추가',
-      value: 'addCategory',
-    });
-    setCategoryList(newCategoryList);
-  }, []);
+    if (label !== '대분류' && label !== '중분류') {
+      const newCategoryList = addItemToCategoryList(dummyCategories, {
+        name: '항목 추가',
+        value: 'addCategory',
+      });
+
+      setCategoryList(newCategoryList);
+    } else {
+      setCategoryList(dummyCategories);
+    }
+  }, [label]);
 
   const handlePressCategoryItem = () => setIsBottomSheetOpen(true);
 

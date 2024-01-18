@@ -1,11 +1,11 @@
 import {View, StyleSheet} from 'react-native';
+import {useRecoilState} from 'recoil';
 import {theme} from 'styles';
 import {CategoryType} from 'libs/recoil/types/category';
+import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import BottomSheet from 'components/@common/BottomSheet';
 import Typography from 'components/@common/Typography';
 import CategoryList from 'components/@common/SelectForm/CategoryList';
-import {useRecoilState} from 'recoil';
-import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 
 type SelectFormBottomSheetProps = {
   label: string;
