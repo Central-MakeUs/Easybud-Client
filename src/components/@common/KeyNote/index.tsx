@@ -10,14 +10,13 @@ export default function KeyNote() {
 
   const handlePressSelectItem = () => setIsBottomSheetOpen(true);
 
-  const text = keyNoteText === '' ? '입력하세요' : sliceString(keyNoteText, 30);
-
   return (
     <CommonSelectItem
       label={'적요'}
       variant={'gray'}
       handlePressSelectItem={handlePressSelectItem}
-      value={text}
+      value={keyNoteText.length ? sliceString(keyNoteText, 30) : ''}
+      placeholder="적요를 작성하세요"
       bottomSheet={
         <KeyNoteBottomSheet
           isBottomSheetOpen={isBottomSheetOpen}
