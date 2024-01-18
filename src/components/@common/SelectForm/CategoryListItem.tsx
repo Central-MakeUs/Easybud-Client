@@ -1,3 +1,4 @@
+import {Dispatch, SetStateAction} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
@@ -6,13 +7,24 @@ import {categoryState} from 'libs/recoil/states/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import Typography from 'components/@common/Typography';
 
-export default function CategoryListItem({data}: {data: CategoryType}) {
+export default function CategoryListItem({
+  data,
+  setInputState,
+}: {
+  data: CategoryType;
+  setInputState: Dispatch<SetStateAction<boolean>>;
+}) {
   const setIsBottomSheetOpen = useSetRecoilState(selectFormBottomSheetState);
   const setSelectedCategory = useSetRecoilState(categoryState);
 
   const handlePressCategoryItem = () => {
-    setSelectedCategory({name: data.name, value: data.value});
-    setIsBottomSheetOpen(false);
+    if (data.value === 'addCategory') {
+      setInputState(true);
+    } else {
+      setInputState(false);
+      setSelectedCategory({name: data.name, value: data.value});
+      setIsBottomSheetOpen(false);
+    }
   };
 
   return (

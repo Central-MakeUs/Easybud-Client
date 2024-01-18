@@ -1,4 +1,5 @@
-import {View, StyleSheet} from 'react-native';
+import {Dispatch, SetStateAction, useState} from 'react';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import {useRecoilState} from 'recoil';
 import {theme} from 'styles';
 import {CategoryType} from 'libs/recoil/types/category';
@@ -16,6 +17,8 @@ export default function SelectFormBottomSheet({
   label,
   categoryList,
 }: SelectFormBottomSheetProps) {
+  const [inputState, setInputState] = useState(false);
+
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useRecoilState(
     selectFormBottomSheetState,
   );
@@ -25,7 +28,13 @@ export default function SelectFormBottomSheet({
       isBottomSheetOpen={isBottomSheetOpen}
       setIsBottomSheetOpen={setIsBottomSheetOpen}
       height={270}
-      children={renderBottomSheetChildren({label, categoryList})}
+      setInputState={setInputState}
+      children={renderBottomSheetChildren({
+        label,
+        categoryList,
+        inputState,
+        setInputState,
+      })}
     />
   );
 }
@@ -33,18 +42,29 @@ export default function SelectFormBottomSheet({
 function renderBottomSheetChildren({
   label,
   categoryList,
+  inputState,
+  setInputState,
 }: {
   label: string;
   categoryList: CategoryType[];
+  inputState: boolean;
+  setInputState: Dispatch<SetStateAction<boolean>>;
 }) {
-  return (
+  return inputState ? (
+    <View style={selectFormStyles.bottomSheetContainer}>
+      <Typography>항목 추가 UI</Typography>
+      <TouchableOpacity onPress={() => setInputState(false)}>
+        <Typography>항목 추가하기</Typography>
+      </TouchableOpacity>
+    </View>
+  ) : (
     <View style={selectFormStyles.bottomSheetContainer}>
       <View style={selectFormStyles.bottomSheetLabelContainer}>
         <Typography color={'gray6'} type={'Body1Semibold'}>
           {label}
         </Typography>
       </View>
-      <CategoryList categoryList={categoryList} />
+      <CategoryList categoryList={categoryList} setInputState={setInputState} />
     </View>
   );
 }

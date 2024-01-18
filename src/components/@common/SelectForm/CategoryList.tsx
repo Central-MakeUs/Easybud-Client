@@ -1,23 +1,24 @@
+import {Dispatch, SetStateAction} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
 import {CategoryType} from 'libs/recoil/types/category';
 import CategoryListItem from 'components/@common/SelectForm/CategoryListItem';
 
 export default function CategoryList({
   categoryList,
+  setInputState,
 }: {
   categoryList: CategoryType[];
+  setInputState: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
     <FlatList
       data={categoryList}
-      renderItem={renderFlatListItem}
+      renderItem={({item}) => (
+        <CategoryListItem data={item} setInputState={setInputState} />
+      )}
       style={selectFormStyles.bottomSheetDataListContainer}
     />
   );
-}
-
-function renderFlatListItem({item}: {item: CategoryType}) {
-  return <CategoryListItem data={item} />;
 }
 
 const selectFormStyles = StyleSheet.create({

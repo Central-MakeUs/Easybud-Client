@@ -7,4 +7,7 @@ export const enum RecoilStateKeys {
 
   /** SelectFormBottomSheet */
   SelectFormBottomSheet = 'selectFormBottomSheet',
+
+  /** SelectFormInput */
+  SelectFormInput = 'selectFormInput',
 }
