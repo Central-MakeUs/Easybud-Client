@@ -17,7 +17,7 @@ export default function Typography({
       {...props}
       style={[
         props.style,
-        {color: theme.palette[color]},
+        {flexShrink: 1, flexWrap: 'wrap', color: theme.palette[color]},
         theme.typography[type],
       ]}>
       {props.children}
