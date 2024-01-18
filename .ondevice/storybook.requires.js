@@ -55,7 +55,7 @@ const getStories = () => {
     "./src/components/@common/ProgressStep/ProgressStep.stories.tsx": require("../src/components/@common/ProgressStep/ProgressStep.stories.tsx"),
     "./src/components/@common/KeyNote/KeyNote.stories.tsx": require("../src/components/@common/KeyNote/KeyNote.stories.tsx"),
     "./src/components/@common/BottomSheet/BottomSheet.stories.tsx": require("../src/components/@common/BottomSheet/BottomSheet.stories.tsx"),
-
+    "./src/components/@common/DatePicker/DatePicker.stories.tsx": require("../src/components/@common/DatePicker/DatePicker.stories.tsx"),
   };
 };
 

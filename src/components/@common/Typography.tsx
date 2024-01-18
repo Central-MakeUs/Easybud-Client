@@ -19,7 +19,8 @@ export default function Typography({
         props.style,
         {flexShrink: 1, flexWrap: 'wrap', color: theme.palette[color]},
         theme.typography[type],
-      ]}
-    />
+      ]}>
+      {props.children}
+    </Text>
   );
 }
