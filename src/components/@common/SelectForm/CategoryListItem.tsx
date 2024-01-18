@@ -18,11 +18,11 @@ export default function CategoryListItem({
   const setSelectedCategory = useSetRecoilState(categoryState);
 
   const handlePressCategoryItem = () => {
-    if (data.value === 'addCategory') {
+    if (data === '항목 추가') {
       setInputState(true);
     } else {
       setInputState(false);
-      setSelectedCategory({name: data.name, value: data.value});
+      setSelectedCategory(data);
       setIsBottomSheetOpen(false);
     }
   };
@@ -32,7 +32,7 @@ export default function CategoryListItem({
       style={categoryListItemStyles.container}
       onPress={handlePressCategoryItem}>
       <Typography type={'Body1Semibold'} color={'black'}>
-        {data.name}
+        {data}
       </Typography>
     </TouchableOpacity>
   );

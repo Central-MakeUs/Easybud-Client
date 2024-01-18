@@ -1,6 +1,4 @@
-export const addItemToCategoryList = <
-  ItemType extends Record<PropertyKey, unknown>,
->(
+export const addItemToCategoryList = <ItemType extends string>(
   array: ItemType[],
   item: ItemType,
 ): ItemType[] => {

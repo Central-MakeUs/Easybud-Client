@@ -9,7 +9,7 @@ type BottomSheetProps = {
   setIsBottomSheetOpen:
     | Dispatch<SetStateAction<boolean>>
     | SetterOrUpdater<unknown>;
-  setInputState: Dispatch<SetStateAction<boolean>>;
+  setInputState?: Dispatch<SetStateAction<boolean>>;
   height?: number;
   children: ReactNode;
 };
@@ -35,7 +35,7 @@ export default function BottomSheet({
 
   const handleCloseBottomSheet = () => {
     setIsBottomSheetOpen(false);
-    setInputState(false);
+    setInputState?.(false);
   };
 
   return (

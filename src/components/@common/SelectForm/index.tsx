@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
-import {KeyOfPalette} from 'styles/types';
 import {themeVariants} from 'constants/SelectForm';
 import {categoryState} from 'libs/recoil/states/category';
 import {CategoryType} from 'libs/recoil/types/category';
@@ -12,11 +11,11 @@ import Typography from 'components/@common/Typography';
 import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
 
 const dummyCategories = [
-  {name: '현금', value: 'cash'},
-  {name: '보통예금', value: 'ordinaryDeposit'},
-  {name: '정기예금', value: 'fixedDeposit'},
-  {name: '유가증권', value: 'securities'},
-  {name: '기타유동자산', value: 'otherLiquidAssets'},
+  '현금',
+  '보통예금',
+  '정기예금',
+  '유가증권',
+  '기타유동자산',
 ];
 
 type SelectFormProps = {
@@ -36,10 +35,10 @@ export default function SelectForm({
 
   useEffect(() => {
     if (label !== '대분류' && label !== '중분류') {
-      const newCategoryList = addItemToCategoryList(dummyCategories, {
-        name: '항목 추가',
-        value: 'addCategory',
-      });
+      const newCategoryList = addItemToCategoryList(
+        dummyCategories,
+        '항목 추가',
+      );
 
       setCategoryList(newCategoryList);
     } else {
@@ -54,11 +53,6 @@ export default function SelectForm({
     labelTextColor,
     valueTextColor,
     placeholderTextColor,
-  }: {
-    backgroundColor: string;
-    labelTextColor: KeyOfPalette;
-    valueTextColor: KeyOfPalette;
-    placeholderTextColor: KeyOfPalette;
   } = themeVariants[variant];
 
   return (
@@ -71,11 +65,15 @@ export default function SelectForm({
         </Typography>
         <Typography
           type={'Body1Semibold'}
-          color={selectedCategory.name ? valueTextColor : placeholderTextColor}>
-          {selectedCategory.name || placeholder}
+          color={selectedCategory ? valueTextColor : placeholderTextColor}>
+          {selectedCategory || placeholder}
         </Typography>
       </TouchableOpacity>
-      <SelectFormBottomSheet label={label} categoryList={categoryList} />
+      <SelectFormBottomSheet
+        label={label}
+        categoryList={categoryList}
+        setCategoryList={setCategoryList}
+      />
     </>
   );
 }

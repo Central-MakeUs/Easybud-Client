@@ -1,1 +1,1 @@
-export type CategoryType = {name: string; value: string};
+export type CategoryType = string;
