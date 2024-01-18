@@ -4,14 +4,20 @@ import {sliceString} from 'utils/sliceString';
 import {theme} from 'styles';
 import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
-import BottomSheet from 'components/@common/BottomSheet';
-import TextArea from 'components/@common/KeyNote/TextArea';
-import Button from 'components/@common/Buttons/Button';
+import KeyNoteBottomSheet from 'components/@common/KeyNote/KeyNoteBottomSheet';
+import {KeyOfPalette} from 'styles/types';
 
 export default function KeyNote() {
   const [keyNoteText, setKeyNoteText] = useState('');
   const [keyNoteInputText, setKeyNoteInputText] = useState('');
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+
+  const handlePressRightCol = () => setIsBottomSheetOpen(true);
+
+  const {color, text}: {color: KeyOfPalette; text: string} = {
+    color: keyNoteText === '' ? 'gray3' : 'gray5',
+    text: keyNoteText === '' ? '입력하세요' : sliceString(keyNoteText, 16),
+  };
 
   return (
     <View style={keyNoteStyles.container}>
@@ -19,32 +25,22 @@ export default function KeyNote() {
         적요
       </Typography>
       <TouchableOpacity
-        onPress={() => setIsBottomSheetOpen(true)}
+        onPress={handlePressRightCol}
         style={keyNoteStyles.rightCol}>
         <Typography
           type={'Body1Semibold'}
-          color={keyNoteText === '' ? 'gray3' : 'gray5'}
+          color={color}
           style={keyNoteStyles.text}>
-          {keyNoteText === '' ? '입력하세요' : sliceString(keyNoteText, 16)}
+          {text}
         </Typography>
         <Icon name={'ArrowRightSmall'} fill={'gray4'} />
       </TouchableOpacity>
-      <BottomSheet
+      <KeyNoteBottomSheet
         isBottomSheetOpen={isBottomSheetOpen}
         setIsBottomSheetOpen={setIsBottomSheetOpen}
-        children={
-          <View style={keyNoteStyles.bottomSheetContainer}>
-            <TextArea setText={setKeyNoteInputText} />
-            <Button
-              children={'작성 완료하기'}
-              onPress={() => {
-                keyNoteInputText.length && setKeyNoteText(keyNoteInputText);
-                setIsBottomSheetOpen(false);
-              }}
-            />
-          </View>
-        }
-        height={160}
+        keyNoteInputText={keyNoteInputText}
+        setKeyNoteText={setKeyNoteText}
+        setKeyNoteInputText={setKeyNoteInputText}
       />
     </View>
   );
@@ -72,11 +68,5 @@ const keyNoteStyles = StyleSheet.create({
   },
   text: {
     flex: 1,
-  },
-  bottomSheetContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    height: '100%',
   },
 });
