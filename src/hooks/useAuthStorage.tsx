@@ -1,7 +1,7 @@
 import {tokenState} from 'libs/recoil/states/token';
-import {TokenType} from 'libs/recoil/types';
 import {useCallback} from 'react';
 import {useRecoilState} from 'recoil';
+import {TokenType} from 'types/token';
 
 /** auth token manager */
 export default function useAuthStorage() {
