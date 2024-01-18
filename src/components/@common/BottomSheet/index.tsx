@@ -48,7 +48,6 @@ export default function BottomSheet({
 const bottomSheetStyles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    padding: 15,
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
     backgroundColor: theme.palette.gray2,
