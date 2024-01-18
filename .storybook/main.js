@@ -9,7 +9,7 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
-  webpackFinal: (config) => {
+  webpackFinal: async (config) => {
     const fileLoaderRule = config.module.rules.find(
       (rule) => rule.test && rule.test.test('.svg'),
     );
@@ -20,6 +20,8 @@ module.exports = {
       enforce: 'pre',
       loader: require.resolve('@svgr/webpack'),
     });
+
+    config.resolve.alias['recoil'] = path.resolve(__dirname, '../node_modules/recoil');
 
     return config;
   },

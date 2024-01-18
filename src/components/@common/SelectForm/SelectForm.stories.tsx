@@ -1,5 +1,6 @@
 import {ComponentStory} from '@storybook/react';
 import SelectForm from 'components/@common/SelectForm';
+import {RecoilRoot} from 'recoil';
 
 const meta = {
   title: 'components/SelectForm',
@@ -10,7 +11,11 @@ export default meta;
 
 type Story = ComponentStory<typeof SelectForm>;
 
-const Template: Story = args => <SelectForm {...args} />;
+const Template: Story = args => (
+  <RecoilRoot>
+    <SelectForm {...args} />
+  </RecoilRoot>
+);
 
 export const GraySelectForm = Template.bind({});
 GraySelectForm.args = {
