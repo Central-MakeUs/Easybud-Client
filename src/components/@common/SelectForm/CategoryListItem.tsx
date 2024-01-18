@@ -1,12 +1,9 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from 'styles';
+import {CategoryData} from 'components/@common/SelectForm/SelectFormBottomSheet';
 import Typography from 'components/@common/Typography';
 
-export default function CategoryListItem({
-  data,
-}: {
-  data: {name: string; value: string};
-}) {
+export default function CategoryListItem({data}: {data: CategoryData}) {
   return (
     <TouchableOpacity style={categoryListItemStyles.container}>
       <Typography type={'Body1Semibold'} color={'black'}>

@@ -1,15 +1,28 @@
+import {FlatList, StyleSheet} from 'react-native';
 import CategoryListItem from 'components/@common/SelectForm/CategoryListItem';
-import {FlatList} from 'react-native';
+import {CategoryData} from 'components/@common/SelectForm/SelectFormBottomSheet';
 
 export default function CategoryList({
   categoryList,
 }: {
-  categoryList: unknown[];
+  categoryList: CategoryData[];
 }) {
+  const renderFlatListItem = ({item}: {item: CategoryData}) => (
+    <CategoryListItem data={item} />
+  );
+
   return (
     <FlatList
       data={categoryList}
-      renderItem={({item}) => <CategoryListItem data={item} />}
+      renderItem={renderFlatListItem}
+      style={selectFormStyles.bottomSheetDataListContainer}
     />
   );
 }
+
+const selectFormStyles = StyleSheet.create({
+  bottomSheetDataListContainer: {
+    width: '100%',
+    height: '100%',
+  },
+});
