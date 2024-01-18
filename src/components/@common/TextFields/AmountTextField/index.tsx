@@ -32,7 +32,7 @@ export default function AmountTextField({
 
   const handleClearInput = () => {
     setValue('0원');
-    setHeight(0);
+    setHeight(56);
   };
 
   const handleInputHeight = (
@@ -63,6 +63,7 @@ export default function AmountTextField({
       <CommonTextField
         isAmountField={true}
         value={value}
+        label="금액"
         isFocused={isFocused}
         height={height}
         onChangeText={onChangeText}
