@@ -1,9 +1,11 @@
-import {useState} from 'react';
-import {FlatList, StyleSheet, TouchableOpacity, View} from 'react-native';
+import {useEffect, useState} from 'react';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from 'styles';
-import BottomSheet from 'components/@common/BottomSheet';
-import CategoryListItem from 'components/@common/SelectForm/CategoryListItem';
+import {addItemToCategoryList} from 'utils/addItemToCategoryList';
 import Typography from 'components/@common/Typography';
+import SelectFormBottomSheet, {
+  CategoryData,
+} from 'components/@common/SelectForm/SelectFormBottomSheet';
 
 const dummyCategories = [
   {name: '현금', value: 'cash'},
@@ -27,6 +29,15 @@ export default function SelectForm({
   variant = 'gray',
 }: SelectFormProps) {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const [categoryList, setCategoryList] = useState<CategoryData[]>([]);
+
+  useEffect(() => {
+    const newCategoryList = addItemToCategoryList(dummyCategories, {
+      name: '항목 추가',
+      value: 'addCategories',
+    });
+    setCategoryList(newCategoryList);
+  }, []);
 
   return (
     <>
@@ -52,24 +63,11 @@ export default function SelectForm({
           {value ?? placeholder}
         </Typography>
       </TouchableOpacity>
-      <BottomSheet
+      <SelectFormBottomSheet
         isBottomSheetOpen={isBottomSheetOpen}
         setIsBottomSheetOpen={setIsBottomSheetOpen}
-        height={270}
-        children={
-          <View style={selectFormStyles.bottomSheetContainer}>
-            <View style={selectFormStyles.bottomSheetLabelContainer}>
-              <Typography color={'gray6'} type={'Body1Semibold'}>
-                {label}
-              </Typography>
-            </View>
-            <FlatList
-              data={dummyCategories}
-              renderItem={({item}) => <CategoryListItem data={item} />}
-              style={selectFormStyles.bottomSheetDataListContainer}
-            />
-          </View>
-        }
+        label={label}
+        categoryList={categoryList}
       />
     </>
   );
