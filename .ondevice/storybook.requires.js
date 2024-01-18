@@ -49,11 +49,14 @@ try {
 
 const getStories = () => {
   return {
+    "./src/components/@common/BottomSheet/BottomSheet.stories.tsx": require("../src/components/@common/BottomSheet/BottomSheet.stories.tsx"),
     "./src/components/@common/Buttons/Button/Button.stories.tsx": require("../src/components/@common/Buttons/Button/Button.stories.tsx"),
-    "./src/components/@common/TextFields/TextField/TextField.stories.tsx": require("../src/components/@common/TextFields/TextField/TextField.stories.tsx"),
-    "./src/components/@common/TextFields/AmountTextField/AmountTextField.stories.tsx": require("../src/components/@common/TextFields/AmountTextField/AmountTextField.stories.tsx"),
+    "./src/components/@common/Buttons/SocialLoginButton/SocialLoginButton.stories.tsx": require("../src/components/@common/Buttons/SocialLoginButton/SocialLoginButton.stories.tsx"),
     "./src/components/@common/DatePicker/DatePicker.stories.tsx": require("../src/components/@common/DatePicker/DatePicker.stories.tsx"),
     "./src/components/@common/ProgressStep/ProgressStep.stories.tsx": require("../src/components/@common/ProgressStep/ProgressStep.stories.tsx"),
+    "./src/components/@common/SelectForm/SelectForm.stories.tsx": require("../src/components/@common/SelectForm/SelectForm.stories.tsx"),
+    "./src/components/@common/TextFields/TextField/TextField.stories.tsx": require("../src/components/@common/TextFields/TextField/TextField.stories.tsx"),
+    "./src/components/@common/TextFields/AmountTextField/AmountTextField.stories.tsx": require("../src/components/@common/TextFields/AmountTextField/AmountTextField.stories.tsx"),
   };
 };
 
