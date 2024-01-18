@@ -10,6 +10,7 @@ import DebitCreditDeciderScreen from 'screens/CreateTransactionStack/DebitCredit
 import TransactionConfirmationScreen from 'screens/CreateTransactionStack/TransactionConfirmationScreen';
 import {CreateTransactionStackParamList} from 'navigators/types';
 import {theme} from 'styles';
+import BasicTransactionInfoScreen from 'screens/CreateTransactionStack/BasicTransactionInfoScreen';
 
 const Stack = createStackNavigator<CreateTransactionStackParamList>();
 
@@ -24,8 +25,12 @@ export default function CreateTransactionStackNavigator() {
     <SafeAreaView style={styles.safeArea}>
       <StatusBar />
       <Stack.Navigator
-        initialRouteName={'DebitCreditDecider'}
+        initialRouteName={'BasicTransactionInfo'}
         screenOptions={screenOptions}>
+        <Stack.Screen
+          name={'BasicTransactionInfo'}
+          component={BasicTransactionInfoScreen}
+        />
         <Stack.Screen
           name={'DebitCreditDecider'}
           component={DebitCreditDeciderScreen}

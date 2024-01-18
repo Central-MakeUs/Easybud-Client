@@ -9,7 +9,7 @@ export default function CreateTransactionButton() {
 
   const navigateAddTransaction = () =>
     navigation.navigate('CreateTransactionStack', {
-      screen: 'DebitCreditDecider',
+      screen: 'BasicTransactionInfo',
     });
 
   return (

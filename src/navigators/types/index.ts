@@ -13,11 +13,13 @@ export type RootStackParamList = {
   CreateTransactionStack: NavigatorScreenParams<CreateTransactionStackParamList>;
 };
 
+type params = {transaction: NewTransaction; prevScreen?: string} | undefined;
 export type CreateTransactionStackParamList = {
-  DebitCreditDecider: {transaction: NewTransaction} | undefined;
-  AccountType: {transaction: NewTransaction} | undefined;
-  AccountAmount: {transaction: NewTransaction} | undefined;
-  TransactionConfirmation: {transaction: NewTransaction} | undefined;
+  BasicTransactionInfo: params;
+  DebitCreditDecider: params;
+  AccountType: params;
+  AccountAmount: params;
+  TransactionConfirmation: params;
 };
 
 export type TabParamList = {
