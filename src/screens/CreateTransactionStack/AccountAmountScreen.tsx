@@ -1,8 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import NextButton from 'components/CreateTransactionStack/NextButton';
-import PrevButton from 'components/CreateTransactionStack/PrevButton';
+import RightButton from 'components/CreateTransactionStack/RightButton';
+import LeftButton from 'components/CreateTransactionStack/LeftButton';
 
 export default function AccountAmountScreen() {
   const navigation = useNavigation();
@@ -21,8 +21,8 @@ export default function AccountAmountScreen() {
     <ScreenContainer
       fixedBottomComponent={
         <>
-          <PrevButton onPress={handlePressPrevButton} />
-          <NextButton onPress={handlePressNextButton} />
+          <LeftButton onPress={handlePressPrevButton} />
+          <RightButton onPress={handlePressNextButton} />
         </>
       }>
       <Typography>AccountAmountScreen</Typography>
