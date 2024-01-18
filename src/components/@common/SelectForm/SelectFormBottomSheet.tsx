@@ -24,17 +24,27 @@ export default function SelectFormBottomSheet({
       isBottomSheetOpen={isBottomSheetOpen}
       setIsBottomSheetOpen={setIsBottomSheetOpen}
       height={270}
-      children={
-        <View style={selectFormStyles.bottomSheetContainer}>
-          <View style={selectFormStyles.bottomSheetLabelContainer}>
-            <Typography color={'gray6'} type={'Body1Semibold'}>
-              {label}
-            </Typography>
-          </View>
-          <CategoryList categoryList={categoryList} />
-        </View>
-      }
+      children={renderBottomSheetChildren({label, categoryList})}
     />
+  );
+}
+
+function renderBottomSheetChildren({
+  label,
+  categoryList,
+}: {
+  label: string;
+  categoryList: CategoryType[];
+}) {
+  return (
+    <View style={selectFormStyles.bottomSheetContainer}>
+      <View style={selectFormStyles.bottomSheetLabelContainer}>
+        <Typography color={'gray6'} type={'Body1Semibold'}>
+          {label}
+        </Typography>
+      </View>
+      <CategoryList categoryList={categoryList} />
+    </View>
   );
 }
 

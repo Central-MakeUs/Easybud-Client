@@ -7,10 +7,6 @@ export default function CategoryList({
 }: {
   categoryList: CategoryType[];
 }) {
-  const renderFlatListItem = ({item}: {item: CategoryType}) => (
-    <CategoryListItem data={item} />
-  );
-
   return (
     <FlatList
       data={categoryList}
@@ -18,6 +14,10 @@ export default function CategoryList({
       style={selectFormStyles.bottomSheetDataListContainer}
     />
   );
+}
+
+function renderFlatListItem({item}: {item: CategoryType}) {
+  return <CategoryListItem data={item} />;
 }
 
 const selectFormStyles = StyleSheet.create({
