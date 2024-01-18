@@ -66,5 +66,7 @@ const dateStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     gap: 15,
+    flex: 1,
+    marginLeft: 50,
   },
 });
