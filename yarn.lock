@@ -5792,6 +5792,7 @@ __metadata:
     react-native: 0.71.4
     react-native-error-boundary: ^1.2.4
     react-native-gesture-handler: ^2.14.0
+    react-native-raw-bottom-sheet: ^2.2.0
     react-native-safe-area-context: ^4.8.2
     react-native-screens: ^3.29.0
     react-native-svg: 13.10.0
@@ -16562,6 +16563,13 @@ eslint-plugin-jsx-a11y@latest:
   dependencies:
     prop-types: ^15.5.10
   checksum: c7b00ebceb6fe15e025ef1655483bc98fdb150453fb27e71d17a282a87317c5b1e242a1108f5247fac99594e6778470513d19c21e02eb2ce81f80688dd616419
+  languageName: node
+  linkType: hard
+
+"react-native-raw-bottom-sheet@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "react-native-raw-bottom-sheet@npm:2.2.0"
+  checksum: a42b2edcf6ee0e4d3fe1b06e81b7db424d3ba7f57658a4f280815db9c5cb9690802061ed6802d2e0d3064d6c34773233e66c3dccc1bd929c2aad27bbf30f4dac
   languageName: node
   linkType: hard
 
