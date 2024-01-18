@@ -23,8 +23,8 @@ export default function CategoryListItem({
       setInputState(true);
     } else {
       setInputState(false);
-      setSelectedCategory(data);
       setIsBottomSheetOpen(false);
+      setSelectedCategory(data);
     }
   };
 
