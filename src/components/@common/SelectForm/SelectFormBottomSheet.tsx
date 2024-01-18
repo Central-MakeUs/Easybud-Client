@@ -1,17 +1,16 @@
 import {Dispatch, SetStateAction} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {theme} from 'styles';
+import {CategoryType} from 'libs/recoil/types/category';
 import BottomSheet from 'components/@common/BottomSheet';
 import Typography from 'components/@common/Typography';
 import CategoryList from 'components/@common/SelectForm/CategoryList';
-
-export type CategoryData = {name: string; value: string};
 
 type SelectFormBottomSheetProps = {
   isBottomSheetOpen: boolean;
   setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
   label: string;
-  categoryList: CategoryData[];
+  categoryList: CategoryType[];
 };
 
 export default function SelectFormBottomSheet({

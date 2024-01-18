@@ -1,13 +1,13 @@
 import {FlatList, StyleSheet} from 'react-native';
+import {CategoryType} from 'libs/recoil/types/category';
 import CategoryListItem from 'components/@common/SelectForm/CategoryListItem';
-import {CategoryData} from 'components/@common/SelectForm/SelectFormBottomSheet';
 
 export default function CategoryList({
   categoryList,
 }: {
-  categoryList: CategoryData[];
+  categoryList: CategoryType[];
 }) {
-  const renderFlatListItem = ({item}: {item: CategoryData}) => (
+  const renderFlatListItem = ({item}: {item: CategoryType}) => (
     <CategoryListItem data={item} />
   );
 

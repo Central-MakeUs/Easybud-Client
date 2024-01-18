@@ -1,11 +1,12 @@
 import {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
+import {useRecoilValue} from 'recoil';
 import {theme} from 'styles';
+import {categoryState} from 'libs/recoil/states/category';
+import {CategoryType} from 'libs/recoil/types/category';
 import {addItemToCategoryList} from 'utils/addItemToCategoryList';
 import Typography from 'components/@common/Typography';
-import SelectFormBottomSheet, {
-  CategoryData,
-} from 'components/@common/SelectForm/SelectFormBottomSheet';
+import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
 
 const dummyCategories = [
   {name: '현금', value: 'cash'},
@@ -29,15 +30,20 @@ export default function SelectForm({
   variant = 'gray',
 }: SelectFormProps) {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
-  const [categoryList, setCategoryList] = useState<CategoryData[]>([]);
+  const [categoryList, setCategoryList] = useState<CategoryType[]>([]);
+  const selectedCategory = useRecoilValue(categoryState);
 
   useEffect(() => {
     const newCategoryList = addItemToCategoryList(dummyCategories, {
       name: '항목 추가',
-      value: 'addCategories',
+      value: 'addCategory',
     });
     setCategoryList(newCategoryList);
   }, []);
+
+  useEffect(() => {
+    console.log(selectedCategory.name, selectedCategory.value);
+  }, [selectedCategory]);
 
   return (
     <>
