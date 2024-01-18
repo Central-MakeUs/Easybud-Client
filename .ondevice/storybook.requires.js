@@ -49,8 +49,11 @@ try {
 
 const getStories = () => {
   return {
-    "./src/components/Button/Button.stories.tsx": require("../src/components/Button/Button.stories.tsx"),
-    "./src/components/TextField/TextField.stories.tsx": require("../src/components/TextField/TextField.stories.tsx"),
+    "./src/components/@common/Buttons/Button/Button.stories.tsx": require("../src/components/@common/Buttons/Button/Button.stories.tsx"),
+    "./src/components/@common/TextFields/TextField/TextField.stories.tsx": require("../src/components/@common/TextFields/TextField/TextField.stories.tsx"),
+    "./src/components/@common/TextFields/AmountTextField/AmountTextField.stories.tsx": require("../src/components/@common/TextFields/AmountTextField/AmountTextField.stories.tsx"),
+    "./src/components/@common/ProgressStep/ProgressStep.stories.tsx": require("../src/components/@common/ProgressStep/ProgressStep.stories.tsx"),
+    "./src/components/@common/KeyNote/KeyNote.stories.tsx": require("../src/components/@common/KeyNote/KeyNote.stories.tsx"),
   };
 };
 
