@@ -13,15 +13,6 @@ export type RootStackParamList = {
   CreateTransactionStack: NavigatorScreenParams<CreateTransactionStackParamList>;
 };
 
-type params = {transaction: NewTransaction; prevScreen?: string} | undefined;
-export type CreateTransactionStackParamList = {
-  BasicTransactionInfo: params;
-  DebitCreditDecider: params;
-  AccountType: params;
-  AccountAmount: params;
-  TransactionConfirmation: params;
-};
-
 export type TabParamList = {
   Ledger: undefined;
   Transaction: undefined;
@@ -30,23 +21,39 @@ export type TabParamList = {
   Setting: undefined;
 };
 
+type Params = {transaction: NewTransaction; prevScreen?: string} | undefined;
+export type CreateTransactionStackParamList = {
+  BasicTransactionInfo: Params;
+  DebitCreditDecider: Params;
+  AccountType: Params;
+  AccountAmount: Params;
+  TransactionConfirmation: Params;
+};
+
 /** screen name */
 
 export type TabScreenName = keyof TabParamList;
-export type RootStackScreenName = keyof RootStackParamList;
+type RootStackScreenName = keyof RootStackParamList;
+type CreateTransactionStackScreenName = keyof CreateTransactionStackParamList;
 
 /** route props */
 
-export type TabRouteProps = RouteProp<TabParamList, TabScreenName>;
+export type TabRouteProp = RouteProp<TabParamList, TabScreenName>;
+export type CreateTransactionStackRouteProp<
+  T extends CreateTransactionStackScreenName,
+> = RouteProp<CreateTransactionStackParamList, T>;
 
 /** navigation props */
 
 export type RootStackNavigationProp =
   NativeStackNavigationProp<RootStackParamList>;
 
+export type CreateTransactionStackNavigationProp =
+  NativeStackNavigationProp<CreateTransactionStackParamList>;
+
 /** screen props - unused*/
 
-export type RootStackScreenProps<T extends RootStackScreenName> =
+export type RootStackScreenProp<T extends RootStackScreenName> =
   NativeStackScreenProps<RootStackParamList, T>;
 
 /** navigation에 type 지정 */

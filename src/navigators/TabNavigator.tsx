@@ -3,7 +3,7 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {theme} from 'styles';
-import {TabRouteProps, TabParamList} from 'navigators/types';
+import {TabRouteProp, TabParamList} from 'navigators/types';
 import AccountScreen from 'screens/Tab/AccountScreen';
 import LedgerScreen from 'screens/Tab/LedgerScreen';
 import SettingScreen from 'screens/Tab/SettingScreen';
@@ -51,7 +51,7 @@ export default function TabNavigator() {
 }
 
 const screenOptions: (props: {
-  route: TabRouteProps;
+  route: TabRouteProp;
   bottomSize: number;
 }) => BottomTabNavigationOptions = ({route, bottomSize}) => ({
   tabBarIcon:
