@@ -1,4 +1,4 @@
-export const addItemToCategoryList = <ItemType extends string>(
+export const addItemToCategoryList = <ItemType>(
   array: ItemType[],
   item: ItemType,
 ): ItemType[] => {
