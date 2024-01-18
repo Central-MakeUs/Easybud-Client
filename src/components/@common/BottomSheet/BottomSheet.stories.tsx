@@ -1,6 +1,5 @@
 import {ComponentStory} from '@storybook/react';
 import BottomSheet from 'components/@common/BottomSheet';
-import TextField from 'components/@common/TextFields/TextField';
 
 const meta = {
   title: 'components/BottomSheet',
@@ -17,5 +16,4 @@ export const DefaultBottomSheet = Template.bind({});
 DefaultBottomSheet.args = {
   isBottomSheetOpen: true,
   setIsBottomSheetOpen: () => {},
-  children: <TextField />,
 };
