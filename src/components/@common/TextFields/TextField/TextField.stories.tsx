@@ -13,4 +13,7 @@ type Story = ComponentStory<typeof TextField>;
 const Template: Story = args => <TextField {...args} />;
 
 export const DefaultStatus = Template.bind({});
-DefaultStatus.args = {};
+DefaultStatus.args = {
+  placeholder: '이름',
+  label: '이름',
+};

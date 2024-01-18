@@ -23,9 +23,7 @@ export default function ProgressStep({
             progressStepStyles.bar,
             {
               backgroundColor:
-                index + 1 === currentStep
-                  ? theme.palette.primary
-                  : theme.palette.gray2,
+                index + 1 === currentStep ? theme.palette.primary : undefined,
             },
           ]}
         />
@@ -45,7 +43,7 @@ const progressStepStyles = StyleSheet.create({
   },
   bar: {
     flex: 1,
-    height: 10,
+    height: 8,
     borderRadius: 8,
   },
 });

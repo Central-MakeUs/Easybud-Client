@@ -6,9 +6,13 @@ import {
 } from 'react-native';
 import CommonTextField from 'components/@common/TextFields/CommonTextField';
 
-type TextFieldProps = TextInputProps;
+type TextFieldProps = {label?: string} & TextInputProps;
 
-export default function TextField({defaultValue}: TextFieldProps) {
+export default function TextField({
+  defaultValue,
+  label,
+  placeholder,
+}: TextFieldProps) {
   const [value, setValue] = useState(defaultValue ?? '');
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [height, setHeight] = useState(0);
@@ -36,6 +40,8 @@ export default function TextField({defaultValue}: TextFieldProps) {
       value={value}
       isFocused={isFocused}
       height={height}
+      label={label}
+      placeholder={placeholder}
       onChangeText={onChangeText}
       handleBlur={handleBlur}
       handleFocus={handleFocus}
