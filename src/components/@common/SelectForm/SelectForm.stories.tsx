@@ -1,6 +1,6 @@
+import {RecoilRoot} from 'recoil';
 import {ComponentStory} from '@storybook/react';
 import SelectForm from 'components/@common/SelectForm';
-import {RecoilRoot} from 'recoil';
 
 const meta = {
   title: 'components/SelectForm',

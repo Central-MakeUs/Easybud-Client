@@ -1,11 +1,14 @@
 import {Dispatch, ReactNode, SetStateAction, useEffect, useRef} from 'react';
 import {StyleSheet} from 'react-native';
+import {SetterOrUpdater} from 'recoil';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {theme} from 'styles';
 
 type BottomSheetProps = {
   isBottomSheetOpen: boolean;
-  setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
+  setIsBottomSheetOpen:
+    | Dispatch<SetStateAction<boolean>>
+    | SetterOrUpdater<unknown>;
   height?: number;
   children: ReactNode;
 };

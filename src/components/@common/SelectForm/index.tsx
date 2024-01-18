@@ -1,11 +1,12 @@
 import {useEffect, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {useRecoilValue} from 'recoil';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
 import {KeyOfPalette} from 'styles/types';
 import {themeVariants} from 'constants/SelectForm';
 import {categoryState} from 'libs/recoil/states/category';
 import {CategoryType} from 'libs/recoil/types/category';
+import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import {addItemToCategoryList} from 'utils/addItemToCategoryList';
 import Typography from 'components/@common/Typography';
 import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
@@ -29,7 +30,7 @@ export default function SelectForm({
   placeholder,
   variant = 'gray',
 }: SelectFormProps) {
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const setIsBottomSheetOpen = useSetRecoilState(selectFormBottomSheetState);
   const [categoryList, setCategoryList] = useState<CategoryType[]>([]);
   const selectedCategory = useRecoilValue(categoryState);
 
@@ -69,12 +70,7 @@ export default function SelectForm({
           {selectedCategory.name || placeholder}
         </Typography>
       </TouchableOpacity>
-      <SelectFormBottomSheet
-        isBottomSheetOpen={isBottomSheetOpen}
-        setIsBottomSheetOpen={setIsBottomSheetOpen}
-        label={label}
-        categoryList={categoryList}
-      />
+      <SelectFormBottomSheet label={label} categoryList={categoryList} />
     </>
   );
 }

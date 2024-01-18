@@ -5,4 +5,6 @@ export const enum RecoilStateKeys {
   /** Category */
   Category = 'category',
 
+  /** SelectFormBottomSheet */
+  SelectFormBottomSheet = 'selectFormBottomSheet',
 }
