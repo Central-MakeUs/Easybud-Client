@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction, useState} from 'react';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {SetterOrUpdater, useRecoilState, useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
@@ -8,7 +8,7 @@ import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import BottomSheet from 'components/@common/BottomSheet';
 import Typography from 'components/@common/Typography';
 import CategoryList from 'components/@common/SelectForm/CategoryList';
-import TextArea from 'components/@common/KeyNote/TextArea';
+import TextArea from 'components/@common/TextArea';
 import Button from 'components/@common/Buttons/Button';
 
 type SelectFormBottomSheetProps = {
@@ -29,6 +29,10 @@ export default function SelectFormBottomSheet({
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useRecoilState(
     selectFormBottomSheetState,
   );
+
+  useEffect(() => {
+    setInputText('');
+  }, [isBottomSheetOpen]);
 
   return (
     <BottomSheet
@@ -72,20 +76,27 @@ function renderBottomSheetChildren({
   setCategoryList: Dispatch<SetStateAction<CategoryType[]>>;
   setIsBottomSheetOpen: SetterOrUpdater<boolean>;
 }) {
+  const handlePressAddCategoryButton = () => {
+    if (inputText.length) {
+      setCategoryList(prevCategoryList => [
+        ...prevCategoryList.slice(0, -1),
+        inputText,
+        '항목 추가',
+      ]);
+      setSelectedCategory(inputText);
+      setIsBottomSheetOpen(false);
+      setInputState(false);
+    } else {
+      return;
+    }
+  };
+
   return inputState ? (
     <View style={selectFormStyles.addCategoryBottomSheetContainer}>
-      <TextArea setText={setInputText} />
+      <TextArea setText={setInputText} placeholder="추가할 항목을 작성하세요" />
       <Button
-        onPress={() => {
-          setCategoryList(prevCategoryList => [
-            ...prevCategoryList.slice(0, -1),
-            inputText,
-            '항목 추가',
-          ]);
-          setSelectedCategory(inputText);
-          setIsBottomSheetOpen(false);
-          setInputState(false);
-        }}>
+        onPress={handlePressAddCategoryButton}
+        disabled={!inputText.length}>
         항목 추가하기
       </Button>
     </View>
@@ -113,7 +124,8 @@ const selectFormStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    height: '100%',
+    height: '50%',
+    paddingHorizontal: 20,
   },
   bottomSheetDataListContainer: {
     width: '100%',
