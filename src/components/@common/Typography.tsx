@@ -2,6 +2,10 @@ import {Text, TextProps} from 'react-native';
 import {theme} from 'styles';
 import {KeyOfPalette, KeyOfTypography} from 'styles/types';
 
+/**
+ * @param type 종류를 나타냄 (KeyOfTypography 타입 중 가능)
+ * @param color text를 변경하는 함수
+ */
 type TypographyProps = {
   type?: KeyOfTypography;
   color?: KeyOfPalette;
