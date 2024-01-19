@@ -32,6 +32,7 @@ export default function KeyNoteBottomSheet({
         <View style={keyNoteStyles.bottomSheetContainer}>
           <TextArea setText={setKeyNoteInputText} />
           <Button
+            disabled={!keyNoteInputText.length}
             children={'작성 완료하기'}
             onPress={handlePressCompleteButton}
           />
