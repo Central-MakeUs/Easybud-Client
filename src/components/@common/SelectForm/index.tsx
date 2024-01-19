@@ -1,18 +1,12 @@
 import {useEffect, useState} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
-import {theme} from 'styles';
-import {
-  AddCategoryText,
-  CategoryName,
-  ThemeVariants,
-} from 'constants/SelectForm';
+import {AddCategoryText, CategoryName} from 'constants/SelectForm';
 import {categoryState} from 'libs/recoil/states/category';
 import {CategoryType} from 'libs/recoil/types/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import {addItemToCategoryList} from 'utils/addItemToCategoryList';
-import Typography from 'components/@common/Typography';
 import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
+import CommonSelectItem from 'components/@common/CommonSelectItem';
 
 const dummyCategories = [
   '현금',
@@ -52,67 +46,20 @@ export default function SelectForm({
 
   const handlePressCategoryItem = () => setIsBottomSheetOpen(true);
 
-  const {
-    backgroundColor,
-    labelTextColor,
-    valueTextColor,
-    placeholderTextColor,
-  } = ThemeVariants[variant];
-
   return (
-    <>
-      <TouchableOpacity
-        onPress={handlePressCategoryItem}
-        style={[selectFormStyles.container, {backgroundColor}]}>
-        <Typography type={'Body1Semibold'} color={labelTextColor}>
-          {label}
-        </Typography>
-        <Typography
-          type={'Body1Semibold'}
-          color={selectedCategory ? valueTextColor : placeholderTextColor}>
-          {selectedCategory || placeholder}
-        </Typography>
-      </TouchableOpacity>
-      <SelectFormBottomSheet
-        label={label}
-        categoryList={categoryList}
-        setCategoryList={setCategoryList}
-      />
-    </>
+    <CommonSelectItem
+      label={label}
+      variant={variant}
+      handlePressSelectItem={handlePressCategoryItem}
+      value={selectedCategory}
+      placeholder={placeholder}
+      bottomSheet={
+        <SelectFormBottomSheet
+          label={label}
+          categoryList={categoryList}
+          setCategoryList={setCategoryList}
+        />
+      }
+    />
   );
 }
-
-const selectFormStyles = StyleSheet.create({
-  container: {
-    width: '100%',
-    height: 49,
-    borderRadius: 18,
-    backgroundColor: theme.palette.gray2,
-    paddingHorizontal: 21,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  bottomSheetContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 15,
-  },
-  bottomSheetDataListContainer: {
-    width: '100%',
-    height: '100%',
-  },
-  bottomSheetLabelContainer: {
-    width: '100%',
-    height: 55,
-    paddingTop: 15,
-    borderBottomColor: theme.palette.gray3,
-    borderBottomWidth: 1,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

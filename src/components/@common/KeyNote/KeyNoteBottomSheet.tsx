@@ -56,5 +56,6 @@ const keyNoteStyles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between',
     height: '100%',
+    padding: 15,
   },
 });
