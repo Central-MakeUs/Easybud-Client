@@ -22,15 +22,22 @@ export default function SocialLoginButton({
   variant,
   ...props
 }: SocialLoginButtonProps) {
-  const {logo, text, size} = SocialLoginButtonLabel[variant];
-  const {color, ...styles} = SocialLoginButtonStyles[variant];
+  const {logo, text} = SocialLoginButtonLabel[variant];
+
+  const {color: textColor, ...buttonStyles} = SocialLoginButtonStyles[variant];
+  const {width: iconSize, ...iconStyles} =
+    SocialLoginButtonStyles[`${variant}Icon`];
 
   return (
     <TouchableOpacity
       {...props}
-      style={[socialLoginButtonStyles.button, styles]}>
-      <Icon name={logo} size={size} style={[socialLoginButtonStyles.logo]} />
-      <Typography style={[socialLoginButtonStyles.text, {color}]}>
+      style={[socialLoginButtonStyles.button, buttonStyles]}>
+      <Icon
+        name={logo}
+        size={iconSize}
+        style={[socialLoginButtonStyles.logo, iconStyles]}
+      />
+      <Typography style={[socialLoginButtonStyles.text, {color: textColor}]}>
         {text}
       </Typography>
       <View style={{width: 56}} />
