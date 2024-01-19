@@ -3,7 +3,6 @@ import {View, StyleSheet} from 'react-native';
 import {SetterOrUpdater, useRecoilState, useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
 import {categoryState} from 'libs/recoil/states/category';
-import {CategoryType} from 'libs/recoil/types/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import {AddCategoryText} from 'constants/SelectForm';
 import BottomSheet from 'components/@common/BottomSheet';
@@ -12,10 +11,15 @@ import CategoryList from 'components/@common/SelectForm/CategoryList';
 import TextArea from 'components/@common/TextArea';
 import Button from 'components/@common/Buttons/Button';
 
+/**
+ * @param label label 텍스트
+ * @param categoryList 카테고리
+ * @param setCategoryList SelectForm 종류를 나타냄 'primary' | 'gray'
+ */
 type SelectFormBottomSheetProps = {
   label: string;
-  categoryList: CategoryType[];
-  setCategoryList: Dispatch<SetStateAction<CategoryType[]>>;
+  categoryList: string[];
+  setCategoryList: Dispatch<SetStateAction<string[]>>;
 };
 
 export default function SelectFormBottomSheet({
@@ -71,13 +75,13 @@ function renderBottomSheetChildren({
   setIsBottomSheetOpen,
 }: {
   label: string;
-  categoryList: CategoryType[];
+  categoryList: string[];
   inputState: boolean;
   inputText: string;
   setSelectedCategory: Dispatch<SetStateAction<string>>;
   setInputState: Dispatch<SetStateAction<boolean>>;
   setInputText: Dispatch<SetStateAction<string>>;
-  setCategoryList: Dispatch<SetStateAction<CategoryType[]>>;
+  setCategoryList: Dispatch<SetStateAction<string[]>>;
   setIsBottomSheetOpen: SetterOrUpdater<boolean>;
 }) {
   const handlePressAddCategoryButton = () => {
@@ -90,17 +94,13 @@ function renderBottomSheetChildren({
       setSelectedCategory(inputText);
       setIsBottomSheetOpen(false);
       setInputState(false);
-    } else {
-      return;
     }
   };
 
+  const height = categoryList.length >= 4 ? '50%' : '70%';
+
   return inputState ? (
-    <View
-      style={[
-        selectFormStyles.addCategoryBottomSheetContainer,
-        {height: categoryList.length >= 4 ? '50%' : '70%'},
-      ]}>
+    <View style={[selectFormStyles.addCategoryBottomSheetContainer, {height}]}>
       <TextArea setText={setInputText} placeholder="추가할 항목을 작성하세요" />
       <Button
         onPress={handlePressAddCategoryButton}

@@ -6,22 +6,12 @@ import {
   Image,
 } from 'react-native';
 import kakaoLogo from 'assets/images/kakao.png';
+import {
+  SocialLoginButtonBackgroundColor,
+  SocialLoginButtonText,
+  SocialLoginButtonTextColor,
+} from 'constants/Button';
 import Typography from 'components/@common/Typography';
-
-const BUTTON_TEXT = {
-  kakao: '카카오 로그인',
-  apple: 'Apple로 로그인',
-};
-
-const TEXT_COLOR = {
-  kakao: 'rgba(0, 0, 0, 0.85)',
-  apple: '#000000',
-};
-
-const BACKGROUND_COLOR = {
-  kakao: '#FEE500',
-  apple: '#FFFFFF',
-};
 
 /**
  * @param variant 버튼 종류: 'kakao' | 'apple'
@@ -35,8 +25,8 @@ export default function SocialLoginButton({
   ...props
 }: SocialLoginButtonProps) {
   const {backgroundColor, textColor, borderColor, borderWidth} = {
-    backgroundColor: BACKGROUND_COLOR[variant],
-    textColor: TEXT_COLOR[variant],
+    backgroundColor: SocialLoginButtonBackgroundColor[variant],
+    textColor: SocialLoginButtonTextColor[variant],
     borderColor: variant === 'apple' ? '#000000' : 'transparent',
     borderWidth: variant === 'apple' ? 1 : 0,
   };
@@ -44,12 +34,14 @@ export default function SocialLoginButton({
   return (
     <TouchableOpacity
       {...props}
-      style={{
-        ...socialLoginButtonStyles.button,
-        backgroundColor,
-        borderColor,
-        borderWidth,
-      }}>
+      style={[
+        socialLoginButtonStyles.button,
+        {
+          backgroundColor,
+          borderColor,
+          borderWidth,
+        },
+      ]}>
       {variant === 'apple' ? (
         <Icon
           name={'AppleLogo'}
@@ -61,7 +53,7 @@ export default function SocialLoginButton({
         <Image source={kakaoLogo} style={socialLoginButtonStyles.kakaoImage} />
       )}
       <Typography style={[{color: textColor}, socialLoginButtonStyles.text]}>
-        {BUTTON_TEXT[variant]}
+        {SocialLoginButtonText[variant]}
       </Typography>
     </TouchableOpacity>
   );

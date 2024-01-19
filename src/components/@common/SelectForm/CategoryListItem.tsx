@@ -3,28 +3,33 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
 import {AddCategoryText} from 'constants/SelectForm';
-import {CategoryType} from 'libs/recoil/types/category';
 import {categoryState} from 'libs/recoil/states/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import Typography from 'components/@common/Typography';
 
-export default function CategoryListItem({
-  data,
-  setInputState,
-}: {
-  data: CategoryType;
+/**
+ * @param categoryName 카테고리명
+ * @param setInputState input 상태를 변경하는 함수
+ */
+type CategoryListItemProps = {
+  categoryName: string;
   setInputState: Dispatch<SetStateAction<boolean>>;
-}) {
+};
+
+export default function CategoryListItem({
+  categoryName,
+  setInputState,
+}: CategoryListItemProps) {
   const setIsBottomSheetOpen = useSetRecoilState(selectFormBottomSheetState);
   const setSelectedCategory = useSetRecoilState(categoryState);
 
   const handlePressCategoryItem = () => {
-    if (data === AddCategoryText) {
+    if (categoryName === AddCategoryText) {
       setInputState(true);
     } else {
       setInputState(false);
       setIsBottomSheetOpen(false);
-      setSelectedCategory(data);
+      setSelectedCategory(categoryName);
     }
   };
 
@@ -33,7 +38,7 @@ export default function CategoryListItem({
       style={categoryListItemStyles.container}
       onPress={handlePressCategoryItem}>
       <Typography type={'Body1Semibold'} color={'black'}>
-        {data}
+        {categoryName}
       </Typography>
     </TouchableOpacity>
   );

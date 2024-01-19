@@ -15,7 +15,7 @@ export default function KeyNote() {
       label={'적요'}
       variant={'gray'}
       handlePressSelectItem={handlePressSelectItem}
-      value={keyNoteText.length ? sliceString(keyNoteText, 30) : ''}
+      value={keyNoteText || sliceString(keyNoteText, 30)}
       placeholder="적요를 작성하세요"
       bottomSheet={
         <KeyNoteBottomSheet

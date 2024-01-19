@@ -1,32 +1,10 @@
-import Typography from 'components/@common/Typography';
 import {
   StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
-import {theme} from 'styles';
-
-const TEXT_COLOR = {
-  normal: {
-    primary: 'white',
-    secondary: 'gray5',
-  },
-  disabled: {
-    primary: 'white',
-    secondary: 'gray5',
-  },
-} as const;
-
-const BACKGROUND_COLOR = {
-  normal: {
-    primary: 'primary',
-    secondary: 'gray2',
-  },
-  disabled: {
-    primary: 'gray3',
-    secondary: 'gray2',
-  },
-} as const;
+import {ButtonBackgroundColor, ButtonTextColor} from 'constants/Button';
+import Typography from 'components/@common/Typography';
 
 /**
  * @param variant 버튼 종류: 'primary' | 'secondary'
@@ -42,25 +20,22 @@ type ButtonProps = {
 export default function Button({
   variant = 'primary',
   fullWidth = true,
+  disabled,
   children,
   ...props
 }: ButtonProps) {
-  const activeVariant = props.disabled ? 'disabled' : 'normal';
+  const activeVariant = disabled ? 'disabled' : 'normal';
 
   const {backgroundColor, textColor, width} = {
-    backgroundColor: theme.palette[BACKGROUND_COLOR[activeVariant][variant]],
-    textColor: TEXT_COLOR[activeVariant][variant],
+    backgroundColor: ButtonBackgroundColor[activeVariant][variant],
+    textColor: ButtonTextColor[activeVariant][variant],
     width: fullWidth ? '100%' : '50%',
   };
 
   return (
     <TouchableOpacity
       {...props}
-      style={{
-        ...buttonStyles.button,
-        backgroundColor,
-        width,
-      }}>
+      style={[buttonStyles.button, {backgroundColor, width}]}>
       <Typography type={'Body1Semibold'} color={textColor}>
         {children}
       </Typography>
