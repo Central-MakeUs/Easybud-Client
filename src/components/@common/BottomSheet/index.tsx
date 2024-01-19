@@ -4,6 +4,13 @@ import {SetterOrUpdater} from 'recoil';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {theme} from 'styles';
 
+/**
+ * @param isBottomSheetOpen bottomSheet의 open 여부
+ * @param setIsBottomSheetOpen bottomSheet의 open 여부를 set하는 함수
+ * @param setInputState input 상태를 set하는 함수
+ * @param height bottomSheet의 높이
+ * @param children bottomSheet 내부에 들어갈 content
+ */
 type BottomSheetProps = {
   isBottomSheetOpen: boolean;
   setIsBottomSheetOpen:
