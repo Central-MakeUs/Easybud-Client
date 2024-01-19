@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction} from 'react';
+import {Dispatch, SetStateAction, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
 import BottomSheet from 'components/@common/BottomSheet';
 import TextArea from 'components/@common/TextArea';
@@ -26,6 +26,10 @@ export default function KeyNoteBottomSheet({
   keyNoteInputText,
   setKeyNoteText,
 }: KeyNoteBottmSheetProps) {
+  useEffect(() => {
+    setKeyNoteInputText('');
+  }, [isBottomSheetOpen, setKeyNoteInputText]);
+
   const handlePressCompleteButton = () => {
     keyNoteInputText.length && setKeyNoteText(keyNoteInputText);
     setIsBottomSheetOpen(false);
