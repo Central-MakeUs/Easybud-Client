@@ -44,12 +44,14 @@ export default function SocialLoginButton({
   return (
     <TouchableOpacity
       {...props}
-      style={{
-        ...socialLoginButtonStyles.button,
-        backgroundColor,
-        borderColor,
-        borderWidth,
-      }}>
+      style={[
+        socialLoginButtonStyles.button,
+        {
+          backgroundColor,
+          borderColor,
+          borderWidth,
+        },
+      ]}>
       {variant === 'apple' ? (
         <Icon
           name={'AppleLogo'}
