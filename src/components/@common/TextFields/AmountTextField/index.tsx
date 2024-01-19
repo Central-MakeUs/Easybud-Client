@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {
   NativeSyntheticEvent,
-  TextInputContentSizeChangeEventData,
   TextInputKeyPressEventData,
   TextInputProps,
 } from 'react-native';
@@ -26,20 +25,9 @@ export default function AmountTextField({
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [height, setHeight] = useState(0);
 
-  const handleFocus = () => setIsFocused(true);
-
-  const handleBlur = () => setIsFocused(false);
-
   const handleClearInput = () => {
     setValue('0원');
     setHeight(56);
-  };
-
-  const handleInputHeight = (
-    e: NativeSyntheticEvent<TextInputContentSizeChangeEventData>,
-  ) => {
-    e.nativeEvent.contentSize.height &&
-      setHeight(e.nativeEvent.contentSize.height);
   };
 
   const onChangeText = (text: string) => setValue(formatValue(text));
@@ -66,10 +54,9 @@ export default function AmountTextField({
         label="금액"
         isFocused={isFocused}
         height={height}
+        setHeight={setHeight}
+        setIsFocused={setIsFocused}
         onChangeText={onChangeText}
-        handleBlur={handleBlur}
-        handleFocus={handleFocus}
-        handleInputHeight={handleInputHeight}
         handleClearInput={handleClearInput}
         handleKeyPress={handleKeyPress}
       />

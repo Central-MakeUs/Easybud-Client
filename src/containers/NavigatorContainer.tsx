@@ -7,7 +7,7 @@ const globalTheme = {
   colors: {
     ...DefaultTheme.colors,
     ...lightPalette,
-    background: theme.palette.white,
+    background: theme.palette.gray1,
   },
 };
 type NavigatorContainerProps = {children: ReactElement};

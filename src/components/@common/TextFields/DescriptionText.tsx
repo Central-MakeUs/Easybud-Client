@@ -7,6 +7,11 @@ import {
 } from 'utils/formatAmountValue';
 import Typography from 'components/@common/Typography';
 
+/**
+ * @param value AmountTextField의 value 값
+ * @param setValue AmountTextField의 value 값을 변경하는 함수
+ * @param defaultCurrentBalance 현재 대차 값
+ */
 type DescriptionTextProps = {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;

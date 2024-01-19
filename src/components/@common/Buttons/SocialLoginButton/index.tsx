@@ -6,13 +6,16 @@ import {
 } from 'react-native';
 import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
-import {LogoIcons} from 'types/icon';
+import {
+  SocialLoginButtonLabel,
+  SocialLoginButtonStyles,
+} from 'constants/Button';
 
 /**
  * @param variant 버튼 종류: 'kakao' | 'apple'
  */
 type SocialLoginButtonProps = {
-  variant: SocialLogin;
+  variant: 'kakao' | 'apple';
 } & TouchableOpacityProps;
 
 export default function SocialLoginButton({
@@ -20,27 +23,14 @@ export default function SocialLoginButton({
   ...props
 }: SocialLoginButtonProps) {
   const {logo, text, size} = SocialLoginButtonLabel[variant];
+  const {color, ...styles} = SocialLoginButtonStyles[variant];
 
   return (
     <TouchableOpacity
       {...props}
-      style={[
-        socialLoginButtonStyles.button,
-        socialLoginButtonStyles[variant],
-      ]}>
-      <Icon
-        name={logo}
-        size={size}
-        style={[
-          socialLoginButtonStyles.logo,
-          socialLoginButtonStyles[`${variant}Icon`],
-        ]}
-      />
-      <Typography
-        style={[
-          socialLoginButtonStyles.text,
-          {color: socialLoginButtonStyles[variant].color},
-        ]}>
+      style={[socialLoginButtonStyles.button, styles]}>
+      <Icon name={logo} size={size} style={[socialLoginButtonStyles.logo]} />
+      <Typography style={[socialLoginButtonStyles.text, {color}]}>
         {text}
       </Typography>
       <View style={{width: 56}} />
@@ -57,35 +47,6 @@ const socialLoginButtonStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  apple: {
-    borderWidth: 1,
-    borderColor: '#000000',
-    backgroundColor: '#FFFFFF',
-    color: '#000000',
-  },
-  kakao: {
-    backgroundColor: '#FEE500',
-    color: 'rgba(0, 0, 0, 0.85)',
-  },
   logo: {},
-  appleIcon: {},
-  kakaoIcon: {margin: 12}, // 28-16
   text: {textAlign: 'center'},
 });
-
-type SocialLogin = 'kakao' | 'apple';
-
-const SocialLoginButtonLabel: {
-  [key in SocialLogin]: {logo: LogoIcons; text: string; size: number};
-} = {
-  kakao: {
-    logo: 'KakaoLogo',
-    text: '카카오 로그인',
-    size: 32,
-  },
-  apple: {
-    logo: 'AppleLogo',
-    text: 'Apple로 로그인',
-    size: 56,
-  },
-};
