@@ -4,6 +4,13 @@ import BottomSheet from 'components/@common/BottomSheet';
 import TextArea from 'components/@common/TextArea';
 import Button from 'components/@common/Buttons/Button';
 
+/**
+ * @param isBottomSheetOpen bottomSheet의 open 여부
+ * @param setIsBottomSheetOpen bottomSheet의 open 여부를 set하는 함수
+ * @param keyNoteInputText keyNote input에 들어갈 텍스트
+ * @param setKeyNoteText keyNote 컴포넌트에 들어갈 텍스트를 set하는 함수
+ * @param setKeyNoteInputText keyNote input에 들어갈 텍스트를 set하는 함수
+ */
 type KeyNoteBottmSheetProps = {
   isBottomSheetOpen: boolean;
   setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
