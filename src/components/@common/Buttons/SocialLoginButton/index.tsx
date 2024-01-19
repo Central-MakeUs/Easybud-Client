@@ -8,17 +8,17 @@ import {
 import kakaoLogo from 'assets/images/kakao.png';
 import Typography from 'components/@common/Typography';
 
-const BUTTON_TEXT = {
+const ButtonText = {
   kakao: '카카오 로그인',
   apple: 'Apple로 로그인',
 };
 
-const TEXT_COLOR = {
+const TextColor = {
   kakao: 'rgba(0, 0, 0, 0.85)',
   apple: '#000000',
 };
 
-const BACKGROUND_COLOR = {
+const BackgroundColor = {
   kakao: '#FEE500',
   apple: '#FFFFFF',
 };
@@ -35,8 +35,8 @@ export default function SocialLoginButton({
   ...props
 }: SocialLoginButtonProps) {
   const {backgroundColor, textColor, borderColor, borderWidth} = {
-    backgroundColor: BACKGROUND_COLOR[variant],
-    textColor: TEXT_COLOR[variant],
+    backgroundColor: BackgroundColor[variant],
+    textColor: TextColor[variant],
     borderColor: variant === 'apple' ? '#000000' : 'transparent',
     borderWidth: variant === 'apple' ? 1 : 0,
   };
@@ -61,7 +61,7 @@ export default function SocialLoginButton({
         <Image source={kakaoLogo} style={socialLoginButtonStyles.kakaoImage} />
       )}
       <Typography style={[{color: textColor}, socialLoginButtonStyles.text]}>
-        {BUTTON_TEXT[variant]}
+        {ButtonText[variant]}
       </Typography>
     </TouchableOpacity>
   );
