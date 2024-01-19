@@ -10,7 +10,7 @@ import Typography from 'components/@common/Typography';
 
 /**
  * @param categoryName 카테고리명
- * @param setInputState input 상태를 set하는 함수
+ * @param setInputState input 상태를 변경하는 함수
  */
 type CategoryListItemProps = {
   categoryName: CategoryType;

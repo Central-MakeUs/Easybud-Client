@@ -5,7 +5,7 @@ import CategoryListItem from 'components/@common/SelectForm/CategoryListItem';
 
 /**
  * @param categoryList 카테고리 목록 배열
- * @param setInputState input 상태를 set하는 함수
+ * @param setInputState input 상태를 변경하는 함수
  */
 export default function CategoryList({
   categoryList,
