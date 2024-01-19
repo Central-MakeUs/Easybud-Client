@@ -1,5 +1,5 @@
 import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
-import RootStackNavigator from 'navigators/StackNavigator';
+import {ReactElement} from 'react';
 import {lightPalette, theme} from 'styles';
 
 const globalTheme = {
@@ -10,12 +10,11 @@ const globalTheme = {
     background: theme.palette.gray1,
   },
 };
+type NavigatorContainerProps = {children: ReactElement};
 
-const NavigatorContainer = () => {
+const NavigatorContainer = ({children}: NavigatorContainerProps) => {
   return (
-    <NavigationContainer theme={globalTheme}>
-      <RootStackNavigator />
-    </NavigationContainer>
+    <NavigationContainer theme={globalTheme}>{children}</NavigationContainer>
   );
 };
 

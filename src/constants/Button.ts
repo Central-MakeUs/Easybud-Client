@@ -1,4 +1,8 @@
+import {StyleSheet} from 'react-native';
 import {theme} from 'styles';
+import {LogoIcons} from 'types/icon';
+
+/** button */
 
 export const ButtonTextColor = {
   normal: {
@@ -22,17 +26,32 @@ export const ButtonBackgroundColor = {
   },
 } as const;
 
-export const SocialLoginButtonText = {
-  kakao: '카카오 로그인',
-  apple: 'Apple로 로그인',
-} as const;
+/** social login button */
 
-export const SocialLoginButtonTextColor = {
-  kakao: 'rgba(0, 0, 0, 0.85)',
-  apple: '#000000',
-} as const;
+export const SocialLoginButtonStyles = StyleSheet.create({
+  apple: {
+    backgroundColor: '#FFFFFF',
+    color: '#000000',
+    borderWidth: 1,
+    borderColor: '#000000',
+  },
+  kakao: {
+    backgroundColor: '#FEE500',
+    color: 'rgba(0, 0, 0, 0.85)',
+  },
+  appleIcon: {width: 56},
+  kakaoIcon: {margin: 14, width: 28},
+});
 
-export const SocialLoginButtonBackgroundColor = {
-  kakao: '#FEE500',
-  apple: '#FFFFFF',
+export const SocialLoginButtonLabel: {
+  [key in 'kakao' | 'apple']: {logo: LogoIcons; text: string};
+} = {
+  kakao: {
+    logo: 'KakaoLogo',
+    text: '카카오 로그인',
+  },
+  apple: {
+    logo: 'AppleLogo',
+    text: 'Apple로 로그인',
+  },
 } as const;

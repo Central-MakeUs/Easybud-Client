@@ -1,7 +1,7 @@
-import SocialLoginButton from 'components/@common/Buttons/SocialLoginButton';
+import {StyleSheet, View} from 'react-native';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import {StyleSheet, View} from 'react-native';
+import SocialLoginButton from 'components/@common/buttons/SocialLoginButton';
 
 export default function LoginStepScreen() {
   return (
@@ -13,7 +13,7 @@ export default function LoginStepScreen() {
       </View>
       <View style={loginStyles.bodyContainer}>
         <Typography type={'Body2Semibold'} color={'gray4'}>
-          1분만에
+          1분만에{' '}
         </Typography>
         <Typography type={'Body2Regular'} color={'gray4'}>
           빠른 회원가입

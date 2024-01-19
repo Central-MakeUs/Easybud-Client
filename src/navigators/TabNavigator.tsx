@@ -3,13 +3,12 @@ import {
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {theme} from 'styles';
-import {TabBarLabel} from 'navigators/constants/label';
-import {TabRouteProps, TabParamList} from 'navigators/types';
-import AccountScreen from 'screens/AccountScreen';
-import LedgerScreen from 'screens/LedgerScreen';
-import SettingScreen from 'screens/SettingScreen';
-import TransactionScreen from 'screens/TransactionScreen';
-import AddTransactionButton from 'navigators/components/AddTransactionButton';
+import {TabRouteProp, TabParamList} from 'navigators/types';
+import AccountScreen from 'screens/Tab/AccountScreen';
+import LedgerScreen from 'screens/Tab/LedgerScreen';
+import SettingScreen from 'screens/Tab/SettingScreen';
+import TransactionScreen from 'screens/Tab/TransactionScreen';
+import CreateTransactionButton from 'navigators/components/CreateTransactionButton';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import TabBarIcon from 'navigators/components/TabBarIcon';
 import NullScreen from 'navigators/components/NullScreen';
@@ -25,44 +24,44 @@ export default function TabNavigator() {
       <Tab.Screen
         name={'Ledger'}
         component={LedgerScreen}
-        options={{tabBarLabel: TabBarLabel.Ledger}}
+        options={{tabBarLabel: '장부'}}
       />
       <Tab.Screen
         name={'Transaction'}
         component={TransactionScreen}
-        options={{tabBarLabel: TabBarLabel.Transaction}}
+        options={{tabBarLabel: '거래'}}
       />
       <Tab.Screen
-        name={'NavigateAddTransaction'}
+        name={'NavigateCreateTransaction'}
         component={NullScreen}
-        options={{tabBarLabel: TabBarLabel.AddTransaction}}
+        options={{tabBarLabel: ''}}
       />
       <Tab.Screen
         name={'Account'}
         component={AccountScreen}
-        options={{tabBarLabel: TabBarLabel.Account}}
+        options={{tabBarLabel: '계정'}}
       />
       <Tab.Screen
         name={'Setting'}
         component={SettingScreen}
-        options={{tabBarLabel: TabBarLabel.Setting}}
+        options={{tabBarLabel: '설정'}}
       />
     </Tab.Navigator>
   );
 }
 
 const screenOptions: (props: {
-  route: TabRouteProps;
+  route: TabRouteProp;
   bottomSize: number;
 }) => BottomTabNavigationOptions = ({route, bottomSize}) => ({
   tabBarIcon:
-    route.name === 'NavigateAddTransaction'
-      ? AddTransactionButton
+    route.name === 'NavigateCreateTransaction'
+      ? CreateTransactionButton
       : ({focused}: {focused: boolean}) => (
           <TabBarIcon routeName={route.name} focused={focused} />
         ),
   tabBarIconStyle: {
-    marginTop: route.name === 'NavigateAddTransaction' ? 18 : 4,
+    marginTop: route.name === 'NavigateCreateTransaction' ? 18 : 4,
   },
   tabBarActiveTintColor: theme.palette.primary,
   tabBarInactiveTintColor: theme.palette.gray4,

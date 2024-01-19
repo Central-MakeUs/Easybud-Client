@@ -1,11 +1,11 @@
-import {TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {
   useQueryClient,
   useQueryErrorResetBoundary,
 } from '@tanstack/react-query';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import useNavigator from 'navigators/hooks/useNavigator';
+import {TouchableOpacity} from 'react-native';
 
 type FallbackErrorScreenProps = {
   error: Error;
@@ -18,7 +18,7 @@ export default function FallbackErrorScreen({
 }: FallbackErrorScreenProps) {
   const queryClient = useQueryClient();
   const {reset} = useQueryErrorResetBoundary();
-  const {stackNavigation} = useNavigator();
+  const navigation = useNavigation();
 
   const resetErrorState = () => {
     queryClient.clear();
@@ -28,8 +28,7 @@ export default function FallbackErrorScreen({
 
   const handlePressButton = () => {
     resetErrorState();
-
-    stackNavigation.navigate('TabNavigator');
+    navigation.navigate('Tab');
   };
 
   return (
@@ -37,7 +36,7 @@ export default function FallbackErrorScreen({
       <Typography>문제가 발생했습니다</Typography>
       <Typography>{error.message}</Typography>
       <TouchableOpacity onPress={handlePressButton}>
-        홈으로 돌아가기
+        <Typography>홈으로 돌아가기</Typography>
       </TouchableOpacity>
     </ScreenContainer>
   );

@@ -1,35 +1,60 @@
 import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
-import {StackScreenProps} from '@react-navigation/stack';
+import {
+  NativeStackNavigationProp,
+  NativeStackScreenProps,
+} from '@react-navigation/native-stack';
+import {NewTransaction} from 'types/transaction';
 
 /** param list */
 
 export type RootStackParamList = {
-  TabNavigator?: NavigatorScreenParams<TabParamList>;
+  Tab?: NavigatorScreenParams<TabParamList>;
   OnBoarding: undefined;
-  AddTransaction: undefined;
+  CreateTransactionStack: NavigatorScreenParams<CreateTransactionStackParamList>;
 };
 
 export type TabParamList = {
   Ledger: undefined;
   Transaction: undefined;
-  NavigateAddTransaction: undefined;
+  NavigateCreateTransaction: undefined;
   Account: undefined;
   Setting: undefined;
 };
 
-/** screen list */
+type Params = {transaction: NewTransaction; prevScreen?: string} | undefined;
+export type CreateTransactionStackParamList = {
+  BasicTransactionInfo: Params;
+  DebitCreditDecider: Params;
+  AccountType: Params;
+  AccountAmount: Params;
+  TransactionConfirmation: Params;
+};
+
+/** screen name */
 
 export type TabScreenName = keyof TabParamList;
-export type RootStackScreenName = keyof RootStackParamList;
+type RootStackScreenName = keyof RootStackParamList;
+type CreateTransactionStackScreenName = keyof CreateTransactionStackParamList;
 
 /** route props */
 
-export type TabRouteProps = RouteProp<TabParamList, TabScreenName>;
+export type TabRouteProp = RouteProp<TabParamList, TabScreenName>;
+export type CreateTransactionStackRouteProp<
+  T extends CreateTransactionStackScreenName,
+> = RouteProp<CreateTransactionStackParamList, T>;
+
+/** navigation props */
+
+export type RootStackNavigationProp =
+  NativeStackNavigationProp<RootStackParamList>;
+
+export type CreateTransactionStackNavigationProp =
+  NativeStackNavigationProp<CreateTransactionStackParamList>;
 
 /** screen props - unused*/
 
-export type MainStackScreenProps<T extends RootStackScreenName> =
-  StackScreenProps<RootStackParamList, T>;
+export type RootStackScreenProp<T extends RootStackScreenName> =
+  NativeStackScreenProps<RootStackParamList, T>;
 
 /** navigation에 type 지정 */
 declare global {

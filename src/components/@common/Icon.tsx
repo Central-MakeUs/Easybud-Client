@@ -2,6 +2,7 @@ import {SvgProps} from 'react-native-svg';
 import {theme} from 'styles';
 import {KeyOfPalette} from 'styles/types';
 import * as Icons from 'assets/icons';
+import {KeyOfIcons} from 'types/icon';
 
 /**
  * @param name 아이콘명
@@ -10,8 +11,8 @@ import * as Icons from 'assets/icons';
  * @param style 추가적인 style 속성
  */
 type IconProps = SvgProps & {
-  name: keyof typeof Icons;
-  size?: number;
+  name: KeyOfIcons;
+  size?: number | undefined;
   fill?: KeyOfPalette;
   style?: React.CSSProperties | Array<React.CSSProperties>;
 };
