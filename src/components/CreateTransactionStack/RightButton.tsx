@@ -1,15 +1,36 @@
+import {useNavigation} from '@react-navigation/native';
 import Button from 'components/@common/buttons/Button';
+import {
+  CreateTransactionStackNavigationProp,
+  CreateTransactionStackScreenName,
+} from 'navigators/types';
 import React from 'react';
 import {TouchableOpacityProps} from 'react-native';
+import {NewTransaction} from 'types/transaction';
 
 type RightButtonProps = {
-  label?: '다음' | '저장' | '수정';
-  onPress: () => void;
+  isUpdateStep: boolean | undefined;
+  transaction: NewTransaction;
+  nextScreen: Exclude<CreateTransactionStackScreenName, 'BasicTransactionInfo'>;
 } & TouchableOpacityProps;
 
 export default function RightButton({
-  label = '다음',
-  onPress,
+  isUpdateStep = false,
+  transaction,
+  nextScreen,
+  ...props
 }: RightButtonProps) {
-  return <Button onPress={onPress}>{label}</Button>;
+  const navigation = useNavigation<CreateTransactionStackNavigationProp>();
+
+  const onPress = () => {
+    const screen = isUpdateStep ? 'TransactionConfirmation' : nextScreen;
+
+    navigation.navigate(screen, {transaction});
+  };
+
+  return (
+    <Button {...props} onPress={onPress}>
+      {isUpdateStep ? '수정' : '다음'}
+    </Button>
+  );
 }

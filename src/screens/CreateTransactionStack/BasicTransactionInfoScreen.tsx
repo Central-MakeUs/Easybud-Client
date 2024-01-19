@@ -1,31 +1,56 @@
-import {useNavigation} from '@react-navigation/native';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import RightButton from 'components/CreateTransactionStack/RightButton';
+import {CreateTransactionStackRouteProp} from 'navigators/types';
+import {useMemo, useState} from 'react';
+import {NewTransaction} from 'types/transaction';
 
-export default function BasicTransactionInfoScreen() {
-  const navigation = useNavigation();
+const initialTransaction: NewTransaction = {date: new Date(), accounts: []};
 
-  const handlePressNextButton = () => {
-    navigation.navigate('CreateTransactionStack', {
-      screen: 'DebitCreditDecider',
-    });
-  };
+type BasicTransactionInfoScreenProps = {
+  route: CreateTransactionStackRouteProp<'BasicTransactionInfo'>;
+};
 
-  const handlePressPrevButton = () => {
-    navigation.goBack();
-  };
+/** 거래 추가 Step 1 */
+export default function BasicTransactionInfoScreen({
+  route: {params},
+}: BasicTransactionInfoScreenProps) {
+  const [transaction, setTransaction] = useState<NewTransaction>(
+    params?.isUpdateStep ? params.transaction : initialTransaction,
+  );
+  setTransaction;
+
+  const disabledRightButton = useMemo(() => {
+    if (params?.isUpdateStep) {
+      const {transaction: prevTransaction} = params;
+
+      return (
+        prevTransaction.summary === transaction.summary ||
+        prevTransaction.date === transaction.date
+      );
+    }
+
+    return false;
+  }, [params, transaction.date, transaction.summary]);
 
   return (
     <ScreenContainer
       fixedBottomComponent={
         <>
-          <LeftButton onPress={handlePressPrevButton} />
-          <RightButton onPress={handlePressNextButton} />
+          {params?.isUpdateStep ? (
+            <LeftButton isUpdateStep transaction={params.transaction} />
+          ) : null}
+          <RightButton
+            nextScreen="DebitCreditDecider"
+            transaction={transaction}
+            isUpdateStep={params?.isUpdateStep}
+            disabled={disabledRightButton}
+          />
         </>
       }>
-      <Typography>BasicTransactionInfoScreen</Typography>
+      <Typography>date: {transaction.date.toDateString()}</Typography>
+      <Typography>summary: {transaction.summary}</Typography>
     </ScreenContainer>
   );
 }

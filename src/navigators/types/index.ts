@@ -21,20 +21,36 @@ export type TabParamList = {
   Setting: undefined;
 };
 
-type Params = {transaction: NewTransaction; prevScreen?: string} | undefined;
+type Props = Update | Create;
+
+// only navigate this screen
+type Update = {
+  transaction: NewTransaction;
+  isUpdateStep: true;
+  accountIndex?: number;
+};
+
+// navigate step by step
+type Create = {
+  transaction: NewTransaction;
+  isUpdateStep?: false | undefined;
+  accountIndex?: never; // account length
+};
+
 export type CreateTransactionStackParamList = {
-  BasicTransactionInfo: Params;
-  DebitCreditDecider: Params;
-  AccountType: Params;
-  AccountAmount: Params;
-  TransactionConfirmation: Params;
+  BasicTransactionInfo: Update | undefined;
+  DebitCreditDecider: Props;
+  AccountType: Props;
+  AccountAmount: Props;
+  TransactionConfirmation: Props;
 };
 
 /** screen name */
 
 export type TabScreenName = keyof TabParamList;
 type RootStackScreenName = keyof RootStackParamList;
-type CreateTransactionStackScreenName = keyof CreateTransactionStackParamList;
+export type CreateTransactionStackScreenName =
+  keyof CreateTransactionStackParamList;
 
 /** route props */
 

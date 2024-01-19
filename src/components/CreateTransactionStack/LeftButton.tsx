@@ -1,15 +1,30 @@
+import {useNavigation} from '@react-navigation/native';
 import Button from 'components/@common/buttons/Button';
+import {CreateTransactionStackNavigationProp} from 'navigators/types';
 import React from 'react';
+import {TouchableOpacityProps} from 'react-native';
+import {NewTransaction} from 'types/transaction';
 
 type LeftButtonProps = {
-  label?: '이전';
-  onPress: () => void;
-};
+  isUpdateStep: boolean | undefined;
+  transaction: NewTransaction;
+} & TouchableOpacityProps;
 
-export default function LeftButton({label = '이전', onPress}: LeftButtonProps) {
+export default function LeftButton({
+  isUpdateStep,
+  transaction,
+  ...props
+}: LeftButtonProps) {
+  const navigation = useNavigation<CreateTransactionStackNavigationProp>();
+
+  const onPress = () => {
+    isUpdateStep
+      ? navigation.navigate('TransactionConfirmation', {transaction})
+      : navigation.goBack();
+  };
   return (
-    <Button variant="secondary" onPress={onPress}>
-      {label}
+    <Button {...props} variant="secondary" onPress={onPress}>
+      이전
     </Button>
   );
 }
