@@ -3,10 +3,14 @@ import {StyleSheet, TextInput} from 'react-native';
 import {theme} from 'styles';
 
 type TextAreaProps = {
+  placeholder?: string;
   setText: Dispatch<SetStateAction<string>>;
 };
 
-export default function TextArea({setText}: TextAreaProps) {
+export default function TextArea({
+  placeholder = '적요를 작성하세요',
+  setText,
+}: TextAreaProps) {
   const [isFocused, setIsFocused] = useState<boolean>(false);
 
   const handleFocus = () => setIsFocused(true);
@@ -19,7 +23,7 @@ export default function TextArea({setText}: TextAreaProps) {
       onFocus={handleFocus}
       onBlur={handleBlur}
       underlineColorAndroid="transparent"
-      placeholder="적요를 작성하세요"
+      placeholder={placeholder}
       placeholderTextColor={theme.palette.gray4}
       style={[
         textAreaStyles.container,

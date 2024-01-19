@@ -1,11 +1,15 @@
 import {Dispatch, ReactNode, SetStateAction, useEffect, useRef} from 'react';
 import {StyleSheet} from 'react-native';
+import {SetterOrUpdater} from 'recoil';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {theme} from 'styles';
 
 type BottomSheetProps = {
   isBottomSheetOpen: boolean;
-  setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
+  setIsBottomSheetOpen:
+    | Dispatch<SetStateAction<boolean>>
+    | SetterOrUpdater<unknown>;
+  setInputState?: Dispatch<SetStateAction<boolean>>;
   height?: number;
   children: ReactNode;
 };
@@ -13,6 +17,7 @@ type BottomSheetProps = {
 export default function BottomSheet({
   isBottomSheetOpen,
   setIsBottomSheetOpen,
+  setInputState,
   height,
   children,
 }: BottomSheetProps) {
@@ -30,6 +35,7 @@ export default function BottomSheet({
 
   const handleCloseBottomSheet = () => {
     setIsBottomSheetOpen(false);
+    setInputState?.(false);
   };
 
   return (
@@ -48,7 +54,6 @@ export default function BottomSheet({
 const bottomSheetStyles = StyleSheet.create({
   container: {
     justifyContent: 'center',
-    padding: 15,
     borderTopStartRadius: 20,
     borderTopEndRadius: 20,
     backgroundColor: theme.palette.gray2,

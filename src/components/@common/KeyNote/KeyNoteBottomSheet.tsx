@@ -1,7 +1,7 @@
 import {Dispatch, SetStateAction} from 'react';
 import {View, StyleSheet} from 'react-native';
 import BottomSheet from 'components/@common/BottomSheet';
-import TextArea from 'components/@common/KeyNote/TextArea';
+import TextArea from 'components/@common/TextArea';
 import Button from 'components/@common/Buttons/Button';
 
 type KeyNoteBottmSheetProps = {
