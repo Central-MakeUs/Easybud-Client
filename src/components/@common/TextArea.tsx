@@ -2,6 +2,10 @@ import {Dispatch, SetStateAction, useState} from 'react';
 import {StyleSheet, TextInput} from 'react-native';
 import {theme} from 'styles';
 
+/**
+ * @param placeholder placeholder 텍스트
+ * @param setText text를 변경하는 함수
+ */
 type TextAreaProps = {
   placeholder?: string;
   setText: Dispatch<SetStateAction<string>>;
