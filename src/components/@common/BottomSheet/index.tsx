@@ -8,7 +8,7 @@ type BottomSheetProps = {
   isBottomSheetOpen: boolean;
   setIsBottomSheetOpen:
     | Dispatch<SetStateAction<boolean>>
-    | SetterOrUpdater<unknown>;
+    | SetterOrUpdater<boolean>;
   setInputState?: Dispatch<SetStateAction<boolean>>;
   height?: number;
   children: ReactNode;
