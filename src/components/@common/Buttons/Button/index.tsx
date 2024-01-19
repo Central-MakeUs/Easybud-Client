@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import {theme} from 'styles';
 
-const TEXT_COLOR = {
+const TextColor = {
   normal: {
     primary: 'white',
     secondary: 'gray5',
@@ -17,14 +17,14 @@ const TEXT_COLOR = {
   },
 } as const;
 
-const BACKGROUND_COLOR = {
+const BackgroundColor = {
   normal: {
-    primary: 'primary',
-    secondary: 'gray2',
+    primary: theme.palette.primary,
+    secondary: theme.palette.gray2,
   },
   disabled: {
-    primary: 'gray3',
-    secondary: 'gray2',
+    primary: theme.palette.gray3,
+    secondary: theme.palette.gray2,
   },
 } as const;
 
@@ -42,25 +42,22 @@ type ButtonProps = {
 export default function Button({
   variant = 'primary',
   fullWidth = true,
+  disabled,
   children,
   ...props
 }: ButtonProps) {
-  const activeVariant = props.disabled ? 'disabled' : 'normal';
+  const activeVariant = disabled ? 'disabled' : 'normal';
 
   const {backgroundColor, textColor, width} = {
-    backgroundColor: theme.palette[BACKGROUND_COLOR[activeVariant][variant]],
-    textColor: TEXT_COLOR[activeVariant][variant],
+    backgroundColor: BackgroundColor[activeVariant][variant],
+    textColor: TextColor[activeVariant][variant],
     width: fullWidth ? '100%' : '50%',
   };
 
   return (
     <TouchableOpacity
       {...props}
-      style={{
-        ...buttonStyles.button,
-        backgroundColor,
-        width,
-      }}>
+      style={[buttonStyles.button, {backgroundColor, width}]}>
       <Typography type={'Body1Semibold'} color={textColor}>
         {children}
       </Typography>
