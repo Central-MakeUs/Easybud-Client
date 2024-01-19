@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {AddCategoryText, CategoryName} from 'constants/SelectForm';
 import {categoryState} from 'libs/recoil/states/category';
-import {CategoryType} from 'libs/recoil/types/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import {addItemToCategoryList} from 'utils/addItemToCategoryList';
 import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
@@ -16,6 +15,11 @@ const dummyCategories = [
   '기타유동자산',
 ];
 
+/**
+ * @param label label 텍스트
+ * @param placeholder placeholder 텍스트
+ * @param variant SelectForm 종류를 나타냄 'primary' | 'gray'
+ */
 type SelectFormProps = {
   label: string;
   placeholder?: string;
@@ -27,9 +31,9 @@ export default function SelectForm({
   placeholder,
   variant = 'gray',
 }: SelectFormProps) {
-  const setIsBottomSheetOpen = useSetRecoilState(selectFormBottomSheetState);
-  const [categoryList, setCategoryList] = useState<CategoryType[]>([]);
+  const [categoryList, setCategoryList] = useState<string[]>([]);
   const selectedCategory = useRecoilValue(categoryState);
+  const setIsBottomSheetOpen = useSetRecoilState(selectFormBottomSheetState);
 
   useEffect(() => {
     if (label !== CategoryName.primary && label !== CategoryName.secondary) {

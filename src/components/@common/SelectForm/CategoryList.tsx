@@ -1,6 +1,5 @@
 import {Dispatch, SetStateAction} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
-import {CategoryType} from 'libs/recoil/types/category';
 import CategoryListItem from 'components/@common/SelectForm/CategoryListItem';
 
 /**
@@ -11,7 +10,7 @@ export default function CategoryList({
   categoryList,
   setInputState,
 }: {
-  categoryList: CategoryType[];
+  categoryList: string[];
   setInputState: Dispatch<SetStateAction<boolean>>;
 }) {
   return (

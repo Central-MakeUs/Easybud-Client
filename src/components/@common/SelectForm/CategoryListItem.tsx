@@ -3,7 +3,6 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
 import {AddCategoryText} from 'constants/SelectForm';
-import {CategoryType} from 'libs/recoil/types/category';
 import {categoryState} from 'libs/recoil/states/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import Typography from 'components/@common/Typography';
@@ -13,7 +12,7 @@ import Typography from 'components/@common/Typography';
  * @param setInputState input 상태를 변경하는 함수
  */
 type CategoryListItemProps = {
-  categoryName: CategoryType;
+  categoryName: string;
   setInputState: Dispatch<SetStateAction<boolean>>;
 };
 
