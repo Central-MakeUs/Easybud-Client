@@ -1,32 +1,10 @@
-import Typography from 'components/@common/Typography';
 import {
   StyleSheet,
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
-import {theme} from 'styles';
-
-const TextColor = {
-  normal: {
-    primary: 'white',
-    secondary: 'gray5',
-  },
-  disabled: {
-    primary: 'white',
-    secondary: 'gray5',
-  },
-} as const;
-
-const BackgroundColor = {
-  normal: {
-    primary: theme.palette.primary,
-    secondary: theme.palette.gray2,
-  },
-  disabled: {
-    primary: theme.palette.gray3,
-    secondary: theme.palette.gray2,
-  },
-} as const;
+import {ButtonBackgroundColor, ButtonTextColor} from 'constants/Button';
+import Typography from 'components/@common/Typography';
 
 /**
  * @param variant 버튼 종류: 'primary' | 'secondary'
@@ -49,8 +27,8 @@ export default function Button({
   const activeVariant = disabled ? 'disabled' : 'normal';
 
   const {backgroundColor, textColor, width} = {
-    backgroundColor: BackgroundColor[activeVariant][variant],
-    textColor: TextColor[activeVariant][variant],
+    backgroundColor: ButtonBackgroundColor[activeVariant][variant],
+    textColor: ButtonTextColor[activeVariant][variant],
     width: fullWidth ? '100%' : '50%',
   };
 
