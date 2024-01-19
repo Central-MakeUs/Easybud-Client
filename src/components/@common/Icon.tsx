@@ -3,6 +3,12 @@ import {theme} from 'styles';
 import {KeyOfPalette} from 'styles/types';
 import * as Icons from 'assets/icons';
 
+/**
+ * @param name 아이콘명
+ * @param size 아이콘 크기
+ * @param fill 아이콘 색
+ * @param style 추가적인 style 속성
+ */
 type IconProps = SvgProps & {
   name: keyof typeof Icons;
   size?: number;

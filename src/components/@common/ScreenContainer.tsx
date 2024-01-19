@@ -12,6 +12,11 @@ import {
 } from 'react-native';
 import {theme} from 'styles';
 
+/**
+ * @param children 자식 요소
+ * @param loading 로딩 여부
+ * @param style 추가적인 style 속성
+ */
 type ScreenContainerProps = {
   children: ReactNode;
   loading?: boolean;

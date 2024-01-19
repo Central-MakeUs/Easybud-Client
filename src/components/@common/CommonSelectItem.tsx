@@ -4,6 +4,14 @@ import {theme} from 'styles';
 import Typography from 'components/@common/Typography';
 import {ThemeVariants} from 'constants/CommonSelectItem';
 
+/**
+ * @param label label 텍스트
+ * @param variant SelectItem의 종류를 나타냄 'primary' | 'gray'
+ * @param handlePressSelectItem SelectItem을 눌렀을 때 동작하는 함수
+ * @param value SelectItem value
+ * @param placeholder SelectItem placeholder 텍스트
+ * @param bottomSheet SelectItem을 눌렀을 때 나타나는 bottomSheet
+ */
 type CommonSelectButtonProps = {
   label: string;
   variant: 'primary' | 'gray';

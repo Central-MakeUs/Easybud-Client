@@ -1,20 +1,23 @@
 import {Dispatch, SetStateAction} from 'react';
 import {FlatList, StyleSheet} from 'react-native';
-import {CategoryType} from 'libs/recoil/types/category';
 import CategoryListItem from 'components/@common/SelectForm/CategoryListItem';
 
+/**
+ * @param categoryList 카테고리 목록 배열
+ * @param setInputState input 상태를 변경하는 함수
+ */
 export default function CategoryList({
   categoryList,
   setInputState,
 }: {
-  categoryList: CategoryType[];
+  categoryList: string[];
   setInputState: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
     <FlatList
       data={categoryList}
       renderItem={({item}) => (
-        <CategoryListItem data={item} setInputState={setInputState} />
+        <CategoryListItem categoryName={item} setInputState={setInputState} />
       )}
       style={selectFormStyles.bottomSheetDataListContainer}
     />

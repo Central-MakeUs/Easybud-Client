@@ -1,11 +1,10 @@
 import {useState} from 'react';
-import {
-  TextInputProps,
-  NativeSyntheticEvent,
-  TextInputContentSizeChangeEventData,
-} from 'react-native';
+import {TextInputProps} from 'react-native';
 import CommonTextField from 'components/@common/TextFields/CommonTextField';
 
+/**
+ * @param label label 텍스트, 텍스트 필드에 값이 있다면 상단에 보여주는 텍스트
+ */
 type TextFieldProps = {label?: string} & TextInputProps;
 
 export default function TextField({
@@ -24,28 +23,16 @@ export default function TextField({
     setHeight(0);
   };
 
-  const handleFocus = () => setIsFocused(true);
-
-  const handleBlur = () => setIsFocused(false);
-
-  const handleInputHeight = (
-    e: NativeSyntheticEvent<TextInputContentSizeChangeEventData>,
-  ) => {
-    e.nativeEvent.contentSize.height &&
-      setHeight(e.nativeEvent.contentSize.height);
-  };
-
   return (
     <CommonTextField
       value={value}
       isFocused={isFocused}
       height={height}
+      setHeight={setHeight}
       label={label}
       placeholder={placeholder}
+      setIsFocused={setIsFocused}
       onChangeText={onChangeText}
-      handleBlur={handleBlur}
-      handleFocus={handleFocus}
-      handleInputHeight={handleInputHeight}
       handleClearInput={handleClearInput}
     />
   );
