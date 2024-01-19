@@ -24,9 +24,11 @@ export default function BottomSheet({
   const bottomSheetRef = useRef<RBSheet>(null);
 
   useEffect(() => {
-    isBottomSheetOpen
-      ? bottomSheetRef.current!.open()
-      : bottomSheetRef.current!.close();
+    if (bottomSheetRef.current) {
+      isBottomSheetOpen
+        ? bottomSheetRef.current.open()
+        : bottomSheetRef.current.close();
+    }
   }, [isBottomSheetOpen]);
 
   const handleOpenBottomSheet = () => {
