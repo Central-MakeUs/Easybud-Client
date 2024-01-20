@@ -2,18 +2,19 @@ import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
-import {CreateTransactionStackRouteProp} from 'navigators/types';
 import {useMemo, useState} from 'react';
 import {NewTransaction} from 'types/transaction';
+import {cloneDeep} from 'lodash';
 import {NewAccountUnion} from 'types/account';
+import {CreateTransactionStackRouteProp} from 'navigators/types';
 
-const initialAccount: NewAccountUnion = {
+export const initialAccount: NewAccountUnion = {
   type: {name: 'Asset', change: 'increase'},
   amount: 0,
   category: {primary: '', secondary: ''},
 };
 
-type DebitCreditDeciderScreenProps = {
+export type DebitCreditDeciderScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountType'>;
 };
 
@@ -23,15 +24,22 @@ export default function AccountTypeScreen({
 }: DebitCreditDeciderScreenProps) {
   const {transaction: prevTransaction, isUpdateStep, accountIndex} = params;
 
-  const [transaction, setTransaction] =
-    useState<NewTransaction>(prevTransaction);
-  setTransaction;
-
-  const account: NewAccountUnion = useMemo(
-    () =>
-      isUpdateStep ? prevTransaction.accounts[accountIndex] : initialAccount,
-    [accountIndex, isUpdateStep, prevTransaction.accounts],
+  const [account, setAccount] = useState<NewAccountUnion>(
+    isUpdateStep ? prevTransaction.accounts[accountIndex] : initialAccount,
   );
+  setAccount;
+
+  const transaction = useMemo<NewTransaction>(() => {
+    const accounts = cloneDeep(prevTransaction.accounts);
+
+    if (isUpdateStep) {
+      accounts[accountIndex] = account;
+    } else {
+      accounts.push(account);
+    }
+
+    return {...prevTransaction, accounts};
+  }, [account, accountIndex, isUpdateStep, prevTransaction]);
 
   const disabledRightButton = useMemo(() => {
     if (isUpdateStep) {
@@ -39,7 +47,7 @@ export default function AccountTypeScreen({
     }
 
     return false;
-  }, [account.type, accountIndex, isUpdateStep, prevTransaction.accounts]);
+  }, [account, accountIndex, isUpdateStep, prevTransaction.accounts]);
 
   return (
     <ScreenContainer
