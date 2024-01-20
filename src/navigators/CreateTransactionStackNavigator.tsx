@@ -1,4 +1,3 @@
-import {SafeAreaView, StatusBar, StyleSheet} from 'react-native';
 import {
   CardStyleInterpolators,
   StackNavigationOptions,
@@ -9,7 +8,6 @@ import AccountCategoryScreen from 'screens/CreateTransactionStack/AccountCategor
 import AccountTypeScreen from 'screens/CreateTransactionStack/AccountTypeScreen';
 import TransactionConfirmationScreen from 'screens/CreateTransactionStack/TransactionConfirmationScreen';
 import {CreateTransactionStackParamList} from 'navigators/types';
-import {theme} from 'styles';
 import BasicTransactionInfoScreen from 'screens/CreateTransactionStack/BasicTransactionInfoScreen';
 
 const Stack = createStackNavigator<CreateTransactionStackParamList>();
@@ -22,33 +20,23 @@ const screenOptions: StackNavigationOptions = {
 
 export default function CreateTransactionStackNavigator() {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <StatusBar />
-      <Stack.Navigator
-        initialRouteName={'BasicTransactionInfo'}
-        screenOptions={screenOptions}>
-        <Stack.Screen
-          name={'BasicTransactionInfo'}
-          component={BasicTransactionInfoScreen}
-        />
-        <Stack.Screen name={'AccountType'} component={AccountTypeScreen} />
-        <Stack.Screen
-          name={'AccountCategory'}
-          component={AccountCategoryScreen}
-        />
-        <Stack.Screen name={'AccountAmount'} component={AccountAmountScreen} />
-        <Stack.Screen
-          name={'TransactionConfirmation'}
-          component={TransactionConfirmationScreen}
-        />
-      </Stack.Navigator>
-    </SafeAreaView>
+    <Stack.Navigator
+      initialRouteName={'BasicTransactionInfo'}
+      screenOptions={screenOptions}>
+      <Stack.Screen
+        name={'BasicTransactionInfo'}
+        component={BasicTransactionInfoScreen}
+      />
+      <Stack.Screen name={'AccountType'} component={AccountTypeScreen} />
+      <Stack.Screen
+        name={'AccountCategory'}
+        component={AccountCategoryScreen}
+      />
+      <Stack.Screen name={'AccountAmount'} component={AccountAmountScreen} />
+      <Stack.Screen
+        name={'TransactionConfirmation'}
+        component={TransactionConfirmationScreen}
+      />
+    </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-    backgroundColor: theme.palette.gray1,
-  },
-});

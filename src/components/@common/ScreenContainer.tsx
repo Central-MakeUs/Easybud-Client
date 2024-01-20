@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: 10,
     margin: 20,
     borderRadius: 12,
     alignItems: 'center',
