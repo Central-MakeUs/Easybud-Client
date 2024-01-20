@@ -27,7 +27,7 @@ type Props = Update | Create;
 type Update = {
   transaction: NewTransaction;
   isUpdateStep: true;
-  accountIndex?: number;
+  accountIndex: number; // 0일 경우 Step 1 수정
 };
 
 // navigate step by step
