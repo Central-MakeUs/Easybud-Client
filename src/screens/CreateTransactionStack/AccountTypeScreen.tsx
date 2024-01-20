@@ -14,11 +14,11 @@ const initialAccount: NewAccountUnion = {
 };
 
 type DebitCreditDeciderScreenProps = {
-  route: CreateTransactionStackRouteProp<'DebitCreditDecider'>;
+  route: CreateTransactionStackRouteProp<'AccountType'>;
 };
 
 /** 거래 추가 Step 2 */
-export default function DebitCreditDeciderScreen({
+export default function AccountTypeScreen({
   route: {params},
 }: DebitCreditDeciderScreenProps) {
   const {transaction: prevTransaction, isUpdateStep, accountIndex} = params;

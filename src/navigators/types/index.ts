@@ -39,8 +39,8 @@ type Create = {
 
 export type CreateTransactionStackParamList = {
   BasicTransactionInfo: Update | undefined;
-  DebitCreditDecider: Props;
   AccountType: Props;
+  AccountCategory: Props;
   AccountAmount: Props;
   TransactionConfirmation: Props;
 };

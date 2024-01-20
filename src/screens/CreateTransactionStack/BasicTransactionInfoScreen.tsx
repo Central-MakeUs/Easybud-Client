@@ -42,7 +42,7 @@ export default function BasicTransactionInfoScreen({
             <LeftButton isUpdateStep transaction={params.transaction} />
           ) : null}
           <RightButton
-            nextScreen="DebitCreditDecider"
+            nextScreen="AccountType"
             transaction={transaction}
             isUpdateStep={params?.isUpdateStep}
             disabled={disabledRightButton}
