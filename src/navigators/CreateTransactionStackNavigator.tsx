@@ -5,7 +5,7 @@ import {
   createStackNavigator,
 } from '@react-navigation/stack';
 import AccountAmountScreen from 'screens/CreateTransactionStack/AccountAmountScreen';
-import AccountTypeScreen from 'screens/CreateTransactionStack/AccountTypeScreen';
+import AccountCategoryScreen from 'screens/CreateTransactionStack/AccountCategoryScreen';
 import DebitCreditDeciderScreen from 'screens/CreateTransactionStack/DebitCreditDeciderScreen';
 import TransactionConfirmationScreen from 'screens/CreateTransactionStack/TransactionConfirmationScreen';
 import {CreateTransactionStackParamList} from 'navigators/types';
@@ -35,7 +35,10 @@ export default function CreateTransactionStackNavigator() {
           name={'DebitCreditDecider'}
           component={DebitCreditDeciderScreen}
         />
-        <Stack.Screen name={'AccountType'} component={AccountTypeScreen} />
+        <Stack.Screen
+          name={'AccountCategory'}
+          component={AccountCategoryScreen}
+        />
         <Stack.Screen name={'AccountAmount'} component={AccountAmountScreen} />
         <Stack.Screen
           name={'TransactionConfirmation'}

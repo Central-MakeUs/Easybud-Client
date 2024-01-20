@@ -51,7 +51,7 @@ export default function DebitCreditDeciderScreen({
           />
           <RightButton
             disabled={disabledRightButton}
-            nextScreen="AccountType"
+            nextScreen="AccountCategory"
             isUpdateStep={isUpdateStep}
             transaction={transaction}
           />
