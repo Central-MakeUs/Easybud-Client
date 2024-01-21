@@ -36,7 +36,7 @@ const debitCreditListItemStyles = StyleSheet.create({
   debitCreditListContainer: {
     flex: 1,
     gap: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
   },
   debitCreditContainer: {
     display: 'flex',

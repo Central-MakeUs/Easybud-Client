@@ -1,5 +1,8 @@
 import {StyleSheet, View} from 'react-native';
-import {DebitCreditType} from 'types/components/Transaction';
+import {
+  DebitCreditType,
+  TransactionCategoryType,
+} from 'types/components/Transaction';
 import DebitCreditList from 'components/@common/Transaction/DebitCreditList';
 import TransactionSummary from 'components/@common/Transaction/TransactionSummary';
 
@@ -11,7 +14,7 @@ import TransactionSummary from 'components/@common/Transaction/TransactionSummar
  * @param creditList 대변 리스트
  */
 export type TransactionProps = {
-  category: 'profit' | 'cost' | 'account';
+  category: TransactionCategoryType;
   keyNote: string;
   date: string;
   debitList: DebitCreditType[];
