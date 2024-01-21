@@ -1,5 +1,5 @@
 import {useMemo, useState} from 'react';
-import {cloneDeep} from 'lodash';
+import {cloneDeep, isEmpty} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
@@ -39,6 +39,12 @@ export default function AccountCategoryScreen({
     return {...prevTransaction, accounts};
   }, [account, accountIndex, isUpdateStep, prevTransaction]);
 
+  const disabled = useMemo(() => {
+    return (
+      isEmpty(account.category.primary) || isEmpty(account.category.secondary)
+    );
+  }, [account.category.primary, account.category.secondary]);
+
   return (
     <ScreenContainer
       fixedBottomComponent={
@@ -48,6 +54,7 @@ export default function AccountCategoryScreen({
             transaction={prevTransaction}
           />
           <RightButton
+            disabled={disabled}
             nextScreen="AccountAmount"
             isUpdateStep={isUpdateStep}
             transaction={transaction}

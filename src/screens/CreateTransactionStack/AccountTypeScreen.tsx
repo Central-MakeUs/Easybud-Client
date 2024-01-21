@@ -1,5 +1,5 @@
 import {useMemo, useState} from 'react';
-import {cloneDeep} from 'lodash';
+import {cloneDeep, isEqual} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
@@ -42,11 +42,10 @@ export default function AccountTypeScreen({
   }, [account, accountIndex, isUpdateStep, prevTransaction]);
 
   const disabledRightButton = useMemo(() => {
-    if (isUpdateStep) {
-      return account.type === prevTransaction.accounts[accountIndex].type;
-    }
-
-    return false;
+    return (
+      isUpdateStep &&
+      isEqual(account.type, prevTransaction.accounts[accountIndex].type)
+    );
   }, [account, accountIndex, isUpdateStep, prevTransaction.accounts]);
 
   return (

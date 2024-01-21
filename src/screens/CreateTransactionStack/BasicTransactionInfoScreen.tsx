@@ -2,6 +2,7 @@ import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import RightButton from 'components/CreateTransactionStack/RightButton';
+import {isEqual, some} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import {useMemo, useState} from 'react';
 import {NewTransaction} from 'types/transaction';
@@ -25,14 +26,13 @@ export default function BasicTransactionInfoScreen({
     if (params?.isUpdateStep) {
       const {transaction: prevTransaction} = params;
 
-      return (
-        prevTransaction.summary === transaction.summary ||
-        prevTransaction.date === transaction.date
+      return some(['summary', 'date'], (key: keyof NewTransaction) =>
+        isEqual(prevTransaction[key], transaction[key]),
       );
     }
 
     return false;
-  }, [params, transaction.date, transaction.summary]);
+  }, [params, transaction]);
 
   return (
     <ScreenContainer
