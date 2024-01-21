@@ -22,9 +22,12 @@ export default function FinancialOverview() {
   return (
     <View style={financialOverviewStyles.container}>
       {dummyFinancialDatas.map((data, index) => (
-        <>
-          <View style={financialOverviewStyles.columnContainer} key={index}>
-            <Typography type={'Body2Regular'} color={'gray4'}>
+        <View style={financialOverviewStyles.columnContainer} key={index}>
+          <View style={financialOverviewStyles.textContainer}>
+            <Typography
+              type={'Body2Regular'}
+              color={'gray4'}
+              style={financialOverviewStyles.text}>
               {data.name}
             </Typography>
             <Typography type={'Body2Regular'} color={textColor[data.name]}>
@@ -32,7 +35,7 @@ export default function FinancialOverview() {
             </Typography>
           </View>
           {index !== 2 && <Typography color={'gray4'}>{'|'}</Typography>}
-        </>
+        </View>
       ))}
     </View>
   );
@@ -48,9 +51,19 @@ const financialOverviewStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 5,
   },
   columnContainer: {
+    display: 'flex',
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+  },
+  textContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingHorizontal: 10,
+  },
+  text: {
+    textAlign: 'center',
   },
 });

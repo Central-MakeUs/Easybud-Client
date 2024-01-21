@@ -7,7 +7,7 @@ export default function DayHeader() {
   return (
     <View style={dayHeaderStyles.container}>
       {days.map(day => (
-        <View style={dayHeaderStyles.day}>
+        <View style={dayHeaderStyles.day} key={day}>
           <Typography
             type={'Body3Regular'}
             color={'gray4'}
