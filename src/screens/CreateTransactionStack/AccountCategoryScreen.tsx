@@ -44,6 +44,7 @@ export default function AccountCategoryScreen({
       isEmpty(account.category.primary) || isEmpty(account.category.secondary)
     );
   }, [account.category.primary, account.category.secondary]);
+  disabled;
 
   return (
     <ScreenContainer
@@ -54,7 +55,7 @@ export default function AccountCategoryScreen({
             transaction={prevTransaction}
           />
           <RightButton
-            disabled={disabled}
+            // disabled={disabled}
             nextScreen="AccountAmount"
             isUpdateStep={isUpdateStep}
             transaction={transaction}
