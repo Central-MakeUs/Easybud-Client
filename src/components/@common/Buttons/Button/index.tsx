@@ -32,6 +32,7 @@ export default function Button({
   return (
     <TouchableOpacity
       {...props}
+      disabled={disabled}
       style={[props.style, buttonStyles.button, {backgroundColor}]}>
       <Typography type={'Body1Semibold'} color={textColor}>
         {children}

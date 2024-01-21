@@ -21,13 +21,11 @@ export type TabParamList = {
   Setting: undefined;
 };
 
-type Props = Update | Create;
-
 // only navigate this screen
 type Update = {
   transaction: NewTransaction;
   isUpdateStep: true;
-  accountIndex: number; // 0일 경우 Step 1 수정
+  accountIndex: number;
 };
 
 // navigate step by step
@@ -38,11 +36,11 @@ type Create = {
 };
 
 export type CreateTransactionStackParamList = {
-  BasicTransactionInfo: Update | undefined;
-  AccountType: Props;
-  AccountCategory: Props;
-  AccountAmount: Props;
-  TransactionConfirmation: Props;
+  BasicTransactionInfo: Omit<Update, 'accountIndex'> | undefined;
+  AccountType: Update | Create;
+  AccountCategory: Update | Create;
+  AccountAmount: Update | Create;
+  TransactionConfirmation: Create;
 };
 
 /** screen name */
