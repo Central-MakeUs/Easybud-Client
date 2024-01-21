@@ -2,13 +2,14 @@ import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {Calendar} from 'react-native-big-calendar';
 import 'dayjs/locale/ko';
+import {theme} from 'styles';
+import {typographyStyles} from 'styles/typography';
+import CalendarHeader from 'components/TransactionScreen/CalendarHeader';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import Icon from 'components/@common/Icon';
-import {theme} from 'styles';
-import {typographyStyles} from 'styles/typography';
 
-const events = [
+const dummyEvents = [
   {
     title: '-151,900',
     start: new Date(2024, 0, 1, 0, 0),
@@ -60,82 +61,6 @@ const events = [
     end: new Date(2024, 0, 10, 23, 59),
   },
 ];
-
-const CustomHeader = () => {
-  return (
-    <View style={customHeaderStyles.container}>
-      <View style={{flex: 1}}>
-        <Typography
-          type={'Body3Regular'}
-          color={'gray4'}
-          style={{textAlign: 'center'}}>
-          월
-        </Typography>
-      </View>
-      <View style={{flex: 1}}>
-        <Typography
-          type={'Body3Regular'}
-          color={'gray4'}
-          style={{textAlign: 'center'}}>
-          화
-        </Typography>
-      </View>
-      <View style={{flex: 1}}>
-        <Typography
-          type={'Body3Regular'}
-          color={'gray4'}
-          style={{textAlign: 'center'}}>
-          수
-        </Typography>
-      </View>
-      <View style={{flex: 1}}>
-        <Typography
-          type={'Body3Regular'}
-          color={'gray4'}
-          style={{textAlign: 'center'}}>
-          목
-        </Typography>
-      </View>
-      <View style={{flex: 1}}>
-        <Typography
-          type={'Body3Regular'}
-          color={'gray4'}
-          style={{textAlign: 'center'}}>
-          금
-        </Typography>
-      </View>
-      <View style={{flex: 1}}>
-        <Typography
-          type={'Body3Regular'}
-          color={'gray4'}
-          style={{textAlign: 'center'}}>
-          토
-        </Typography>
-      </View>
-      <View style={{flex: 1}}>
-        <Typography
-          type={'Body3Regular'}
-          color={'gray4'}
-          style={{textAlign: 'center'}}>
-          일
-        </Typography>
-      </View>
-    </View>
-  );
-};
-
-const customHeaderStyles = StyleSheet.create({
-  container: {
-    borderTopRadius: 18,
-    height: 26,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderColor: theme.palette.gray7,
-  },
-});
 
 export default function TransactionScreen() {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -224,7 +149,7 @@ export default function TransactionScreen() {
       </View>
       <View style={transactionScreenStyles.calendarContainer}>
         <Calendar
-          events={events}
+          events={dummyEvents}
           height={310}
           mode="month"
           locale="ko"
@@ -256,7 +181,7 @@ export default function TransactionScreen() {
             shadowColor: 'transparent',
             shadowOpacity: 0,
           }}
-          renderHeaderForMonthView={() => <CustomHeader />}
+          renderHeaderForMonthView={() => <CalendarHeader />}
         />
       </View>
     </ScreenContainer>
