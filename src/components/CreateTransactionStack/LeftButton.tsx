@@ -1,4 +1,4 @@
-import Button from 'components/@common/buttons/Button';
+import Button from 'components/@common/Buttons/Button';
 import React from 'react';
 
 type LeftButtonProps = {
