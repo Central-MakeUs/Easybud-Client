@@ -6,7 +6,6 @@ import {theme} from 'styles';
 import {typographyStyles} from 'styles/typography';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import Icon from 'components/@common/Icon';
 import DayHeader from 'components/TransactionScreen/DayHeader';
 import MonthHeader from 'components/TransactionScreen/MonthHeader';
 
@@ -68,12 +67,7 @@ export default function TransactionScreen() {
 
   return (
     <ScreenContainer contentContainerStyle={{paddingVertical: 0}}>
-      <View>
-        <MonthHeader
-          currentDate={currentDate}
-          setCurrentDate={setCurrentDate}
-        />
-      </View>
+      <MonthHeader currentDate={currentDate} setCurrentDate={setCurrentDate} />
       <View style={transactionScreenStyles.financialOverviewContainer}>
         <View style={transactionScreenStyles.financialOverviewColContainer}>
           <Typography type={'Body2Regular'} color={'gray4'}>
