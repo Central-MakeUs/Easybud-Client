@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import type {Steps, NonEmptyArray} from 'types/components/funnel';
+import type {Steps, NonEmptyArray} from 'types/components/Funnel';
 import DescriptionStepScreen from 'screens/OnBoardingFunnelScreen/DescriptionStepScreen';
 import LoginStepScreen from 'screens/OnBoardingFunnelScreen/LoginStepScreen';
 import UserInfoStepScreen from 'screens/OnBoardingFunnelScreen/UserInfoStepScreen';
