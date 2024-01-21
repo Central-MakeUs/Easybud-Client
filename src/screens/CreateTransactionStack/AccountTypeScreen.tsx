@@ -14,14 +14,14 @@ export const initialAccount: NewAccountUnion = {
   category: {primary: '', secondary: ''},
 };
 
-export type DebitCreditDeciderScreenProps = {
+export type AccountTypeScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountType'>;
 };
 
 /** 거래 추가 Step 2 */
 export default function AccountTypeScreen({
   route: {params},
-}: DebitCreditDeciderScreenProps) {
+}: AccountTypeScreenProps) {
   const {transaction: prevTransaction, isUpdateStep, accountIndex} = params;
 
   const [account, setAccount] = useState<NewAccountUnion>(

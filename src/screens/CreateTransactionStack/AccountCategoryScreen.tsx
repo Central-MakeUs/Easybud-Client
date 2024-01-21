@@ -8,14 +8,14 @@ import RightButton from 'components/CreateTransactionStack/RightButton';
 import {NewAccountUnion} from 'types/account';
 import {NewTransaction} from 'types/transaction';
 
-type DebitCreditDeciderScreenProps = {
+type AccountCategoryScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountCategory'>;
 };
 
 /** 거래 추가 Step 3 */
 export default function AccountCategoryScreen({
   route: {params},
-}: DebitCreditDeciderScreenProps) {
+}: AccountCategoryScreenProps) {
   const {transaction: prevTransaction, isUpdateStep, accountIndex} = params;
 
   const [account, setAccount] = useState<NewAccountUnion>(() => {
