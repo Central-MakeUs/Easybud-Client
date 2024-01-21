@@ -1,5 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import {theme} from 'styles';
+import {textColor} from 'constants/TransactionScreen';
 import Typography from 'components/@common/Typography';
 
 const dummyFinancialDatas = [
@@ -15,7 +16,7 @@ const dummyFinancialDatas = [
     name: '손익',
     amount: '7,800,858원',
   },
-];
+] as const;
 
 export default function FinancialOverview() {
   return (
@@ -26,7 +27,7 @@ export default function FinancialOverview() {
             <Typography type={'Body2Regular'} color={'gray4'}>
               {data.name}
             </Typography>
-            <Typography type={'Body2Regular'} color={'green'}>
+            <Typography type={'Body2Regular'} color={textColor[data.name]}>
               {data.amount}
             </Typography>
           </View>
