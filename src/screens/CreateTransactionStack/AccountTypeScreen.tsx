@@ -1,12 +1,12 @@
+import {useMemo, useState} from 'react';
+import {cloneDeep} from 'lodash';
+import {CreateTransactionStackRouteProp} from 'navigators/types';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
-import {useMemo, useState} from 'react';
 import {NewTransaction} from 'types/transaction';
-import {cloneDeep} from 'lodash';
 import {NewAccountUnion} from 'types/account';
-import {CreateTransactionStackRouteProp} from 'navigators/types';
 
 export const initialAccount: NewAccountUnion = {
   type: {name: 'Asset', change: 'increase'},
