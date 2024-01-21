@@ -10,6 +10,7 @@ import Typography from 'components/@common/Typography';
 import CategoryList from 'components/@common/SelectForm/CategoryList';
 import TextArea from 'components/@common/TextArea';
 import Button from 'components/@common/Buttons/Button';
+import {SelectFormProps} from 'components/@common/SelectForm';
 
 /**
  * @param label label 텍스트
@@ -17,7 +18,7 @@ import Button from 'components/@common/Buttons/Button';
  * @param setCategoryList SelectForm 종류를 나타냄 'primary' | 'gray'
  */
 type SelectFormBottomSheetProps = {
-  label: string;
+  label: SelectFormProps['label'];
   categoryList: string[];
   setCategoryList: Dispatch<SetStateAction<string[]>>;
 };

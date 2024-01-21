@@ -6,13 +6,15 @@ import CategoryListItem from 'components/@common/SelectForm/CategoryListItem';
  * @param categoryList 카테고리 목록 배열
  * @param setInputState input 상태를 변경하는 함수
  */
+export type CategoryListProps = {
+  categoryList: string[];
+  setInputState: Dispatch<SetStateAction<boolean>>;
+};
+
 export default function CategoryList({
   categoryList,
   setInputState,
-}: {
-  categoryList: string[];
-  setInputState: Dispatch<SetStateAction<boolean>>;
-}) {
+}: CategoryListProps) {
   return (
     <FlatList
       data={categoryList}

@@ -20,7 +20,7 @@ const dummyCategories = [
  * @param placeholder placeholder 텍스트
  * @param variant SelectForm 종류를 나타냄 'primary' | 'gray'
  */
-type SelectFormProps = {
+export type SelectFormProps = {
   label: string;
   placeholder?: string;
   variant?: 'primary' | 'gray';
