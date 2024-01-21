@@ -50,8 +50,6 @@ export type RootStackNavigationProp =
 export type CreateTransactionStackNavigationProp =
   NativeStackNavigationProp<CreateTransactionStackParamList>;
 
-export type TabNavigationProp = NativeStackNavigationProp<TabParamList>;
-
 /** screen props - unused*/
 
 export type RootStackScreenProp<T extends RootStackScreenName> =

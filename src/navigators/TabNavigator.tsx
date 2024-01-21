@@ -6,7 +6,11 @@ import {
 } from '@react-navigation/bottom-tabs';
 import {theme} from 'styles';
 import {typographyStyles} from 'styles/typography';
-import {TabRouteProp, TabParamList} from 'navigators/types';
+import {
+  TabRouteProp,
+  TabParamList,
+  RootStackNavigationProp,
+} from 'navigators/types';
 import CreateTransactionButton from 'navigators/components/CreateTransactionButton';
 import TabBarIcon from 'navigators/components/TabBarIcon';
 import NullScreen from 'navigators/components/NullScreen';
@@ -19,19 +23,12 @@ const Tab = createBottomTabNavigator<TabParamList>();
 export default function TabNavigator() {
   const {bottom: bottomSize} = useSafeAreaInsets();
 
-  const navigation = useNavigation();
+  const navigation = useNavigation<RootStackNavigationProp>();
 
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
-        ...screenOptions({route, bottomSize}),
-        headerRight: () => (
-          <Icon
-            name={'Setting'}
-            size={20}
-            onPress={() => navigation.navigate('Setting')}
-          />
-        ),
+        ...screenOptions({route, bottomSize, navigation}),
       })}>
       <Tab.Screen
         name={'Ledger'}
@@ -55,7 +52,8 @@ export default function TabNavigator() {
 const screenOptions: (props: {
   route: TabRouteProp;
   bottomSize: number;
-}) => BottomTabNavigationOptions = ({route, bottomSize}) => ({
+  navigation: RootStackNavigationProp;
+}) => BottomTabNavigationOptions = ({route, bottomSize, navigation}) => ({
   tabBarIcon:
     route.name === 'NavigateCreateTransaction'
       ? CreateTransactionButton
@@ -89,4 +87,11 @@ const screenOptions: (props: {
   headerRightContainerStyle: {
     paddingRight: 15,
   },
+  headerRight: () => (
+    <Icon
+      name={'Setting'}
+      size={20}
+      onPress={() => navigation.navigate('Setting')}
+    />
+  ),
 });
