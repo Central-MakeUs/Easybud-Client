@@ -1,4 +1,4 @@
-import {NonEmptyArray, StepProps} from 'types/components/funnel';
+import {NonEmptyArray, StepProps} from 'types/components/Funnel';
 
 /**
  * @param children 자식 요소

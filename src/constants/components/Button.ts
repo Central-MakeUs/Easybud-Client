@@ -1,6 +1,6 @@
 import {StyleSheet} from 'react-native';
 import {theme} from 'styles';
-import {LogoIcons} from 'types/components/icon';
+import {LogoIcons} from 'types/components/Icon';
 
 /** button */
 

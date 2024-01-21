@@ -1,5 +1,5 @@
 import {Children, ReactElement, isValidElement} from 'react';
-import {NonEmptyArray, StepProps} from 'types/components/funnel';
+import {NonEmptyArray, StepProps} from 'types/components/Funnel';
 
 /**
  * @param steps 전체 스텝 문자열 리스트
