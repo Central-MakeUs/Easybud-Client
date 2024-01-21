@@ -57,6 +57,9 @@ const dummyEvents = [
   },
 ];
 
+/**
+ * @param currentDate 현재 날짜
+ */
 type FinancialCalendarProps = {
   currentDate: Date;
 };

@@ -4,6 +4,10 @@ import {updateMonth} from 'utils/formatDate';
 import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
 
+/**
+ * @param currentDate 현재 날짜
+ * @param setCurrentDate 현재 날짜 값을 변경하는 함수
+ */
 type MonthHeaderProps = {
   currentDate: Date;
   setCurrentDate: Dispatch<SetStateAction<Date>>;
