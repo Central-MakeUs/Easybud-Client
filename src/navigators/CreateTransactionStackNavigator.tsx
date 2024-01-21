@@ -4,12 +4,12 @@ import {
   StackNavigationOptions,
   createStackNavigator,
 } from '@react-navigation/stack';
+import {theme} from 'styles';
+import {CreateTransactionStackParamList} from 'navigators/types';
 import AccountAmountScreen from 'screens/CreateTransactionStack/AccountAmountScreen';
 import AccountTypeScreen from 'screens/CreateTransactionStack/AccountTypeScreen';
 import DebitCreditDeciderScreen from 'screens/CreateTransactionStack/DebitCreditDeciderScreen';
 import TransactionConfirmationScreen from 'screens/CreateTransactionStack/TransactionConfirmationScreen';
-import {CreateTransactionStackParamList} from 'navigators/types';
-import {theme} from 'styles';
 import BasicTransactionInfoScreen from 'screens/CreateTransactionStack/BasicTransactionInfoScreen';
 
 const Stack = createStackNavigator<CreateTransactionStackParamList>();

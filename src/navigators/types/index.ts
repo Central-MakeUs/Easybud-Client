@@ -11,14 +11,13 @@ export type RootStackParamList = {
   Tab?: NavigatorScreenParams<TabParamList>;
   OnBoarding: undefined;
   CreateTransactionStack: NavigatorScreenParams<CreateTransactionStackParamList>;
+  Setting: undefined;
 };
 
 export type TabParamList = {
   Ledger: undefined;
   Transaction: undefined;
   NavigateCreateTransaction: undefined;
-  Account: undefined;
-  Setting: undefined;
 };
 
 type Params = {transaction: NewTransaction; prevScreen?: string} | undefined;

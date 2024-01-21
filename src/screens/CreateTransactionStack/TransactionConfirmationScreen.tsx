@@ -1,6 +1,6 @@
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import Button from 'components/@common/buttons/Button';
+import Button from 'components/@common/Buttons/Button';
 import {RootStackNavigationProp} from 'navigators/types';
 
 type TransactionConfirmationScreenProps = {

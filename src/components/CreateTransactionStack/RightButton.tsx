@@ -1,6 +1,6 @@
-import Button from 'components/@common/buttons/Button';
 import React from 'react';
 import {TouchableOpacityProps} from 'react-native';
+import Button from 'components/@common/Buttons/Button';
 
 type RightButtonProps = {
   label?: '다음' | '저장' | '수정';
