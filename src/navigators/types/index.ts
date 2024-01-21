@@ -1,4 +1,8 @@
-import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
+import {
+  NavigationProp,
+  NavigatorScreenParams,
+  RouteProp,
+} from '@react-navigation/native';
 import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
@@ -49,6 +53,8 @@ export type RootStackNavigationProp =
 
 export type CreateTransactionStackNavigationProp =
   NativeStackNavigationProp<CreateTransactionStackParamList>;
+
+export type TabNavigationProp = NavigationProp<TabParamList>;
 
 /** screen props - unused*/
 
