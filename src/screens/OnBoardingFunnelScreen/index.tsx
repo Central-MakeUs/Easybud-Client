@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
+import type {Steps, NonEmptyArray} from 'types/funnel';
 import DescriptionStepScreen from 'screens/OnBoardingFunnelScreen/DescriptionStepScreen';
 import LoginStepScreen from 'screens/OnBoardingFunnelScreen/LoginStepScreen';
 import UserInfoStepScreen from 'screens/OnBoardingFunnelScreen/UserInfoStepScreen';
-import Funnel from 'components/@common/funnel/Funnel';
-import Step from 'components/@common/funnel/Step';
-import type {Steps, NonEmptyArray} from 'types/funnel';
+import Funnel from 'components/@common/Funnel/Funnel';
+import Step from 'components/@common/Funnel/Step';
 
 type OnBoardingStep = 'Step1' | 'Step2' | 'Step3';
 
