@@ -3,13 +3,14 @@ import {
   NativeStackNavigationOptions,
   createNativeStackNavigator,
 } from '@react-navigation/native-stack';
-import useInitialData from 'hooks/useInitialData';
+import {theme} from 'styles';
 import CreateTransactionStackNavigator from 'navigators/CreateTransactionStackNavigator';
 import TabNavigator from 'navigators/TabNavigator';
 import {RootStackNavigationProp, RootStackParamList} from 'navigators/types';
+import useInitialData from 'hooks/useInitialData';
 import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
 import Icon from 'components/@common/Icon';
-import {theme} from 'styles';
+import SettingScreen from 'screens/SettingScreen';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -40,6 +41,15 @@ export default function RootStackNavigator() {
               // presentation: 'containedModal',
             }}
           />
+          <Stack.Screen
+            name={'Setting'}
+            component={SettingScreen}
+            options={{
+              headerShown: true,
+              headerBackTitleVisible: true,
+              headerTitle: '설정',
+            }}
+          />
         </>
       ) : (
         <Stack.Screen name={'OnBoarding'} component={OnBoardingFunnelScreen} />
@@ -61,6 +71,10 @@ const screenOptions: (props: {
       <Icon name="X" />
     </TouchableOpacity>
   ),
-  headerStyle: {backgroundColor: theme.palette.gray1},
+  headerStyle: {
+    height: 50,
+    borderWidth: 1,
+    backgroundColor: theme.palette.gray1,
+  },
   headerTitleStyle: theme.typography.Body1Semibold,
 });

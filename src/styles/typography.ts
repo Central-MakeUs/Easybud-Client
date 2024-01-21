@@ -61,4 +61,11 @@ export const typographyStyles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 13,
   },
+
+  /** size: 10, weight: 400*/
+  Body3Regular: {
+    fontFamily: 'Pretendard-Regular',
+    fontWeight: '400',
+    fontSize: 10,
+  },
 });
