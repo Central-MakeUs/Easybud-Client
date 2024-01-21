@@ -9,7 +9,7 @@ import Typography from 'components/@common/Typography';
 import {
   SocialLoginButtonLabel,
   SocialLoginButtonStyles,
-} from 'constants/Button';
+} from 'constants/components/Button';
 
 /**
  * @param variant 버튼 종류: 'kakao' | 'apple'

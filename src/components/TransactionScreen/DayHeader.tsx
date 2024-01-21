@@ -1,6 +1,6 @@
 import {View, StyleSheet} from 'react-native';
 import {theme} from 'styles';
-import {days} from 'constants/TransactionScreen';
+import {days} from 'constants/screens/TransactionScreen';
 import Typography from 'components/@common/Typography';
 
 export default function DayHeader() {

@@ -2,7 +2,7 @@ import {theme} from 'styles';
 import {
   ThemeVariantType,
   ThemeVariantColorObjectType,
-} from 'types/CommonSelectItem';
+} from 'types/components/CommonSelectItem';
 
 export const ThemeVariants: Record<
   ThemeVariantType,

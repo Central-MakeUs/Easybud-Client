@@ -1,6 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import {theme} from 'styles';
-import {textColor} from 'constants/TransactionScreen';
+import {textColor} from 'constants/screens/TransactionScreen';
 import Typography from 'components/@common/Typography';
 
 const dummyFinancialDatas = [

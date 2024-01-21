@@ -3,7 +3,7 @@ import {
   TouchableOpacity,
   TouchableOpacityProps,
 } from 'react-native';
-import {ButtonBackgroundColor, ButtonTextColor} from 'constants/Button';
+import {ButtonBackgroundColor, ButtonTextColor} from 'constants/components/Button';
 import Typography from 'components/@common/Typography';
 
 /**

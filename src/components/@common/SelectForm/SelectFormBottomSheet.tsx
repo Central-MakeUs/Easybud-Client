@@ -4,7 +4,7 @@ import {SetterOrUpdater, useRecoilState, useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
 import {categoryState} from 'libs/recoil/states/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
-import {AddCategoryText} from 'constants/SelectForm';
+import {AddCategoryText} from 'constants/components/SelectForm';
 import BottomSheet from 'components/@common/BottomSheet';
 import Typography from 'components/@common/Typography';
 import CategoryList from 'components/@common/SelectForm/CategoryList';

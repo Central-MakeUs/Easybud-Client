@@ -2,7 +2,7 @@ import {Dispatch, SetStateAction} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
-import {AddCategoryText} from 'constants/SelectForm';
+import {AddCategoryText} from 'constants/components/SelectForm';
 import {categoryState} from 'libs/recoil/states/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import Typography from 'components/@common/Typography';
