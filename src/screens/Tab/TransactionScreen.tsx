@@ -4,10 +4,11 @@ import {Calendar} from 'react-native-big-calendar';
 import 'dayjs/locale/ko';
 import {theme} from 'styles';
 import {typographyStyles} from 'styles/typography';
-import CalendarHeader from 'components/TransactionScreen/CalendarHeader';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import Icon from 'components/@common/Icon';
+import DayHeader from 'components/TransactionScreen/DayHeader';
+import MonthHeader from 'components/TransactionScreen/MonthHeader';
 
 const dummyEvents = [
   {
@@ -65,59 +66,13 @@ const dummyEvents = [
 export default function TransactionScreen() {
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  const handlePressPrevMonth = () => {
-    setCurrentDate(prevDate => {
-      const newDate = new Date(prevDate);
-      newDate.setMonth(newDate.getMonth() - 1);
-
-      if (newDate.getMonth() < 0) {
-        newDate.setFullYear(newDate.getFullYear() - 1);
-        newDate.setMonth(11);
-      }
-
-      return newDate;
-    });
-  };
-
-  const handlePressNextMonth = () => {
-    setCurrentDate(prevDate => {
-      const newDate = new Date(prevDate);
-      newDate.setMonth(newDate.getMonth() + 1);
-
-      if (newDate.getMonth() > 11) {
-        newDate.setFullYear(newDate.getFullYear() + 1);
-        newDate.setMonth(0); // 0부터 시작하므로 0은 1월을 나타냅니다.
-      }
-
-      return newDate;
-    });
-  };
-
   return (
     <ScreenContainer contentContainerStyle={{paddingVertical: 0}}>
       <View>
-        <View style={transactionScreenStyles.monthContainer}>
-          <Icon
-            name={'ArrowLeftSmall'}
-            fill={'gray4'}
-            onPress={handlePressPrevMonth}
-          />
-          <Typography
-            type={'Title1Bold'}
-            color={'gray4'}
-            style={{
-              marginBottom: 3,
-              width: 50,
-              textAlign: 'center',
-            }}>
-            {currentDate.getMonth() + 1}월
-          </Typography>
-          <Icon
-            name={'ArrowRightSmall'}
-            fill={'gray4'}
-            onPress={handlePressNextMonth}
-          />
-        </View>
+        <MonthHeader
+          currentDate={currentDate}
+          setCurrentDate={setCurrentDate}
+        />
       </View>
       <View style={transactionScreenStyles.financialOverviewContainer}>
         <View style={transactionScreenStyles.financialOverviewColContainer}>
@@ -181,7 +136,7 @@ export default function TransactionScreen() {
             shadowColor: 'transparent',
             shadowOpacity: 0,
           }}
-          renderHeaderForMonthView={() => <CalendarHeader />}
+          renderHeaderForMonthView={() => <DayHeader />}
         />
       </View>
     </ScreenContainer>

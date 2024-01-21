@@ -3,15 +3,15 @@ import {theme} from 'styles';
 import {days} from 'constants/TransactionScreen';
 import Typography from 'components/@common/Typography';
 
-export default function CalendarHeader() {
+export default function DayHeader() {
   return (
-    <View style={calendarHeaderStyles.container}>
+    <View style={dayHeaderStyles.container}>
       {days.map(day => (
-        <View style={calendarHeaderStyles.day}>
+        <View style={dayHeaderStyles.day}>
           <Typography
             type={'Body3Regular'}
             color={'gray4'}
-            style={calendarHeaderStyles.text}>
+            style={dayHeaderStyles.text}>
             {day}
           </Typography>
         </View>
@@ -20,7 +20,7 @@ export default function CalendarHeader() {
   );
 }
 
-const calendarHeaderStyles = StyleSheet.create({
+const dayHeaderStyles = StyleSheet.create({
   container: {
     borderTopRadius: 18,
     height: 26,
