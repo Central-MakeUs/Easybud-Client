@@ -5790,10 +5790,11 @@ __metadata:
     react-docgen-typescript-plugin: ^1.0.5
     react-dom: ^18.2.0
     react-native: 0.71.4
+    react-native-big-calendar: ^4.9.0
     react-native-error-boundary: ^1.2.4
     react-native-gesture-handler: ^2.14.0
-    react-native-raw-bottom-sheet: ^2.2.0
     react-native-modal-datetime-picker: ^17.1.0
+    react-native-raw-bottom-sheet: ^2.2.0
     react-native-safe-area-context: ^4.8.2
     react-native-screens: ^3.29.0
     react-native-svg: 13.10.0
@@ -7320,6 +7321,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"calendarize@npm:^1.1.1":
+  version: 1.1.1
+  resolution: "calendarize@npm:1.1.1"
+  checksum: a5326f762f0d4800ac92b978f24fb1d52ce37dbf730da8d5e7d7562e70df3f93a0cacc615245fb9b2a1f89e8f59030a715080d13fb4bd14c138d3678a85482c8
+  languageName: node
+  linkType: hard
+
 "call-bind@npm:^1.0.0, call-bind@npm:^1.0.2, call-bind@npm:^1.0.4, call-bind@npm:^1.0.5":
   version: 1.0.5
   resolution: "call-bind@npm:1.0.5"
@@ -8490,7 +8498,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dayjs@npm:^1.8.15":
+"dayjs@npm:^1.11.10, dayjs@npm:^1.8.15":
   version: 1.11.10
   resolution: "dayjs@npm:1.11.10"
   checksum: a6b5a3813b8884f5cd557e2e6b7fa569f4c5d0c97aca9558e38534af4f2d60daafd3ff8c2000fed3435cfcec9e805bcebd99f90130c6d1c5ef524084ced588c4
@@ -16494,6 +16502,19 @@ eslint-plugin-jsx-a11y@latest:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
+  languageName: node
+  linkType: hard
+
+"react-native-big-calendar@npm:^4.9.0":
+  version: 4.9.0
+  resolution: "react-native-big-calendar@npm:4.9.0"
+  dependencies:
+    calendarize: ^1.1.1
+    dayjs: ^1.11.10
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 41e177df875bc84582f99ddc23949ae6d396d73e6ac0908006c4e996ff3bc7ebf8f34f67dc9271bae63dfbb5496cdbfbc10f592af3033ac97975ba261eea6969
   languageName: node
   linkType: hard
 
