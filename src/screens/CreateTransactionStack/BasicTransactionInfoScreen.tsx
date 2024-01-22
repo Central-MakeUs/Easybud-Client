@@ -1,5 +1,6 @@
+import DatePicker from 'components/@common/DatePicker';
+import KeyNote from 'components/@common/KeyNote';
 import ScreenContainer from 'components/@common/ScreenContainer';
-import Typography from 'components/@common/Typography';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import {isEqual, some} from 'lodash';
@@ -34,6 +35,9 @@ export default function BasicTransactionInfoScreen({
     return false;
   }, [params, transaction]);
 
+  const handleChange = (key: keyof NewTransaction, value: Date | string) =>
+    setTransaction(prev => ({...prev, [key]: value}));
+
   return (
     <ScreenContainer
       fixedBottomComponent={
@@ -49,8 +53,14 @@ export default function BasicTransactionInfoScreen({
           />
         </>
       }>
-      <Typography>date: {transaction.date.toDateString()}</Typography>
-      <Typography>summary: {transaction.summary}</Typography>
+      <DatePicker
+        date={transaction.date}
+        updateDate={date => handleChange('date', date)}
+      />
+      <KeyNote
+        text={transaction.summary ?? ''}
+        updateText={summary => handleChange('summary', summary)}
+      />
     </ScreenContainer>
   );
 }

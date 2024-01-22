@@ -9,7 +9,7 @@ import BottomSheet from 'components/@common/BottomSheet';
 import Typography from 'components/@common/Typography';
 import CategoryList from 'components/@common/SelectForm/CategoryList';
 import TextArea from 'components/@common/TextArea';
-import Button from 'components/@common/Buttons/Button';
+import Button from 'components/@common/buttons/Button';
 
 /**
  * @param label label 텍스트
