@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.palette.gray1,
     padding: 20,
     flexGrow: 1,
+    gap: 10,
   },
   loadingContainer: {
     flex: 1,
