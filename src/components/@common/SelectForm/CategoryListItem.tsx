@@ -1,44 +1,23 @@
-import {Dispatch, SetStateAction} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
-import {AddCategoryText} from 'constants/SelectForm';
-import {categoryState} from 'libs/recoil/states/category';
-import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import Typography from 'components/@common/Typography';
 
 /**
- * @param categoryName 카테고리명
- * @param setInputState input 상태를 변경하는 함수
+ * @param value 항목 명
+ * @param onSelect 항목 선택
  */
-type CategoryListItemProps = {
-  categoryName: string;
-  setInputState: Dispatch<SetStateAction<boolean>>;
+type ListItemProps = {
+  value: string;
+  onSelect: (value: string) => void;
 };
 
-export default function CategoryListItem({
-  categoryName,
-  setInputState,
-}: CategoryListItemProps) {
-  const setIsBottomSheetOpen = useSetRecoilState(selectFormBottomSheetState);
-  const setSelectedCategory = useSetRecoilState(categoryState);
-
-  const handlePressCategoryItem = () => {
-    if (categoryName === AddCategoryText) {
-      setInputState(true);
-    } else {
-      setInputState(false);
-      setIsBottomSheetOpen(false);
-      setSelectedCategory(categoryName);
-    }
-  };
-
+export default function ListItem({value, onSelect}: ListItemProps) {
   return (
     <TouchableOpacity
       style={categoryListItemStyles.container}
-      onPress={handlePressCategoryItem}>
+      onPress={() => onSelect(value)}>
       <Typography type={'Body1Semibold'} color={'black'}>
-        {categoryName}
+        {value}
       </Typography>
     </TouchableOpacity>
   );

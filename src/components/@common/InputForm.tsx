@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import {theme} from 'styles';
 import Typography from 'components/@common/Typography';
+import {isEmpty} from 'lodash';
 
 type InputFormProps = TextInputProps & {
   label: string;
@@ -16,6 +17,7 @@ type InputFormProps = TextInputProps & {
 export default function InputForm({
   label,
   value,
+  placeholder,
   onPress,
   ...props
 }: InputFormProps) {
@@ -31,12 +33,15 @@ export default function InputForm({
         {label}
       </Typography>
       {onPress ? (
-        <Typography type="Body1Semibold" color="gray6">
-          {value}
+        <Typography
+          type="Body1Semibold"
+          color={isEmpty(value) ? 'gray3' : 'gray6'}>
+          {isEmpty(value) ? placeholder : value}
         </Typography>
       ) : (
         <TextInput
           value={value}
+          placeholder={placeholder}
           ref={inputRef}
           style={[theme.typography.Body1Semibold, {color: theme.palette.gray6}]}
           {...props}

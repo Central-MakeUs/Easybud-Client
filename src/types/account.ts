@@ -47,15 +47,13 @@ type Occurrence = '발생';
 ///////////////////////////////////////////// /** 계정의 대분류, 중분류, 소분류, 세분류를 포함하는 분류 */
 
 /** 계정의 대분류, 중분류, 소분류, 세분류를 포함하는 분류 */
-type AccountCategory = {
+export type AccountCategory = {
   /** 대분류 */
   primary: string;
   /** 중분류 */
   secondary: string;
   /** 소분류 */
   tertiary?: string | null;
-  /** 세분류 */
-  quaternary?: string | null;
 };
 
 /////////////////////////////////////////////

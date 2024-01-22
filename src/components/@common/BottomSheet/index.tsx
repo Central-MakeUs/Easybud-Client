@@ -1,70 +1,32 @@
-import {Dispatch, ReactNode, SetStateAction, useEffect, useRef} from 'react';
+import {ReactNode, forwardRef} from 'react';
+import GorhomBottomSheet, {BottomSheetProps} from '@gorhom/bottom-sheet';
 import {StyleSheet} from 'react-native';
-import {SetterOrUpdater} from 'recoil';
-import RBSheet from 'react-native-raw-bottom-sheet';
-import {theme} from 'styles';
 
-/**
- * @param isBottomSheetOpen bottomSheet의 open 여부
- * @param setIsBottomSheetOpen bottomSheet의 open 여부를 변경하는 함수
- * @param setInputState input 상태를 변경하는 함수
- * @param height bottomSheet의 높이
- * @param children bottomSheet 내부에 들어갈 content
- */
-type BottomSheetProps = {
-  isBottomSheetOpen: boolean;
-  setIsBottomSheetOpen:
-    | Dispatch<SetStateAction<boolean>>
-    | SetterOrUpdater<boolean>;
-  setInputState?: Dispatch<SetStateAction<boolean>>;
-  height?: number;
+type CommonBottomSheetProps = {
   children: ReactNode;
-};
+} & BottomSheetProps;
 
-export default function BottomSheet({
-  isBottomSheetOpen,
-  setIsBottomSheetOpen,
-  setInputState,
-  height,
-  children,
-}: BottomSheetProps) {
-  const bottomSheetRef = useRef<RBSheet>(null);
+const CommonBottomSheet = forwardRef<GorhomBottomSheet, CommonBottomSheetProps>(
+  ({snapPoints = ['50%'], children}, ref) => {
+    return (
+      <GorhomBottomSheet
+        ref={ref}
+        index={-1}
+        snapPoints={snapPoints}
+        enablePanDownToClose
+        style={styles.bottomSheetContainer}>
+        {children}
+      </GorhomBottomSheet>
+    );
+  },
+);
 
-  useEffect(() => {
-    if (bottomSheetRef.current) {
-      isBottomSheetOpen
-        ? bottomSheetRef.current.open()
-        : bottomSheetRef.current.close();
-    }
-  }, [isBottomSheetOpen]);
+export default CommonBottomSheet;
 
-  const handleOpenBottomSheet = () => {
-    setIsBottomSheetOpen(true);
-  };
-
-  const handleCloseBottomSheet = () => {
-    setIsBottomSheetOpen(false);
-    setInputState?.(false);
-  };
-
-  return (
-    <RBSheet
-      ref={bottomSheetRef}
-      onOpen={handleOpenBottomSheet}
-      onClose={handleCloseBottomSheet}
-      keyboardAvoidingViewEnabled={true}
-      height={height ?? 200}
-      customStyles={bottomSheetStyles}>
-      {children}
-    </RBSheet>
-  );
-}
-
-const bottomSheetStyles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    borderTopStartRadius: 20,
-    borderTopEndRadius: 20,
-    backgroundColor: theme.palette.gray2,
+const styles = StyleSheet.create({
+  bottomSheetContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    paddingBottom: 10,
   },
 });

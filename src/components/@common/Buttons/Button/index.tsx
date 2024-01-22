@@ -33,7 +33,7 @@ export default function Button({
     <TouchableOpacity
       {...props}
       disabled={disabled}
-      style={[props.style, buttonStyles.button, {backgroundColor}]}>
+      style={[buttonStyles.button, props.style, {backgroundColor}]}>
       <Typography type={'Body1Semibold'} color={textColor}>
         {children}
       </Typography>

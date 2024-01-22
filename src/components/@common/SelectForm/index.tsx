@@ -1,64 +1,109 @@
-import {useEffect, useState} from 'react';
-import {useRecoilValue, useSetRecoilState} from 'recoil';
-import {AddCategoryText, CategoryName} from 'constants/SelectForm';
-import {categoryState} from 'libs/recoil/states/category';
-import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
-import {addItemToCategoryList} from 'utils/addItemToCategoryList';
-import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
+import {CategoryName} from 'constants/SelectForm';
 import InputForm from 'components/@common/InputForm';
-import {TouchableOpacity} from 'react-native';
-
-const dummyCategories = [
-  '현금',
-  '보통예금',
-  '정기예금',
-  '유가증권',
-  '기타유동자산',
-];
+import CommonBottomSheet from 'components/@common/BottomSheet';
+import Typography from 'components/@common/Typography';
+import {useState} from 'react';
+import {View, StyleSheet, TextInput} from 'react-native';
+import {theme} from 'styles';
+import useBottomSheet from 'hooks/useBottomSheet';
+import ListItem from 'components/@common/SelectForm/CategoryListItem';
+import {isEmpty} from 'lodash';
+import Button from 'components/@common/buttons/Button';
 
 /**
  * @param label label 텍스트
  * @param placeholder placeholder 텍스트
  */
 type SelectFormProps = {
+  items: string[];
+  value: string | null | undefined;
   label: string;
   placeholder?: string;
+  addToList?: (value: string) => void;
+  onSelect: (value: string) => void;
 };
 
-export default function SelectForm({label, placeholder}: SelectFormProps) {
-  const [categoryList, setCategoryList] = useState<string[]>([]);
-  const selectedCategory = useRecoilValue(categoryState);
-  const setIsBottomSheetOpen = useSetRecoilState(selectFormBottomSheetState);
+export default function SelectForm({
+  label,
+  value,
+  items,
+  placeholder = '선택해주세요',
+  addToList,
+  onSelect,
+}: SelectFormProps) {
+  const {ref, open, close} = useBottomSheet();
+  const [text, setText] = useState<string>('');
 
-  useEffect(() => {
-    if (label !== CategoryName.primary && label !== CategoryName.secondary) {
-      const newCategoryList = addItemToCategoryList(
-        dummyCategories,
-        AddCategoryText,
-      );
+  const onPressAddButton = () => {
+    addToList && addToList(text);
+    onSelect(text);
+    setText('');
+    close();
+  };
 
-      setCategoryList(newCategoryList);
-    } else {
-      setCategoryList(dummyCategories);
-    }
-  }, [label]);
-
-  const handlePressCategoryItem = () => setIsBottomSheetOpen(true);
+  const onPressItem = (item: string) => {
+    onSelect(item);
+    close();
+  };
 
   return (
     <>
-      <TouchableOpacity onPress={handlePressCategoryItem}>
-        <InputForm
-          label={label}
-          value={selectedCategory}
-          placeholder={placeholder}
-        />
-      </TouchableOpacity>
-      <SelectFormBottomSheet
+      <InputForm
+        onPress={open}
         label={label}
-        categoryList={categoryList}
-        setCategoryList={setCategoryList}
+        value={value ?? ''}
+        placeholder={placeholder}
       />
+      <CommonBottomSheet
+        ref={ref}
+        snapPoints={items.length > 4 ? ['75%'] : ['50%']}>
+        <View style={styles.labelContainer}>
+          <Typography color={'gray6'} type={'Body1Semibold'}>
+            {label}
+          </Typography>
+        </View>
+        {items.map((item, index) => (
+          <ListItem
+            key={`${item}${index}`}
+            value={item}
+            onSelect={onPressItem}
+          />
+        ))}
+        {label === CategoryName.tertiary && (
+          <View style={styles.inputContainer}>
+            <TextInput
+              value={text}
+              onChangeText={setText}
+              placeholder="추가할 항목을 작성하세요"
+              style={[theme.typography.Body1Regular, styles.input]}
+            />
+            <Button
+              onPress={onPressAddButton}
+              disabled={isEmpty(text)}
+              style={styles.button}>
+              항목 추가하기
+            </Button>
+          </View>
+        )}
+      </CommonBottomSheet>
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  labelContainer: {
+    width: '100%',
+    borderBottomWidth: 1,
+    borderColor: theme.palette.gray4,
+    padding: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    padding: 20,
+    gap: 20,
+  },
+  input: {width: '60%'},
+  button: {height: 40, padding: 10},
+});

@@ -4,5 +4,3 @@ export const enum CategoryName {
   'tertiary' = '소분류',
   'quaternary' = '세분류',
 }
-
-export const AddCategoryText = ' 항목 추가';

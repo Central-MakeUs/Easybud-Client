@@ -2,11 +2,12 @@ import {useMemo, useState} from 'react';
 import {cloneDeep, isEmpty} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import ScreenContainer from 'components/@common/ScreenContainer';
-import Typography from 'components/@common/Typography';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import RightButton from 'components/CreateTransactionStack/RightButton';
-import {NewAccount} from 'types/account';
+import {AccountCategory, NewAccount} from 'types/account';
 import {NewTransaction} from 'types/transaction';
+import SelectForm from 'components/@common/SelectForm';
+import {CategoryName} from 'constants/SelectForm';
 
 type AccountCategoryScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountCategory'>;
@@ -44,7 +45,13 @@ export default function AccountCategoryScreen({
       isEmpty(account.category.primary) || isEmpty(account.category.secondary)
     );
   }, [account.category.primary, account.category.secondary]);
-  disabled;
+
+  const handleChange = (label: keyof AccountCategory, category: string) => {
+    setAccount(prev => ({
+      ...prev,
+      category: {...prev.category, [label]: category},
+    }));
+  };
 
   return (
     <ScreenContainer
@@ -55,19 +62,39 @@ export default function AccountCategoryScreen({
             transaction={prevTransaction}
           />
           <RightButton
-            // disabled={disabled}
+            disabled={disabled}
             nextScreen="AccountAmount"
             isUpdateStep={isUpdateStep}
             transaction={transaction}
           />
         </>
       }>
-      <Typography>primary category: {account.category.primary}</Typography>
-      <Typography>secondary category: {account.category.secondary}</Typography>
-      <Typography>tertiary category: {account.category.tertiary}</Typography>
-      <Typography>
-        quaternary category: {account.category.quaternary}
-      </Typography>
+      <SelectForm
+        value={account.category.primary}
+        label={CategoryName.primary}
+        items={dummyCategories}
+        onSelect={category => handleChange('primary', category)}
+      />
+      <SelectForm
+        value={account.category.secondary}
+        label={CategoryName.secondary}
+        items={dummyCategories}
+        onSelect={category => handleChange('secondary', category)}
+      />
+      <SelectForm
+        value={account.category.tertiary}
+        label={CategoryName.tertiary}
+        items={dummyCategories}
+        onSelect={category => handleChange('tertiary', category)}
+      />
     </ScreenContainer>
   );
 }
+
+const dummyCategories = [
+  '현금',
+  '보통예금',
+  '정기예금',
+  '유가증권',
+  '기타유동자산',
+];
