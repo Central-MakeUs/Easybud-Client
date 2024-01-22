@@ -7,8 +7,11 @@ const commonPalette = {
   gray4: '#8B95A1',
   gray5: '#4E5968',
   gray6: '#191F28',
+  gray7: '#eeeeee',
   white: '#ffffff',
   black: '#000000',
+  green: '#26A060',
+  pink: '#E76587',
 };
 
 export const lightPalette: TypeOfPalette = {

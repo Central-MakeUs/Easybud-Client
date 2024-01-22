@@ -1,11 +1,11 @@
-import {Dispatch, SetStateAction} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
-import {AddCategoryText} from 'constants/SelectForm';
+import {AddCategoryText} from 'constants/components/SelectForm';
 import {categoryState} from 'libs/recoil/states/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import Typography from 'components/@common/Typography';
+import {CategoryListProps} from 'components/@common/SelectForm/CategoryList';
 
 /**
  * @param categoryName 카테고리명
@@ -13,7 +13,7 @@ import Typography from 'components/@common/Typography';
  */
 type CategoryListItemProps = {
   categoryName: string;
-  setInputState: Dispatch<SetStateAction<boolean>>;
+  setInputState: CategoryListProps['setInputState'];
 };
 
 export default function CategoryListItem({

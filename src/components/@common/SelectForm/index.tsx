@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {useRecoilValue, useSetRecoilState} from 'recoil';
-import {AddCategoryText, CategoryName} from 'constants/SelectForm';
+import {AddCategoryText, CategoryName} from 'constants/components/SelectForm';
 import {categoryState} from 'libs/recoil/states/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import {addItemToCategoryList} from 'utils/addItemToCategoryList';
@@ -20,7 +20,7 @@ const dummyCategories = [
  * @param placeholder placeholder 텍스트
  * @param variant SelectForm 종류를 나타냄 'primary' | 'gray'
  */
-type SelectFormProps = {
+export type SelectFormProps = {
   label: string;
   placeholder?: string;
   variant?: 'primary' | 'gray';

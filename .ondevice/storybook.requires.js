@@ -57,6 +57,7 @@ const getStories = () => {
     './src/components/@common/SelectForm/SelectForm.stories.tsx': require('../src/components/@common/SelectForm/SelectForm.stories.tsx'),
     './src/components/@common/TextFields/TextField/TextField.stories.tsx': require('../src/components/@common/TextFields/TextField/TextField.stories.tsx'),
     './src/components/@common/TextFields/AmountTextField/AmountTextField.stories.tsx': require('../src/components/@common/TextFields/AmountTextField/AmountTextField.stories.tsx'),
+    './src/components/@common/Transaction/Transaction.stories.tsx': require('../src/components/@common/Transaction/Transaction.stories.tsx'),
     './src/components/@common/KeyNote/KeyNote.stories.tsx': require('../src/components/@common/KeyNote/KeyNote.stories.tsx'),
   };
 };

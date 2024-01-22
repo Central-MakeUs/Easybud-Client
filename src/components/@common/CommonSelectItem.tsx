@@ -2,7 +2,7 @@ import React, {ReactNode} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from 'styles';
 import Typography from 'components/@common/Typography';
-import {ThemeVariants} from 'constants/CommonSelectItem';
+import {ThemeVariants} from 'constants/components/CommonSelectItem';
 
 /**
  * @param label label 텍스트
