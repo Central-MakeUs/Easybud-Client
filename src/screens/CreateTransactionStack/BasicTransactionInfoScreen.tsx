@@ -1,5 +1,5 @@
 import DatePicker from 'components/@common/DatePicker';
-import KeyNote from 'components/@common/KeyNote';
+import InputForm from 'components/@common/InputForm';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import RightButton from 'components/CreateTransactionStack/RightButton';
@@ -57,9 +57,12 @@ export default function BasicTransactionInfoScreen({
         date={transaction.date}
         updateDate={date => handleChange('date', date)}
       />
-      <KeyNote
-        text={transaction.summary ?? ''}
-        updateText={summary => handleChange('summary', summary)}
+      <InputForm
+        label={'적요'}
+        value={transaction.summary ?? ''}
+        maxLength={15}
+        onChangeText={summary => handleChange('summary', summary)}
+        placeholder="적요를 작성하세요"
       />
     </ScreenContainer>
   );

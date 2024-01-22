@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {getFormattedDate} from 'utils/formatDate';
-import CommonSelectItem from 'components/@common/CommonSelectItem';
+import InputForm from 'components/@common/InputForm';
 
 type DatePickerProps = {date: Date; updateDate: (date: Date) => void};
 
@@ -22,12 +22,11 @@ export default function DatePicker({date, updateDate}: DatePickerProps) {
   };
 
   return (
-    <CommonSelectItem
+    <InputForm
       label={'날짜'}
-      variant={'gray'}
-      handlePressSelectItem={handlePressDateTimePicker}
-      value={getFormattedDate(date)}
       placeholder="날짜를 선택하세요"
+      onPress={handlePressDateTimePicker}
+      value={getFormattedDate(date)}
       bottomSheet={
         <DateTimePickerModal
           isVisible={isDateTimePickerVisible}

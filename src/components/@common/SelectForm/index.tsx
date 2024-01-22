@@ -5,7 +5,7 @@ import {categoryState} from 'libs/recoil/states/category';
 import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import {addItemToCategoryList} from 'utils/addItemToCategoryList';
 import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
-import CommonSelectItem from 'components/@common/CommonSelectItem';
+import InputForm from 'components/@common/InputForm';
 
 const dummyCategories = [
   '현금',
@@ -18,19 +18,13 @@ const dummyCategories = [
 /**
  * @param label label 텍스트
  * @param placeholder placeholder 텍스트
- * @param variant SelectForm 종류를 나타냄 'primary' | 'gray'
  */
 type SelectFormProps = {
   label: string;
   placeholder?: string;
-  variant?: 'primary' | 'gray';
 };
 
-export default function SelectForm({
-  label,
-  placeholder,
-  variant = 'gray',
-}: SelectFormProps) {
+export default function SelectForm({label, placeholder}: SelectFormProps) {
   const [categoryList, setCategoryList] = useState<string[]>([]);
   const selectedCategory = useRecoilValue(categoryState);
   const setIsBottomSheetOpen = useSetRecoilState(selectFormBottomSheetState);
@@ -51,10 +45,9 @@ export default function SelectForm({
   const handlePressCategoryItem = () => setIsBottomSheetOpen(true);
 
   return (
-    <CommonSelectItem
+    <InputForm
       label={label}
-      variant={variant}
-      handlePressSelectItem={handlePressCategoryItem}
+      onPress={handlePressCategoryItem}
       value={selectedCategory}
       placeholder={placeholder}
       bottomSheet={

@@ -1,8 +1,7 @@
 import React, {ReactNode} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet, TextInputProps, TouchableOpacity} from 'react-native';
 import {theme} from 'styles';
 import Typography from 'components/@common/Typography';
-import {ThemeVariants} from 'constants/CommonSelectItem';
 
 /**
  * @param label label 텍스트
@@ -12,42 +11,28 @@ import {ThemeVariants} from 'constants/CommonSelectItem';
  * @param placeholder SelectItem placeholder 텍스트
  * @param bottomSheet SelectItem을 눌렀을 때 나타나는 bottomSheet
  */
-type CommonSelectButtonProps = {
+type InputFormProps = TextInputProps & {
   label: string;
-  variant: 'primary' | 'gray';
-  handlePressSelectItem: () => void;
+  onPress?: () => void;
   value: string;
-  placeholder?: string;
-  bottomSheet: ReactNode;
+  bottomSheet?: ReactNode;
 };
 
-export default function CommonSelectItem({
+export default function InputForm({
   label,
-  variant,
-  handlePressSelectItem,
+  onPress,
   value,
-  placeholder,
   bottomSheet,
-}: CommonSelectButtonProps) {
-  const {
-    backgroundColor,
-    labelTextColor,
-    valueTextColor,
-    placeholderTextColor,
-  } = ThemeVariants[variant];
-
+  ...props
+}: InputFormProps) {
   return (
     <>
-      <TouchableOpacity
-        onPress={handlePressSelectItem}
-        style={[selectFormStyles.container, {backgroundColor}]}>
-        <Typography type={'Body1Semibold'} color={labelTextColor}>
+      <TouchableOpacity onPress={onPress} style={selectFormStyles.container}>
+        <Typography type={'Body1Semibold'} color={'gray6'}>
           {label}
         </Typography>
-        <Typography
-          type={'Body1Semibold'}
-          color={value ? valueTextColor : placeholderTextColor}>
-          {value || placeholder}
+        <Typography {...props} type={'Body1Semibold'} color={'gray6'}>
+          {value}
         </Typography>
       </TouchableOpacity>
       {bottomSheet}
@@ -57,10 +42,10 @@ export default function CommonSelectItem({
 
 const selectFormStyles = StyleSheet.create({
   container: {
+    backgroundColor: theme.palette.gray2,
     width: '100%',
     height: 49,
     borderRadius: 18,
-    backgroundColor: theme.palette.gray2,
     paddingHorizontal: 21,
     display: 'flex',
     flexDirection: 'row',
