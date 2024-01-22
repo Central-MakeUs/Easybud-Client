@@ -6,6 +6,7 @@ import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import {addItemToCategoryList} from 'utils/addItemToCategoryList';
 import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
 import InputForm from 'components/@common/InputForm';
+import {TouchableOpacity} from 'react-native';
 
 const dummyCategories = [
   '현금',
@@ -45,18 +46,19 @@ export default function SelectForm({label, placeholder}: SelectFormProps) {
   const handlePressCategoryItem = () => setIsBottomSheetOpen(true);
 
   return (
-    <InputForm
-      label={label}
-      onPress={handlePressCategoryItem}
-      value={selectedCategory}
-      placeholder={placeholder}
-      bottomSheet={
-        <SelectFormBottomSheet
+    <>
+      <TouchableOpacity onPress={handlePressCategoryItem}>
+        <InputForm
           label={label}
-          categoryList={categoryList}
-          setCategoryList={setCategoryList}
+          value={selectedCategory}
+          placeholder={placeholder}
         />
-      }
-    />
+      </TouchableOpacity>
+      <SelectFormBottomSheet
+        label={label}
+        categoryList={categoryList}
+        setCategoryList={setCategoryList}
+      />
+    </>
   );
 }

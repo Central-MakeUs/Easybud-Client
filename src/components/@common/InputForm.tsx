@@ -8,20 +8,17 @@ import {
 import {theme} from 'styles';
 import Typography from 'components/@common/Typography';
 
-/**
- * @param label label 텍스트
- */
-type InputFieldProps = TextInputProps & {
+type InputFormProps = TextInputProps & {
   label: string;
   onPress?: () => void;
 };
 
-export default function InputField({
+export default function InputForm({
   label,
   value,
   onPress,
   ...props
-}: InputFieldProps) {
+}: InputFormProps) {
   const inputRef = useRef<TextInput>(null);
 
   const focusOnInput = () => inputRef.current?.focus();
@@ -34,11 +31,11 @@ export default function InputField({
         {label}
       </Typography>
       <TextInput
+        value={value}
         ref={inputRef}
         style={[theme.typography.Body1Semibold, {color: theme.palette.gray6}]}
-        {...props}>
-        {value}
-      </TextInput>
+        {...props}
+      />
     </TouchableOpacity>
   );
 }
