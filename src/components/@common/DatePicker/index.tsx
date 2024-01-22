@@ -2,7 +2,6 @@ import {useState} from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {getFormattedDate} from 'utils/formatDate';
 import InputForm from 'components/@common/InputForm';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 
 type DatePickerProps = {date: Date; updateDate: (date: Date) => void};
 
@@ -24,13 +23,12 @@ export default function DatePicker({date, updateDate}: DatePickerProps) {
 
   return (
     <>
-      <TouchableOpacity onPress={handlePressDateTimePicker}>
-        <InputForm
-          label={'날짜'}
-          value={getFormattedDate(date)}
-          placeholder={'날짜를 선택하세요'}
-        />
-      </TouchableOpacity>
+      <InputForm
+        onPress={handlePressDateTimePicker}
+        label={'날짜'}
+        value={getFormattedDate(date)}
+        placeholder={'날짜를 선택하세요'}
+      />
       <DateTimePickerModal
         isVisible={isDateTimePickerVisible}
         mode="date"

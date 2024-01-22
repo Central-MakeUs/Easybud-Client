@@ -1,11 +1,11 @@
-import {AccountUnion, NewAccountUnion} from 'types/account';
+import {Account, NewAccount} from 'types/account';
 
 export type Transaction = {
   id: number;
   /** 거래일 */
   date: Date;
   /** 계정 */
-  accounts: AccountUnion[];
+  accounts: Account[];
   /** 적요 */
   summary?: string | null;
 };
@@ -13,5 +13,5 @@ export type Transaction = {
 /////////////////////////////////////////////
 
 export type NewTransaction = Omit<Transaction, 'id' | 'accounts'> & {
-  accounts: NewAccountUnion[];
+  accounts: NewAccount[];
 };

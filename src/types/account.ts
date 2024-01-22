@@ -1,52 +1,52 @@
-/** 모든 계정 타입을 포함하는 유니온 타입 */
-export type AccountUnion = {
-  [K in AccountName]: Account<K>;
-}[AccountName];
-
 /** 계정 */
-type Account<T extends AccountName> = {
+export type Account = {
   id: number;
   /** 거래의 8요소 중 하나에 해당하는 계정 타입 */
-  type: AccountType<T>;
+  type: AccountTypeUnion;
   /** 계정의 대분류, 중분류, 소분류, 세분류를 포함하는 분류 */
   category: AccountCategory;
   amount: number;
   memo?: string | null;
 };
 
-/////////////////////////////////////////////
+///////////////////////////////////////////// /** 거래의 8요소 중 하나에 해당하는 계정 타입 */
+
+/** 거래의 8요소 중 하나에 해당하는 계정 타입 */
+export type AccountTypeUnion = {
+  [K in AccountName]: AccountType<K>;
+}[AccountName];
 
 /** 거래의 8요소*/
-type AccountType<T extends AccountName> = {
+export type AccountType<T extends AccountName> = {
   name: T;
   change: Changes[T];
 };
 
 /** 계정 이름 */
 type AccountName =
-  | 'Asset' // 자산
-  | 'Liability' // 부채
-  | 'Equity' // 자본
-  | 'Revenue' // 수익
-  | 'Expense'; // 비용
+  | '자산' // Asset
+  | '부채' // Liability
+  | '자본' // Equity
+  | '수익' // Revenue
+  | '비용'; // Expense
 
 type Changes = {
-  Asset: Change;
-  Liability: Change;
-  Equity: Change;
-  Revenue: Occurrence;
-  Expense: Occurrence;
+  자산: Change;
+  부채: Change;
+  자본: Change;
+  수익: Occurrence;
+  비용: Occurrence;
 };
 
 /** 증가/감소 */
-type Change = 'increase' | 'decrease';
+type Change = '증가' | '감소';
 
 /** 발생 */
-type Occurrence = 'occurrence';
+type Occurrence = '발생';
 
-/////////////////////////////////////////////
+///////////////////////////////////////////// /** 계정의 대분류, 중분류, 소분류, 세분류를 포함하는 분류 */
 
-/** 계정 분류 */
+/** 계정의 대분류, 중분류, 소분류, 세분류를 포함하는 분류 */
 type AccountCategory = {
   /** 대분류 */
   primary: string;
@@ -60,8 +60,4 @@ type AccountCategory = {
 
 /////////////////////////////////////////////
 
-export type NewAccountUnion = {
-  [K in AccountName]: NewAccount<K>;
-}[AccountName];
-
-type NewAccount<T extends AccountName> = Omit<Account<T>, 'id'>;
+export type NewAccount = Omit<Account, 'id'>;

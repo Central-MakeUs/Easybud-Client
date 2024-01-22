@@ -5,7 +5,7 @@ import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import RightButton from 'components/CreateTransactionStack/RightButton';
-import {NewAccountUnion} from 'types/account';
+import {NewAccount} from 'types/account';
 import {NewTransaction} from 'types/transaction';
 
 type AccountCategoryScreenProps = {
@@ -18,7 +18,7 @@ export default function AccountCategoryScreen({
 }: AccountCategoryScreenProps) {
   const {transaction: prevTransaction, isUpdateStep, accountIndex} = params;
 
-  const [account, setAccount] = useState<NewAccountUnion>(() => {
+  const [account, setAccount] = useState<NewAccount>(() => {
     const index = isUpdateStep
       ? accountIndex
       : prevTransaction.accounts.length - 1;

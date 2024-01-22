@@ -1,4 +1,4 @@
-import {TextInput, TextInputProps} from 'react-native';
+import {Text, TextProps} from 'react-native';
 import {theme} from 'styles';
 import {KeyOfPalette, KeyOfTypography} from 'styles/types';
 
@@ -9,7 +9,7 @@ import {KeyOfPalette, KeyOfTypography} from 'styles/types';
 type TypographyProps = {
   type?: KeyOfTypography;
   color?: KeyOfPalette;
-} & TextInputProps;
+} & TextProps;
 
 export default function Typography({
   type = 'Body1Regular',
@@ -17,7 +17,7 @@ export default function Typography({
   ...props
 }: TypographyProps) {
   return (
-    <TextInput
+    <Text
       {...props}
       style={[
         props.style,

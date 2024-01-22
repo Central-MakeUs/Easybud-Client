@@ -2,14 +2,26 @@ import {useMemo, useState} from 'react';
 import {cloneDeep, isEqual} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import ScreenContainer from 'components/@common/ScreenContainer';
-import Typography from 'components/@common/Typography';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import {NewTransaction} from 'types/transaction';
-import {NewAccountUnion} from 'types/account';
+import {AccountTypeUnion, NewAccount} from 'types/account';
+import Button from 'components/@common/buttons/Button';
+import {StyleSheet, View} from 'react-native';
 
-export const initialAccount: NewAccountUnion = {
-  type: {name: 'Asset', change: 'increase'},
+const accountTypes: AccountTypeUnion[] = [
+  {name: '자산', change: '증가'},
+  {name: '자산', change: '감소'},
+  {name: '부채', change: '증가'},
+  {name: '부채', change: '감소'},
+  {name: '자본', change: '증가'},
+  {name: '자본', change: '감소'},
+  {name: '수익', change: '발생'},
+  {name: '비용', change: '발생'},
+];
+
+const initialAccount: NewAccount = {
+  type: accountTypes[0],
   amount: 0,
   category: {primary: '', secondary: ''},
 };
@@ -24,10 +36,21 @@ export default function AccountTypeScreen({
 }: AccountTypeScreenProps) {
   const {transaction: prevTransaction, isUpdateStep, accountIndex} = params;
 
-  const [account, setAccount] = useState<NewAccountUnion>(
-    isUpdateStep ? prevTransaction.accounts[accountIndex] : initialAccount,
+  const [account, setAccount] = useState<NewAccount>(
+    // 이전 버튼이었다가 다시 돌아가는 걸 어케알아차리지 ? ? ??  ㅅㅂ
+    isUpdateStep || prevTransaction.accounts.length - 1 === accountIndex
+      ? prevTransaction.accounts[accountIndex]
+      : initialAccount,
   );
-  setAccount;
+
+  console.log(
+    'hihi',
+    prevTransaction.accounts.length - 1,
+    accountIndex,
+    isUpdateStep || prevTransaction.accounts.length - 1 === accountIndex
+      ? prevTransaction.accounts[accountIndex]
+      : initialAccount,
+  );
 
   const transaction = useMemo<NewTransaction>(() => {
     const accounts = cloneDeep(prevTransaction.accounts);
@@ -40,6 +63,10 @@ export default function AccountTypeScreen({
 
     return {...prevTransaction, accounts};
   }, [account, accountIndex, isUpdateStep, prevTransaction]);
+
+  const handleChangeAccountType = (type: AccountTypeUnion) => {
+    setAccount(prev => ({...prev, type}));
+  };
 
   const disabledRightButton = useMemo(() => {
     return (
@@ -64,8 +91,28 @@ export default function AccountTypeScreen({
           />
         </>
       }>
-      <Typography>type name: {account.type.name}</Typography>
-      <Typography>type change: {account.type.change}</Typography>
+      <View style={styles.container}>
+        {accountTypes.map(item => (
+          <Button
+            style={styles.item}
+            key={`${item.name} ${item.change}`}
+            onPress={() => handleChangeAccountType(item)}
+            variant={
+              isEqual(account.type, item) ? 'primary' : 'secondary'
+            }>{`${item.name} ${item.change}`}</Button>
+        ))}
+      </View>
     </ScreenContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    gap: 10,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  item: {
+    flexBasis: '40%',
+  },
+});

@@ -30,12 +30,18 @@ export default function InputForm({
       <Typography type={'Body1Semibold'} color={'gray6'}>
         {label}
       </Typography>
-      <TextInput
-        value={value}
-        ref={inputRef}
-        style={[theme.typography.Body1Semibold, {color: theme.palette.gray6}]}
-        {...props}
-      />
+      {onPress ? (
+        <Typography type="Body1Semibold" color="gray6">
+          {value}
+        </Typography>
+      ) : (
+        <TextInput
+          value={value}
+          ref={inputRef}
+          style={[theme.typography.Body1Semibold, {color: theme.palette.gray6}]}
+          {...props}
+        />
+      )}
     </TouchableOpacity>
   );
 }

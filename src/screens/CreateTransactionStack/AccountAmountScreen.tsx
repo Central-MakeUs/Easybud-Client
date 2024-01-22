@@ -5,8 +5,7 @@ import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import {cloneDeep, isEmpty} from 'lodash';
 import {useState, useMemo} from 'react';
-import {initialAccount} from 'screens/CreateTransactionStack/AccountTypeScreen';
-import {NewAccountUnion} from 'types/account';
+import {NewAccount} from 'types/account';
 import {NewTransaction} from 'types/transaction';
 
 type AccountAmountScreenProps = {
@@ -19,9 +18,13 @@ export default function AccountAmountScreen({
 }: AccountAmountScreenProps) {
   const {transaction: prevTransaction, isUpdateStep, accountIndex} = params;
 
-  const [account, setAccount] = useState<NewAccountUnion>(
-    isUpdateStep ? prevTransaction.accounts[accountIndex] : initialAccount,
-  );
+  const [account, setAccount] = useState<NewAccount>(() => {
+    const index = isUpdateStep
+      ? accountIndex
+      : prevTransaction.accounts.length - 1;
+
+    return prevTransaction.accounts[index];
+  });
   setAccount;
 
   const transaction = useMemo<NewTransaction>(() => {
