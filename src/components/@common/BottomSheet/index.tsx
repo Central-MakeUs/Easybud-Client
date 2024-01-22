@@ -25,7 +25,6 @@ export default CommonBottomSheet;
 
 const styles = StyleSheet.create({
   bottomSheetContainer: {
-    display: 'flex',
     flexDirection: 'column',
     paddingBottom: 10,
   },
