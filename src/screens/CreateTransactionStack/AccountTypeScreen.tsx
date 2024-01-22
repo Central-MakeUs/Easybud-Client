@@ -37,19 +37,8 @@ export default function AccountTypeScreen({
   const {transaction: prevTransaction, isUpdateStep, accountIndex} = params;
 
   const [account, setAccount] = useState<NewAccount>(
-    // 이전 버튼이었다가 다시 돌아가는 걸 어케알아차리지 ? ? ??  ㅅㅂ
-    isUpdateStep || prevTransaction.accounts.length - 1 === accountIndex
-      ? prevTransaction.accounts[accountIndex]
-      : initialAccount,
-  );
-
-  console.log(
-    'hihi',
-    prevTransaction.accounts.length - 1,
-    accountIndex,
-    isUpdateStep || prevTransaction.accounts.length - 1 === accountIndex
-      ? prevTransaction.accounts[accountIndex]
-      : initialAccount,
+    // 이전 버튼이었다가 다시 돌아가는 걸 어케알아차리지 ? ? ??
+    isUpdateStep ? prevTransaction.accounts[accountIndex] : initialAccount,
   );
 
   const transaction = useMemo<NewTransaction>(() => {

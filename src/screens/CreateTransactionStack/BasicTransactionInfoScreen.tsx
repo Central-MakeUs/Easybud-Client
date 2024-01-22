@@ -21,7 +21,6 @@ export default function BasicTransactionInfoScreen({
   const [transaction, setTransaction] = useState<NewTransaction>(
     params?.isUpdateStep ? params.transaction : initialTransaction,
   );
-  setTransaction;
 
   const disabledRightButton = useMemo(() => {
     if (params?.isUpdateStep) {
