@@ -1,4 +1,8 @@
-import {NavigatorScreenParams, RouteProp} from '@react-navigation/native';
+import {
+  NavigationProp,
+  NavigatorScreenParams,
+  RouteProp,
+} from '@react-navigation/native';
 import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
@@ -11,14 +15,13 @@ export type RootStackParamList = {
   Tab?: NavigatorScreenParams<TabParamList>;
   OnBoarding: undefined;
   CreateTransactionStack: NavigatorScreenParams<CreateTransactionStackParamList>;
+  Setting: undefined;
 };
 
 export type TabParamList = {
   Ledger: undefined;
   Transaction: undefined;
   NavigateCreateTransaction: undefined;
-  Account: undefined;
-  Setting: undefined;
 };
 
 // only navigate this screen
@@ -64,6 +67,8 @@ export type RootStackNavigationProp =
 
 export type CreateTransactionStackNavigationProp =
   NativeStackNavigationProp<CreateTransactionStackParamList>;
+
+export type TabNavigationProp = NavigationProp<TabParamList>;
 
 /** screen props - unused*/
 

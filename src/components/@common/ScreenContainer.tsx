@@ -30,30 +30,28 @@ export default function ScreenContainer({
   ...props
 }: ScreenContainerProps) {
   return (
-    <>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardAvoidingView}>
-        <ScrollView
-          contentContainerStyle={[
-            fixedBottomComponent ? {paddingBottom: 100} : {},
-            styles.scrollViewContent,
-            props?.style,
-            props?.contentContainerStyle,
-          ]}>
-          {loading ? (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator size="large" color={theme.palette.primary} />
-            </View>
-          ) : (
-            children
-          )}
-        </ScrollView>
-        {fixedBottomComponent && (
-          <View style={styles.fixBottomComponent}>{fixedBottomComponent}</View>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={styles.keyboardAvoidingView}>
+      <ScrollView
+        contentContainerStyle={[
+          fixedBottomComponent ? {paddingBottom: 100} : {},
+          styles.scrollViewContent,
+          props?.style,
+          props?.contentContainerStyle,
+        ]}>
+        {loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color={theme.palette.primary} />
+          </View>
+        ) : (
+          children
         )}
-      </KeyboardAvoidingView>
-    </>
+      </ScrollView>
+      {fixedBottomComponent && (
+        <View style={styles.fixBottomComponent}>{fixedBottomComponent}</View>
+      )}
+    </KeyboardAvoidingView>
   );
 }
 

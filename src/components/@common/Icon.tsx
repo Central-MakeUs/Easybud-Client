@@ -2,7 +2,7 @@ import {SvgProps} from 'react-native-svg';
 import {theme} from 'styles';
 import {KeyOfPalette} from 'styles/types';
 import * as Icons from 'assets/icons';
-import {KeyOfIcons} from 'types/icon';
+import {KeyOfIcons} from 'types/components/Icon';
 
 /**
  * @param name 아이콘명

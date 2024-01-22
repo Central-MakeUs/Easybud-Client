@@ -1,35 +1,39 @@
+import {useNavigation} from '@react-navigation/native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import {theme} from 'styles';
-import {TabRouteProp, TabParamList} from 'navigators/types';
-import AccountScreen from 'screens/Tab/AccountScreen';
-import LedgerScreen from 'screens/Tab/LedgerScreen';
-import SettingScreen from 'screens/Tab/SettingScreen';
-import TransactionScreen from 'screens/Tab/TransactionScreen';
+import {typographyStyles} from 'styles/typography';
+import {
+  TabRouteProp,
+  TabParamList,
+  RootStackNavigationProp,
+} from 'navigators/types';
 import CreateTransactionButton from 'navigators/components/CreateTransactionButton';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import TabBarIcon from 'navigators/components/TabBarIcon';
 import NullScreen from 'navigators/components/NullScreen';
+import LedgerScreen from 'screens/Tab/LedgerScreen';
+import TransactionScreen from 'screens/Tab/TransactionScreen';
+import Icon from 'components/@common/Icon';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
 export default function TabNavigator() {
   const {bottom: bottomSize} = useSafeAreaInsets();
 
+  const navigation = useNavigation<RootStackNavigationProp>();
+
   return (
     <Tab.Navigator
-      screenOptions={({route}) => screenOptions({route, bottomSize})}>
+      screenOptions={({route}) => ({
+        ...screenOptions({route, bottomSize, navigation}),
+      })}>
       <Tab.Screen
         name={'Ledger'}
         component={LedgerScreen}
         options={{tabBarLabel: '장부'}}
-      />
-      <Tab.Screen
-        name={'Transaction'}
-        component={TransactionScreen}
-        options={{tabBarLabel: '거래'}}
       />
       <Tab.Screen
         name={'NavigateCreateTransaction'}
@@ -37,14 +41,9 @@ export default function TabNavigator() {
         options={{tabBarLabel: ''}}
       />
       <Tab.Screen
-        name={'Account'}
-        component={AccountScreen}
-        options={{tabBarLabel: '계정'}}
-      />
-      <Tab.Screen
-        name={'Setting'}
-        component={SettingScreen}
-        options={{tabBarLabel: '설정'}}
+        name={'Transaction'}
+        component={TransactionScreen}
+        options={{tabBarLabel: '거래'}}
       />
     </Tab.Navigator>
   );
@@ -53,7 +52,8 @@ export default function TabNavigator() {
 const screenOptions: (props: {
   route: TabRouteProp;
   bottomSize: number;
-}) => BottomTabNavigationOptions = ({route, bottomSize}) => ({
+  navigation: RootStackNavigationProp;
+}) => BottomTabNavigationOptions = ({route, bottomSize, navigation}) => ({
   tabBarIcon:
     route.name === 'NavigateCreateTransaction'
       ? CreateTransactionButton
@@ -74,11 +74,24 @@ const screenOptions: (props: {
     paddingVertical: 4,
   },
   tabBarLabelStyle: {
-    // Todo: 타이포 변경 시 변경 필요
-    fontSize: 10,
-    fontWeight: '500' as const,
+    ...typographyStyles.Body3Regular,
     marginBottom: bottomSize ? 0 : 4,
   },
-  headerShown: false,
+  headerStyle: {
+    height: 50,
+    backgroundColor: theme.palette.gray1,
+  },
   headerShadowVisible: false,
+  headerTitle: '로고',
+  headerTitleStyle: theme.typography.Body1Semibold,
+  headerRightContainerStyle: {
+    paddingRight: 15,
+  },
+  headerRight: () => (
+    <Icon
+      name={'Setting'}
+      size={20}
+      onPress={() => navigation.navigate('Setting')}
+    />
+  ),
 });

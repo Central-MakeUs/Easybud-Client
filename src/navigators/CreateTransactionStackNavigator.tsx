@@ -3,11 +3,11 @@ import {
   StackNavigationOptions,
   createStackNavigator,
 } from '@react-navigation/stack';
+import {CreateTransactionStackParamList} from 'navigators/types';
 import AccountAmountScreen from 'screens/CreateTransactionStack/AccountAmountScreen';
 import AccountCategoryScreen from 'screens/CreateTransactionStack/AccountCategoryScreen';
 import AccountTypeScreen from 'screens/CreateTransactionStack/AccountTypeScreen';
 import TransactionConfirmationScreen from 'screens/CreateTransactionStack/TransactionConfirmationScreen';
-import {CreateTransactionStackParamList} from 'navigators/types';
 import BasicTransactionInfoScreen from 'screens/CreateTransactionStack/BasicTransactionInfoScreen';
 
 const Stack = createStackNavigator<CreateTransactionStackParamList>();
