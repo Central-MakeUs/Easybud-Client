@@ -8,11 +8,13 @@ import Typography from 'components/@common/Typography';
 type ActionButtonWithBottomSheetProps = {
   buttonText: string;
   bottomSheetContent?: ReactNode;
+  onPress?: () => void;
 };
 
 export default function ActionButtonWithBottomSheet({
   buttonText,
   bottomSheetContent,
+  onPress,
 }: ActionButtonWithBottomSheetProps) {
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
@@ -22,7 +24,7 @@ export default function ActionButtonWithBottomSheet({
     <>
       <TouchableOpacity
         style={actionButtonWithBottomSheetStyles.button}
-        onPress={handlePressActionButton}>
+        onPress={onPress || handlePressActionButton}>
         <Typography type={'Body1Semibold'} color={'gray4'}>
           {buttonText}
         </Typography>

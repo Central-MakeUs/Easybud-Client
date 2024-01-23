@@ -10,6 +10,7 @@ import TabNavigator from 'navigators/TabNavigator';
 import useInitialData from 'hooks/useInitialData';
 import SettingScreen from 'screens/SettingScreen';
 import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
+import CardSettingScreen from 'screens/SettingScreen/CardSettingScreen';
 import Icon from 'components/@common/Icon';
 
 export const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -48,6 +49,15 @@ export default function RootStackNavigator() {
               headerShown: true,
               headerBackTitleVisible: true,
               headerTitle: '설정',
+            }}
+          />
+          <Stack.Screen
+            name={'CardSetting'}
+            component={CardSettingScreen}
+            options={{
+              headerShown: true,
+              headerBackTitleVisible: true,
+              headerTitle: '카드 설정',
             }}
           />
         </>

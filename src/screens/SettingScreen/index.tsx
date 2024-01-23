@@ -1,13 +1,19 @@
 import {View, StyleSheet} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {theme} from 'styles';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import ActionButtonWithBottomSheet from 'components/screens/SettingScreen/ActionButtonWithBottomSheet';
 
 export default function SettingScreen() {
+  const navigation = useNavigation();
+
   return (
     <ScreenContainer contentContainerStyle={{paddingHorizontal: 0}}>
-      <ActionButtonWithBottomSheet buttonText={'카드 설정'} />
+      <ActionButtonWithBottomSheet
+        buttonText={'카드 설정'}
+        onPress={() => navigation.navigate('CardSetting')}
+      />
       <View style={settingScreenStyles.divider} />
       <ActionButtonWithBottomSheet
         buttonText={'로그아웃'}
