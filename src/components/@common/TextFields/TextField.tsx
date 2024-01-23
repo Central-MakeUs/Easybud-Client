@@ -26,21 +26,13 @@ import Typography from 'components/@common/Typography';
 import DescriptionText from 'components/@common/TextFields/DescriptionText';
 
 /**
- * @param isAmountField AmountTextField인지 여부
- * @param isFocused text input의 focus 여부
- * @param label label 텍스트
- * @param height text input의 높이
- * @param setHeight text input의 높이를 변경하는 함수
- * @param setIsFocused text input의 focus 여부를 변경하는 함수
- * @param handleClearInput text input의 X 아이콘을 눌렀을 때 동작하는 함수
- * @param handleKeyPress text input에서 특정 키를 눌렀을 때 동작하는 함수
+ * @param children 자식 요소
  */
-
-export function Container({
-  children,
-}: {
+type ContainerProps = {
   children: ReactElement | ReactElement[];
-}) {
+};
+
+export function Container({children}: ContainerProps) {
   const textFieldContext = useContext(TextFieldContext);
 
   return (
@@ -76,7 +68,12 @@ export function Label({label}: {label: string}) {
   );
 }
 
-export function CustomTextInput({placeholder}: {placeholder?: string}) {
+/**
+ * @param placeholder placeholder 텍스트
+ */
+type CustomTextInputProps = {placeholder?: string};
+
+export function CustomTextInput({placeholder}: CustomTextInputProps) {
   const textFieldContext = useContext(TextFieldContext);
 
   const handleInputHeight = (
@@ -122,11 +119,16 @@ export function ClearIcon() {
   );
 }
 
+/**
+ * @param defaultCurrentBalance value가 0원인 경우 helper text에 뜰 대차 금액
+ */
+type TextFieldHelperTextProps = {
+  defaultCurrentBalance?: string;
+};
+
 export function TextFieldHelperText({
   defaultCurrentBalance,
-}: {
-  defaultCurrentBalance?: string;
-}) {
+}: TextFieldHelperTextProps) {
   const textFieldContext = useContext(TextFieldContext);
 
   return (
@@ -140,6 +142,19 @@ export function TextFieldHelperText({
 
 const TextFieldContext = createContext<TextFieldProps | undefined>(undefined);
 
+/**
+ * @param isAmountField AmountTextField인지 여부
+ * @param children 자식 요소
+ * @param defaultValue text input의 기본값
+ * @param value text input의 value 상태값
+ * @param setValue text input의 value 값을 변경하는 함수
+ * @param isFocused text input의 focus 여부
+ * @param setIsFocused text input의 focus 여부 값을 변경하는 함수
+ * @param height text input의 높이
+ * @param setHeight text input의 높이를 변경하는 함수
+ * @param handleClearInput text input의 X 아이콘을 눌렀을 때 동작하는 함수
+ * @param handleKeyPress text input에서 특정 키를 눌렀을 때 동작하는 함수
+ */
 type TextFieldProps = {
   isAmountField?: boolean;
   children?: ReactElement | ReactElement[];
@@ -151,7 +166,6 @@ type TextFieldProps = {
   height?: number;
   setHeight?: Dispatch<SetStateAction<number>>;
   handleClearInput?: () => void;
-  onChangeText?: (text: string) => void;
   handleKeyPress?: (
     e: NativeSyntheticEvent<TextInputKeyPressEventData>,
   ) => void;
@@ -192,6 +206,7 @@ export function TextField({
       e.preventDefault();
     } else {
       const newValue = e.nativeEvent.key;
+
       setValue(prevValue =>
         isAmountField
           ? formatValue(prevValue + newValue)
