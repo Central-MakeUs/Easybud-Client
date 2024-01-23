@@ -2,9 +2,8 @@ import {View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {theme} from 'styles';
 import ScreenContainer from 'components/@common/ScreenContainer';
-import Typography from 'components/@common/Typography';
 import ActionButtonWithBottomSheet from 'components/screens/SettingScreen/ActionButtonWithBottomSheet';
-import Button from 'components/@common/Buttons/Button';
+import MemberManagementBottomSheetContent from 'components/screens/SettingScreen/MemberManagementBottomSheetContent';
 
 export default function SettingScreen() {
   const navigation = useNavigation();
@@ -21,23 +20,13 @@ export default function SettingScreen() {
       <ActionButtonWithBottomSheet
         buttonText={'로그아웃'}
         bottomSheetContent={
-          <View style={settingScreenStyles.bottomSheetContainer}>
-            <Typography type={'Body1Semibold'} color={'gray5'}>
-              정말 로그아웃하시겠습니까?
-            </Typography>
-            <Button>로그아웃하기</Button>
-          </View>
+          <MemberManagementBottomSheetContent variant="logout" />
         }
       />
       <ActionButtonWithBottomSheet
         buttonText={'회원 탈퇴'}
         bottomSheetContent={
-          <View style={settingScreenStyles.bottomSheetContainer}>
-            <Typography type={'Body1Semibold'} color={'gray5'}>
-              정말 탈퇴하시겠습니까?
-            </Typography>
-            <Button>탈퇴하기</Button>
-          </View>
+          <MemberManagementBottomSheetContent variant="leave" />
         }
       />
     </ScreenContainer>
