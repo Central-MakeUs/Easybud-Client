@@ -3,6 +3,7 @@ import {StyleSheet, TextInputProps, TouchableOpacity} from 'react-native';
 import TextField from 'components/@common/TextFields/TextField';
 import Typography from 'components/@common/Typography';
 import {theme} from 'styles';
+import {isEqual} from 'lodash';
 
 /**
  * @param amount 현 계좌 금액
@@ -25,18 +26,21 @@ export default function AmountTextField({
   return (
     <>
       <TextField
+        type="number"
         autoFocus
         value={amount.toString()}
         onChangeText={text => onChange(Number(text))}
         keyboardType="number-pad"
       />
-      <TouchableOpacity
-        onPress={() => onChange(-1 * balance)}
-        style={descriptionTextStyles.button}>
-        <Typography type={'Body2Semibold'}>
-          현재 대차: {balance}원 입력
-        </Typography>
-      </TouchableOpacity>
+      {isEqual(amount, Math.abs(balance)) ? null : (
+        <TouchableOpacity
+          onPress={() => onChange(Math.abs(balance))}
+          style={descriptionTextStyles.button}>
+          <Typography type={'Body2Semibold'}>
+            현재 대차: {balance}원 입력
+          </Typography>
+        </TouchableOpacity>
+      )}
     </>
   );
 }
