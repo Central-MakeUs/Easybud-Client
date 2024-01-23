@@ -1,4 +1,3 @@
-import {View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import Button from 'components/@common/Buttons/Button';
 
@@ -20,16 +19,12 @@ export default function CardSettingFixedButton({
   };
 
   return (
-    <View style={cardSettingFixedButtonStyles.fixedBottomContainer}>
+    <>
       <Button
         disabled={!cardName || !keyNoteText || !startDate}
         onPress={handlePressSaveButton}>
         저장하기
       </Button>
-    </View>
+    </>
   );
 }
-
-const cardSettingFixedButtonStyles = StyleSheet.create({
-  fixedBottomContainer: {width: '100%', height: 56},
-});
