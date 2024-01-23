@@ -7,7 +7,7 @@ import {theme} from 'styles';
 import useBottomSheet from 'hooks/useBottomSheet';
 import ListItem from 'components/@common/SelectForm/CategoryListItem';
 import {isEmpty} from 'lodash';
-import Button from 'components/@common/buttons/Button';
+import Button from 'components/@common/Buttons/Button';
 import {CategoryName} from 'constants/components/SelectForm';
 
 /**

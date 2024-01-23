@@ -5331,6 +5331,11 @@ cache-base@^1.0.1:
     union-value "^1.0.0"
     unset-value "^1.0.0"
 
+calendarize@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/calendarize/-/calendarize-1.1.1.tgz#0fa8b8de6b5e6ff9f9fbb89cc3a8c01aace291c2"
+  integrity sha512-C2JyBAtNp2NG4DX4fA1EILggLt/5PlYzvQR0crHktoAPBc9TlIfdhzg7tWekCbe+pH6+9qoK+FhPbi+vYJJlqw==
+
 call-bind@^1.0.0, call-bind@^1.0.2, call-bind@^1.0.4, call-bind@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/call-bind/-/call-bind-1.0.5.tgz#6fa2b7845ce0ea49bf4d8b9ef64727a2c2e2e513"
@@ -6230,7 +6235,7 @@ damerau-levenshtein@^1.0.8:
   resolved "https://registry.yarnpkg.com/damerau-levenshtein/-/damerau-levenshtein-1.0.8.tgz#b43d286ccbd36bc5b2f7ed41caf2d0aba1f8a6e7"
   integrity sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==
 
-dayjs@^1.8.15:
+dayjs@^1.11.10, dayjs@^1.8.15:
   version "1.11.10"
   resolved "https://registry.yarnpkg.com/dayjs/-/dayjs-1.11.10.tgz#68acea85317a6e164457d6d6947564029a6a16a0"
   integrity sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==
@@ -12144,6 +12149,14 @@ react-is@^16.13.0, react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-native-big-calendar@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/react-native-big-calendar/-/react-native-big-calendar-4.9.0.tgz#0a90d0e2ca19da580c5f0c85d2f6469d30115d1d"
+  integrity sha512-vYrgypaXQbNL916KLh+iKHq0XuvxL8CwOjm1MPiCBKPo2+Lde5g/ep+KPnkfTumQ7g/tOYcIg3hW3C4wugtKxA==
+  dependencies:
+    calendarize "^1.1.1"
+    dayjs "^1.11.10"
 
 react-native-codegen@^0.71.5:
   version "0.71.6"

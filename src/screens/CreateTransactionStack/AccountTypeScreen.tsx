@@ -6,7 +6,7 @@ import RightButton from 'components/CreateTransactionStack/RightButton';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import {NewTransaction} from 'types/transaction';
 import {AccountTypeUnion, NewAccount} from 'types/account';
-import Button from 'components/@common/buttons/Button';
+import Button from 'components/@common/Buttons/Button';
 import {StyleSheet, View} from 'react-native';
 
 const accountTypes: AccountTypeUnion[] = [

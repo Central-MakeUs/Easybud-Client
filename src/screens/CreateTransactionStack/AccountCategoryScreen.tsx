@@ -7,7 +7,7 @@ import RightButton from 'components/CreateTransactionStack/RightButton';
 import {AccountCategory, NewAccount} from 'types/account';
 import {NewTransaction} from 'types/transaction';
 import SelectForm from 'components/@common/SelectForm';
-import {CategoryName} from 'constants/SelectForm';
+import {CategoryName} from 'constants/components/SelectForm';
 
 type AccountCategoryScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountCategory'>;

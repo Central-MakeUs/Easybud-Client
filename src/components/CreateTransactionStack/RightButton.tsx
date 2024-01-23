@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import Button from 'components/@common/buttons/Button';
+import Button from 'components/@common/Buttons/Button';
 import {
   CreateTransactionStackNavigationProp,
   CreateTransactionStackScreenName,
