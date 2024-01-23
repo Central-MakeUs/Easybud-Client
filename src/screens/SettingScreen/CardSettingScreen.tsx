@@ -1,12 +1,11 @@
 import {useState} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {StyleSheet} from 'react-native';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import CommonSelectItem from 'components/@common/CommonSelectItem';
 import InputBottomSheet from 'components/@common/InputBottomSheet';
 import BottomSheet from 'components/@common/BottomSheet';
 import Typography from 'components/@common/Typography';
-import Button from 'components/@common/Buttons/Button';
+import CardSettingFixedButton from 'components/screens/SettingScreen/CardSettingFixedButton';
 
 export default function CardSettingScreen() {
   const [cardName, setCardName] = useState('');
@@ -20,26 +19,31 @@ export default function CardSettingScreen() {
   const [isKeyNoteBottomSheetOpen, setIsKeyNoteBottomSheetOpen] =
     useState(false);
 
-  const navigation = useNavigation();
+  const handlePressCardNameSelectItem = () =>
+    setIsCardNameBottomSheetOpen(true);
+
+  const handlePressPeriodSelectItem = () => {
+    setIsPeriodBottomSheetOpen(true);
+  };
+
+  const handlePressKeyNoteSelectItem = () => {
+    setIsKeyNoteBottomSheetOpen(true);
+  };
 
   return (
     <ScreenContainer
       contentContainerStyle={cardSettingScreenStyles.contentContainer}
       fixedBottomComponent={
-        <View style={cardSettingScreenStyles.fixedBottomContainer}>
-          <Button
-            disabled={!cardName || !keyNoteText || !startDate}
-            onPress={() => {
-              navigation.navigate('Setting');
-            }}>
-            저장하기
-          </Button>
-        </View>
+        <CardSettingFixedButton
+          cardName={cardName}
+          keyNoteText={keyNoteText}
+          startDate={startDate}
+        />
       }>
       <CommonSelectItem
         label={'카드명'}
         variant={'gray'}
-        handlePressSelectItem={() => setIsCardNameBottomSheetOpen(true)}
+        handlePressSelectItem={handlePressCardNameSelectItem}
         value={cardName}
         placeholder="카드명을 입력해주세요"
         bottomSheet={
@@ -56,9 +60,7 @@ export default function CardSettingScreen() {
       <CommonSelectItem
         label={'사용 기간'}
         variant={'gray'}
-        handlePressSelectItem={() => {
-          setIsPeriodBottomSheetOpen(true);
-        }}
+        handlePressSelectItem={handlePressPeriodSelectItem}
         value={startDate}
         placeholder="기간을 선택해주세요"
         bottomSheet={
@@ -76,9 +78,7 @@ export default function CardSettingScreen() {
       <CommonSelectItem
         label={'적요'}
         variant={'gray'}
-        handlePressSelectItem={() => {
-          setIsKeyNoteBottomSheetOpen(true);
-        }}
+        handlePressSelectItem={handlePressKeyNoteSelectItem}
         value={keyNoteText}
         placeholder={'적요를 입력해주세요'}
         bottomSheet={
@@ -100,5 +100,4 @@ const cardSettingScreenStyles = StyleSheet.create({
   contentContainer: {
     gap: 10,
   },
-  fixedBottomContainer: {width: '100%', height: 56},
 });
