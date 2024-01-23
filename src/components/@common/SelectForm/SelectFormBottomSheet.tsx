@@ -6,6 +6,7 @@ import {
   useState,
 } from 'react';
 import {View, StyleSheet} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 import {SetterOrUpdater, useRecoilState, useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
 import {categoryState} from 'libs/recoil/states/category';
@@ -17,7 +18,6 @@ import CategoryList from 'components/@common/SelectForm/CategoryList';
 import TextArea from 'components/@common/TextArea';
 import Button from 'components/@common/Buttons/Button';
 import {SelectFormProps} from 'components/@common/SelectForm';
-import {useFocusEffect} from '@react-navigation/native';
 
 /**
  * @param label label 텍스트
