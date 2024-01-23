@@ -4,6 +4,7 @@ import {theme} from 'styles';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import ActionButtonWithBottomSheet from 'components/screens/SettingScreen/ActionButtonWithBottomSheet';
+import Button from 'components/@common/Buttons/Button';
 
 export default function SettingScreen() {
   const navigation = useNavigation();
@@ -20,17 +21,23 @@ export default function SettingScreen() {
       <ActionButtonWithBottomSheet
         buttonText={'로그아웃'}
         bottomSheetContent={
-          <>
-            <Typography>로그아웃</Typography>
-          </>
+          <View style={settingScreenStyles.bottomSheetContainer}>
+            <Typography type={'Body1Semibold'} color={'gray5'}>
+              정말 로그아웃하시겠습니까?
+            </Typography>
+            <Button>로그아웃하기</Button>
+          </View>
         }
       />
       <ActionButtonWithBottomSheet
         buttonText={'회원 탈퇴'}
         bottomSheetContent={
-          <>
-            <Typography>회원 탈퇴</Typography>
-          </>
+          <View style={settingScreenStyles.bottomSheetContainer}>
+            <Typography type={'Body1Semibold'} color={'gray5'}>
+              정말 탈퇴하시겠습니까?
+            </Typography>
+            <Button>탈퇴하기</Button>
+          </View>
         }
       />
     </ScreenContainer>
@@ -53,5 +60,12 @@ const settingScreenStyles = StyleSheet.create({
     width: '100%',
     height: 7,
     backgroundColor: theme.palette.gray3,
+  },
+  bottomSheetContainer: {
+    height: '100%',
+    padding: 20,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
 });

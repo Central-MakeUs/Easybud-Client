@@ -34,6 +34,7 @@ export default function ActionButtonWithBottomSheet({
         <BottomSheet
           isBottomSheetOpen={isBottomSheetOpen}
           setIsBottomSheetOpen={setIsBottomSheetOpen}
+          height={140}
           children={bottomSheetContent}
         />
       )}

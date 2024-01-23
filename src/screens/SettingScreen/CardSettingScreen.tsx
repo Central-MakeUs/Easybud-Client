@@ -2,12 +2,16 @@ import {useState} from 'react';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import CommonSelectItem from 'components/@common/CommonSelectItem';
 import InputBottomSheet from 'components/@common/InputBottomSheet';
+import BottomSheet from 'components/@common/BottomSheet';
+import Typography from 'components/@common/Typography';
 
 export default function CardSettingScreen() {
   const [cardName, setCardName] = useState('');
   const [cardInputText, setCardInputText] = useState('');
   const [isCardNameBottomSheetOpen, setIsCardNameBottomSheetOpen] =
     useState(false);
+  const [startDate, setStartDate] = useState('1일~말일');
+  const [isPeriodBottomSheetOpen, setIsPeriodBottomSheetOpen] = useState(false);
   const [keyNoteText, setKeyNoteText] = useState('');
   const [keyNoteInputText, setKeyNoteInputText] = useState('');
   const [isKeyNoteBottomSheetOpen, setIsKeyNoteBottomSheetOpen] =
@@ -33,12 +37,24 @@ export default function CardSettingScreen() {
         }
       />
       <CommonSelectItem
-        label={'기간'}
+        label={'사용 기간'}
         variant={'gray'}
-        handlePressSelectItem={() => {}}
-        value={''}
+        handlePressSelectItem={() => {
+          setIsPeriodBottomSheetOpen(true);
+        }}
+        value={startDate}
         placeholder="기간을 선택해주세요"
-        bottomSheet={undefined}
+        bottomSheet={
+          <BottomSheet
+            isBottomSheetOpen={isPeriodBottomSheetOpen}
+            setIsBottomSheetOpen={setIsPeriodBottomSheetOpen}
+            children={
+              <>
+                <Typography>기간</Typography>
+              </>
+            }
+          />
+        }
       />
       <CommonSelectItem
         label={'적요'}
