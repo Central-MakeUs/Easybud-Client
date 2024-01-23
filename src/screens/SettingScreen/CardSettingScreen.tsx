@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {StyleSheet} from 'react-native';
-import {startDateListData} from 'constants/screens/SettingScreen';
+import {cardUsagePeriodOptions} from 'constants/screens/SettingScreen';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import CommonSelectItem from 'components/@common/CommonSelectItem';
 import InputBottomSheet from 'components/@common/InputBottomSheet';
@@ -12,7 +12,9 @@ export default function CardSettingScreen() {
   const [cardInputText, setCardInputText] = useState('');
   const [isCardNameBottomSheetOpen, setIsCardNameBottomSheetOpen] =
     useState(false);
-  const [startDateList, setStartDateList] = useState(startDateListData ?? []);
+  const [cardUsagePeriodList, setCardUsagePeriodList] = useState(
+    cardUsagePeriodOptions ?? [],
+  );
   const [keyNoteText, setKeyNoteText] = useState('');
   const [keyNoteInputText, setKeyNoteInputText] = useState('');
   const [isKeyNoteBottomSheetOpen, setIsKeyNoteBottomSheetOpen] =
@@ -48,10 +50,10 @@ export default function CardSettingScreen() {
         }
       />
       <SelectForm
-        label={'사용 시작일'}
-        placeholder="사용 시작일을 선택해주세요"
-        categoryList={startDateList}
-        setCategoryList={setStartDateList}
+        label={'사용 기간'}
+        placeholder="사용 기간을 선택해주세요"
+        categoryList={cardUsagePeriodList}
+        setCategoryList={setCardUsagePeriodList}
       />
       <CommonSelectItem
         label={'적요'}
