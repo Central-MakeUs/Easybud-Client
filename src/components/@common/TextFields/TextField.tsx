@@ -61,7 +61,7 @@ export function Label({label}: LabelProps) {
   const {value} = useContext(TextFieldContext) || {};
 
   return (
-    value || (
+    value && (
       <Typography
         type={'Body2Regular'}
         color={'gray3'}
@@ -85,6 +85,7 @@ export function CustomTextInput({placeholder}: CustomTextInputProps) {
     handleKeyPress,
     isAmountField,
     height,
+    onChangeText,
   } = useContext(TextFieldContext) || {};
 
   const handleInputHeight = (
@@ -108,6 +109,7 @@ export function CustomTextInput({placeholder}: CustomTextInputProps) {
       onKeyPress={(e: NativeSyntheticEvent<TextInputKeyPressEventData>) =>
         handleKeyPress?.(e)
       }
+      onChangeText={onChangeText}
       multiline={true}
       underlineColorAndroid="transparent"
       onContentSizeChange={handleInputHeight}
@@ -122,7 +124,7 @@ export function ClearIcon() {
   const {value, handleClearInput} = useContext(TextFieldContext) || {};
 
   return (
-    value || (
+    value && (
       <TouchableOpacity onPress={handleClearInput}>
         <Icon name="XCircle" color={theme.palette.gray3} />
       </TouchableOpacity>
@@ -180,6 +182,7 @@ type TextFieldProps = {
   handleKeyPress?: (
     e: NativeSyntheticEvent<TextInputKeyPressEventData>,
   ) => void;
+  onChangeText?: (text: string) => void;
 };
 
 export function TextField({
@@ -206,21 +209,29 @@ export function TextField({
   const handleKeyPress = (
     e: NativeSyntheticEvent<TextInputKeyPressEventData>,
   ) => {
-    if (e.nativeEvent.key === 'Backspace') {
-      if (value !== '0원') {
-        const parsedValue = parseNumberFromString(value).slice(0, -1);
-        const newValue = `${formatNumberToLocaleString(parsedValue)}원`;
+    if (isAmountField) {
+      if (e.nativeEvent.key === 'Backspace') {
+        if (value !== '0원') {
+          const parsedValue = parseNumberFromString(value).slice(0, -1);
+          const newValue = `${formatNumberToLocaleString(parsedValue)}원`;
 
-        setValue(newValue);
+          setValue(newValue);
+        }
+
+        e.preventDefault();
+      } else {
+        setValue(prevValue =>
+          isAmountField
+            ? formatValue(prevValue + e.nativeEvent.key)
+            : prevValue + e.nativeEvent.key,
+        );
       }
+    }
+  };
 
-      e.preventDefault();
-    } else {
-      setValue(prevValue =>
-        isAmountField
-          ? formatValue(prevValue + e.nativeEvent.key)
-          : prevValue + e.nativeEvent.key,
-      );
+  const onChangeText = (text: string) => {
+    if (!isAmountField) {
+      setValue(text);
     }
   };
 
@@ -235,6 +246,7 @@ export function TextField({
         setHeight,
         handleClearInput,
         handleKeyPress,
+        onChangeText,
       }}>
       {children}
     </TextFieldContext.Provider>
