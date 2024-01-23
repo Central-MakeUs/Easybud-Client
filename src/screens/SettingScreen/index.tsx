@@ -11,7 +11,8 @@ export default function SettingScreen() {
   const handlePressCardSettingButton = () => navigation.navigate('CardSetting');
 
   return (
-    <ScreenContainer contentContainerStyle={{paddingHorizontal: 0}}>
+    <ScreenContainer
+      contentContainerStyle={settingScreenStyles.contentContainer}>
       <ActionButtonWithBottomSheet
         buttonText={'카드 설정'}
         onPress={handlePressCardSettingButton}
@@ -34,6 +35,9 @@ export default function SettingScreen() {
 }
 
 const settingScreenStyles = StyleSheet.create({
+  contentContainer: {
+    paddingHorizontal: 0,
+  },
   button: {
     height: 68,
     width: '100%',
