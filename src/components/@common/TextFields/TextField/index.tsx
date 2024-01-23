@@ -4,21 +4,21 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInputProps,
-  NativeSyntheticEvent,
-  TextInputContentSizeChangeEventData,
   Text,
 } from 'react-native';
 import {theme} from 'styles';
 import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
 import {useState} from 'react';
+import {extractNumbers, formatNumber} from 'utils/formatAmountValue';
 
 /**
  * @param type number, string
  * @param label label 텍스트
  */
-type TextFieldProps = TextInputProps & {
+type TextFieldProps = Omit<TextInputProps, 'value'> & {
   label?: string;
+  value: number | string;
   type?: 'number' | 'string';
 };
 
@@ -29,64 +29,53 @@ export default function TextField({
   type = 'string',
   ...props
 }: TextFieldProps) {
-  const [height, setHeight] = useState<number>(0);
   const [isFocused, setIsFocused] = useState<boolean>(false);
-
-  const handleInputHeight = (
-    e: NativeSyntheticEvent<TextInputContentSizeChangeEventData>,
-  ) => {
-    e.nativeEvent.contentSize.height &&
-      setHeight(e.nativeEvent.contentSize.height);
-  };
-
-  const handleClearInput = () => {
-    setHeight(0);
-    onChangeText && onChangeText('');
-  };
 
   const handleFocus = () => setIsFocused(true);
   const handleBlur = () => setIsFocused(false);
 
+  const handleChangeText = (text: string) =>
+    onChangeText && onChangeText(extractNumbers(text));
+
+  const handleClearInput = () => handleChangeText('');
+
   return (
     <View
       style={[
-        commonTextFieldStyles.textFieldContainer,
+        styles.textFieldContainer,
         {
           borderBottomColor:
             theme.palette[isFocused || value ? 'primary' : 'gray3'],
         },
       ]}>
       {label && (
-        <Typography
-          type={'Body2Regular'}
-          color={'gray3'}
-          style={commonTextFieldStyles.label}>
+        <Typography type={'Body2Regular'} color={'gray3'} style={styles.label}>
           {label}
         </Typography>
       )}
       <TextInput
-        {...props}
-        maxLength={15}
-        value={value}
-        onChangeText={onChangeText}
+        maxLength={20}
+        value={formatNumber(value.toString())}
+        onChangeText={handleChangeText}
         placeholderTextColor={theme.palette.gray3}
         onFocus={handleFocus}
         onBlur={handleBlur}
         underlineColorAndroid="transparent"
-        onContentSizeChange={handleInputHeight}
-        style={[commonTextFieldStyles.textInput, {height}]}
+        {...props}
       />
-      {type === 'number' && <Text style={commonTextFieldStyles.unit}>원</Text>}
-      {value !== '' && (
-        <TouchableOpacity onPress={handleClearInput}>
-          <Icon name="XCircle" color={theme.palette.gray3} />
-        </TouchableOpacity>
-      )}
+      <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
+        {type === 'number' && <Text style={styles.unit}>원</Text>}
+        {value !== '' && (
+          <TouchableOpacity onPress={handleClearInput}>
+            <Icon name="XCircle" color={theme.palette.gray3} />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 }
 
-const commonTextFieldStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   textFieldContainer: {
     flexDirection: 'row',
     borderBottomWidth: 1.5,
@@ -98,7 +87,6 @@ const commonTextFieldStyles = StyleSheet.create({
     paddingRight: 16,
     width: '100%',
     marginBottom: 10,
-    position: 'relative',
   },
   textInput: {
     ...theme.typography.Title1Bold,

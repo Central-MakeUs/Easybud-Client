@@ -32,3 +32,11 @@ export function calculateBalance(accounts: NewAccount[]): number {
 
   return totalDebit - totalCredit;
 }
+
+export function formatNumber(amount: string): string {
+  return amount.replace(/,/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+export function extractNumbers(str: string) {
+  return str.replace(/[^0-9]/g, '');
+}

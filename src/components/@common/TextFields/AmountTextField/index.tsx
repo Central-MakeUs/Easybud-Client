@@ -4,6 +4,7 @@ import TextField from 'components/@common/TextFields/TextField';
 import Typography from 'components/@common/Typography';
 import {theme} from 'styles';
 import {isEqual} from 'lodash';
+import {formatNumber} from 'utils/formatAmountValue';
 
 /**
  * @param amount 현 계좌 금액
@@ -28,7 +29,7 @@ export default function AmountTextField({
       <TextField
         type="number"
         autoFocus
-        value={amount.toString()}
+        value={amount}
         onChangeText={text => onChange(Number(text))}
         keyboardType="number-pad"
       />
@@ -37,7 +38,7 @@ export default function AmountTextField({
           onPress={() => onChange(Math.abs(balance))}
           style={descriptionTextStyles.button}>
           <Typography type={'Body2Semibold'}>
-            현재 대차: {balance}원 입력
+            현재 대차: {formatNumber(balance.toString())}원 입력
           </Typography>
         </TouchableOpacity>
       )}
