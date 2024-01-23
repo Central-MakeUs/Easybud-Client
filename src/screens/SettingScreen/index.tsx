@@ -8,11 +8,13 @@ import ActionButtonWithBottomSheet from 'components/screens/SettingScreen/Action
 export default function SettingScreen() {
   const navigation = useNavigation();
 
+  const handlePressCardSettingButton = () => navigation.navigate('CardSetting');
+
   return (
     <ScreenContainer contentContainerStyle={{paddingHorizontal: 0}}>
       <ActionButtonWithBottomSheet
         buttonText={'카드 설정'}
-        onPress={() => navigation.navigate('CardSetting')}
+        onPress={handlePressCardSettingButton}
       />
       <View style={settingScreenStyles.divider} />
       <ActionButtonWithBottomSheet
