@@ -93,7 +93,6 @@ export function CustomTextInput({placeholder}: {placeholder?: string}) {
   return (
     <TextInput
       value={textFieldContext?.value}
-      onChangeText={textFieldContext?.onChangeText}
       placeholder={placeholder}
       placeholderTextColor={theme.palette.gray3}
       onFocus={handleFocus}
@@ -171,15 +170,11 @@ export function TextField({
   const handleClearInput = () => {
     if (isAmountField) {
       setValue('0원');
-      setHeight(56);
+      setHeight(55);
     } else {
       setValue('');
       setHeight(0);
     }
-  };
-
-  const onChangeText = (text: string) => {
-    isAmountField ? setValue(formatValue(text)) : setValue(text);
   };
 
   const handleKeyPress = (
@@ -188,11 +183,19 @@ export function TextField({
     if (e.nativeEvent.key === 'Backspace') {
       if (value !== '0원') {
         const parsedValue = parseNumberFromString(value).slice(0, -1);
+        const newValue = `${formatNumberToLocaleString(parsedValue)}원`;
 
-        setValue(`${formatNumberToLocaleString(parsedValue)}원`);
+        setValue(newValue);
       }
 
       e.preventDefault();
+    } else {
+      const newValue = e.nativeEvent.key;
+      setValue(prevValue =>
+        isAmountField
+          ? formatValue(prevValue + newValue)
+          : prevValue + newValue,
+      );
     }
   };
 
@@ -206,7 +209,6 @@ export function TextField({
         height,
         setHeight,
         handleClearInput,
-        onChangeText,
         handleKeyPress,
       }}>
       {children}

@@ -15,10 +15,7 @@ export default function DefaultTextField({
     <TextFieldBase defaultValue={defaultValue}>
       <TextFieldBase.Container>
         <TextFieldBase.Label label={label!} />
-        <TextFieldBase.CustomTextInput
-          isAmountField={false}
-          placeholder={placeholder}
-        />
+        <TextFieldBase.CustomTextInput placeholder={placeholder} />
         <TextFieldBase.ClearIcon />
       </TextFieldBase.Container>
     </TextFieldBase>
