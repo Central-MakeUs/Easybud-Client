@@ -23,7 +23,7 @@ import {
 } from 'utils/formatAmountValue';
 import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
-import DescriptionText from 'components/@common/TextFields/DescriptionText';
+import HelperText from 'components/@common/TextFields/HelperText';
 
 /**
  * @param children 자식 요소
@@ -145,7 +145,7 @@ export function TextFieldHelperText({
   const {value, setValue} = useContext(TextFieldContext) || {};
 
   return (
-    <DescriptionText
+    <HelperText
       value={value ?? ''}
       setValue={setValue!}
       defaultCurrentBalance={defaultCurrentBalance}
