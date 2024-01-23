@@ -33,19 +33,16 @@ type ContainerProps = {
 };
 
 export function Container({children}: ContainerProps) {
-  const textFieldContext = useContext(TextFieldContext);
+  const {isFocused, value} = useContext(TextFieldContext) || {};
+  const borderBottomColor =
+    theme.palette[isFocused || value ? 'primary' : 'gray3'];
 
   return (
     <View
       style={[
         textFieldStyles.textFieldContainer,
         {
-          borderBottomColor:
-            theme.palette[
-              textFieldContext?.isFocused || textFieldContext?.value
-                ? 'primary'
-                : 'gray3'
-            ],
+          borderBottomColor,
         },
       ]}>
       {children}
@@ -53,11 +50,18 @@ export function Container({children}: ContainerProps) {
   );
 }
 
-export function Label({label}: {label: string}) {
-  const textFieldContext = useContext(TextFieldContext);
+/**
+ * @param label label 텍스트
+ */
+type LabelProps = {
+  label: string;
+};
+
+export function Label({label}: LabelProps) {
+  const {value} = useContext(TextFieldContext) || {};
 
   return (
-    textFieldContext?.value && (
+    value || (
       <Typography
         type={'Body2Regular'}
         color={'gray3'}
@@ -74,45 +78,52 @@ export function Label({label}: {label: string}) {
 type CustomTextInputProps = {placeholder?: string};
 
 export function CustomTextInput({placeholder}: CustomTextInputProps) {
-  const textFieldContext = useContext(TextFieldContext);
+  const {
+    setHeight,
+    setIsFocused,
+    value,
+    handleKeyPress,
+    isAmountField,
+    height,
+  } = useContext(TextFieldContext) || {};
 
   const handleInputHeight = (
     e: NativeSyntheticEvent<TextInputContentSizeChangeEventData>,
   ) => {
     e.nativeEvent.contentSize.height &&
-      textFieldContext?.setHeight?.(e.nativeEvent.contentSize.height);
+      setHeight?.(e.nativeEvent.contentSize.height);
   };
 
-  const handleFocus = () => textFieldContext?.setIsFocused?.(true);
+  const handleFocus = () => setIsFocused?.(true);
 
-  const handleBlur = () => textFieldContext?.setIsFocused?.(false);
+  const handleBlur = () => setIsFocused?.(false);
 
   return (
     <TextInput
-      value={textFieldContext?.value}
+      value={value}
       placeholder={placeholder}
       placeholderTextColor={theme.palette.gray3}
       onFocus={handleFocus}
       onBlur={handleBlur}
       onKeyPress={(e: NativeSyntheticEvent<TextInputKeyPressEventData>) =>
-        textFieldContext?.handleKeyPress?.(e)
+        handleKeyPress?.(e)
       }
       multiline={true}
       underlineColorAndroid="transparent"
       onContentSizeChange={handleInputHeight}
-      keyboardType={textFieldContext?.isAmountField ? 'phone-pad' : 'default'}
+      keyboardType={isAmountField ? 'phone-pad' : 'default'}
       caretHidden={true}
-      style={[textFieldStyles.textInput, {height: textFieldContext?.height}]}
+      style={[textFieldStyles.textInput, {height}]}
     />
   );
 }
 
 export function ClearIcon() {
-  const textFieldContext = useContext(TextFieldContext);
+  const {value, handleClearInput} = useContext(TextFieldContext) || {};
 
   return (
-    textFieldContext?.value !== '' && (
-      <TouchableOpacity onPress={textFieldContext?.handleClearInput}>
+    value || (
+      <TouchableOpacity onPress={handleClearInput}>
         <Icon name="XCircle" color={theme.palette.gray3} />
       </TouchableOpacity>
     )
@@ -129,12 +140,12 @@ type TextFieldHelperTextProps = {
 export function TextFieldHelperText({
   defaultCurrentBalance,
 }: TextFieldHelperTextProps) {
-  const textFieldContext = useContext(TextFieldContext);
+  const {value, setValue} = useContext(TextFieldContext) || {};
 
   return (
     <DescriptionText
-      value={textFieldContext?.value ?? ''}
-      setValue={textFieldContext?.setValue!}
+      value={value ?? ''}
+      setValue={setValue!}
       defaultCurrentBalance={defaultCurrentBalance}
     />
   );
@@ -205,12 +216,10 @@ export function TextField({
 
       e.preventDefault();
     } else {
-      const newValue = e.nativeEvent.key;
-
       setValue(prevValue =>
         isAmountField
-          ? formatValue(prevValue + newValue)
-          : prevValue + newValue,
+          ? formatValue(prevValue + e.nativeEvent.key)
+          : prevValue + e.nativeEvent.key,
       );
     }
   };
