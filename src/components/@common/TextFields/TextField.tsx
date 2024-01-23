@@ -153,12 +153,7 @@ export function TextFieldHelperText({
   );
 }
 
-const TextFieldContext = createContext<TextFieldProps | undefined>(undefined);
-
 /**
- * @param isAmountField AmountTextField인지 여부
- * @param children 자식 요소
- * @param defaultValue text input의 기본값
  * @param value text input의 value 상태값
  * @param setValue text input의 value 값을 변경하는 함수
  * @param isFocused text input의 focus 여부
@@ -167,22 +162,35 @@ const TextFieldContext = createContext<TextFieldProps | undefined>(undefined);
  * @param setHeight text input의 높이를 변경하는 함수
  * @param handleClearInput text input의 X 아이콘을 눌렀을 때 동작하는 함수
  * @param handleKeyPress text input에서 특정 키를 눌렀을 때 동작하는 함수
+ * @param onChangeText text input에서 텍스트가 변할 때 호출되는 함수
+ * @param isAmountField AmountTextField인지 여부
+ */
+type TextFieldContextType = {
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
+  isFocused: boolean;
+  setIsFocused: Dispatch<SetStateAction<boolean>>;
+  height: number;
+  setHeight: Dispatch<SetStateAction<number>>;
+  handleClearInput: () => void;
+  handleKeyPress: (e: NativeSyntheticEvent<TextInputKeyPressEventData>) => void;
+  onChangeText: (text: string) => void;
+  isAmountField: boolean;
+};
+
+const TextFieldContext = createContext<TextFieldContextType | undefined>(
+  undefined,
+);
+
+/**
+ * @param children 자식 요소
+ * @param isAmountField AmountTextField인지 여부
+ * @param defaultValue text input의 기본값
  */
 type TextFieldProps = {
+  children: ReactElement | ReactElement[];
   isAmountField?: boolean;
-  children?: ReactElement | ReactElement[];
   defaultValue?: string;
-  value?: string;
-  setValue?: Dispatch<SetStateAction<string>>;
-  isFocused?: boolean;
-  setIsFocused?: Dispatch<SetStateAction<boolean>>;
-  height?: number;
-  setHeight?: Dispatch<SetStateAction<number>>;
-  handleClearInput?: () => void;
-  handleKeyPress?: (
-    e: NativeSyntheticEvent<TextInputKeyPressEventData>,
-  ) => void;
-  onChangeText?: (text: string) => void;
 };
 
 export function TextField({
@@ -247,6 +255,7 @@ export function TextField({
         handleClearInput,
         handleKeyPress,
         onChangeText,
+        isAmountField,
       }}>
       {children}
     </TextFieldContext.Provider>
