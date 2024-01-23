@@ -105,6 +105,7 @@
     ]
   },
   "resolutions": {
-    "react-docgen-typescript": "2.2.2"
+    "react-docgen-typescript": "2.2.2",
+    "react-native-reanimated": "^3.6.1"
   }
 }
