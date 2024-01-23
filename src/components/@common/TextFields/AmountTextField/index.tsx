@@ -1,6 +1,6 @@
 import React from 'react';
 import {TextInputProps} from 'react-native';
-import {CommonTextFieldBase} from 'components/@common/TextFields/CommonTextField';
+import {TextFieldBase} from 'components/@common/TextFields/TextField';
 
 /**
  * @param defaultCurrentBalance 현재 대차를 나타내는 텍스트
@@ -8,19 +8,19 @@ import {CommonTextFieldBase} from 'components/@common/TextFields/CommonTextField
 type TextFieldProps = {defaultCurrentBalance?: string} & TextInputProps;
 
 export default function AmountTextField({
-  defaultValue,
+  defaultValue = '0원',
   defaultCurrentBalance,
 }: TextFieldProps) {
   return (
-    <CommonTextFieldBase defaultValue={defaultValue}>
-      <CommonTextFieldBase.Container>
-        <CommonTextFieldBase.Label label="금액" />
-        <CommonTextFieldBase.CustomTextInput isAmountField={true} />
-        <CommonTextFieldBase.ClearIcon />
-      </CommonTextFieldBase.Container>
-      <CommonTextFieldBase.TextFieldHelperText
+    <TextFieldBase defaultValue={defaultValue} isAmountField={true}>
+      <TextFieldBase.Container>
+        <TextFieldBase.Label label="금액" />
+        <TextFieldBase.CustomTextInput />
+        <TextFieldBase.ClearIcon />
+      </TextFieldBase.Container>
+      <TextFieldBase.TextFieldHelperText
         defaultCurrentBalance={defaultCurrentBalance}
       />
-    </CommonTextFieldBase>
+    </TextFieldBase>
   );
 }

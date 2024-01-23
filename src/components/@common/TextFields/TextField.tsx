@@ -16,13 +16,13 @@ import {
   TextInputContentSizeChangeEventData,
 } from 'react-native';
 import {theme} from 'styles';
-import Icon from 'components/@common/Icon';
-import Typography from 'components/@common/Typography';
 import {
   formatNumberToLocaleString,
   formatValue,
   parseNumberFromString,
 } from 'utils/formatAmountValue';
+import Icon from 'components/@common/Icon';
+import Typography from 'components/@common/Typography';
 import DescriptionText from 'components/@common/TextFields/DescriptionText';
 
 /**
@@ -36,17 +36,21 @@ import DescriptionText from 'components/@common/TextFields/DescriptionText';
  * @param handleKeyPress text input에서 특정 키를 눌렀을 때 동작하는 함수
  */
 
-export function Container({children}: {children: ReactElement[]}) {
-  const commonTextFieldContext = useContext(CommonTextFieldContext);
+export function Container({
+  children,
+}: {
+  children: ReactElement | ReactElement[];
+}) {
+  const textFieldContext = useContext(TextFieldContext);
 
   return (
     <View
       style={[
-        commonTextFieldStyles.textFieldContainer,
+        textFieldStyles.textFieldContainer,
         {
           borderBottomColor:
             theme.palette[
-              commonTextFieldContext?.isFocused || commonTextFieldContext?.value
+              textFieldContext?.isFocused || textFieldContext?.value
                 ? 'primary'
                 : 'gray3'
             ],
@@ -58,69 +62,60 @@ export function Container({children}: {children: ReactElement[]}) {
 }
 
 export function Label({label}: {label: string}) {
-  const commonTextFieldContext = useContext(CommonTextFieldContext);
+  const textFieldContext = useContext(TextFieldContext);
 
   return (
-    commonTextFieldContext?.value && (
+    textFieldContext?.value && (
       <Typography
         type={'Body2Regular'}
         color={'gray3'}
-        style={commonTextFieldStyles.label}>
+        style={textFieldStyles.label}>
         {label}
       </Typography>
     )
   );
 }
 
-export function CustomTextInput({
-  isAmountField,
-  placeholder,
-}: {
-  isAmountField: boolean;
-  placeholder?: string;
-}) {
-  const commonTextFieldContext = useContext(CommonTextFieldContext);
+export function CustomTextInput({placeholder}: {placeholder?: string}) {
+  const textFieldContext = useContext(TextFieldContext);
 
   const handleInputHeight = (
     e: NativeSyntheticEvent<TextInputContentSizeChangeEventData>,
   ) => {
     e.nativeEvent.contentSize.height &&
-      commonTextFieldContext?.setHeight?.(e.nativeEvent.contentSize.height);
+      textFieldContext?.setHeight?.(e.nativeEvent.contentSize.height);
   };
 
-  const handleFocus = () => commonTextFieldContext?.setIsFocused?.(true);
+  const handleFocus = () => textFieldContext?.setIsFocused?.(true);
 
-  const handleBlur = () => commonTextFieldContext?.setIsFocused?.(false);
+  const handleBlur = () => textFieldContext?.setIsFocused?.(false);
 
   return (
     <TextInput
-      value={commonTextFieldContext?.value}
-      onChangeText={commonTextFieldContext?.onChangeText}
+      value={textFieldContext?.value}
+      onChangeText={textFieldContext?.onChangeText}
       placeholder={placeholder}
       placeholderTextColor={theme.palette.gray3}
       onFocus={handleFocus}
       onBlur={handleBlur}
       onKeyPress={(e: NativeSyntheticEvent<TextInputKeyPressEventData>) =>
-        commonTextFieldContext?.handleKeyPress?.(e)
+        textFieldContext?.handleKeyPress?.(e)
       }
       multiline={true}
       underlineColorAndroid="transparent"
       onContentSizeChange={handleInputHeight}
-      keyboardType={isAmountField ? 'phone-pad' : 'default'}
-      style={[
-        commonTextFieldStyles.textInput,
-        {height: commonTextFieldContext?.height},
-      ]}
+      keyboardType={textFieldContext?.isAmountField ? 'phone-pad' : 'default'}
+      style={[textFieldStyles.textInput, {height: textFieldContext?.height}]}
     />
   );
 }
 
 export function ClearIcon() {
-  const commonTextFieldContext = useContext(CommonTextFieldContext);
+  const textFieldContext = useContext(TextFieldContext);
 
   return (
-    commonTextFieldContext?.value !== '' && (
-      <TouchableOpacity onPress={commonTextFieldContext?.handleClearInput}>
+    textFieldContext?.value !== '' && (
+      <TouchableOpacity onPress={textFieldContext?.handleClearInput}>
         <Icon name="XCircle" color={theme.palette.gray3} />
       </TouchableOpacity>
     )
@@ -132,23 +127,22 @@ export function TextFieldHelperText({
 }: {
   defaultCurrentBalance?: string;
 }) {
-  const commonTextFieldContext = useContext(CommonTextFieldContext);
+  const textFieldContext = useContext(TextFieldContext);
 
   return (
     <DescriptionText
-      value={commonTextFieldContext?.value ?? ''}
-      setValue={commonTextFieldContext?.setValue!}
+      value={textFieldContext?.value ?? ''}
+      setValue={textFieldContext?.setValue!}
       defaultCurrentBalance={defaultCurrentBalance}
     />
   );
 }
 
-const CommonTextFieldContext = createContext<CommonTextFieldProps | undefined>(
-  undefined,
-);
+const TextFieldContext = createContext<TextFieldProps | undefined>(undefined);
 
-type CommonTextFieldProps = {
-  children?: ReactElement[];
+type TextFieldProps = {
+  isAmountField?: boolean;
+  children?: ReactElement | ReactElement[];
   defaultValue?: string;
   value?: string;
   setValue?: Dispatch<SetStateAction<string>>;
@@ -163,17 +157,30 @@ type CommonTextFieldProps = {
   ) => void;
 };
 
-function CommonTextField({children, defaultValue}: CommonTextFieldProps) {
-  const [value, setValue] = useState(formatValue(defaultValue) ?? '');
+export function TextField({
+  isAmountField = false,
+  children,
+  defaultValue = '',
+}: TextFieldProps) {
+  const [value, setValue] = useState(
+    isAmountField ? formatValue(defaultValue) : defaultValue,
+  );
   const [isFocused, setIsFocused] = useState<boolean>(false);
   const [height, setHeight] = useState(0);
 
   const handleClearInput = () => {
-    setValue('0원');
-    setHeight(56);
+    if (isAmountField) {
+      setValue('0원');
+      setHeight(56);
+    } else {
+      setValue('');
+      setHeight(0);
+    }
   };
 
-  const onChangeText = (text: string) => setValue(formatValue(text));
+  const onChangeText = (text: string) => {
+    isAmountField ? setValue(formatValue(text)) : setValue(text);
+  };
 
   const handleKeyPress = (
     e: NativeSyntheticEvent<TextInputKeyPressEventData>,
@@ -190,7 +197,7 @@ function CommonTextField({children, defaultValue}: CommonTextFieldProps) {
   };
 
   return (
-    <CommonTextFieldContext.Provider
+    <TextFieldContext.Provider
       value={{
         value,
         setValue,
@@ -203,11 +210,11 @@ function CommonTextField({children, defaultValue}: CommonTextFieldProps) {
         handleKeyPress,
       }}>
       {children}
-    </CommonTextFieldContext.Provider>
+    </TextFieldContext.Provider>
   );
 }
 
-export const CommonTextFieldBase = Object.assign(CommonTextField, {
+export const TextFieldBase = Object.assign(TextField, {
   Container,
   Label,
   CustomTextInput,
@@ -215,7 +222,7 @@ export const CommonTextFieldBase = Object.assign(CommonTextField, {
   TextFieldHelperText,
 });
 
-const commonTextFieldStyles = StyleSheet.create({
+const textFieldStyles = StyleSheet.create({
   textFieldContainer: {
     flexDirection: 'row',
     borderBottomWidth: 1.5,
