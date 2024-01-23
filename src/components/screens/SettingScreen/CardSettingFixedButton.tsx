@@ -4,13 +4,11 @@ import Button from 'components/@common/Buttons/Button';
 type CardSettingFixedButtonProps = {
   cardName: string;
   keyNoteText: string;
-  startDate: string;
 };
 
 export default function CardSettingFixedButton({
   cardName,
   keyNoteText,
-  startDate,
 }: CardSettingFixedButtonProps) {
   const navigation = useNavigation();
 
@@ -21,7 +19,7 @@ export default function CardSettingFixedButton({
   return (
     <>
       <Button
-        disabled={!cardName || !keyNoteText || !startDate}
+        disabled={!cardName || !keyNoteText}
         onPress={handlePressSaveButton}>
         저장하기
       </Button>

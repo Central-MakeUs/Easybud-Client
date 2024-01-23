@@ -1,10 +1,9 @@
 import {RecoilStateKeys} from 'libs/recoil/constants/keys';
-import {CategoryType} from 'libs/recoil/types/category';
 import {atom} from 'recoil';
 
-const initialState: CategoryType = '';
+const initialState: string = '';
 
-export const categoryState = atom<CategoryType>({
+export const categoryState = atom<string>({
   key: RecoilStateKeys.Category,
   default: initialState,
 });
