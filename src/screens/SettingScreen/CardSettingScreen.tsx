@@ -1,24 +1,41 @@
 import {useState} from 'react';
+import {StyleSheet, View} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import CommonSelectItem from 'components/@common/CommonSelectItem';
 import InputBottomSheet from 'components/@common/InputBottomSheet';
 import BottomSheet from 'components/@common/BottomSheet';
 import Typography from 'components/@common/Typography';
+import Button from 'components/@common/Buttons/Button';
 
 export default function CardSettingScreen() {
   const [cardName, setCardName] = useState('');
   const [cardInputText, setCardInputText] = useState('');
   const [isCardNameBottomSheetOpen, setIsCardNameBottomSheetOpen] =
     useState(false);
-  const [startDate, setStartDate] = useState('1일~말일');
+  const [startDate, _] = useState('1일~말일');
   const [isPeriodBottomSheetOpen, setIsPeriodBottomSheetOpen] = useState(false);
   const [keyNoteText, setKeyNoteText] = useState('');
   const [keyNoteInputText, setKeyNoteInputText] = useState('');
   const [isKeyNoteBottomSheetOpen, setIsKeyNoteBottomSheetOpen] =
     useState(false);
 
+  const navigation = useNavigation();
+
   return (
-    <ScreenContainer contentContainerStyle={{gap: 10}}>
+    <ScreenContainer
+      contentContainerStyle={cardSettingScreenStyles.contentContainer}
+      fixedBottomComponent={
+        <View style={cardSettingScreenStyles.fixedBottomContainer}>
+          <Button
+            disabled={!cardName || !keyNoteText || !startDate}
+            onPress={() => {
+              navigation.navigate('Setting');
+            }}>
+            저장하기
+          </Button>
+        </View>
+      }>
       <CommonSelectItem
         label={'카드명'}
         variant={'gray'}
@@ -78,3 +95,10 @@ export default function CardSettingScreen() {
     </ScreenContainer>
   );
 }
+
+const cardSettingScreenStyles = StyleSheet.create({
+  contentContainer: {
+    gap: 10,
+  },
+  fixedBottomContainer: {width: '100%', height: 56},
+});
