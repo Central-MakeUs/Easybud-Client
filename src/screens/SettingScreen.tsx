@@ -1,55 +1,27 @@
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
-import Icon from 'components/@common/Icon';
+import {View, StyleSheet} from 'react-native';
+import {theme} from 'styles';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import {theme} from 'styles';
-import {useState} from 'react';
-import BottomSheet from 'components/@common/BottomSheet';
+import ActionButtonWithBottomSheet from 'components/screens/SettingScreen/ActionButtonWithBottomSheet';
 
 export default function SettingScreen() {
-  const [isLogoutBottomSheetOpen, setIsLogoutBottomSheetOpen] = useState(false);
-  const [isLeaveBottomSheetOpen, setIsLeaveBottomSheetOpen] = useState(false);
-
   return (
     <ScreenContainer contentContainerStyle={{paddingHorizontal: 0}}>
-      <TouchableOpacity style={settingScreenStyles.button}>
-        <Typography type={'Body1Semibold'} color={'gray4'}>
-          카드 설정
-        </Typography>
-        <Icon name={'ArrowRightSmall'} />
-      </TouchableOpacity>
+      <ActionButtonWithBottomSheet buttonText={'카드 설정'} />
       <View style={settingScreenStyles.divider} />
-      <TouchableOpacity
-        style={settingScreenStyles.button}
-        onPress={() => setIsLogoutBottomSheetOpen(true)}>
-        <Typography type={'Body1Semibold'} color={'gray4'}>
-          로그아웃
-        </Typography>
-        <Icon name={'ArrowRightSmall'} />
-      </TouchableOpacity>
-      <BottomSheet
-        isBottomSheetOpen={isLogoutBottomSheetOpen}
-        setIsBottomSheetOpen={setIsLogoutBottomSheetOpen}
-        children={
+      <ActionButtonWithBottomSheet
+        buttonText={'로그아웃'}
+        bottomSheetContent={
           <>
             <Typography>로그아웃</Typography>
           </>
         }
       />
-      <TouchableOpacity
-        style={settingScreenStyles.button}
-        onPress={() => setIsLeaveBottomSheetOpen(true)}>
-        <Typography type={'Body1Semibold'} color={'gray4'}>
-          회원 탈퇴
-        </Typography>
-        <Icon name={'ArrowRightSmall'} />
-      </TouchableOpacity>
-      <BottomSheet
-        isBottomSheetOpen={isLeaveBottomSheetOpen}
-        setIsBottomSheetOpen={setIsLeaveBottomSheetOpen}
-        children={
+      <ActionButtonWithBottomSheet
+        buttonText={'회원 탈퇴'}
+        bottomSheetContent={
           <>
-            <Typography>회원탈퇴</Typography>
+            <Typography>회원 탈퇴</Typography>
           </>
         }
       />
