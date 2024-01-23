@@ -10,15 +10,15 @@ import Button from 'components/@common/Buttons/Button';
 import {StyleSheet, View} from 'react-native';
 
 const accountTypes: AccountTypeUnion[] = [
-  {name: '자산', change: '증가'},
+  {name: '자산', change: '증가'}, // 차변
   {name: '자산', change: '감소'},
+  {name: '부채', change: '감소'}, // 차변
   {name: '부채', change: '증가'},
-  {name: '부채', change: '감소'},
+  {name: '자본', change: '감소'}, // 차변
   {name: '자본', change: '증가'},
-  {name: '자본', change: '감소'},
+  {name: '비용', change: '발생'}, // 차변
   {name: '수익', change: '발생'},
-  {name: '비용', change: '발생'},
-];
+] as const;
 
 const initialAccount: NewAccount = {
   type: accountTypes[0],
