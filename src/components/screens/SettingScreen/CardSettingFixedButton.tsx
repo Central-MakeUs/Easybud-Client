@@ -20,12 +20,10 @@ export default function CardSettingFixedButton({
   };
 
   return (
-    <>
-      <Button
-        disabled={!cardName || !keyNoteText || !selectedCategory}
-        onPress={handlePressSaveButton}>
-        저장하기
-      </Button>
-    </>
+    <Button
+      disabled={!cardName || !keyNoteText || !selectedCategory}
+      onPress={handlePressSaveButton}>
+      저장하기
+    </Button>
   );
 }
