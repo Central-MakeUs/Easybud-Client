@@ -6,6 +6,7 @@ import {
   TextInputProps,
   NativeSyntheticEvent,
   TextInputContentSizeChangeEventData,
+  Text,
 } from 'react-native';
 import {theme} from 'styles';
 import Icon from 'components/@common/Icon';
@@ -13,16 +14,19 @@ import Typography from 'components/@common/Typography';
 import {useState} from 'react';
 
 /**
+ * @param type number, string
  * @param label label 텍스트
  */
 type TextFieldProps = TextInputProps & {
   label?: string;
+  type?: 'number' | 'string';
 };
 
 export default function TextField({
   value,
   onChangeText,
   label,
+  type = 'string',
   ...props
 }: TextFieldProps) {
   const [height, setHeight] = useState<number>(0);
@@ -62,6 +66,7 @@ export default function TextField({
       )}
       <TextInput
         {...props}
+        maxLength={15}
         value={value}
         onChangeText={onChangeText}
         placeholderTextColor={theme.palette.gray3}
@@ -71,6 +76,7 @@ export default function TextField({
         onContentSizeChange={handleInputHeight}
         style={[commonTextFieldStyles.textInput, {height}]}
       />
+      {type === 'number' && <Text style={commonTextFieldStyles.unit}>원</Text>}
       {value !== '' && (
         <TouchableOpacity onPress={handleClearInput}>
           <Icon name="XCircle" color={theme.palette.gray3} />
@@ -99,6 +105,9 @@ const commonTextFieldStyles = StyleSheet.create({
     maxWidth: '93%',
     flex: 1,
     color: theme.palette.black,
+  },
+  unit: {
+    color: theme.palette.gray4,
   },
   label: {
     position: 'absolute',
