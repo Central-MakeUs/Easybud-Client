@@ -25,7 +25,6 @@ export default function DatePicker() {
   return (
     <CommonSelectItem
       label={'날짜'}
-      variant={'gray'}
       handlePressSelectItem={handlePressDateTimePicker}
       value={formattedDate}
       placeholder="날짜를 선택하세요"

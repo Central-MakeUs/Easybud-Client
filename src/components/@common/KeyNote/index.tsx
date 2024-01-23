@@ -13,7 +13,6 @@ export default function KeyNote() {
   return (
     <CommonSelectItem
       label={'적요'}
-      variant={'gray'}
       handlePressSelectItem={handlePressSelectItem}
       value={keyNoteText || sliceString(keyNoteText, 30)}
       placeholder="적요를 작성하세요"

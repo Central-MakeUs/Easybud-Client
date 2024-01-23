@@ -42,7 +42,6 @@ export default function CardSettingScreen() {
       }>
       <CommonSelectItem
         label={'카드명'}
-        variant={'gray'}
         handlePressSelectItem={handlePressCardNameSelectItem}
         value={cardName}
         placeholder="카드명을 입력해주세요"
@@ -59,7 +58,6 @@ export default function CardSettingScreen() {
       />
       <CommonSelectItem
         label={'사용 기간'}
-        variant={'gray'}
         handlePressSelectItem={handlePressPeriodSelectItem}
         value={startDate}
         placeholder="기간을 선택해주세요"
@@ -77,7 +75,6 @@ export default function CardSettingScreen() {
       />
       <CommonSelectItem
         label={'적요'}
-        variant={'gray'}
         handlePressSelectItem={handlePressKeyNoteSelectItem}
         value={keyNoteText}
         placeholder={'적요를 입력해주세요'}
