@@ -1,4 +1,10 @@
-import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {SetterOrUpdater, useRecoilState, useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
@@ -11,6 +17,7 @@ import CategoryList from 'components/@common/SelectForm/CategoryList';
 import TextArea from 'components/@common/TextArea';
 import Button from 'components/@common/Buttons/Button';
 import {SelectFormProps} from 'components/@common/SelectForm';
+import {useFocusEffect} from '@react-navigation/native';
 
 /**
  * @param label label 텍스트
@@ -39,6 +46,12 @@ export default function SelectFormBottomSheet({
   useEffect(() => {
     setInputText('');
   }, [isBottomSheetOpen]);
+
+  useFocusEffect(
+    useCallback(() => {
+      setSelectedCategory('');
+    }, [setSelectedCategory]),
+  );
 
   const calculateBottomSheetHeight = () =>
     categoryList.length >= 4 ? 270 : 200;
