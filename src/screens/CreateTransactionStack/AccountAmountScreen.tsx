@@ -1,12 +1,13 @@
 import ScreenContainer from 'components/@common/ScreenContainer';
-import Typography from 'components/@common/Typography';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
-import {cloneDeep, isEmpty} from 'lodash';
+import {cloneDeep} from 'lodash';
 import {useState, useMemo} from 'react';
 import {NewAccount} from 'types/account';
 import {NewTransaction} from 'types/transaction';
+import AmountTextField from 'components/@common/TextFields/AmountTextField';
+import {calculateBalance} from 'utils/formatAmountValue';
 
 type AccountAmountScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountAmount'>;
@@ -25,24 +26,25 @@ export default function AccountAmountScreen({
 
     return prevTransaction.accounts[index];
   });
-  setAccount;
 
   const transaction = useMemo<NewTransaction>(() => {
     const accounts = cloneDeep(prevTransaction.accounts);
 
-    if (isUpdateStep) {
-      accounts[accountIndex] = account;
-    } else {
-      accounts.push(account);
-    }
+    const index = isUpdateStep
+      ? accountIndex
+      : prevTransaction.accounts.length - 1;
+
+    accounts[index] = account;
 
     return {...prevTransaction, accounts};
   }, [account, accountIndex, isUpdateStep, prevTransaction]);
 
   const disabled = useMemo(() => {
-    return isEmpty(account.amount);
+    return account.amount === 0;
   }, [account.amount]);
-  disabled;
+
+  const handleChange = (amount: number) =>
+    setAccount(prev => ({...prev, amount}));
 
   return (
     <ScreenContainer
@@ -53,14 +55,18 @@ export default function AccountAmountScreen({
             transaction={prevTransaction}
           />
           <RightButton
-            // disabled={disabled}
+            disabled={disabled}
             nextScreen="TransactionConfirmation"
             isUpdateStep={isUpdateStep}
             transaction={transaction}
           />
         </>
       }>
-      <Typography>amount: {account.amount}</Typography>
+      <AmountTextField
+        amount={account.amount}
+        balance={calculateBalance(transaction.accounts)}
+        onChange={handleChange}
+      />
     </ScreenContainer>
   );
 }

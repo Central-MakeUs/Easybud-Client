@@ -14,5 +14,5 @@ const Template: Story = args => <AmountTextField {...args} />;
 
 export const DefaultStatus = Template.bind({});
 DefaultStatus.args = {
-  defaultCurrentBalance: '-8500000',
+  balance: -8500000,
 };

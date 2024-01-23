@@ -1,70 +1,55 @@
-import React, {useState} from 'react';
-import {
-  NativeSyntheticEvent,
-  TextInputKeyPressEventData,
-  TextInputProps,
-} from 'react-native';
-import {
-  formatNumberToLocaleString,
-  formatValue,
-  parseNumberFromString,
-} from 'utils/formatAmountValue';
-import CommonTextField from 'components/@common/TextFields/CommonTextField';
-import DescriptionText from 'components/@common/TextFields/DescriptionText';
+import React from 'react';
+import {StyleSheet, TextInputProps, TouchableOpacity} from 'react-native';
+import TextField from 'components/@common/TextFields/TextField';
+import Typography from 'components/@common/Typography';
+import {theme} from 'styles';
 
 /**
- * @param defaultCurrentBalance 현재 대차를 나타내는 텍스트
+ * @param amount 현 계좌 금액
+ * @param balance 현재 대차 금액
  */
-type TextFieldProps = {defaultCurrentBalance?: string} & TextInputProps;
+type TextFieldProps = {
+  amount: number;
+  balance: number;
+  onChange: (amount: number) => void;
+} & Omit<
+  TextInputProps,
+  'value' | 'defaultValue' | 'onChangeText' | 'onChange'
+>;
 
 export default function AmountTextField({
-  defaultValue,
-  defaultCurrentBalance,
+  amount,
+  balance,
+  onChange,
 }: TextFieldProps) {
-  const [value, setValue] = useState(formatValue(defaultValue) ?? '');
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [height, setHeight] = useState(0);
-
-  const handleClearInput = () => {
-    setValue('0원');
-    setHeight(56);
-  };
-
-  const onChangeText = (text: string) => setValue(formatValue(text));
-
-  const handleKeyPress = (
-    e: NativeSyntheticEvent<TextInputKeyPressEventData>,
-  ) => {
-    if (e.nativeEvent.key === 'Backspace') {
-      if (value !== '0원') {
-        const parsedValue = parseNumberFromString(value).slice(0, -1);
-
-        setValue(`${formatNumberToLocaleString(parsedValue)}원`);
-      }
-
-      e.preventDefault();
-    }
-  };
-
   return (
     <>
-      <CommonTextField
-        isAmountField={true}
-        value={value}
-        label="금액"
-        isFocused={isFocused}
-        height={height}
-        setHeight={setHeight}
-        setIsFocused={setIsFocused}
-        onChangeText={onChangeText}
-        handleClearInput={handleClearInput}
-        handleKeyPress={handleKeyPress}
+      <TextField
+        autoFocus
+        value={amount.toString()}
+        onChangeText={text => onChange(Number(text))}
+        keyboardType="number-pad"
       />
-      <DescriptionText
-        value={value}
-        setValue={setValue}
-        defaultCurrentBalance={defaultCurrentBalance}
-      />
+      <TouchableOpacity
+        onPress={() => onChange(-1 * balance)}
+        style={descriptionTextStyles.button}>
+        <Typography type={'Body2Semibold'}>
+          현재 대차: {balance}원 입력
+        </Typography>
+      </TouchableOpacity>
     </>
   );
 }
+
+const descriptionTextStyles = StyleSheet.create({
+  button: {
+    alignSelf: 'flex-start',
+    backgroundColor: theme.palette.gray3,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
+    borderRadius: 10,
+  },
+  currentBalanceText: {
+    borderBottomWidth: 1,
+  },
+});

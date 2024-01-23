@@ -1,17 +1,34 @@
-export const formatNumberToLocaleString = (value: string): string => {
-  return Number(value).toLocaleString();
-};
+import {NewAccount} from 'types/account';
 
-export const parseNumberFromString = (value: string) => {
-  return value.replace(/[^0-9]/g, '');
-};
+export function calculateBalance(accounts: NewAccount[]): number {
+  let totalDebit = 0;
+  let totalCredit = 0;
 
-export const formatValue = (value?: string): string => {
-  if (!value) return '0원';
+  accounts.forEach(({type, amount}) => {
+    switch (type.name) {
+      case '자산':
+        type.change === '증가'
+          ? (totalDebit += amount)
+          : (totalCredit += amount);
+        break;
+      case '부채':
+        type.change === '증가'
+          ? (totalCredit += amount)
+          : (totalDebit += amount);
+        break;
+      case '자본':
+        type.change === '증가'
+          ? (totalCredit += amount)
+          : (totalDebit += amount);
+        break;
+      case '수익':
+        totalCredit += amount;
+        break;
+      case '비용':
+        totalDebit += amount;
+        break;
+    }
+  });
 
-  const formattedValue = formatNumberToLocaleString(
-    parseNumberFromString(value),
-  );
-
-  return `${formattedValue}원`;
-};
+  return totalDebit - totalCredit;
+}
