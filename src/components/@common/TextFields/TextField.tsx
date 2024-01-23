@@ -104,6 +104,7 @@ export function CustomTextInput({placeholder}: {placeholder?: string}) {
       underlineColorAndroid="transparent"
       onContentSizeChange={handleInputHeight}
       keyboardType={textFieldContext?.isAmountField ? 'phone-pad' : 'default'}
+      caretHidden={true}
       style={[textFieldStyles.textInput, {height: textFieldContext?.height}]}
     />
   );
