@@ -57,7 +57,7 @@ const netWorthOverviewStyles = StyleSheet.create({
   assetDebtContainer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: 6,
+    gap: 10,
   },
   assetContainer: {
     display: 'flex',

@@ -10,6 +10,7 @@ export default function LedgerScreen() {
       <RecentTransactionOverview />
       <Divider style={ledgerScreenStyles.divider} />
       <FinancialStatusOverview />
+      <Divider style={ledgerScreenStyles.divider} />
     </ScreenContainer>
   );
 }
@@ -19,6 +20,6 @@ const ledgerScreenStyles = {
     paddingHorizontal: 0,
   },
   divider: {
-    marginVertical: 15,
+    marginVertical: 20,
   },
 };
