@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {TabNavigationProp} from 'navigators/types';
 import {FinancialDataCardBase} from 'components/screen/LedgerScreen/FinancialDataCard';
-import RecentTransactionBottomElement from 'components/screen/LedgerScreen/RecentTransactionOverviewBottomElement';
+import RecentTransactionBottomElement from 'components/screen/LedgerScreen/RecentTransactionOverview/RecentTransactionOverviewBottomElement';
 
 export default function RecentTransactionOverview() {
   const navigation = useNavigation<TabNavigationProp>();
