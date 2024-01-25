@@ -2,29 +2,45 @@ import React, {ReactElement, createContext} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import Typography from 'components/@common/Typography';
 
-export function Container({
-  children,
-}: {
+/**
+ * @param children 자식 요소
+ */
+type ContainerProps = {
   children: ReactElement | ReactElement[];
-}) {
+};
+
+export function Container({children}: ContainerProps) {
   return <View style={financialDataCardStyles.container}>{children}</View>;
 }
 
-export function TopElementContainer({
-  children,
-}: {
+/**
+ * @param children 자식 요소
+ */
+type TopElementContainerProps = {
   children: ReactElement | ReactElement[];
-}) {
+};
+
+export function TopElementContainer({children}: TopElementContainerProps) {
   return (
     <View style={financialDataCardStyles.topLabelContainer}>{children}</View>
   );
 }
 
-export function Label({label}: {label: string}) {
+/**
+ * @param label label 텍스트
+ */
+type LabelProps = {label: string};
+
+export function Label({label}: LabelProps) {
   return <Typography type={'Title1Semibold1'}>{label}</Typography>;
 }
 
-export function DetailButton({onPress}: {onPress?: () => void}) {
+/**
+ * @param onPress 상세 보기 버튼을 클릭했을 때 동작하는 함수
+ */
+type DetailButtonProps = {onPress?: () => void};
+
+export function DetailButton({onPress}: DetailButtonProps) {
   return (
     <TouchableOpacity onPress={onPress}>
       <Typography
@@ -37,23 +53,29 @@ export function DetailButton({onPress}: {onPress?: () => void}) {
   );
 }
 
-export function BottomElement({bottomElement}: {bottomElement: ReactElement}) {
+/**
+ * @param bottomElement 하단에 들어갈 요소
+ */
+type BottomElementProps = {
+  bottomElement: ReactElement;
+};
+
+export function BottomElement({bottomElement}: BottomElementProps) {
   return <View>{bottomElement}</View>;
 }
 
-type FinancialDataCardContextType = {};
+const FinancialDataCardContext = createContext(undefined);
 
-const FinancialDataCardContext = createContext<
-  undefined | FinancialDataCardContextType
->(undefined);
-
-export function FinancialDataCard({
-  children,
-}: {
+/**
+ * @param children 자식 요소
+ */
+type FinancialDataCardProps = {
   children: ReactElement | ReactElement[];
-}) {
+};
+
+export function FinancialDataCard({children}: FinancialDataCardProps) {
   return (
-    <FinancialDataCardContext.Provider value={{}}>
+    <FinancialDataCardContext.Provider value={undefined}>
       {children}
     </FinancialDataCardContext.Provider>
   );
