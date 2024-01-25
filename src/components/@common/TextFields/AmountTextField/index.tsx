@@ -5,7 +5,7 @@ import {
   TextInputProps,
 } from 'react-native';
 import {
-  formatNumberToLocaleString,
+  formatToLocaleString,
   formatValue,
   parseNumberFromString,
 } from 'utils/formatAmountValue';
@@ -39,7 +39,7 @@ export default function AmountTextField({
       if (value !== '0원') {
         const parsedValue = parseNumberFromString(value).slice(0, -1);
 
-        setValue(`${formatNumberToLocaleString(parsedValue)}원`);
+        setValue(`${formatToLocaleString(parsedValue)}원`);
       }
 
       e.preventDefault();
