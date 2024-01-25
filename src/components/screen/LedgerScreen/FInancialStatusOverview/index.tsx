@@ -1,6 +1,5 @@
 import React from 'react';
 import {FinancialDataCardBase} from 'components/screen/LedgerScreen/FinancialDataCard';
-import {StyleSheet, View} from 'react-native';
 import NetWorthOverview from 'components/screen/LedgerScreen/FInancialStatusOverview/NetWorthOverview';
 
 export default function FinancialStatusOverview() {
@@ -12,17 +11,13 @@ export default function FinancialStatusOverview() {
       </FinancialDataCardBase.TopElementContainer>
       <FinancialDataCardBase.BottomElement
         bottomElement={
-          <View style={financialStatusOverviewStyles.bottomElementContainer}>
-            <NetWorthOverview amount={170450000} />
-          </View>
+          <NetWorthOverview
+            networthAmount={170450000}
+            assetAmount={20045000}
+            debtAmount={3000000}
+          />
         }
       />
     </FinancialDataCardBase.Container>
   );
 }
-
-const financialStatusOverviewStyles = StyleSheet.create({
-  bottomElementContainer: {
-    borderWidth: 1,
-  },
-});
