@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import 'dayjs/locale/ko';
 import {theme} from 'styles';
@@ -8,6 +8,7 @@ import FinancialCalendar from 'components/screen/TransactionScreen/FinancialCale
 import FinancialOverview from 'components/screen/TransactionScreen/FinancialOverview';
 import MonthHeader from 'components/screen/TransactionScreen/MonthHeader';
 import TransactionList from 'components/@common/TransactionList';
+import {useFocusEffect} from '@react-navigation/native';
 
 export const dummyTransactionDatas: TransactionDataType[] = [
   {
@@ -89,6 +90,12 @@ export const dummyTransactionDatas: TransactionDataType[] = [
 
 export default function TransactionScreen() {
   const [currentDate, setCurrentDate] = useState(new Date());
+
+  useFocusEffect(
+    useCallback(() => {
+      setCurrentDate(new Date());
+    }, []),
+  );
 
   return (
     <ScreenContainer
