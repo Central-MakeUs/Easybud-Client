@@ -3,20 +3,20 @@ import {StyleSheet, View} from 'react-native';
 import {theme} from 'styles';
 import {formatToLocaleString} from 'utils/formatAmountValue';
 
-type NetWorthOverviewProps = {
+type FinacialStatusBottomElementProps = {
   networthAmount: number;
   assetAmount: number;
   debtAmount: number;
 };
 
-export default function NetWorthOverview({
+export default function FinacialStatusBottomElement({
   networthAmount,
   assetAmount,
   debtAmount,
-}: NetWorthOverviewProps) {
+}: FinacialStatusBottomElementProps) {
   return (
     <View>
-      <View style={netWorthOverviewStyles.networthContainer}>
+      <View style={finacialStatusBottomElementStyles.networthContainer}>
         <Typography type={'Body2Semibold'} color={'gray6'}>
           보민님의 순자산
         </Typography>
@@ -24,8 +24,8 @@ export default function NetWorthOverview({
           {formatToLocaleString(networthAmount)}원
         </Typography>
       </View>
-      <View style={netWorthOverviewStyles.assetDebtContainer}>
-        <View style={netWorthOverviewStyles.assetContainer}>
+      <View style={finacialStatusBottomElementStyles.assetDebtContainer}>
+        <View style={finacialStatusBottomElementStyles.assetContainer}>
           <Typography type={'Body1Semibold'} color={'gray6'}>
             자산
           </Typography>
@@ -33,7 +33,7 @@ export default function NetWorthOverview({
             {formatToLocaleString(assetAmount)}원
           </Typography>
         </View>
-        <View style={netWorthOverviewStyles.debtContainer}>
+        <View style={finacialStatusBottomElementStyles.debtContainer}>
           <Typography type={'Body1Semibold'} color={'gray6'}>
             부채
           </Typography>
@@ -46,7 +46,7 @@ export default function NetWorthOverview({
   );
 }
 
-const netWorthOverviewStyles = StyleSheet.create({
+const finacialStatusBottomElementStyles = StyleSheet.create({
   networthContainer: {
     width: '100%',
     borderRadius: 18,
