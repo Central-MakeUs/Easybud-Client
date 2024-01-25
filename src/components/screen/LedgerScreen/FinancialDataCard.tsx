@@ -1,6 +1,7 @@
 import React, {ReactElement} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import Typography from 'components/@common/Typography';
+import Icon from 'components/@common/Icon';
 
 /**
  * @param children 자식 요소
@@ -33,6 +34,10 @@ type LabelProps = {label: string};
 
 export function Label({label}: LabelProps) {
   return <Typography type={'Title1Semibold1'}>{label}</Typography>;
+}
+
+export function TooltipIcon() {
+  return <Icon name={'ExclamationCircle'} />;
 }
 
 /**
@@ -79,6 +84,7 @@ export const FinancialDataCardBase = Object.assign(FinancialDataCard, {
   Container,
   TopElementContainer,
   Label,
+  TooltipIcon,
   DetailButton,
   BottomElement,
 });
