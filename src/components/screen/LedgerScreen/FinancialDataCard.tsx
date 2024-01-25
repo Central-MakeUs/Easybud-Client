@@ -85,10 +85,10 @@ export const FinancialDataCardBase = Object.assign(FinancialDataCard, {
 
 const financialDataCardStyles = StyleSheet.create({
   container: {
+    paddingHorizontal: 20,
     gap: 20,
     display: 'flex',
     flexDirection: 'column',
-    borderWidth: 1,
   },
   topLabelContainer: {
     display: 'flex',
