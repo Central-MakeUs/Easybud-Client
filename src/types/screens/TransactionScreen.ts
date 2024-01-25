@@ -3,10 +3,10 @@ import {
   DebitCreditType,
 } from 'types/components/Transaction';
 
-export type TransactionDataType = Array<{
+export type TransactionDataType = {
   category: TransactionCategoryType;
   keyNote: string;
   date: string;
   debitList: DebitCreditType[];
   creditList: DebitCreditType[];
-}>;
+};

@@ -12,6 +12,7 @@ import TransactionSummary from 'components/@common/Transaction/TransactionSummar
  * @param date 날짜 (형식: 2023.02.21)
  * @param debitList 차변 리스트
  * @param creditList 대변 리스트
+ * @param showAll 거래 전체를 보여줄 것인지 요약만 보여줄 것인지 여부
  */
 export type TransactionProps = {
   category: TransactionCategoryType;
@@ -19,6 +20,7 @@ export type TransactionProps = {
   date: string;
   debitList: DebitCreditType[];
   creditList: DebitCreditType[];
+  showAll?: boolean;
 };
 
 export default function Transaction({
@@ -27,11 +29,14 @@ export default function Transaction({
   date,
   debitList,
   creditList,
+  showAll = true,
 }: TransactionProps) {
   return (
     <View style={transactionStyles.container}>
       <TransactionSummary category={category} keyNote={keyNote} date={date} />
-      <DebitCreditList debitList={debitList} creditList={creditList} />
+      {showAll && (
+        <DebitCreditList debitList={debitList} creditList={creditList} />
+      )}
     </View>
   );
 }

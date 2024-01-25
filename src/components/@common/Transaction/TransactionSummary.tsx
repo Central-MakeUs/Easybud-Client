@@ -28,10 +28,10 @@ export default function TransactionSummary({
         </Typography>
       </View>
       <View style={transactionSummaryStyles.rightColContainer}>
-        <Typography type={'Body2Semibold'} color={'gray4'}>
+        <Typography type={'Title2Regular'} color={'gray4'}>
           {keyNote}
         </Typography>
-        <Typography type={'Body2Semibold'} color={'gray4'}>
+        <Typography type={'Title2Regular'} color={'gray4'}>
           {date}
         </Typography>
       </View>
