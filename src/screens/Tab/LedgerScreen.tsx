@@ -3,6 +3,7 @@ import FinancialStatusOverview from 'components/screen/LedgerScreen/FinancialSta
 import AvailableFundsOverview from 'components/screen/LedgerScreen/AvailableFundsOverview';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Divider from 'components/@common/Divider';
+import IncomeStatementOverview from 'components/screen/LedgerScreen/IncomeStatementOverview';
 
 export default function LedgerScreen() {
   return (
@@ -14,6 +15,7 @@ export default function LedgerScreen() {
       <Divider style={ledgerScreenStyles.divider} />
       <FinancialStatusOverview />
       <Divider style={ledgerScreenStyles.divider} />
+      <IncomeStatementOverview />
     </ScreenContainer>
   );
 }
