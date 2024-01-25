@@ -1,4 +1,4 @@
-import React, {ReactElement, createContext} from 'react';
+import React, {ReactElement} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import Typography from 'components/@common/Typography';
 
@@ -64,8 +64,6 @@ export function BottomElement({bottomElement}: BottomElementProps) {
   return <View>{bottomElement}</View>;
 }
 
-const FinancialDataCardContext = createContext(undefined);
-
 /**
  * @param children 자식 요소
  */
@@ -74,11 +72,7 @@ type FinancialDataCardProps = {
 };
 
 export function FinancialDataCard({children}: FinancialDataCardProps) {
-  return (
-    <FinancialDataCardContext.Provider value={undefined}>
-      {children}
-    </FinancialDataCardContext.Provider>
-  );
+  return <>{children}</>;
 }
 
 export const FinancialDataCardBase = Object.assign(FinancialDataCard, {
