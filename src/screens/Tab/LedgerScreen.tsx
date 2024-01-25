@@ -1,5 +1,5 @@
 import ScreenContainer from 'components/@common/ScreenContainer';
-import RecentTransaction from 'components/screen/LedgerScreen/RecentTransaction';
+import RecentTransaction from 'components/screen/LedgerScreen/RecentTransactionOverview';
 import Divider from 'components/@common/Divider';
 
 export default function LedgerScreen() {

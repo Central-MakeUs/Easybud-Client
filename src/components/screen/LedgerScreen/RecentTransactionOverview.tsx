@@ -1,9 +1,9 @@
 import {useNavigation} from '@react-navigation/native';
 import {TabNavigationProp} from 'navigators/types';
 import {FinancialDataCardBase} from 'components/screen/LedgerScreen/FinancialDataCard';
-import RecentTransactionBottomElement from 'components/screen/LedgerScreen/RecentTransactionBottomElement';
+import RecentTransactionBottomElement from 'components/screen/LedgerScreen/RecentTransactionOverviewBottomElement';
 
-export default function RecentTransaction() {
+export default function RecentTransactionOverview() {
   const navigation = useNavigation<TabNavigationProp>();
 
   const handlePressDetailButton = () => navigation.navigate('Transaction');
