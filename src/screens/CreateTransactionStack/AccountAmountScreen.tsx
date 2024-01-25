@@ -1,8 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import RightButton from 'components/CreateTransactionStack/RightButton';
-import LeftButton from 'components/CreateTransactionStack/LeftButton';
+import LeftButton from 'components/screen/CreateTransactionStack/LeftButton';
+import RightButton from 'components/screen/CreateTransactionStack/RightButton';
 
 export default function AccountAmountScreen() {
   const navigation = useNavigation();
