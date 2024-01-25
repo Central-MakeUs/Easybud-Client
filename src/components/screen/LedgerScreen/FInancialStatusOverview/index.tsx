@@ -1,6 +1,6 @@
 import React from 'react';
 import {FinancialDataCardBase} from 'components/screen/LedgerScreen/FinancialDataCard';
-import NetWorthOverview from 'components/screen/LedgerScreen/FInancialStatusOverview/NetWorthOverview';
+import NetWorthOverview from 'components/screen/LedgerScreen/FinancialStatusOverview/NetWorthOverview';
 
 export default function FinancialStatusOverview() {
   return (
