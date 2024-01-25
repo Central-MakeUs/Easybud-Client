@@ -1,7 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import {TabNavigationProp} from 'navigators/types';
+import {dummyTransactionDatas} from 'screens/Tab/TransactionScreen';
 import {FinancialDataCardBase} from 'components/screen/LedgerScreen/FinancialDataCard';
-import RecentTransactionBottomElement from 'components/screen/LedgerScreen/RecentTransactionOverview/RecentTransactionOverviewBottomElement';
+import TransactionList from 'components/@common/TransactionList';
 
 export default function RecentTransactionOverview() {
   const navigation = useNavigation<TabNavigationProp>();
@@ -15,7 +16,12 @@ export default function RecentTransactionOverview() {
         <FinancialDataCardBase.DetailButton onPress={handlePressDetailButton} />
       </FinancialDataCardBase.TopElementContainer>
       <FinancialDataCardBase.BottomElement
-        bottomElement={<RecentTransactionBottomElement />}
+        bottomElement={
+          <TransactionList
+            variant={'recent'}
+            transactionList={dummyTransactionDatas}
+          />
+        }
       />
     </FinancialDataCardBase.Container>
   );
