@@ -1,19 +1,38 @@
-import {View, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {TabNavigationProp} from 'navigators/types';
-import Typography from 'components/@common/Typography';
+import FinancialDataCard from 'components/screen/LedgerScreen/FinancialDataCard';
+import ScreenContainer from 'components/@common/ScreenContainer';
+import Transaction from 'components/@common/Transaction';
 
 export default function LedgerScreen() {
-  const navigation = useNavigation<TabNavigationProp>();
-
   return (
-    <View>
-      <Typography>거래</Typography>
-      <TouchableOpacity>
-        <Typography onPress={() => navigation.navigate('Transaction')}>
-          상세보기
-        </Typography>
-      </TouchableOpacity>
-    </View>
+    <ScreenContainer>
+      <FinancialDataCard
+        label={'최근 거래'}
+        bottomElement={
+          <>
+            <Transaction
+              category={'profit'}
+              keyNote={''}
+              date={''}
+              debitList={[]}
+              creditList={[]}
+            />
+            <Transaction
+              category={'profit'}
+              keyNote={''}
+              date={''}
+              debitList={[]}
+              creditList={[]}
+            />
+            <Transaction
+              category={'profit'}
+              keyNote={''}
+              date={''}
+              debitList={[]}
+              creditList={[]}
+            />
+          </>
+        }
+      />
+    </ScreenContainer>
   );
 }

@@ -37,5 +37,5 @@ export default function Transaction({
 }
 
 const transactionStyles = StyleSheet.create({
-  container: {display: 'flex', flexDirection: 'column'},
+  container: {display: 'flex', flexDirection: 'column', gap: 15},
 });
