@@ -12,7 +12,8 @@ export default function TransactionScreen() {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   return (
-    <ScreenContainer contentContainerStyle={{paddingTop: 0}}>
+    <ScreenContainer
+      contentContainerStyle={transactionScreenStyles.contentContainer}>
       <MonthHeader currentDate={currentDate} setCurrentDate={setCurrentDate} />
       <FinancialOverview />
       <FinancialCalendar currentDate={currentDate} />
@@ -23,6 +24,9 @@ export default function TransactionScreen() {
 }
 
 const transactionScreenStyles = StyleSheet.create({
+  contentContainer: {
+    paddingTop: 0,
+  },
   divider: {
     borderWidth: 1,
     borderColor: theme.palette.gray2,
