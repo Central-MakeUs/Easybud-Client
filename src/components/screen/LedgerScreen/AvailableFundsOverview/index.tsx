@@ -10,7 +10,12 @@ export default function AvailableFundsOverview() {
       </FinancialDataCardBase.TopElementContainer>
       <FinancialDataCardBase.BottomElement
         children={
-          <AvailableFundsBottomElement availableFundsAmount={1600000} />
+          <AvailableFundsBottomElement
+            availableFunds={1600000}
+            cashAndLiquidAssets={1000000000}
+            savingsAccount={1000000000}
+            plannedExpenditure={111111112}
+          />
         }
       />
     </FinancialDataCardBase.Container>

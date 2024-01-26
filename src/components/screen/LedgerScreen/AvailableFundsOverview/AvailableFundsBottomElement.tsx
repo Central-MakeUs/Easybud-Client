@@ -3,12 +3,24 @@ import {theme} from 'styles';
 import {formatToLocaleString} from 'utils/formatAmountValue';
 import Typography from 'components/@common/Typography';
 
+/**
+ * @param availableFunds 가용 자금
+ * @param cashAndLiquidAssets 현금 및 현금성 자산
+ * @param savingsAccount 보통 예금
+ * @param plannedExpenditure 지출 예정 자금
+ */
 type AvailableFundsBottomElementProps = {
-  availableFundsAmount: number;
+  availableFunds: number;
+  cashAndLiquidAssets: number;
+  savingsAccount: number;
+  plannedExpenditure: number;
 };
 
 export default function AvailableFundsBottomElement({
-  availableFundsAmount,
+  availableFunds,
+  cashAndLiquidAssets,
+  savingsAccount,
+  plannedExpenditure,
 }: AvailableFundsBottomElementProps) {
   return (
     <>
@@ -17,7 +29,7 @@ export default function AvailableFundsBottomElement({
           보민님의 가용자금
         </Typography>
         <Typography type={'Title1Semibold2'}>
-          {formatToLocaleString(availableFundsAmount)}원
+          {formatToLocaleString(availableFunds)}원
         </Typography>
       </View>
       <View
@@ -38,7 +50,7 @@ export default function AvailableFundsBottomElement({
               현금 및 현금성 자산
             </Typography>
             <Typography type={'Body2Semibold'} color={'green'}>
-              1,000,000,000원
+              {formatToLocaleString(cashAndLiquidAssets)}원
             </Typography>
           </View>
           <View style={availableFundsBottomElementStyles.rowContainer}>
@@ -46,7 +58,7 @@ export default function AvailableFundsBottomElement({
               보통 예금
             </Typography>
             <Typography type={'Body2Semibold'} color={'green'}>
-              1,000,000,000원
+              {formatToLocaleString(savingsAccount)}원
             </Typography>
           </View>
           <View style={availableFundsBottomElementStyles.rowContainer}>
@@ -54,7 +66,7 @@ export default function AvailableFundsBottomElement({
               지출 예정 자금
             </Typography>
             <Typography type={'Body2Semibold'} color={'pink'}>
-              1,000,000,000원
+              {formatToLocaleString(plannedExpenditure)}원
             </Typography>
           </View>
         </View>
