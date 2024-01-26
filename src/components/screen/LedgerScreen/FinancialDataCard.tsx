@@ -1,4 +1,4 @@
-import React, {ReactElement} from 'react';
+import React, {ReactElement, useState} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import Typography from 'components/@common/Typography';
 import Icon from 'components/@common/Icon';
@@ -41,19 +41,39 @@ export function TooltipIcon() {
 }
 
 /**
+ * @param variant 버튼 종류 'detail' | 'time'
  * @param onPress 상세 보기 버튼을 클릭했을 때 동작하는 함수
  */
-type DetailButtonProps = {onPress?: () => void};
+type DetailButtonProps = {variant?: 'detail' | 'time'; onPress?: () => void};
 
-export function DetailButton({onPress}: DetailButtonProps) {
+export function DetailButton({variant = 'detail', onPress}: DetailButtonProps) {
+  const [currentDate, _] = useState(new Date());
+
+  const getDatePeriod = () => {
+    const year = currentDate.getFullYear();
+    const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+    const day = String(currentDate.getDate()).padStart(2, '0');
+
+    return `${year}.${month}.01-${year}.${month}.${day}`;
+  };
+
   return (
     <TouchableOpacity onPress={onPress}>
-      <Typography
-        type={'Body2Regular'}
-        color={'gray4'}
-        style={financialDataCardStyles.button}>
-        상세보기
-      </Typography>
+      {variant === 'detail' ? (
+        <Typography
+          type={'Body2Regular'}
+          color={'gray4'}
+          style={financialDataCardStyles.button}>
+          상세보기
+        </Typography>
+      ) : (
+        <View style={financialDataCardStyles.timeDetailButton}>
+          <Typography type={'Body2Regular'} color={'gray4'}>
+            {getDatePeriod()}
+          </Typography>
+          <Icon name={'ArrowRightSmall'} />
+        </View>
+      )}
     </TouchableOpacity>
   );
 }
@@ -104,5 +124,10 @@ const financialDataCardStyles = StyleSheet.create({
   },
   button: {
     textDecorationLine: 'underline',
+  },
+  timeDetailButton: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });

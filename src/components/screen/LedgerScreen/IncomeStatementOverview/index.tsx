@@ -5,8 +5,8 @@ export default function IncomeStatementOverview() {
   return (
     <FinancialDataCardBase.Container>
       <FinancialDataCardBase.TopElementContainer>
-        <FinancialDataCardBase.Label label={'손익계산서'} />
-        <FinancialDataCardBase.DetailButton />
+        <FinancialDataCardBase.Label label={'손익현황'} />
+        <FinancialDataCardBase.DetailButton variant={'time'} />
       </FinancialDataCardBase.TopElementContainer>
       <FinancialDataCardBase.BottomElement
         children={<IncomeStatementBottomElement />}

@@ -10,7 +10,7 @@ export default function FinancialStatusOverview() {
     <FinancialDataCardBase.Container>
       <FinancialDataCardBase.TopElementContainer>
         <View style={financialStatusOverviewStyles.topElementFirstColContainer}>
-          <FinancialDataCardBase.Label label={'재무상태표'} />
+          <FinancialDataCardBase.Label label={'재무상태'} />
           {!hasInitialNetWorth && <FinancialDataCardBase.TooltipIcon />}
         </View>
         <FinancialDataCardBase.DetailButton />
