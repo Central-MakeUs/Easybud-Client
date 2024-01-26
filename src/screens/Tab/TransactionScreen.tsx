@@ -10,7 +10,7 @@ import MonthHeader from 'components/screen/TransactionScreen/MonthHeader';
 import TransactionList from 'components/@common/TransactionList';
 import {useFocusEffect} from '@react-navigation/native';
 
-export const dummyTransactionDatas: TransactionDataType[] = [
+export const dummyTransactionDatas: TransactionDataType<'default'>[] = [
   {
     category: 'cost',
     keyNote: '쿠팡',

@@ -1,10 +1,12 @@
 export const formatToLocaleString = <T extends string | number>(
   value: T,
-): string => {
+): string | undefined => {
   if (typeof value === 'string') {
     return Number(value).toLocaleString();
+  } else if (typeof value === 'number') {
+    return value.toLocaleString();
   }
-  return value.toLocaleString();
+  return;
 };
 
 export const parseNumberFromString = (value: string) => {

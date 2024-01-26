@@ -1,20 +1,22 @@
 import {StyleSheet, View} from 'react-native';
 import {TransactionDataType} from 'types/screens/TransactionScreen';
+import {TransactionListVariant} from 'types/screens/LedgerScreen';
 import Transaction from 'components/@common/Transaction';
 
 /**
  * @param transactionList 거래 데이터 배열
  * @param variant 최근 거래 리스트인지 기본 거래 리스트인지 여부
+ * @param amount 최근 거래 리스트에서 보여줄 금액
  */
-type TransactionListType = {
-  transactionList: TransactionDataType[];
-  variant?: 'recent' | 'default';
+export type TransactionListType<T extends TransactionListVariant> = {
+  transactionList: TransactionDataType<T>[];
+  variant?: T;
 };
 
 export default function TransactionList({
   transactionList,
   variant = 'default',
-}: TransactionListType) {
+}: TransactionListType<TransactionListVariant>) {
   return (
     <View style={transactionListStyles.transactionContainer}>
       {transactionList.map((transactionData, index) => (
@@ -24,8 +26,9 @@ export default function TransactionList({
           category={transactionData.category}
           keyNote={transactionData.keyNote}
           date={transactionData.date}
-          debitList={transactionData.debitList}
-          creditList={transactionData.creditList}
+          amount={transactionData.amount}
+          debitList={transactionData.debitList!}
+          creditList={transactionData.creditList!}
         />
       ))}
     </View>
