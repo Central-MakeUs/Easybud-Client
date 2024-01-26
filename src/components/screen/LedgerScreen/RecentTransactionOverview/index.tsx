@@ -16,7 +16,7 @@ export default function RecentTransactionOverview() {
         <FinancialDataCardBase.DetailButton onPress={handlePressDetailButton} />
       </FinancialDataCardBase.TopElementContainer>
       <FinancialDataCardBase.BottomElement
-        bottomElement={
+        children={
           <TransactionList
             variant={'recent'}
             transactionList={dummyTransactionDatas}

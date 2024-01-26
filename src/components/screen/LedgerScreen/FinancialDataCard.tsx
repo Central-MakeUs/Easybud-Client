@@ -59,14 +59,14 @@ export function DetailButton({onPress}: DetailButtonProps) {
 }
 
 /**
- * @param bottomElement 하단에 들어갈 요소
+ * @param children 자식 요소
  */
 type BottomElementProps = {
-  bottomElement: ReactElement;
+  children: ReactElement;
 };
 
-export function BottomElement({bottomElement}: BottomElementProps) {
-  return <View>{bottomElement}</View>;
+export function BottomElement({children}: BottomElementProps) {
+  return <View>{children}</View>;
 }
 
 /**

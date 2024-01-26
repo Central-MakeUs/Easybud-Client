@@ -9,7 +9,7 @@ export default function AvailableFundsOverview() {
         <FinancialDataCardBase.DetailButton />
       </FinancialDataCardBase.TopElementContainer>
       <FinancialDataCardBase.BottomElement
-        bottomElement={
+        children={
           <AvailableFundsBottomElement availableFundsAmount={1600000} />
         }
       />

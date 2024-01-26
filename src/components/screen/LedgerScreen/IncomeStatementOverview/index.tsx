@@ -9,7 +9,7 @@ export default function IncomeStatementOverview() {
         <FinancialDataCardBase.DetailButton />
       </FinancialDataCardBase.TopElementContainer>
       <FinancialDataCardBase.BottomElement
-        bottomElement={<IncomeStatementBottomElement />}
+        children={<IncomeStatementBottomElement />}
       />
     </FinancialDataCardBase.Container>
   );

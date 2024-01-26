@@ -16,7 +16,7 @@ export default function FinancialStatusOverview() {
         <FinancialDataCardBase.DetailButton />
       </FinancialDataCardBase.TopElementContainer>
       <FinancialDataCardBase.BottomElement
-        bottomElement={
+        children={
           <FinancialStatusBottomElement
             networthAmount={170450000}
             assetAmount={20045000}
