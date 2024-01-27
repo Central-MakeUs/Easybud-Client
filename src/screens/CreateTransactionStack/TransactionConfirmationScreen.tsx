@@ -1,4 +1,4 @@
-import {useRecoilValue} from 'recoil';
+import {useRecoilValue, useResetRecoilState} from 'recoil';
 import {transactionState} from 'libs/recoil/states/transaction';
 import {
   CreateTransactionStackScreenName,
@@ -18,11 +18,14 @@ export default function TransactionConfirmationScreen({
   navigation,
 }: TransactionConfirmationScreenProps) {
   const transaction = useRecoilValue(transactionState);
+  const clearTransaction = useResetRecoilState(transactionState);
+
   console.log('step5: ', transaction, transaction.accounts.length);
 
   const handleSave = () => {
     console.log(transaction);
     navigation.navigate('Tab', {screen: 'Ledger'});
+    clearTransaction();
   };
 
   const handleAddAccount = () => {
