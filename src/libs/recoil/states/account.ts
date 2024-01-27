@@ -15,7 +15,8 @@ export const accountState = selectorFamily<NewAccount, number>({
   get:
     (index: number) =>
     ({get}) => {
-      const {accounts} = get(transactionState);
+      const {accounts: prevAccounts} = get(transactionState);
+      const accounts = cloneDeep(prevAccounts);
       // 배열의 '마지막 다음' 인덱스에 접근하려 할 때 새 계좌를 추가
       if (index === accounts.length) {
         accounts.push(initialAccount);
