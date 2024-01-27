@@ -37,20 +37,24 @@ export function Label({label}: LabelProps) {
 }
 
 /**
+ * @param isVisible 아이콘을 보여줄지 여부
  * @param onPress 아이콘을 눌렀을 때 동작을 정의하는 함수
  */
 type TooltipIconProps = {
+  isVisible: boolean;
   onPress: (prevState: boolean) => void;
 };
 
-export function TooltipIcon({onPress}: TooltipIconProps) {
+export function TooltipIcon({onPress, isVisible}: TooltipIconProps) {
   return (
-    <Icon
-      name={'ExclamationCircle'}
-      size={18}
-      fill={'gray3'}
-      onPress={onPress}
-    />
+    isVisible && (
+      <Icon
+        name={'ExclamationCircle'}
+        size={18}
+        fill={'gray3'}
+        onPress={onPress}
+      />
+    )
   );
 }
 

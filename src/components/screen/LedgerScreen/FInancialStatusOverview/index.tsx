@@ -8,6 +8,9 @@ export default function FinancialStatusOverview() {
   const [hasInitialNetWorth, _] = useState(false);
   const [showTooltipText, setShowTooltipText] = useState(false);
 
+  const handlePressTooltipIcon = () =>
+    setShowTooltipText(prevState => !prevState);
+
   return (
     <View>
       <FinancialDataCardBase.Container>
@@ -15,11 +18,10 @@ export default function FinancialStatusOverview() {
           <View
             style={financialStatusOverviewStyles.topElementFirstColContainer}>
             <FinancialDataCardBase.Label label={'재무상태'} />
-            {!hasInitialNetWorth && (
-              <FinancialDataCardBase.TooltipIcon
-                onPress={() => setShowTooltipText(prevState => !prevState)}
-              />
-            )}
+            <FinancialDataCardBase.TooltipIcon
+              isVisible={!hasInitialNetWorth}
+              onPress={handlePressTooltipIcon}
+            />
           </View>
           <FinancialDataCardBase.DetailButton />
         </FinancialDataCardBase.TopElementContainer>
@@ -33,15 +35,14 @@ export default function FinancialStatusOverview() {
           }
         />
       </FinancialDataCardBase.Container>
-      {showTooltipText && (
-        <Tooltip
-          text={'기초 순자산을 설정하세요!'}
-          position={{
-            top: 29,
-            left: 23,
-          }}
-        />
-      )}
+      <Tooltip
+        isVisible={showTooltipText}
+        text={'기초 순자산을 설정하세요!'}
+        position={{
+          top: 29,
+          left: 23,
+        }}
+      />
     </View>
   );
 }

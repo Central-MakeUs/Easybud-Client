@@ -2,7 +2,13 @@ import {View, StyleSheet} from 'react-native';
 import Typography from 'components/@common/Typography';
 import {theme} from 'styles';
 
+/**
+ * @param isVisible 툴팁을 보여줄지 여부
+ * @param text 툴팁 텍스트
+ * @param position 툴팁 위치
+ */
 type TooltipProps = {
+  isVisible: boolean;
   text: string;
   position: {
     top: number;
@@ -10,20 +16,22 @@ type TooltipProps = {
   };
 };
 
-export default function Tooltip({text, position}: TooltipProps) {
+export default function Tooltip({isVisible, text, position}: TooltipProps) {
   return (
-    <View
-      style={[
-        tooltipStyles.backgroundContainer,
-        {top: position.top, left: position.left},
-      ]}>
-      <View style={tooltipStyles.triangleContainer} />
-      <View style={tooltipStyles.container}>
-        <Typography type={'Body1Regular'} color={'gray2'}>
-          {text}
-        </Typography>
+    isVisible && (
+      <View
+        style={[
+          tooltipStyles.backgroundContainer,
+          {top: position.top, left: position.left},
+        ]}>
+        <View style={tooltipStyles.triangleContainer} />
+        <View style={tooltipStyles.container}>
+          <Typography type={'Body1Regular'} color={'gray2'}>
+            {text}
+          </Typography>
+        </View>
       </View>
-    </View>
+    )
   );
 }
 
