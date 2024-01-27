@@ -1,4 +1,3 @@
-import Title from 'components/CreateTransactionStack/Title';
 import React, {ReactNode} from 'react';
 import {
   ScrollView,
@@ -18,7 +17,6 @@ import {theme} from 'styles';
  */
 type ScreenContainerProps = {
   children: ReactNode;
-  title: string;
   loading?: boolean;
   fixedBottomComponent?: ReactNode;
   style?: React.CSSProperties | Array<React.CSSProperties>;
@@ -28,7 +26,6 @@ type ScreenContainerProps = {
 export default function ScreenContainer({
   children,
   loading,
-  title,
   fixedBottomComponent,
   ...props
 }: ScreenContainerProps) {
@@ -42,20 +39,18 @@ export default function ScreenContainer({
           styles.scrollViewContent,
           props?.style,
           props?.contentContainerStyle,
-        ]}>
+        ]}
+        keyboardShouldPersistTaps="handled">
         {loading ? (
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color={theme.palette.primary} />
           </View>
         ) : (
-          <>
-            <Title>{title}</Title>
-            {children}
-          </>
+          children
         )}
       </ScrollView>
       {fixedBottomComponent && (
-        <View style={styles.fixBottomComponent}>{fixedBottomComponent}</View>
+        <View style={styles.fixedBottomComponent}>{fixedBottomComponent}</View>
       )}
     </KeyboardAvoidingView>
   );
@@ -74,11 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  fixBottomComponent: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 10,
+  fixedBottomComponent: {
     margin: 20,
     borderRadius: 12,
     alignItems: 'center',

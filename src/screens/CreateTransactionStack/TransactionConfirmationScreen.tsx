@@ -4,9 +4,9 @@ import {
   CreateTransactionStackScreenName,
   RootStackNavigationProp,
 } from 'navigators/types';
-import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import Button from 'components/@common/Buttons/Button';
+import Container from 'components/CreateTransactionStack/Container';
 
 type TransactionConfirmationScreenProps = {
   navigation: RootStackNavigationProp;
@@ -47,7 +47,7 @@ export default function TransactionConfirmationScreen({
   };
 
   return (
-    <ScreenContainer
+    <Container
       title="입력하신 정보를 확인해주세요"
       fixedBottomComponent={
         <>
@@ -70,7 +70,7 @@ export default function TransactionConfirmationScreen({
         handleUpdate AccountCategory accountIndex 0
       </Button>
       <Typography>TransactionConfirmationScreen</Typography>
-    </ScreenContainer>
+    </Container>
   );
 }
 

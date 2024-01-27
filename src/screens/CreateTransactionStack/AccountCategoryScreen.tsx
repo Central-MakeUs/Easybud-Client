@@ -3,12 +3,12 @@ import {useRecoilState} from 'recoil';
 import {isEmpty} from 'lodash';
 import {accountState} from 'libs/recoil/states/account';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
-import ScreenContainer from 'components/@common/ScreenContainer';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import {AccountCategory, NewAccount} from 'types/account';
 import SelectForm from 'components/@common/SelectForm';
 import {CategoryName} from 'constants/components/SelectForm';
+import Container from 'components/CreateTransactionStack/Container';
 
 type AccountCategoryScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountCategory'>;
@@ -43,7 +43,7 @@ export default function AccountCategoryScreen({
   };
 
   return (
-    <ScreenContainer
+    <Container
       title="자산항목을 선택해 주세요"
       fixedBottomComponent={
         <>
@@ -74,7 +74,7 @@ export default function AccountCategoryScreen({
         items={dummyCategories}
         onSelect={category => handleChange('tertiary', category)}
       />
-    </ScreenContainer>
+    </Container>
   );
 }
 

@@ -5,10 +5,10 @@ import {accountState} from 'libs/recoil/states/account';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import {AccountTypeUnion, NewAccount} from 'types/account';
 
-import ScreenContainer from 'components/@common/ScreenContainer';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import Button from 'components/@common/Buttons/Button';
+import Container from 'components/CreateTransactionStack/Container';
 
 const accountTypes: AccountTypeUnion[] = [
   {name: '자산', change: '증가'}, // 차변
@@ -39,7 +39,7 @@ export default function AccountTypeScreen({
   };
 
   return (
-    <ScreenContainer
+    <Container
       title="거래 요소를 선택해주세요"
       fixedBottomComponent={
         <>
@@ -62,7 +62,7 @@ export default function AccountTypeScreen({
             }>{`${item.name} ${item.change}`}</Button>
         ))}
       </View>
-    </ScreenContainer>
+    </Container>
   );
 }
 

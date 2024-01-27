@@ -4,9 +4,9 @@ import {CreateTransactionStackRouteProp} from 'navigators/types';
 import {NewTransaction} from 'types/transaction';
 import DatePicker from 'components/@common/DatePicker';
 import InputForm from 'components/@common/InputForm';
-import ScreenContainer from 'components/@common/ScreenContainer';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import RightButton from 'components/CreateTransactionStack/RightButton';
+import Container from 'components/CreateTransactionStack/Container';
 
 type BasicTransactionInfoScreenProps = {
   route: CreateTransactionStackRouteProp<'BasicTransactionInfo'>;
@@ -23,7 +23,7 @@ export default function BasicTransactionInfoScreen({
     setTransaction(prev => ({...prev, [key]: value}));
 
   return (
-    <ScreenContainer
+    <Container
       title="거래 정보를 입력해주세요"
       fixedBottomComponent={
         <>
@@ -47,6 +47,6 @@ export default function BasicTransactionInfoScreen({
         onChangeText={summary => handleChange('summary', summary)}
         placeholder="적요를 작성하세요"
       />
-    </ScreenContainer>
+    </Container>
   );
 }

@@ -3,10 +3,10 @@ import {useRecoilState} from 'recoil';
 import {accountState} from 'libs/recoil/states/account';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import {NewAccount} from 'types/account';
-import ScreenContainer from 'components/@common/ScreenContainer';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import AmountTextField from 'components/@common/TextFields/AmountTextField';
+import Container from 'components/CreateTransactionStack/Container';
 
 type AccountAmountScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountAmount'>;
@@ -27,7 +27,7 @@ export default function AccountAmountScreen({
     setAccount(prev => ({...prev, amount}));
 
   return (
-    <ScreenContainer
+    <Container
       title="금액을 입력해주세요"
       fixedBottomComponent={
         <>
@@ -41,6 +41,6 @@ export default function AccountAmountScreen({
         </>
       }>
       <AmountTextField account={account} onChange={handleChange} />
-    </ScreenContainer>
+    </Container>
   );
 }
