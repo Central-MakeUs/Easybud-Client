@@ -1,4 +1,4 @@
-import {AccountTypeUnion, NewAccount} from 'types/account';
+import {AccountTypeUnion} from 'types/account';
 
 /** 차변 여부 판단 */
 export function isDebit(type: AccountTypeUnion) {
@@ -13,17 +13,6 @@ export function isDebit(type: AccountTypeUnion) {
     case '비용':
       return true;
   }
-}
-
-export function calculateBalance(accounts: NewAccount[]): number {
-  let totalDebit = 0;
-  let totalCredit = 0;
-
-  accounts.forEach(({type, amount}) => {
-    isDebit(type) ? (totalDebit += amount) : (totalCredit += amount);
-  });
-
-  return totalDebit - totalCredit;
 }
 
 export function formatNumber(amount: string): string {

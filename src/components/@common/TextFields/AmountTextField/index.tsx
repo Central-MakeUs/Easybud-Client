@@ -6,8 +6,8 @@ import {theme} from 'styles';
 import {formatNumber, isDebit} from 'utils/formatAmountValue';
 import {NewAccount} from 'types/account';
 import {isEqual} from 'lodash';
-import {balanceState} from 'libs/recoil/states/transaction';
 import {useRecoilValue} from 'recoil';
+import {balanceState} from 'libs/recoil/states/balance';
 
 /**
  * @param amount 현 계좌 금액

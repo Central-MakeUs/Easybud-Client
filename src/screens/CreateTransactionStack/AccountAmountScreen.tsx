@@ -1,6 +1,6 @@
 import {useMemo} from 'react';
 import {useRecoilState} from 'recoil';
-import {accountState} from 'libs/recoil/states/transaction';
+import {accountState} from 'libs/recoil/states/account';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import {NewAccount} from 'types/account';
 import ScreenContainer from 'components/@common/ScreenContainer';

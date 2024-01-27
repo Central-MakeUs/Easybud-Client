@@ -1,7 +1,7 @@
 import {useRecoilState} from 'recoil';
 import {StyleSheet, View} from 'react-native';
 import {isEqual} from 'lodash';
-import {accountState} from 'libs/recoil/states/transaction';
+import {accountState} from 'libs/recoil/states/account';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import {AccountTypeUnion, NewAccount} from 'types/account';
 
