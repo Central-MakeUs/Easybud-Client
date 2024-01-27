@@ -1,33 +1,26 @@
-import {NewAccount} from 'types/account';
+import {AccountTypeUnion, NewAccount} from 'types/account';
+
+/** 차변 여부 판단 */
+export function isDebit(type: AccountTypeUnion) {
+  switch (type.name) {
+    case '자산':
+      return type.change === '증가';
+    case '부채':
+    case '자본':
+      return type.change === '감소';
+    case '수익':
+      return true;
+    case '비용':
+      return false;
+  }
+}
 
 export function calculateBalance(accounts: NewAccount[]): number {
   let totalDebit = 0;
   let totalCredit = 0;
 
   accounts.forEach(({type, amount}) => {
-    switch (type.name) {
-      case '자산':
-        type.change === '증가'
-          ? (totalDebit += amount)
-          : (totalCredit += amount);
-        break;
-      case '부채':
-        type.change === '증가'
-          ? (totalCredit += amount)
-          : (totalDebit += amount);
-        break;
-      case '자본':
-        type.change === '증가'
-          ? (totalCredit += amount)
-          : (totalDebit += amount);
-        break;
-      case '수익':
-        totalCredit += amount;
-        break;
-      case '비용':
-        totalDebit += amount;
-        break;
-    }
+    isDebit(type) ? (totalDebit += amount) : (totalCredit += amount);
   });
 
   return totalDebit - totalCredit;

@@ -63,7 +63,7 @@ export default function AccountAmountScreen({
         </>
       }>
       <AmountTextField
-        amount={account.amount}
+        account={account}
         balance={calculateBalance(transaction.accounts)}
         onChange={handleChange}
       />
