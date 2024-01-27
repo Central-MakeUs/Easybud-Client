@@ -1,7 +1,7 @@
-import Typography from 'components/@common/Typography';
 import {StyleSheet, View} from 'react-native';
 import {theme} from 'styles';
 import {formatToLocaleString} from 'utils/formatAmountValue';
+import Typography from 'components/@common/Typography';
 
 type FinacialStatusBottomElementProps = {
   networthAmount: number;

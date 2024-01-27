@@ -36,8 +36,22 @@ export function Label({label}: LabelProps) {
   return <Typography type={'Title1Semibold1'}>{label}</Typography>;
 }
 
-export function TooltipIcon() {
-  return <Icon name={'ExclamationCircle'} />;
+/**
+ * @param onPress 아이콘을 눌렀을 때 동작을 정의하는 함수
+ */
+type TooltipIconProps = {
+  onPress: (prevState: boolean) => void;
+};
+
+export function TooltipIcon({onPress}: TooltipIconProps) {
+  return (
+    <Icon
+      name={'ExclamationCircle'}
+      size={18}
+      fill={'gray3'}
+      onPress={onPress}
+    />
+  );
 }
 
 /**
