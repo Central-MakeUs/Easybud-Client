@@ -7,23 +7,31 @@ import {formatNumber, isDebit} from 'utils/formatAmountValue';
 import {NewAccount} from 'types/account';
 import {isEqual} from 'lodash';
 import {useRecoilValue} from 'recoil';
-import {balanceState} from 'libs/recoil/states/balance';
+import {transactionState} from 'libs/recoil/states/transaction';
+import {accountState} from 'libs/recoil/states/account';
 
 /**
- * @param amount 현 계좌 금액
+ * @param accountIndex 현 계좌 index
  */
 type TextFieldProps = {
-  account: NewAccount;
+  accountIndex: number;
   onChange: (amount: number) => void;
 } & Omit<
   TextInputProps,
   'value' | 'defaultValue' | 'onChangeText' | 'onChange'
 >;
 
-export default function AmountTextField({account, onChange}: TextFieldProps) {
-  const {amount, type} = account;
+export default function AmountTextField({
+  accountIndex,
+  onChange,
+}: TextFieldProps) {
+  const {accounts} = useRecoilValue(transactionState);
+  const {amount, type} = useRecoilValue(accountState(accountIndex));
 
-  const balance = useRecoilValue(balanceState);
+  const balance = useMemo(
+    () => calculateBalance(accounts, accountIndex),
+    [accountIndex, accounts],
+  );
 
   const disabled = useMemo(
     () => (balance > 0 && isDebit(type)) || balance === 0,
@@ -72,3 +80,19 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
   },
 });
+
+function calculateBalance(
+  accounts: NewAccount[],
+  accountIndex: number,
+): number {
+  let totalDebit = 0;
+  let totalCredit = 0;
+
+  accounts.forEach(({type, amount}, index) => {
+    if (index !== accountIndex) {
+      isDebit(type) ? (totalDebit += amount) : (totalCredit += amount);
+    }
+  });
+
+  return totalDebit - totalCredit;
+}

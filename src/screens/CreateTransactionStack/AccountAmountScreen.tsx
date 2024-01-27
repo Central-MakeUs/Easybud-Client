@@ -42,7 +42,7 @@ export default function AccountAmountScreen({
           />
         </>
       }>
-      <AmountTextField account={account} onChange={handleChange} />
+      <AmountTextField accountIndex={accountIndex} onChange={handleChange} />
     </Container>
   );
 }
