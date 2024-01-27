@@ -53,7 +53,7 @@ export type AccountCategory = {
   /** 중분류 */
   secondary: string;
   /** 소분류 */
-  tertiary?: string | null;
+  tertiary: string;
 };
 
 /////////////////////////////////////////////

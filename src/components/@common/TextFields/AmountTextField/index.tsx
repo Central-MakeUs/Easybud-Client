@@ -9,7 +9,7 @@ import {isEqual} from 'lodash';
 
 /**
  * @param amount 현 계좌 금액
- * @param balance 현재 대차 금액
+ * @param balance 현 대차 금액
  */
 type TextFieldProps = {
   account: NewAccount;

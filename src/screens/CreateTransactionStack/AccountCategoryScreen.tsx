@@ -42,9 +42,15 @@ export default function AccountCategoryScreen({
 
   const disabled = useMemo(() => {
     return (
-      isEmpty(account.category.primary) || isEmpty(account.category.secondary)
+      isEmpty(account.category.primary) ||
+      isEmpty(account.category.secondary) ||
+      isEmpty(account.category.tertiary)
     );
-  }, [account.category.primary, account.category.secondary]);
+  }, [
+    account.category.primary,
+    account.category.secondary,
+    account.category.tertiary,
+  ]);
 
   const handleChange = (label: keyof AccountCategory, category: string) => {
     setAccount(prev => ({
