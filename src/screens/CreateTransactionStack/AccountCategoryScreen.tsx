@@ -1,11 +1,12 @@
-import {useMemo, useState} from 'react';
-import {cloneDeep, isEmpty} from 'lodash';
+import {useMemo} from 'react';
+import {useRecoilState} from 'recoil';
+import {isEmpty} from 'lodash';
+import {accountState} from 'libs/recoil/states/transaction';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import {AccountCategory, NewAccount} from 'types/account';
-import {NewTransaction} from 'types/transaction';
 import SelectForm from 'components/@common/SelectForm';
 import {CategoryName} from 'constants/components/SelectForm';
 
@@ -17,29 +18,11 @@ type AccountCategoryScreenProps = {
 export default function AccountCategoryScreen({
   route: {params},
 }: AccountCategoryScreenProps) {
-  const {transaction: prevTransaction, isUpdateStep, accountIndex} = params;
-
-  const [account, setAccount] = useState<NewAccount>(() => {
-    const index = isUpdateStep
-      ? accountIndex
-      : prevTransaction.accounts.length - 1;
-
-    return prevTransaction.accounts[index];
-  });
-  setAccount;
-
-  const transaction = useMemo<NewTransaction>(() => {
-    const accounts = cloneDeep(prevTransaction.accounts);
-
-    const index = isUpdateStep
-      ? accountIndex
-      : prevTransaction.accounts.length - 1;
-
-    accounts[index] = account;
-
-    return {...prevTransaction, accounts};
-  }, [account, accountIndex, isUpdateStep, prevTransaction]);
-
+  const {isUpdateStep, accountIndex} = params;
+  const [account, setAccount] = useRecoilState<NewAccount>(
+    accountState(accountIndex),
+  );
+  console.log('step3: ', account, accountIndex, isUpdateStep);
   const disabled = useMemo(() => {
     return (
       isEmpty(account.category.primary) ||
@@ -64,15 +47,12 @@ export default function AccountCategoryScreen({
       title="자산항목을 선택해 주세요"
       fixedBottomComponent={
         <>
-          <LeftButton
-            isUpdateStep={isUpdateStep}
-            transaction={prevTransaction}
-          />
+          <LeftButton isUpdateStep={isUpdateStep} />
           <RightButton
             disabled={disabled}
             nextScreen="AccountAmount"
             isUpdateStep={isUpdateStep}
-            transaction={transaction}
+            accountIndex={accountIndex}
           />
         </>
       }>

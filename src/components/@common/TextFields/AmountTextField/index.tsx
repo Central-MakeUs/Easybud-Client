@@ -6,26 +6,24 @@ import {theme} from 'styles';
 import {formatNumber, isDebit} from 'utils/formatAmountValue';
 import {NewAccount} from 'types/account';
 import {isEqual} from 'lodash';
+import {balanceState} from 'libs/recoil/states/transaction';
+import {useRecoilValue} from 'recoil';
 
 /**
  * @param amount 현 계좌 금액
- * @param balance 현 대차 금액
  */
 type TextFieldProps = {
   account: NewAccount;
-  balance: number;
   onChange: (amount: number) => void;
 } & Omit<
   TextInputProps,
   'value' | 'defaultValue' | 'onChangeText' | 'onChange'
 >;
 
-export default function AmountTextField({
-  account,
-  balance,
-  onChange,
-}: TextFieldProps) {
+export default function AmountTextField({account, onChange}: TextFieldProps) {
   const {amount, type} = account;
+
+  const balance = useRecoilValue(balanceState);
 
   const disabled = useMemo(
     () => (balance > 0 && isDebit(type)) || balance === 0,

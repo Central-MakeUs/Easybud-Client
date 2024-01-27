@@ -1,52 +1,47 @@
-import ScreenContainer from 'components/@common/ScreenContainer';
-import Typography from 'components/@common/Typography';
-import Button from 'components/@common/Buttons/Button';
+import {useRecoilValue} from 'recoil';
+import {transactionState} from 'libs/recoil/states/transaction';
 import {
-  CreateTransactionStackRouteProp,
   CreateTransactionStackScreenName,
   RootStackNavigationProp,
 } from 'navigators/types';
+import ScreenContainer from 'components/@common/ScreenContainer';
+import Typography from 'components/@common/Typography';
+import Button from 'components/@common/Buttons/Button';
 
 type TransactionConfirmationScreenProps = {
   navigation: RootStackNavigationProp;
-  route: CreateTransactionStackRouteProp<'TransactionConfirmation'>;
+  // route: CreateTransactionStackRouteProp<'TransactionConfirmation'>;
 };
 
 /** 거래 추가 Step 5 */
 export default function TransactionConfirmationScreen({
   navigation,
-  route: {params},
 }: TransactionConfirmationScreenProps) {
-  const {transaction} = params;
+  const transaction = useRecoilValue(transactionState);
+  console.log('step5: ', transaction, transaction.accounts.length);
 
   const handleSave = () => {
+    console.log(transaction);
     navigation.navigate('Tab', {screen: 'Ledger'});
   };
 
   const handleAddAccount = () => {
     navigation.push('CreateTransactionStack', {
       screen: 'AccountType',
-      params: {transaction},
+      params: {accountIndex: transaction.accounts.length},
     });
   };
 
   const handleUpdateTransaction = ({screen, accountIndex}: Basic | Account) => {
     if (screen === 'BasicTransactionInfo') {
       navigation.push('CreateTransactionStack', {
-        screen: screen,
-        params: {
-          transaction,
-          isUpdateStep: true,
-        },
+        screen,
+        params: {isUpdateStep: true},
       });
     } else {
       navigation.push('CreateTransactionStack', {
-        screen: screen,
-        params: {
-          transaction,
-          isUpdateStep: true,
-          accountIndex,
-        },
+        screen,
+        params: {isUpdateStep: true, accountIndex},
       });
     }
   };

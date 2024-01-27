@@ -1,13 +1,14 @@
-import {useMemo, useState} from 'react';
-import {cloneDeep, isEqual} from 'lodash';
+import {useRecoilState} from 'recoil';
+import {StyleSheet, View} from 'react-native';
+import {isEqual} from 'lodash';
+import {accountState} from 'libs/recoil/states/transaction';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
+import {AccountTypeUnion, NewAccount} from 'types/account';
+
 import ScreenContainer from 'components/@common/ScreenContainer';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
-import {NewTransaction} from 'types/transaction';
-import {AccountTypeUnion, NewAccount} from 'types/account';
 import Button from 'components/@common/Buttons/Button';
-import {StyleSheet, View} from 'react-native';
 
 const accountTypes: AccountTypeUnion[] = [
   {name: '자산', change: '증가'}, // 차변
@@ -20,12 +21,6 @@ const accountTypes: AccountTypeUnion[] = [
   {name: '수익', change: '발생'},
 ] as const;
 
-const initialAccount: NewAccount = {
-  type: accountTypes[0],
-  amount: 0,
-  category: {primary: '', secondary: ''},
-};
-
 export type AccountTypeScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountType'>;
 };
@@ -34,50 +29,25 @@ export type AccountTypeScreenProps = {
 export default function AccountTypeScreen({
   route: {params},
 }: AccountTypeScreenProps) {
-  const {transaction: prevTransaction, isUpdateStep, accountIndex} = params;
-
-  const [account, setAccount] = useState<NewAccount>(
-    // 이전 버튼이었다가 다시 돌아가는 걸 어케알아차리지 ? ? ??
-    isUpdateStep ? prevTransaction.accounts[accountIndex] : initialAccount,
+  const {isUpdateStep, accountIndex} = params;
+  const [account, setAccount] = useRecoilState<NewAccount>(
+    accountState(accountIndex),
   );
-
-  const transaction = useMemo<NewTransaction>(() => {
-    const accounts = cloneDeep(prevTransaction.accounts);
-
-    if (isUpdateStep) {
-      accounts[accountIndex] = account;
-    } else {
-      accounts.push(account);
-    }
-
-    return {...prevTransaction, accounts};
-  }, [account, accountIndex, isUpdateStep, prevTransaction]);
-
+  console.log('step2: ', account, accountIndex, isUpdateStep);
   const handleChangeAccountType = (type: AccountTypeUnion) => {
     setAccount(prev => ({...prev, type}));
   };
-
-  const disabledRightButton = useMemo(() => {
-    return (
-      isUpdateStep &&
-      isEqual(account.type, prevTransaction.accounts[accountIndex].type)
-    );
-  }, [account, accountIndex, isUpdateStep, prevTransaction.accounts]);
 
   return (
     <ScreenContainer
       title="거래 요소를 선택해주세요"
       fixedBottomComponent={
         <>
-          <LeftButton
-            isUpdateStep={isUpdateStep}
-            transaction={prevTransaction}
-          />
+          <LeftButton isUpdateStep={isUpdateStep} />
           <RightButton
-            disabled={disabledRightButton}
             nextScreen="AccountCategory"
             isUpdateStep={isUpdateStep}
-            transaction={transaction}
+            accountIndex={accountIndex}
           />
         </>
       }>

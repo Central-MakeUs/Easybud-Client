@@ -1,13 +1,12 @@
+import {useMemo} from 'react';
+import {useRecoilState} from 'recoil';
+import {accountState} from 'libs/recoil/states/transaction';
+import {CreateTransactionStackRouteProp} from 'navigators/types';
+import {NewAccount} from 'types/account';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
-import {CreateTransactionStackRouteProp} from 'navigators/types';
-import {cloneDeep} from 'lodash';
-import {useState, useMemo} from 'react';
-import {NewAccount} from 'types/account';
-import {NewTransaction} from 'types/transaction';
 import AmountTextField from 'components/@common/TextFields/AmountTextField';
-import {calculateBalance} from 'utils/formatAmountValue';
 
 type AccountAmountScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountAmount'>;
@@ -17,31 +16,12 @@ type AccountAmountScreenProps = {
 export default function AccountAmountScreen({
   route: {params},
 }: AccountAmountScreenProps) {
-  const {transaction: prevTransaction, isUpdateStep, accountIndex} = params;
-
-  const [account, setAccount] = useState<NewAccount>(() => {
-    const index = isUpdateStep
-      ? accountIndex
-      : prevTransaction.accounts.length - 1;
-
-    return prevTransaction.accounts[index];
-  });
-
-  const transaction = useMemo<NewTransaction>(() => {
-    const accounts = cloneDeep(prevTransaction.accounts);
-
-    const index = isUpdateStep
-      ? accountIndex
-      : prevTransaction.accounts.length - 1;
-
-    accounts[index] = account;
-
-    return {...prevTransaction, accounts};
-  }, [account, accountIndex, isUpdateStep, prevTransaction]);
-
-  const disabled = useMemo(() => {
-    return account.amount === 0;
-  }, [account.amount]);
+  const {isUpdateStep, accountIndex} = params;
+  const [account, setAccount] = useRecoilState<NewAccount>(
+    accountState(accountIndex),
+  );
+  console.log('step4: ', account, accountIndex, isUpdateStep);
+  const disabled = useMemo(() => account.amount === 0, [account.amount]);
 
   const handleChange = (amount: number) =>
     setAccount(prev => ({...prev, amount}));
@@ -51,23 +31,16 @@ export default function AccountAmountScreen({
       title="금액을 입력해주세요"
       fixedBottomComponent={
         <>
-          <LeftButton
-            isUpdateStep={isUpdateStep}
-            transaction={prevTransaction}
-          />
+          <LeftButton isUpdateStep={isUpdateStep} />
           <RightButton
             disabled={disabled}
             nextScreen="TransactionConfirmation"
             isUpdateStep={isUpdateStep}
-            transaction={transaction}
+            accountIndex={accountIndex}
           />
         </>
       }>
-      <AmountTextField
-        account={account}
-        balance={calculateBalance(transaction.accounts)}
-        onChange={handleChange}
-      />
+      <AmountTextField account={account} onChange={handleChange} />
     </ScreenContainer>
   );
 }
