@@ -23,10 +23,13 @@ export default function Container({
 }: ContainerProps) {
   const {accounts} = useRecoilValue(transactionState);
 
-  const step = useMemo(
-    () => (accounts.length === 0 ? 1 : accounts.length) * 3 + 2,
-    [accounts.length],
-  );
+  const step = useMemo(() => {
+    if (screen === 'AccountType') {
+      return accountIndex * 3 + 5;
+    }
+
+    return (accounts.length === 0 ? 1 : accounts.length) * 3 + 2;
+  }, [accountIndex, accounts.length, screen]);
 
   const currentStep = useMemo(() => {
     switch (screen) {
