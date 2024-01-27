@@ -1,8 +1,8 @@
 import {useNavigation} from '@react-navigation/native';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import RightButton from 'components/CreateTransactionStack/RightButton';
-import LeftButton from 'components/CreateTransactionStack/LeftButton';
+import RightButton from 'components/screens/CreateTransactionStack/RightButton';
+import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
 
 export default function DebitCreditDeciderScreen() {
   const navigation = useNavigation();

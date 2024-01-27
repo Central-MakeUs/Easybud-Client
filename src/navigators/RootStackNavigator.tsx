@@ -5,12 +5,13 @@ import {
 } from '@react-navigation/native-stack';
 import {theme} from 'styles';
 import {RootStackNavigationProp, RootStackParamList} from 'navigators/types';
-import useInitialData from 'hooks/useInitialData';
-import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
-import Icon from 'components/@common/Icon';
 import CreateTransactionStackNavigator from 'navigators/CreateTransactionStackNavigator';
 import TabNavigator from 'navigators/TabNavigator';
+import useInitialData from 'hooks/useInitialData';
 import SettingScreen from 'screens/SettingScreen';
+import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
+import CardSettingScreen from 'screens/SettingScreen/CardSettingScreen';
+import Icon from 'components/@common/Icon';
 
 export const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -50,6 +51,15 @@ export default function RootStackNavigator() {
               headerTitle: '설정',
             }}
           />
+          <Stack.Screen
+            name={'CardSetting'}
+            component={CardSettingScreen}
+            options={{
+              headerShown: true,
+              headerBackTitleVisible: true,
+              headerTitle: '카드 설정',
+            }}
+          />
         </>
       ) : (
         <Stack.Screen name={'OnBoarding'} component={OnBoardingFunnelScreen} />
@@ -76,5 +86,8 @@ const screenOptions: (props: {
     borderWidth: 1,
     backgroundColor: theme.palette.gray1,
   },
-  headerTitleStyle: theme.typography.Body1Semibold,
+  headerTitleStyle: {
+    ...theme.typography.Body1Semibold,
+  },
+  headerTitleAlign: 'center',
 });

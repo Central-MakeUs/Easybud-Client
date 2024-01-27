@@ -1,16 +1,6 @@
-import React, {useState} from 'react';
-import {
-  NativeSyntheticEvent,
-  TextInputKeyPressEventData,
-  TextInputProps,
-} from 'react-native';
-import {
-  formatNumberToLocaleString,
-  formatValue,
-  parseNumberFromString,
-} from 'utils/formatAmountValue';
-import CommonTextField from 'components/@common/TextFields/CommonTextField';
-import DescriptionText from 'components/@common/TextFields/DescriptionText';
+import React from 'react';
+import {TextInputProps} from 'react-native';
+import {TextFieldBase} from 'components/@common/TextFields/TextField';
 
 /**
  * @param defaultCurrentBalance 현재 대차를 나타내는 텍스트
@@ -18,53 +8,19 @@ import DescriptionText from 'components/@common/TextFields/DescriptionText';
 type TextFieldProps = {defaultCurrentBalance?: string} & TextInputProps;
 
 export default function AmountTextField({
-  defaultValue,
+  defaultValue = '0원',
   defaultCurrentBalance,
 }: TextFieldProps) {
-  const [value, setValue] = useState(formatValue(defaultValue) ?? '');
-  const [isFocused, setIsFocused] = useState<boolean>(false);
-  const [height, setHeight] = useState(0);
-
-  const handleClearInput = () => {
-    setValue('0원');
-    setHeight(56);
-  };
-
-  const onChangeText = (text: string) => setValue(formatValue(text));
-
-  const handleKeyPress = (
-    e: NativeSyntheticEvent<TextInputKeyPressEventData>,
-  ) => {
-    if (e.nativeEvent.key === 'Backspace') {
-      if (value !== '0원') {
-        const parsedValue = parseNumberFromString(value).slice(0, -1);
-
-        setValue(`${formatNumberToLocaleString(parsedValue)}원`);
-      }
-
-      e.preventDefault();
-    }
-  };
-
   return (
-    <>
-      <CommonTextField
-        isAmountField={true}
-        value={value}
-        label="금액"
-        isFocused={isFocused}
-        height={height}
-        setHeight={setHeight}
-        setIsFocused={setIsFocused}
-        onChangeText={onChangeText}
-        handleClearInput={handleClearInput}
-        handleKeyPress={handleKeyPress}
-      />
-      <DescriptionText
-        value={value}
-        setValue={setValue}
+    <TextFieldBase defaultValue={defaultValue} isAmountField={true}>
+      <TextFieldBase.Container>
+        <TextFieldBase.Label label="금액" />
+        <TextFieldBase.CustomTextInput />
+        <TextFieldBase.ClearIcon />
+      </TextFieldBase.Container>
+      <TextFieldBase.TextFieldHelperText
         defaultCurrentBalance={defaultCurrentBalance}
       />
-    </>
+    </TextFieldBase>
   );
 }

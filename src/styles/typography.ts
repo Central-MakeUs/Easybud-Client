@@ -75,8 +75,8 @@ export const typographyStyles = StyleSheet.create({
     fontWeight: '600',
     fontSize: 8,
   },
-  
-   /** size: 8, weight: 400 */
+
+  /** size: 8, weight: 400 */
   Body4Regular: {
     fontFamily: 'Pretendard-Regular',
     fontWeight: '400',

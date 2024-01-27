@@ -1,5 +1,12 @@
-import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 import {View, StyleSheet} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 import {SetterOrUpdater, useRecoilState, useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
 import {categoryState} from 'libs/recoil/states/category';
@@ -39,6 +46,12 @@ export default function SelectFormBottomSheet({
   useEffect(() => {
     setInputText('');
   }, [isBottomSheetOpen]);
+
+  useFocusEffect(
+    useCallback(() => {
+      setSelectedCategory('');
+    }, [setSelectedCategory]),
+  );
 
   const calculateBottomSheetHeight = () =>
     categoryList.length >= 4 ? 270 : 200;
