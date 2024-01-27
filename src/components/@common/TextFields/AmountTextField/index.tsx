@@ -31,10 +31,10 @@ export default function AmountTextField({
     () => (balance > 0 && isDebit(type)) || balance === 0,
     [balance, type],
   );
-  const isButtonVisible = useMemo(
-    () => !isEqual(amount, Math.abs(balance)) || balance === 0,
-    [amount, balance],
-  );
+
+  const isButtonHidden = useMemo(() => {
+    return balance === 0 ? true : isEqual(amount, Math.abs(balance));
+  }, [amount, balance]);
 
   return (
     <>
@@ -45,7 +45,7 @@ export default function AmountTextField({
         onChangeText={text => onChange(Number(text))}
         keyboardType="number-pad"
       />
-      {isButtonVisible && (
+      {isButtonHidden ? null : (
         <TouchableOpacity
           disabled={disabled}
           onPress={() => onChange(Math.abs(balance))}

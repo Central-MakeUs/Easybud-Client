@@ -9,9 +9,9 @@ export function isDebit(type: AccountTypeUnion) {
     case '자본':
       return type.change === '감소';
     case '수익':
-      return true;
-    case '비용':
       return false;
+    case '비용':
+      return true;
   }
 }
 
