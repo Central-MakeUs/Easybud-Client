@@ -1,7 +1,7 @@
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {getFormattedDate} from 'utils/formatDate';
 import InputForm from 'components/@common/InputForm';
-import {useState} from 'react';
+import {useMemo, useState} from 'react';
 
 type DatePickerProps = {date: Date; updateDate: (date: Date) => void};
 
@@ -10,6 +10,11 @@ export default function DatePicker({date, updateDate}: DatePickerProps) {
 
   const open = () => setIsOpen(true);
   const close = () => setIsOpen(false);
+
+  const dateInstance = useMemo(
+    () => (date instanceof Date ? date : new Date(date)),
+    [date],
+  );
 
   const handleConfirmDateTimePicker = (updatedDate: Date) => {
     close();
@@ -21,13 +26,13 @@ export default function DatePicker({date, updateDate}: DatePickerProps) {
       <InputForm
         onPress={open}
         label={'날짜'}
-        value={getFormattedDate(date)}
+        value={getFormattedDate(dateInstance)}
         placeholder={'날짜를 선택하세요'}
       />
       <DateTimePickerModal
         isVisible={isOpen}
         mode="date"
-        date={date}
+        date={dateInstance}
         onConfirm={handleConfirmDateTimePicker}
         onCancel={close}
       />
