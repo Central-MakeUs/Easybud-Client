@@ -13,7 +13,7 @@ const initialAccount: NewAccount = {
 export const accountState = selectorFamily<NewAccount, number>({
   key: RecoilStateKeys.Account,
   get:
-    (index: number) =>
+    index =>
     ({get}) => {
       const {accounts: prevAccounts} = get(transactionState);
       const accounts = cloneDeep(prevAccounts);
@@ -27,7 +27,7 @@ export const accountState = selectorFamily<NewAccount, number>({
       return accounts[index];
     },
   set:
-    (index: number) =>
+    index =>
     ({get, set}, newAccount: NewAccount | DefaultValue) => {
       if (newAccount instanceof DefaultValue) {
         console.error('instanceof DefaultValue', newAccount);

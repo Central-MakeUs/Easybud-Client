@@ -10,7 +10,6 @@ import Container from 'components/CreateTransactionStack/Container';
 
 type TransactionConfirmationScreenProps = {
   navigation: RootStackNavigationProp;
-  // route: CreateTransactionStackRouteProp<'TransactionConfirmation'>;
 };
 
 /** 거래 추가 Step 5 */
@@ -51,6 +50,7 @@ export default function TransactionConfirmationScreen({
 
   return (
     <Container
+      screen="TransactionConfirmation"
       title="입력하신 정보를 확인해주세요"
       fixedBottomComponent={
         <>

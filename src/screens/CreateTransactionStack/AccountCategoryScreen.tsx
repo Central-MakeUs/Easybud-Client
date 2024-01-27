@@ -44,6 +44,8 @@ export default function AccountCategoryScreen({
 
   return (
     <Container
+      screen="AccountCategory"
+      accountIndex={accountIndex}
       title="자산항목을 선택해 주세요"
       fixedBottomComponent={
         <>
