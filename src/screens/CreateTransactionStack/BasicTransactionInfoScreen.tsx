@@ -39,6 +39,7 @@ export default function BasicTransactionInfoScreen({
 
   return (
     <ScreenContainer
+      title="거래 정보를 입력해주세요"
       fixedBottomComponent={
         <>
           {params?.isUpdateStep ? (

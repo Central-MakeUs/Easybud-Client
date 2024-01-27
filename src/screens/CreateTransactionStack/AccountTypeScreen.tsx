@@ -66,6 +66,7 @@ export default function AccountTypeScreen({
 
   return (
     <ScreenContainer
+      title="거래 요소를 선택해주세요"
       fixedBottomComponent={
         <>
           <LeftButton

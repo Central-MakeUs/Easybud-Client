@@ -55,6 +55,7 @@ export default function AccountCategoryScreen({
 
   return (
     <ScreenContainer
+      title="자산항목을 선택해 주세요"
       fixedBottomComponent={
         <>
           <LeftButton

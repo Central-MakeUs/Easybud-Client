@@ -1,3 +1,4 @@
+import Title from 'components/CreateTransactionStack/Title';
 import React, {ReactNode} from 'react';
 import {
   ScrollView,
@@ -17,6 +18,7 @@ import {theme} from 'styles';
  */
 type ScreenContainerProps = {
   children: ReactNode;
+  title: string;
   loading?: boolean;
   fixedBottomComponent?: ReactNode;
   style?: React.CSSProperties | Array<React.CSSProperties>;
@@ -26,6 +28,7 @@ type ScreenContainerProps = {
 export default function ScreenContainer({
   children,
   loading,
+  title,
   fixedBottomComponent,
   ...props
 }: ScreenContainerProps) {
@@ -45,7 +48,10 @@ export default function ScreenContainer({
             <ActivityIndicator size="large" color={theme.palette.primary} />
           </View>
         ) : (
-          children
+          <>
+            <Title>{title}</Title>
+            {children}
+          </>
         )}
       </ScrollView>
       {fixedBottomComponent && (
@@ -60,7 +66,6 @@ const styles = StyleSheet.create({
   scrollViewContent: {
     backgroundColor: theme.palette.gray1,
     paddingHorizontal: 20,
-    paddingVertical: 40,
     flexGrow: 1,
     gap: 10,
   },

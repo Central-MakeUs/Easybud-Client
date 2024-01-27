@@ -53,6 +53,7 @@ export default function TransactionConfirmationScreen({
 
   return (
     <ScreenContainer
+      title="입력하신 정보를 확인해주세요"
       fixedBottomComponent={
         <>
           <Button variant="secondary" onPress={handleAddAccount}>

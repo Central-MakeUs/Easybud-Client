@@ -48,6 +48,7 @@ export default function AccountAmountScreen({
 
   return (
     <ScreenContainer
+      title="금액을 입력해주세요"
       fixedBottomComponent={
         <>
           <LeftButton
