@@ -22,7 +22,7 @@ export default function AccountCategoryScreen({
   const [account, setAccount] = useRecoilState<NewAccount>(
     accountState(accountIndex),
   );
-  console.log('step3: ', account, accountIndex, isUpdateStep);
+
   const disabled = useMemo(() => {
     return (
       isEmpty(account.category.primary) ||

@@ -33,7 +33,7 @@ export default function AccountTypeScreen({
   const [account, setAccount] = useRecoilState<NewAccount>(
     accountState(accountIndex),
   );
-  console.log('step2: ', account, accountIndex, isUpdateStep);
+
   const handleChangeAccountType = (type: AccountTypeUnion) => {
     setAccount(prev => ({...prev, type}));
   };

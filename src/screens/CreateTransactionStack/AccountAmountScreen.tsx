@@ -20,7 +20,7 @@ export default function AccountAmountScreen({
   const [account, setAccount] = useRecoilState<NewAccount>(
     accountState(accountIndex),
   );
-  console.log('step4: ', account, accountIndex, isUpdateStep);
+
   const disabled = useMemo(() => account.amount === 0, [account.amount]);
 
   const handleChange = (amount: number) =>

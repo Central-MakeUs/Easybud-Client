@@ -17,7 +17,6 @@ export default function BasicTransactionInfoScreen({
   route: {params},
 }: BasicTransactionInfoScreenProps) {
   const [transaction, setTransaction] = useRecoilState(transactionState);
-  console.log('step1: ', transaction, transaction.accounts.length);
 
   const handleChange = (key: keyof NewTransaction, value: Date | string) =>
     setTransaction(prev => ({...prev, [key]: value}));

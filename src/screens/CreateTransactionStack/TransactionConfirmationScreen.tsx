@@ -31,12 +31,10 @@ export default function TransactionConfirmationScreen({
   const {accounts} = transaction;
   const clearTransaction = useResetRecoilState(transactionState);
 
-  console.log('step5: ', transaction, transaction.accounts.length);
-
   const handleSave = () => {
     console.log(transaction);
-    navigation.navigate('Tab', {screen: 'Ledger'});
     clearTransaction();
+    navigation.navigate('Tab', {screen: 'Ledger'});
   };
 
   const addNewAccount = () => {
@@ -102,6 +100,7 @@ export default function TransactionConfirmationScreen({
             기본 정보
           </Typography>
           <UpdateButton
+            onPress={() => updateTransaction({screen: 'BasicTransactionInfo'})}
             endIcon={<Icon color="gray5" name="Pencil" size={12} />}>
             {transaction.summary} {getFormattedDate(transaction.date)}
           </UpdateButton>

@@ -30,11 +30,6 @@ export default function Container({
   const step = useMemo(() => {
     return (accounts.length === 0 ? 1 : accounts.length) * 3 + 2;
   }, [accounts.length]);
-  console.log(
-    step,
-    accountIndex * 3 + 5,
-    (accounts.length === 0 ? 1 : accounts.length) * 3 + 2,
-  );
 
   const currentStep = useMemo(() => {
     switch (screen) {
