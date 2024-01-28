@@ -67,7 +67,7 @@ export default function DebitCreditOverview({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 15,
   },
   list: {
     flex: 1,

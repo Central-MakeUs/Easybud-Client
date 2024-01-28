@@ -56,7 +56,7 @@ export default function InputForm({
           ref={inputRef}
           style={[
             theme.typography[size === 'md' ? 'Body1Semibold' : 'Body2Regular'],
-            {color: theme.palette.gray6},
+            {paddingHorizontal: 10, color: theme.palette.gray6},
           ]}
           {...props}
         />

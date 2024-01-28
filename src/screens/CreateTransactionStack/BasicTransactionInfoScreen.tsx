@@ -41,6 +41,7 @@ export default function BasicTransactionInfoScreen({
         updateDate={date => handleChange('date', date)}
       />
       <InputForm
+        autoFocus
         label={'적요'}
         value={transaction.summary ?? ''}
         maxLength={15}
