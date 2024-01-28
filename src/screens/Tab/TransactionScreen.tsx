@@ -9,7 +9,6 @@ import FinancialOverview from 'components/screen/TransactionScreen/FinancialOver
 import MonthHeader from 'components/screen/TransactionScreen/MonthHeader';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import TransactionList from 'components/@common/TransactionList';
-import MonthHeader from 'components/screens/TransactionScreen/MonthHeader';
 
 export const dummyTransactionDatas: TransactionDataType<'default'>[] = [
   {
