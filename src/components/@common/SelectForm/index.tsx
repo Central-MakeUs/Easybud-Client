@@ -2,7 +2,7 @@ import InputForm from 'components/@common/InputForm';
 import CommonBottomSheet from 'components/@common/BottomSheet';
 import Typography from 'components/@common/Typography';
 import {useState} from 'react';
-import {View, StyleSheet, TextInput} from 'react-native';
+import {View, StyleSheet, TextInput, ScrollView} from 'react-native';
 import {theme} from 'styles';
 import useBottomSheet from 'hooks/useBottomSheet';
 import ListItem from 'components/@common/SelectForm/CategoryListItem';
@@ -62,30 +62,32 @@ export default function SelectForm({
             {label}
           </Typography>
         </View>
-        {items.map((item, index) => (
-          <ListItem
-            key={`${item}${index}`}
-            value={item}
-            onSelect={onPressItem}
-          />
-        ))}
-        {label === CategoryName.tertiary && (
-          <View style={styles.inputContainer}>
-            <TextInput
-              value={text}
-              maxLength={6}
-              onChangeText={setText}
-              placeholder="추가할 항목을 작성하세요"
-              style={[theme.typography.Body1Regular, styles.input]}
+        <ScrollView contentContainerStyle={{paddingBottom: 120}}>
+          {items.map((item, index) => (
+            <ListItem
+              key={`${item}${index}`}
+              value={item}
+              onSelect={onPressItem}
             />
-            <Button
-              onPress={onPressAddButton}
-              disabled={isEmpty(text)}
-              style={styles.button}>
-              항목 추가하기
-            </Button>
-          </View>
-        )}
+          ))}
+          {label === CategoryName.tertiary && (
+            <View style={styles.inputContainer}>
+              <TextInput
+                value={text}
+                maxLength={6}
+                onChangeText={setText}
+                placeholder="추가할 항목을 작성하세요"
+                style={[theme.typography.Body1Regular, styles.input]}
+              />
+              <Button
+                onPress={onPressAddButton}
+                disabled={isEmpty(text)}
+                style={styles.button}>
+                항목 추가하기
+              </Button>
+            </View>
+          )}
+        </ScrollView>
       </CommonBottomSheet>
     </>
   );
