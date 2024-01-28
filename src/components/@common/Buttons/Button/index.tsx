@@ -46,7 +46,8 @@ export default function Button({
 const buttonStyles = StyleSheet.create({
   button: {
     paddingHorizontal: 16,
-    height: 56,
+    minHeight: 56,
+    maxHeight: 56,
     borderRadius: 12,
     display: 'flex',
     justifyContent: 'center',

@@ -90,7 +90,7 @@ const screenOptions: (props: {
   headerRight: () => (
     <Icon
       name={'Setting'}
-      size={20}
+      size={24}
       onPress={() => navigation.navigate('Setting')}
     />
   ),

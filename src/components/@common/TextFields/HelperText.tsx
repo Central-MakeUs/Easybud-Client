@@ -12,17 +12,17 @@ import Typography from 'components/@common/Typography';
  * @param setValue AmountTextField의 value 값을 변경하는 함수
  * @param defaultCurrentBalance 현재 대차 값
  */
-type DescriptionTextProps = {
+type HelperTextProps = {
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
   defaultCurrentBalance?: string;
 };
 
-export default function DescriptionText({
+export default function HelperText({
   value,
   setValue,
   defaultCurrentBalance,
-}: DescriptionTextProps) {
+}: HelperTextProps) {
   const calculateCurrentBalance = () => {
     return (
       -parseNumberFromString(defaultCurrentBalance!) +
@@ -43,13 +43,13 @@ export default function DescriptionText({
   };
 
   return (
-    <View style={descriptionTextStyles.currentBalanceContainer}>
+    <View style={helperTextStyles.currentBalanceContainer}>
       <Typography type={'Body2Regular'}>현재 대차 : </Typography>
       <TouchableOpacity>
         <Typography
           type={'Body2Regular'}
           onPress={handlePressCurrentBalanceButton}
-          style={descriptionTextStyles.currentBalanceText}>
+          style={helperTextStyles.currentBalanceText}>
           {`${getCurrentBalance()}원`}
         </Typography>
       </TouchableOpacity>
@@ -57,7 +57,7 @@ export default function DescriptionText({
   );
 }
 
-const descriptionTextStyles = StyleSheet.create({
+const helperTextStyles = StyleSheet.create({
   currentBalanceContainer: {
     display: 'flex',
     flexDirection: 'row',

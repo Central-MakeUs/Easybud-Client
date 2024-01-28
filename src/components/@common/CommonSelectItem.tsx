@@ -14,7 +14,7 @@ import {ThemeVariants} from 'constants/components/CommonSelectItem';
  */
 type CommonSelectButtonProps = {
   label: string;
-  variant: 'primary' | 'gray';
+  variant?: 'primary' | 'gray';
   handlePressSelectItem: () => void;
   value: string;
   placeholder?: string;
@@ -23,7 +23,7 @@ type CommonSelectButtonProps = {
 
 export default function CommonSelectItem({
   label,
-  variant,
+  variant = 'gray',
   handlePressSelectItem,
   value,
   placeholder,

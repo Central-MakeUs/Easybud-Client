@@ -31,5 +31,6 @@ module.exports = {
     'react-native/no-inline-styles': 'off',
     '@typescript-eslint/no-namespace': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
   },
 };

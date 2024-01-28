@@ -9,8 +9,7 @@ import {
   formatValue,
   parseNumberFromString,
 } from 'utils/formatAmountValue';
-import CommonTextField from 'components/@common/TextFields/CommonTextField';
-import DescriptionText from 'components/@common/TextFields/DescriptionText';
+import {TextFieldBase} from 'components/@common/TextFields/TextField';
 
 /**
  * @param defaultCurrentBalance 현재 대차를 나타내는 텍스트
@@ -18,7 +17,7 @@ import DescriptionText from 'components/@common/TextFields/DescriptionText';
 type TextFieldProps = {defaultCurrentBalance?: string} & TextInputProps;
 
 export default function AmountTextField({
-  defaultValue,
+  defaultValue = '0원',
   defaultCurrentBalance,
 }: TextFieldProps) {
   const [value, setValue] = useState(formatValue(defaultValue) ?? '');
@@ -47,24 +46,15 @@ export default function AmountTextField({
   };
 
   return (
-    <>
-      <CommonTextField
-        isAmountField={true}
-        value={value}
-        label="금액"
-        isFocused={isFocused}
-        height={height}
-        setHeight={setHeight}
-        setIsFocused={setIsFocused}
-        onChangeText={onChangeText}
-        handleClearInput={handleClearInput}
-        handleKeyPress={handleKeyPress}
-      />
-      <DescriptionText
-        value={value}
-        setValue={setValue}
+    <TextFieldBase defaultValue={defaultValue} isAmountField={true}>
+      <TextFieldBase.Container>
+        <TextFieldBase.Label label="금액" />
+        <TextFieldBase.CustomTextInput />
+        <TextFieldBase.ClearIcon />
+      </TextFieldBase.Container>
+      <TextFieldBase.TextFieldHelperText
         defaultCurrentBalance={defaultCurrentBalance}
       />
-    </>
+    </TextFieldBase>
   );
 }

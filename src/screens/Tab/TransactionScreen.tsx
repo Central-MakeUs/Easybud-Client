@@ -1,14 +1,15 @@
 import {useCallback, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
+import {useFocusEffect} from '@react-navigation/native';
 import 'dayjs/locale/ko';
 import {theme} from 'styles';
 import {TransactionDataType} from 'types/screens/TransactionScreen';
-import ScreenContainer from 'components/@common/ScreenContainer';
 import FinancialCalendar from 'components/screen/TransactionScreen/FinancialCalendar';
 import FinancialOverview from 'components/screen/TransactionScreen/FinancialOverview';
 import MonthHeader from 'components/screen/TransactionScreen/MonthHeader';
+import ScreenContainer from 'components/@common/ScreenContainer';
 import TransactionList from 'components/@common/TransactionList';
-import {useFocusEffect} from '@react-navigation/native';
+import MonthHeader from 'components/screens/TransactionScreen/MonthHeader';
 
 export const dummyTransactionDatas: TransactionDataType<'default'>[] = [
   {
