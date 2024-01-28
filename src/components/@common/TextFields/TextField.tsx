@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import {theme} from 'styles';
 import {
-  formatNumberToLocaleString,
+  formatToLocaleString,
   formatValue,
   parseNumberFromString,
 } from 'utils/formatAmountValue';
@@ -221,7 +221,7 @@ export function TextField({
       if (e.nativeEvent.key === 'Backspace') {
         if (value !== '0원') {
           const parsedValue = parseNumberFromString(value).slice(0, -1);
-          const newValue = `${formatNumberToLocaleString(parsedValue)}원`;
+          const newValue = `${formatToLocaleString(parsedValue)}원`;
 
           setValue(newValue);
         }
