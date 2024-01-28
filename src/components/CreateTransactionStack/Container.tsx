@@ -56,12 +56,14 @@ export default function Container({
       <ProgressStep stepCount={step} currentStep={currentStep} />
       <View style={styles.header}>
         <Typography type="Title1Bold">{title}</Typography>
-        <Typography
-          type="Body2Semibold"
-          style={styles.description}
-          color="error">
-          {errorMessage}
-        </Typography>
+        {errorMessage && (
+          <Typography
+            type="Body2Semibold"
+            style={styles.description}
+            color="error">
+            {errorMessage}
+          </Typography>
+        )}
       </View>
       {children}
     </ScreenContainer>
