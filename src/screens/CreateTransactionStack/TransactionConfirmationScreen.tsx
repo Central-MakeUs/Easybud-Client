@@ -1,4 +1,4 @@
-import {useMemo} from 'react';
+import {useCallback, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useRecoilState, useRecoilValue, useResetRecoilState} from 'recoil';
 import {transactionState} from 'libs/recoil/states/transaction';
@@ -58,20 +58,23 @@ export default function TransactionConfirmationScreen({
     }
   };
 
-  const deleteAccount = (accountIndex: number) => {
-    const newAccounts = cloneDeep(accounts);
+  const deleteAccount = useCallback(
+    (accountIndex: number) => {
+      const newAccounts = cloneDeep(accounts);
 
-    if (accountIndex >= accounts.length) {
-      console.error(
-        `지우고자 하는 계정 인덱스(${accountIndex})가 범위를 벗어납니다.`,
-      );
-      return;
-    }
+      if (accountIndex >= accounts.length) {
+        console.error(
+          `지우고자 하는 계정 인덱스(${accountIndex})가 범위를 벗어납니다.`,
+        );
+        return;
+      }
 
-    pullAt(newAccounts, accountIndex);
+      pullAt(newAccounts, accountIndex);
 
-    setTransaction(prevState => ({...prevState, accounts: newAccounts}));
-  };
+      setTransaction(prevState => ({...prevState, accounts: newAccounts}));
+    },
+    [accounts, setTransaction],
+  );
 
   const disabledSubmit = useMemo(() => balance !== 0, [balance]);
 
@@ -96,13 +99,16 @@ export default function TransactionConfirmationScreen({
       }>
       <View style={styles.info}>
         <View style={styles.header}>
-          <Typography type="Body1Semibold" style={{flex: 1}}>
+          <Typography type="Body1Semibold" style={{minWidth: 60}}>
             기본 정보
           </Typography>
           <UpdateButton
             onPress={() => updateTransaction({screen: 'BasicTransactionInfo'})}
             endIcon={<Icon color="gray5" name="Pencil" size={12} />}>
-            {transaction.summary} {getFormattedDate(transaction.date)}
+            {(transaction.summary ?? '')?.length > 10
+              ? `${transaction.summary?.slice(0, 10)}...`
+              : transaction.summary}{' '}
+            {getFormattedDate(transaction.date)}
           </UpdateButton>
         </View>
         <DebitCreditOverview accounts={accounts} />
@@ -125,7 +131,7 @@ export default function TransactionConfirmationScreen({
 
 const styles = StyleSheet.create({
   header: {
-    gap: 10,
+    gap: 5,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
