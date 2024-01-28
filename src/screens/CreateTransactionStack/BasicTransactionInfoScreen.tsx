@@ -25,7 +25,7 @@ export default function BasicTransactionInfoScreen({
   return (
     <Container
       screen="BasicTransactionInfo"
-      title="거래 정보를 입력해주세요"
+      header={{title: '거래 정보를 입력해주세요'}}
       fixedBottomComponent={
         <>
           {params?.isUpdateStep ? <LeftButton isUpdateStep /> : null}

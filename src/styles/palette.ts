@@ -12,6 +12,7 @@ const commonPalette = {
   black: '#000000',
   green: '#26A060',
   pink: '#E76587',
+  error: '#F38686',
 };
 
 export const lightPalette: TypeOfPalette = {

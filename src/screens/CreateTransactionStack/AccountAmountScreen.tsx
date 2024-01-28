@@ -30,7 +30,7 @@ export default function AccountAmountScreen({
     <Container
       screen="AccountAmount"
       accountIndex={accountIndex}
-      title="금액을 입력해주세요"
+      header={{title: '금액을 입력해주세요'}}
       fixedBottomComponent={
         <>
           <LeftButton isUpdateStep={isUpdateStep} />

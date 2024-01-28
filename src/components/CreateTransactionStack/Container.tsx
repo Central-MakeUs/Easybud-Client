@@ -1,13 +1,17 @@
 import ProgressStep from 'components/@common/ProgressStep';
 import ScreenContainer from 'components/@common/ScreenContainer';
-import Title from 'components/CreateTransactionStack/Title';
+import Typography from 'components/@common/Typography';
 import {transactionState} from 'libs/recoil/states/transaction';
 import {CreateTransactionStackScreenName} from 'navigators/types';
 import React, {ReactNode, useMemo} from 'react';
+import {StyleSheet, View} from 'react-native';
 import {useRecoilValue} from 'recoil';
 
 type ContainerProps = {
-  title: string;
+  header: {
+    title: string;
+    errorMessage?: ReactNode;
+  };
   children: ReactNode;
   fixedBottomComponent?: ReactNode;
   screen: CreateTransactionStackScreenName;
@@ -15,21 +19,22 @@ type ContainerProps = {
 };
 
 export default function Container({
-  title,
+  header,
   fixedBottomComponent,
   children,
   screen,
   accountIndex = -1,
 }: ContainerProps) {
+  const {title, errorMessage} = header;
   const {accounts} = useRecoilValue(transactionState);
-
   const step = useMemo(() => {
-    if (screen === 'AccountType') {
-      return accountIndex * 3 + 5;
-    }
-
     return (accounts.length === 0 ? 1 : accounts.length) * 3 + 2;
-  }, [accountIndex, accounts.length, screen]);
+  }, [accounts.length]);
+  console.log(
+    step,
+    accountIndex * 3 + 5,
+    (accounts.length === 0 ? 1 : accounts.length) * 3 + 2,
+  );
 
   const currentStep = useMemo(() => {
     switch (screen) {
@@ -49,8 +54,22 @@ export default function Container({
   return (
     <ScreenContainer fixedBottomComponent={fixedBottomComponent}>
       <ProgressStep stepCount={step} currentStep={currentStep} />
-      <Title>{title}</Title>
+      <View style={styles.header}>
+        <Typography type="Title1Bold">{title}</Typography>
+        <Typography
+          type="Body2Semibold"
+          style={styles.description}
+          color="error">
+          {errorMessage}
+        </Typography>
+      </View>
       {children}
     </ScreenContainer>
   );
 }
+
+const styles = StyleSheet.create({
+  header: {height: 80, justifyContent: 'center', gap: 5},
+  title: {},
+  description: {},
+});

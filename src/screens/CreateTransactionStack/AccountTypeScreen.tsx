@@ -42,7 +42,7 @@ export default function AccountTypeScreen({
     <Container
       screen="AccountType"
       accountIndex={accountIndex}
-      title="거래 요소를 선택해주세요"
+      header={{title: '거래 요소를 선택해주세요'}}
       fixedBottomComponent={
         <>
           <LeftButton isUpdateStep={isUpdateStep} />

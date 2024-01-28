@@ -4,7 +4,6 @@ import {
   CreateTransactionStackScreenName,
   RootStackNavigationProp,
 } from 'navigators/types';
-import Typography from 'components/@common/Typography';
 import Button from 'components/@common/Buttons/Button';
 import Container from 'components/CreateTransactionStack/Container';
 
@@ -51,7 +50,11 @@ export default function TransactionConfirmationScreen({
   return (
     <Container
       screen="TransactionConfirmation"
-      title="입력하신 정보를 확인해주세요"
+      header={{
+        title: '입력하신 정보를 확인해주세요',
+        errorMessage:
+          '차대변 합계가 달라요! 새 계정을 추가하거나 금액을 수정해주세요',
+      }}
       fixedBottomComponent={
         <>
           <Button variant="secondary" onPress={handleAddAccount}>
@@ -72,7 +75,6 @@ export default function TransactionConfirmationScreen({
         }>
         handleUpdate AccountCategory accountIndex 0
       </Button>
-      <Typography>TransactionConfirmationScreen</Typography>
     </Container>
   );
 }
