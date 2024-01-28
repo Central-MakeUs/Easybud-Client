@@ -2,8 +2,8 @@ import {View, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {theme} from 'styles';
 import ScreenContainer from 'components/@common/ScreenContainer';
-import ActionButtonWithBottomSheet from 'components/screen/SettingScreen/ActionButtonWithBottomSheet';
-import MemberManagementBottomSheetContent from 'components/screen/SettingScreen/MemberManagementBottomSheetContent';
+import ActionButtonWithBottomSheet from 'components/screens/SettingScreen/ActionButtonWithBottomSheet';
+import MemberManagementBottomSheetContent from 'components/screens/SettingScreen/MemberManagementBottomSheetContent';
 
 export default function SettingScreen() {
   const navigation = useNavigation();

@@ -4,7 +4,7 @@ import {cardUsagePeriodOptions} from 'constants/screens/SettingScreen';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import CommonSelectItem from 'components/@common/CommonSelectItem';
 import InputBottomSheet from 'components/@common/InputBottomSheet';
-import CardSettingFixedButton from 'components/screen/SettingScreen/CardSettingFixedButton';
+import CardSettingFixedButton from 'components/screens/SettingScreen/CardSettingFixedButton';
 import SelectForm from 'components/@common/SelectForm';
 
 export default function CardSettingScreen() {

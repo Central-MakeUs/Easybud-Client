@@ -4,9 +4,9 @@ import {useFocusEffect} from '@react-navigation/native';
 import 'dayjs/locale/ko';
 import {theme} from 'styles';
 import {TransactionDataType} from 'types/screens/TransactionScreen';
-import FinancialCalendar from 'components/screen/TransactionScreen/FinancialCalendar';
-import FinancialOverview from 'components/screen/TransactionScreen/FinancialOverview';
-import MonthHeader from 'components/screen/TransactionScreen/MonthHeader';
+import FinancialCalendar from 'components/screens/TransactionScreen/FinancialCalendar';
+import FinancialOverview from 'components/screens/TransactionScreen/FinancialOverview';
+import MonthHeader from 'components/screens/TransactionScreen/MonthHeader';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import TransactionList from 'components/@common/TransactionList';
 

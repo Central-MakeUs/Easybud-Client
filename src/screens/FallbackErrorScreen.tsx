@@ -1,3 +1,4 @@
+import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {
   useQueryClient,
@@ -5,7 +6,6 @@ import {
 } from '@tanstack/react-query';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import {TouchableOpacity} from 'react-native';
 
 type FallbackErrorScreenProps = {
   error: Error;
