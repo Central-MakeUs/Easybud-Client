@@ -1,8 +1,9 @@
 import {StyleSheet, View} from 'react-native';
 import {TransactionDataType} from 'types/screens/TransactionScreen';
+import {TransactionListVariant} from 'types/screens/LedgerScreen';
 import Transaction from 'components/@common/Transaction';
 
-const dummyTransactionDatas: TransactionDataType = [
+const dummyTransactionDatas: TransactionDataType<TransactionListVariant>[] = [
   {
     category: 'cost',
     keyNote: '쿠팡',
@@ -64,8 +65,8 @@ export default function TransactionList() {
           category={transactionData.category}
           keyNote={transactionData.keyNote}
           date={transactionData.date}
-          debitList={transactionData.debitList}
-          creditList={transactionData.creditList}
+          debitList={transactionData.debitList!}
+          creditList={transactionData.creditList!}
         />
       ))}
     </View>

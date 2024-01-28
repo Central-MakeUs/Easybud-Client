@@ -1,7 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
 import {TabNavigationProp} from 'navigators/types';
 import {TransactionDataType} from 'types/screens/TransactionScreen';
-import {FinancialDataCardBase} from 'components/screen/LedgerScreen/FinancialDataCard';
+import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
 import TransactionList from 'components/@common/TransactionList';
 
 const dummyTransactionDatas: TransactionDataType<'recent'>[] = [

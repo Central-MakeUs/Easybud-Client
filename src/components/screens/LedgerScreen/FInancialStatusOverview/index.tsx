@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {FinancialDataCardBase} from 'components/screen/LedgerScreen/FinancialDataCard';
-import FinancialStatusBottomElement from 'components/screen/LedgerScreen/FinancialStatusOverview/FinancialStatusBottomElement';
+import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
 import Tooltip from 'components/@common/Tooltip';
+import FinancialStatusBottomElement from 'components/screens/LedgerScreen/FInancialStatusOverview/FinancialStatusBottomElement';
 
 export default function FinancialStatusOverview() {
   const [hasInitialNetWorth, _] = useState(false);

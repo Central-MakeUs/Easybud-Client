@@ -1,5 +1,5 @@
-import {FinancialDataCardBase} from 'components/screen/LedgerScreen/FinancialDataCard';
-import IncomeStatementBottomElement from 'components/screen/LedgerScreen/IncomeStatementOverview/IncomeStatementBottomElement';
+import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
+import IncomeStatementBottomElement from 'components/screens/LedgerScreen/IncomeStatementOverview/IncomeStatementBottomElement';
 
 export default function IncomeStatementOverview() {
   return (

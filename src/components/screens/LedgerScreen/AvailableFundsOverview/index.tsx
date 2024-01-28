@@ -1,5 +1,5 @@
-import {FinancialDataCardBase} from 'components/screen/LedgerScreen/FinancialDataCard';
-import AvailableFundsBottomElement from 'components/screen/LedgerScreen/AvailableFundsOverview/AvailableFundsBottomElement';
+import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
+import AvailableFundsBottomElement from 'components/screens/LedgerScreen/AvailableFundsOverview/AvailableFundsBottomElement';
 
 export default function AvailableFundsOverview() {
   return (
