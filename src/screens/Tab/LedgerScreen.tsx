@@ -1,19 +1,30 @@
-import {View, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {TabNavigationProp} from 'navigators/types';
-import Typography from 'components/@common/Typography';
+import RecentTransactionOverview from 'components/screen/LedgerScreen/RecentTransactionOverview';
+import FinancialStatusOverview from 'components/screen/LedgerScreen/FinancialStatusOverview';
+import AvailableFundsOverview from 'components/screen/LedgerScreen/AvailableFundsOverview';
+import ScreenContainer from 'components/@common/ScreenContainer';
+import Divider from 'components/@common/Divider';
+import IncomeStatementOverview from 'components/screen/LedgerScreen/IncomeStatementOverview';
 
 export default function LedgerScreen() {
-  const navigation = useNavigation<TabNavigationProp>();
-
   return (
-    <View>
-      <Typography>거래</Typography>
-      <TouchableOpacity>
-        <Typography onPress={() => navigation.navigate('Transaction')}>
-          상세보기
-        </Typography>
-      </TouchableOpacity>
-    </View>
+    <ScreenContainer
+      contentContainerStyle={ledgerScreenStyles.contentContainer}>
+      <RecentTransactionOverview />
+      <Divider style={ledgerScreenStyles.divider} />
+      <AvailableFundsOverview />
+      <Divider style={ledgerScreenStyles.divider} />
+      <FinancialStatusOverview />
+      <Divider style={ledgerScreenStyles.divider} />
+      <IncomeStatementOverview />
+    </ScreenContainer>
   );
 }
+
+const ledgerScreenStyles = {
+  contentContainer: {
+    paddingHorizontal: 0,
+  },
+  divider: {
+    marginVertical: 20,
+  },
+};
