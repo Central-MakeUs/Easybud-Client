@@ -23,6 +23,8 @@ export type TypeOfPalette = Readonly<{
   black: string;
   green: string;
   pink: string;
+  red: string;
+  blue: string;
 }>;
 
 /** keyof styles */
