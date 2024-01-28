@@ -2,7 +2,7 @@ import {View, StyleSheet} from 'react-native';
 import {Calendar} from 'react-native-big-calendar';
 import {theme} from 'styles';
 import {calendarTheme} from 'constants/screens/TransactionScreen';
-import DayHeader from 'components/screens/TransactionScreen/DayHeader';
+import DayHeader from 'components/screen/TransactionScreen/DayHeader';
 
 const dummyEvents = [
   {
