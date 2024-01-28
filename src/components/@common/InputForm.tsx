@@ -56,7 +56,12 @@ export default function InputForm({
           ref={inputRef}
           style={[
             theme.typography[size === 'md' ? 'Body1Semibold' : 'Body2Regular'],
-            {paddingHorizontal: 10, color: theme.palette.gray6},
+            {
+              paddingHorizontal: 10,
+              color: theme.palette.gray5,
+              width: '80%',
+              textAlign: 'right',
+            },
           ]}
           {...props}
         />
