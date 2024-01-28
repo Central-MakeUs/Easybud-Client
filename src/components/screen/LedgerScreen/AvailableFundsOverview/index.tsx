@@ -12,7 +12,7 @@ export default function AvailableFundsOverview() {
         children={
           <AvailableFundsBottomElement
             availableFunds={1600000}
-            cashAndLiquidAssets={1000000000}
+            cash={1000000000}
             savingsAccount={1000000000}
             plannedExpenditure={111111112}
           />
