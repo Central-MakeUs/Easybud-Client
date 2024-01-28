@@ -49,9 +49,8 @@ const buttonStyles = StyleSheet.create({
     paddingHorizontal: 16,
     height: 56,
     borderRadius: 12,
-    display: 'flex',
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
   },
 });

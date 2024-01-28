@@ -104,9 +104,13 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     flexDirection: 'row',
-    padding: 20,
-    gap: 20,
+    padding: 10,
+    gap: 10,
   },
-  input: {width: '60%'},
-  button: {height: 40, padding: 10},
+  input: {
+    borderRadius: 12,
+    padding: 10,
+    flex: 1,
+  },
+  button: {height: 40, padding: 10, minWidth: 120, maxWidth: 120},
 });
