@@ -44,7 +44,6 @@ export default function BasicTransactionInfoScreen({
         label={'적요'}
         value={transaction.summary ?? ''}
         maxLength={15}
-        multiline
         onChangeText={summary => handleChange('summary', summary)}
         placeholder="적요를 작성하세요"
       />
