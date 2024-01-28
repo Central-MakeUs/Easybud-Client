@@ -1,8 +1,13 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {VictoryPie} from 'victory-native';
+import {KeyOfPalette} from 'styles/types';
 import {colorScale} from 'constants/screens/LedgerScreen';
-import {GraphDataType, LabelTextColor} from 'types/screens/LedgerScreen';
+import {
+  FirstLabelType,
+  GraphDataType,
+  LabelTextColor,
+} from 'types/screens/LedgerScreen';
 import Typography from 'components/@common/Typography';
 
 const dummyGraphData: GraphDataType[] = [
@@ -10,15 +15,9 @@ const dummyGraphData: GraphDataType[] = [
   {y: 60, label: '비용\n111,111,112원\n예산 대비 88%'},
 ];
 
-type LabelProps = {
-  x: number;
-  y: number;
-  datum: GraphDataType;
-};
-
 const calculateGraphPosition = (
   datum: GraphDataType,
-  label1: string,
+  label1: FirstLabelType,
   x: number,
   y: number,
 ) => {
@@ -42,18 +41,46 @@ const calculateGraphPosition = (
   return {top, left};
 };
 
+const getLabelTextColor = (
+  datum: GraphDataType,
+  label1: FirstLabelType,
+): LabelTextColor => {
+  const defaultColor: KeyOfPalette = 'gray1';
+
+  return {
+    label1TextColor: datum.y ? 'gray6' : defaultColor,
+    label2TextColor: datum.y
+      ? label1 === '수익'
+        ? 'pink'
+        : 'green'
+      : defaultColor,
+    label3TextColor: datum.y ? 'gray6' : defaultColor,
+  };
+};
+
+/**
+ * @param x x축 위치
+ * @param y y축 위치
+ * @param datum 그래프 데이터 객체
+ */
+type LabelProps = {
+  x: number;
+  y: number;
+  datum: GraphDataType;
+};
+
 const Label = ({x, y, datum}: LabelProps) => {
   const [label1, label2, label3] = datum.label.split('\n');
 
-  console.log(datum);
+  const {label1TextColor, label2TextColor, label3TextColor}: LabelTextColor =
+    getLabelTextColor(datum, label1 as FirstLabelType);
 
-  const {label1TextColor, label2TextColor, label3TextColor}: LabelTextColor = {
-    label1TextColor: !datum.y ? 'gray1' : 'gray6',
-    label2TextColor: !datum.y ? 'gray1' : label1 === '수익' ? 'pink' : 'green',
-    label3TextColor: !datum.y ? 'gray1' : 'gray6',
-  };
-
-  const {top, left} = calculateGraphPosition(datum, label1, x, y);
+  const {top, left} = calculateGraphPosition(
+    datum,
+    label1 as FirstLabelType,
+    x,
+    y,
+  );
 
   return (
     <View
