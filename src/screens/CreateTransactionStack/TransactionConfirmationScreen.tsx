@@ -1,6 +1,6 @@
 import {useMemo} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {useRecoilValue, useResetRecoilState} from 'recoil';
+import {StyleSheet, View} from 'react-native';
+import {useRecoilState, useRecoilValue, useResetRecoilState} from 'recoil';
 import {transactionState} from 'libs/recoil/states/transaction';
 import {
   CreateTransactionStackScreenName,
@@ -15,8 +15,8 @@ import UpdateButton from 'components/CreateTransactionStack/UpdateButton';
 import DebitCreditOverview from 'components/CreateTransactionStack/DebitCreditOverview';
 import {balanceState} from 'libs/recoil/states/balance';
 import {theme} from 'styles';
-import InputForm from 'components/@common/InputForm';
-import {formatNumber} from 'utils/formatAmountValue';
+import AccountDetails from 'screens/CreateTransactionStack/AccountDetails';
+import {cloneDeep, pullAt} from 'lodash';
 
 type TransactionConfirmationScreenProps = {
   navigation: RootStackNavigationProp;
@@ -26,7 +26,7 @@ type TransactionConfirmationScreenProps = {
 export default function TransactionConfirmationScreen({
   navigation,
 }: TransactionConfirmationScreenProps) {
-  const transaction = useRecoilValue(transactionState);
+  const [transaction, setTransaction] = useRecoilState(transactionState);
   const balance = useRecoilValue(balanceState({}));
   const {accounts} = transaction;
   const clearTransaction = useResetRecoilState(transactionState);
@@ -39,14 +39,14 @@ export default function TransactionConfirmationScreen({
     clearTransaction();
   };
 
-  const handleAddAccount = () => {
+  const addNewAccount = () => {
     navigation.push('CreateTransactionStack', {
       screen: 'AccountType',
       params: {accountIndex: transaction.accounts.length},
     });
   };
 
-  const handleUpdateTransaction = ({screen, accountIndex}: Basic | Account) => {
+  const updateTransaction = ({screen, accountIndex}: Basic | Account) => {
     if (screen === 'BasicTransactionInfo') {
       navigation.push('CreateTransactionStack', {
         screen,
@@ -59,7 +59,21 @@ export default function TransactionConfirmationScreen({
       });
     }
   };
-  handleUpdateTransaction;
+
+  const deleteAccount = (accountIndex: number) => {
+    const newAccounts = cloneDeep(accounts);
+
+    if (accountIndex >= accounts.length) {
+      console.error(
+        `지우고자 하는 계정 인덱스(${accountIndex})가 범위를 벗어납니다.`,
+      );
+      return;
+    }
+
+    pullAt(newAccounts, accountIndex);
+
+    setTransaction(prevState => ({...prevState, accounts: newAccounts}));
+  };
 
   const disabledSubmit = useMemo(() => balance !== 0, [balance]);
 
@@ -74,7 +88,7 @@ export default function TransactionConfirmationScreen({
       }}
       fixedBottomComponent={
         <>
-          <Button variant="secondary" onPress={handleAddAccount}>
+          <Button variant="secondary" onPress={addNewAccount}>
             새 계정 추가
           </Button>
           <Button disabled={disabledSubmit} onPress={handleSave}>
@@ -95,38 +109,15 @@ export default function TransactionConfirmationScreen({
         <DebitCreditOverview accounts={accounts} />
       </View>
       <View style={styles.info}>
-        <Typography type="Body1Semibold">계정 상세 정보</Typography>
-        {accounts.map(({type, category, amount}, index) => (
-          <View key={index} style={styles.account}>
-            <TouchableOpacity style={styles.deleteButton}>
-              <Typography
-                type="Body2Regular"
-                style={{textAlign: 'right', textDecorationLine: 'underline'}}>
-                삭제
-              </Typography>
-            </TouchableOpacity>
-            <InputForm
-              size="sm"
-              label="거래 요소"
-              editIcon
-              value={`${type.name} ${type.change}`}
-              onPress={() => console.log('hi')}
-            />
-            <InputForm
-              size="sm"
-              label="분류"
-              editIcon
-              value={`${category.primary} > ${category.secondary} > ${category.tertiary}`}
-              onPress={() => console.log('hi')}
-            />
-            <InputForm
-              size="sm"
-              label="금액"
-              editIcon
-              value={`${formatNumber(amount)}원`}
-              onPress={() => console.log('hi')}
-            />
-          </View>
+        <Typography type="Body1Semibold">상세 정보</Typography>
+        {accounts.map((account, index) => (
+          <AccountDetails
+            key={index}
+            accountIndex={index}
+            account={account}
+            updateTransaction={updateTransaction}
+            deleteAccount={deleteAccount}
+          />
         ))}
       </View>
     </Container>
@@ -142,7 +133,7 @@ const styles = StyleSheet.create({
   },
   info: {
     gap: 20,
-    paddingBottom: 20,
+    paddingBottom: 10,
   },
   account: {
     paddingHorizontal: 15,
@@ -159,6 +150,9 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
 });
+
+export type UpdateTransactionType = Basic | Account;
+
 type Basic = {
   screen: Extract<CreateTransactionStackScreenName, 'BasicTransactionInfo'>;
   accountIndex?: never;
