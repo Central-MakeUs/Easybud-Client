@@ -55,7 +55,7 @@ export default function TextField({
       )}
       <TextInput
         maxLength={20}
-        value={formatNumber(value.toString())}
+        value={formatNumber(value)}
         onChangeText={handleChangeText}
         placeholderTextColor={theme.palette.gray3}
         onFocus={handleFocus}

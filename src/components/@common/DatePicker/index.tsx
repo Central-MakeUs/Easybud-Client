@@ -26,7 +26,7 @@ export default function DatePicker({date, updateDate}: DatePickerProps) {
       <InputForm
         onPress={open}
         label={'날짜'}
-        value={getFormattedDate(dateInstance)}
+        value={getFormattedDate(date)}
         placeholder={'날짜를 선택하세요'}
       />
       <DateTimePickerModal
