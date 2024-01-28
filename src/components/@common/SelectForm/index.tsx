@@ -73,6 +73,7 @@ export default function SelectForm({
           <View style={styles.inputContainer}>
             <TextInput
               value={text}
+              maxLength={6}
               onChangeText={setText}
               placeholder="추가할 항목을 작성하세요"
               style={[theme.typography.Body1Regular, styles.input]}
