@@ -32,7 +32,7 @@ export default function AmountTextField({
   );
 
   const isButtonHidden = useMemo(() => {
-    return balance === 0 ?? isEqual(amount, Math.abs(balance));
+    return balance === 0 ? true : isEqual(amount, Math.abs(balance));
   }, [amount, balance]);
 
   return (
