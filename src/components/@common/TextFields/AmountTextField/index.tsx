@@ -1,14 +1,12 @@
 import React, {useMemo} from 'react';
-import {StyleSheet, TextInputProps, TouchableOpacity} from 'react-native';
+import {TextInputProps} from 'react-native';
 import TextField from 'components/@common/TextFields/TextField';
-import Typography from 'components/@common/Typography';
-import {theme} from 'styles';
 import {formatNumber, isDebit} from 'utils/formatAmountValue';
-import {NewAccount} from 'types/account';
 import {isEqual} from 'lodash';
 import {useRecoilValue} from 'recoil';
-import {transactionState} from 'libs/recoil/states/transaction';
 import {accountState} from 'libs/recoil/states/account';
+import UpdateButton from 'components/CreateTransactionStack/UpdateButton';
+import {balanceState} from 'libs/recoil/states/balance';
 
 /**
  * @param accountIndex 현 계좌 index
@@ -25,13 +23,8 @@ export default function AmountTextField({
   accountIndex,
   onChange,
 }: TextFieldProps) {
-  const {accounts} = useRecoilValue(transactionState);
   const {amount, type} = useRecoilValue(accountState(accountIndex));
-
-  const balance = useMemo(
-    () => calculateBalance(accounts, accountIndex),
-    [accountIndex, accounts],
-  );
+  const balance = useRecoilValue(balanceState({accountIndex}));
 
   const disabled = useMemo(
     () => (balance > 0 && isDebit(type)) || balance === 0,
@@ -39,7 +32,7 @@ export default function AmountTextField({
   );
 
   const isButtonHidden = useMemo(() => {
-    return balance === 0 ? true : isEqual(amount, Math.abs(balance));
+    return balance === 0 ?? isEqual(amount, Math.abs(balance));
   }, [amount, balance]);
 
   return (
@@ -52,47 +45,12 @@ export default function AmountTextField({
         keyboardType="number-pad"
       />
       {isButtonHidden ? null : (
-        <TouchableOpacity
+        <UpdateButton
           disabled={disabled}
-          onPress={() => onChange(Math.abs(balance))}
-          style={[styles.button, disabled ? styles.disabled : {}]}>
-          <Typography type={'Body2Semibold'}>
-            현재 대차: {formatNumber(balance.toString())}원 입력
-          </Typography>
-        </TouchableOpacity>
+          onPress={() => onChange(Math.abs(balance))}>
+          현재 대차: {formatNumber(balance)}원 입력
+        </UpdateButton>
       )}
     </>
   );
-}
-
-const styles = StyleSheet.create({
-  button: {
-    alignSelf: 'flex-start',
-    backgroundColor: theme.palette.gray3,
-    paddingVertical: 6,
-    paddingHorizontal: 8,
-    borderRadius: 10,
-  },
-  disabled: {
-    opacity: 0.5,
-  },
-  currentBalanceText: {
-    borderBottomWidth: 1,
-  },
-});
-
-function calculateBalance(
-  accounts: NewAccount[],
-  accountIndex: number,
-): number {
-  let totalDebit = 0;
-  let totalCredit = 0;
-
-  accounts.forEach(({type, amount}, index) => {
-    if (index !== accountIndex) {
-      isDebit(type) ? (totalDebit += amount) : (totalCredit += amount);
-    }
-  });
-
-  return totalDebit - totalCredit;
 }

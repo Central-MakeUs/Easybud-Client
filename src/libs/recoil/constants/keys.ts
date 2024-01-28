@@ -8,6 +8,9 @@ export const enum RecoilStateKeys {
   /** Account */
   Account = 'account',
 
+  /** Balance */
+  Balance = 'balance',
+
   /** Category */
   Category = 'category',
 
