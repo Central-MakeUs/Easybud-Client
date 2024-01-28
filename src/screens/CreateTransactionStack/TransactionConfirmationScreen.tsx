@@ -1,3 +1,5 @@
+import {useMemo} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useRecoilValue, useResetRecoilState} from 'recoil';
 import {transactionState} from 'libs/recoil/states/transaction';
 import {
@@ -6,14 +8,15 @@ import {
 } from 'navigators/types';
 import Button from 'components/@common/Buttons/Button';
 import Container from 'components/CreateTransactionStack/Container';
-import {View} from 'react-native';
 import Typography from 'components/@common/Typography';
-import {getFormattedDate} from 'utils/formatDate';
 import Icon from 'components/@common/Icon';
+import {getFormattedDate} from 'utils/formatDate';
 import UpdateButton from 'components/CreateTransactionStack/UpdateButton';
 import DebitCreditOverview from 'components/CreateTransactionStack/DebitCreditOverview';
 import {balanceState} from 'libs/recoil/states/balance';
-import {useMemo} from 'react';
+import {theme} from 'styles';
+import InputForm from 'components/@common/InputForm';
+import {formatNumber} from 'utils/formatAmountValue';
 
 type TransactionConfirmationScreenProps = {
   navigation: RootStackNavigationProp;
@@ -79,33 +82,83 @@ export default function TransactionConfirmationScreen({
           </Button>
         </>
       }>
-      <View style={{gap: 40}}>
-        <View style={{gap: 20}}>
-          <View
-            style={{
-              gap: 10,
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-            <Typography type="Body1Semibold" style={{flex: 1}}>
-              기본 정보
-            </Typography>
-            <UpdateButton
-              endIcon={<Icon color="gray5" name="Pencil" size={12} />}>
-              {transaction.summary} {getFormattedDate(transaction.date)}
-            </UpdateButton>
+      <View style={styles.info}>
+        <View style={styles.header}>
+          <Typography type="Body1Semibold" style={{flex: 1}}>
+            기본 정보
+          </Typography>
+          <UpdateButton
+            endIcon={<Icon color="gray5" name="Pencil" size={12} />}>
+            {transaction.summary} {getFormattedDate(transaction.date)}
+          </UpdateButton>
+        </View>
+        <DebitCreditOverview accounts={accounts} />
+      </View>
+      <View style={styles.info}>
+        <Typography type="Body1Semibold">계정 상세 정보</Typography>
+        {accounts.map(({type, category, amount}, index) => (
+          <View key={index} style={styles.account}>
+            <TouchableOpacity style={styles.deleteButton}>
+              <Typography
+                type="Body2Regular"
+                style={{textAlign: 'right', textDecorationLine: 'underline'}}>
+                삭제
+              </Typography>
+            </TouchableOpacity>
+            <InputForm
+              size="sm"
+              label="거래 요소"
+              editIcon
+              value={`${type.name} ${type.change}`}
+              onPress={() => console.log('hi')}
+            />
+            <InputForm
+              size="sm"
+              label="분류"
+              editIcon
+              value={`${category.primary} > ${category.secondary} > ${category.tertiary}`}
+              onPress={() => console.log('hi')}
+            />
+            <InputForm
+              size="sm"
+              label="금액"
+              editIcon
+              value={`${formatNumber(amount)}원`}
+              onPress={() => console.log('hi')}
+            />
           </View>
-          <DebitCreditOverview accounts={accounts} />
-        </View>
-        <View style={{gap: 10}}>
-          <Typography type="Body1Semibold">상세 정보</Typography>
-        </View>
+        ))}
       </View>
     </Container>
   );
 }
 
+const styles = StyleSheet.create({
+  header: {
+    gap: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  info: {
+    gap: 20,
+    paddingBottom: 20,
+  },
+  account: {
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: theme.palette.gray3,
+    gap: 5,
+  },
+  deleteButton: {
+    alignSelf: 'flex-end',
+    borderRadius: 10,
+    paddingHorizontal: 8,
+    paddingVertical: 6,
+  },
+});
 type Basic = {
   screen: Extract<CreateTransactionStackScreenName, 'BasicTransactionInfo'>;
   accountIndex?: never;

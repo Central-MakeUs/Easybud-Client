@@ -4,14 +4,18 @@ import {
   TextInput,
   TextInputProps,
   TouchableOpacity,
+  View,
 } from 'react-native';
 import {theme} from 'styles';
 import Typography from 'components/@common/Typography';
 import {isEmpty} from 'lodash';
+import Icon from 'components/@common/Icon';
 
 type InputFormProps = TextInputProps & {
   label: string;
   onPress?: () => void;
+  size?: 'md' | 'sm';
+  editIcon?: boolean;
 };
 
 export default function InputForm({
@@ -19,6 +23,8 @@ export default function InputForm({
   value,
   placeholder,
   onPress,
+  editIcon,
+  size = 'md',
   ...props
 }: InputFormProps) {
   const inputRef = useRef<TextInput>(null);
@@ -27,23 +33,31 @@ export default function InputForm({
 
   return (
     <TouchableOpacity
-      style={selectFormStyles.container}
+      style={[selectFormStyles.container, selectFormStyles[size]]}
       onPress={onPress ? onPress : focusOnInput}>
-      <Typography type={'Body1Semibold'} color={'gray6'}>
+      <Typography
+        type={size === 'md' ? 'Body1Semibold' : 'Body2Semibold'}
+        color={'gray6'}>
         {label}
       </Typography>
       {onPress ? (
-        <Typography
-          type="Body1Semibold"
-          color={isEmpty(value) ? 'gray3' : 'gray6'}>
-          {isEmpty(value) ? placeholder : value}
-        </Typography>
+        <View style={{gap: 5, flexDirection: 'row', alignItems: 'center'}}>
+          <Typography
+            type={size === 'md' ? 'Body1Semibold' : 'Body2Regular'}
+            color={isEmpty(value) ? 'gray3' : 'gray5'}>
+            {isEmpty(value) ? placeholder : value}
+          </Typography>
+          {editIcon && <Icon color="gray5" name="Pencil" size={12} />}
+        </View>
       ) : (
         <TextInput
           value={value}
           placeholder={placeholder}
           ref={inputRef}
-          style={[theme.typography.Body1Semibold, {color: theme.palette.gray6}]}
+          style={[
+            theme.typography[size === 'md' ? 'Body1Semibold' : 'Body2Regular'],
+            {color: theme.palette.gray6},
+          ]}
           {...props}
         />
       )}
@@ -56,10 +70,16 @@ const selectFormStyles = StyleSheet.create({
     backgroundColor: theme.palette.gray2,
     width: '100%',
     borderRadius: 12,
-    padding: 20,
     zIndex: -1,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+  },
+  md: {
+    padding: 20,
+  },
+  sm: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
   },
 });
