@@ -3,6 +3,7 @@ import {TransactionListVariant} from 'types/screens/LedgerScreen';
 import {formatDate} from 'utils/formatDate';
 import Transaction from 'components/@common/Transaction';
 import {RecentTransactionType} from 'types/dtos/Ledger';
+import Typography from 'components/@common/Typography';
 
 /**
  * @param transactionList 거래 데이터 배열
@@ -20,18 +21,29 @@ export default function TransactionList({
 }: TransactionListType) {
   return (
     <View style={transactionListStyles.transactionContainer}>
-      {transactionList.map((transactionData, index) => (
-        <Transaction
-          key={index}
-          showAll={variant === 'default'}
-          category={transactionData.type}
-          keyNote={transactionData.summary}
-          date={formatDate(transactionData.date)}
-          amount={transactionData.accounts.amount}
-          debitList={[]}
-          creditList={[]}
-        />
-      ))}
+      {transactionList.length ? (
+        transactionList.map((transactionData, index) => (
+          <Transaction
+            key={index}
+            showAll={variant === 'default'}
+            category={transactionData.type}
+            keyNote={transactionData.summary}
+            date={formatDate(transactionData.date)}
+            amount={transactionData.accounts.amount}
+            debitList={[]}
+            creditList={[]}
+          />
+        ))
+      ) : (
+        <View style={transactionListStyles.noTransactionTextContainer}>
+          <Typography type={'Body1Semibold'} color={'gray6'}>
+            최근 거래가 없습니다.
+          </Typography>
+          <Typography type={'Body1Semibold'} color={'gray6'}>
+            거래 추가 후 다시 확인해주세요.
+          </Typography>
+        </View>
+      )}
     </View>
   );
 }
@@ -41,5 +53,12 @@ const transactionListStyles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     gap: 25,
+  },
+  noTransactionTextContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 5,
   },
 });
