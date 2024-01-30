@@ -25,3 +25,9 @@ export type AvailableFundsDto = {
   scheduledDisbursements: number;
   availableFunds: number;
 };
+
+export type FinancialStatusDto = {
+  totalAssets: number;
+  totalLiabilities: number;
+  netAssets: number;
+};
