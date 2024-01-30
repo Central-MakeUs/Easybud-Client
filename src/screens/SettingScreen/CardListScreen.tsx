@@ -7,7 +7,7 @@ import InputBottomSheet from 'components/@common/InputBottomSheet';
 import CardSettingFixedButton from 'components/screens/SettingScreen/CardSettingFixedButton';
 import SelectForm from 'components/@common/SelectForm';
 
-export default function CardSettingScreen() {
+export default function CardListScreen() {
   const [cardName, setCardName] = useState('');
   const [cardInputText, setCardInputText] = useState('');
   const [isCardNameBottomSheetOpen, setIsCardNameBottomSheetOpen] =

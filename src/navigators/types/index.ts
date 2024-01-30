@@ -17,6 +17,7 @@ export type RootStackParamList = {
   CreateTransactionStack: NavigatorScreenParams<CreateTransactionStackParamList>;
   Setting: undefined;
   CardSetting: undefined;
+  AddCard: undefined;
 };
 
 export type TabParamList = {

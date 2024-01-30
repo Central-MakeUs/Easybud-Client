@@ -10,7 +10,8 @@ import TabNavigator from 'navigators/TabNavigator';
 import useInitialData from 'hooks/useInitialData';
 import SettingScreen from 'screens/SettingScreen';
 import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
-import CardSettingScreen from 'screens/SettingScreen/CardSettingScreen';
+import CardSettingScreen from 'screens/SettingScreen/CardListScreen';
+import AddCardScreen from 'screens/SettingScreen/AddCardScreen';
 import Icon from 'components/@common/Icon';
 
 export const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -49,6 +50,15 @@ export default function RootStackNavigator() {
               headerShown: true,
               headerBackTitleVisible: true,
               headerTitle: '설정',
+            }}
+          />
+          <Stack.Screen
+            name={'AddCard'}
+            component={AddCardScreen}
+            options={{
+              headerShown: true,
+              headerBackTitleVisible: true,
+              headerTitle: '카드 설정',
             }}
           />
           <Stack.Screen
