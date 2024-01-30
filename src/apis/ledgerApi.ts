@@ -1,5 +1,5 @@
 import {axiosApi} from 'apis/axios';
-import {RecentTransactionType} from 'types/dtos/Ledger';
+import {RecentTransactionType} from 'types/dtos/ledger';
 
 export const ledgerApi = {
   getRecentTransactions: async (): Promise<RecentTransactionType[]> => {

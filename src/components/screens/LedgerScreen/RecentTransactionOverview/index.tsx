@@ -1,15 +1,15 @@
 import {useNavigation} from '@react-navigation/native';
 import {TabNavigationProp} from 'navigators/types';
+import {useGetRecentTransactionQuery} from 'hooks/queries/useGetRecentTransactionQuery';
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
 import TransactionList from 'components/@common/TransactionList';
-import {useGetRecentTransactionQuery} from 'hooks/queries/useGetRecentTransactionQuery';
 
 export default function RecentTransactionOverview() {
   const navigation = useNavigation<TabNavigationProp>();
 
-  const handlePressDetailButton = () => navigation.navigate('Transaction');
-
   const recentTransactionList = useGetRecentTransactionQuery();
+
+  const handlePressDetailButton = () => navigation.navigate('Transaction');
 
   return (
     <FinancialDataCardBase.Container>
