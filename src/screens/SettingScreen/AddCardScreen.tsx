@@ -52,7 +52,12 @@ export default function AddCardScreen() {
     <ScreenContainer
       contentContainerStyle={cardSettingScreenStyles.contentContainer}
       fixedBottomComponent={
-        <CardSettingFixedButton cardName={cardName} keyNoteText={keyNoteText} />
+        <CardSettingFixedButton
+          cardName={cardName}
+          keyNoteText={keyNoteText}
+          cardUsagePeriod={cardUsagePeriod}
+          paymentDate={paymentDate}
+        />
       }>
       <CommonSelectItem
         label={'카드명'}
