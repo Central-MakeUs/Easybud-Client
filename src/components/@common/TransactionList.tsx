@@ -2,7 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import {TransactionListVariant} from 'types/screens/LedgerScreen';
 import {formatDate} from 'utils/formatDate';
 import Transaction from 'components/@common/Transaction';
-import {RecentTransactionType} from 'types/dtos/Ledger';
+import {RecentTransactionType} from 'types/dtos/ledger';
 import Typography from 'components/@common/Typography';
 
 /**

@@ -1,19 +1,15 @@
 import {useNavigation} from '@react-navigation/native';
-import {useQuery} from '@tanstack/react-query';
-import {ledgerApi} from 'apis/ledgerApi';
 import {TabNavigationProp} from 'navigators/types';
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
 import TransactionList from 'components/@common/TransactionList';
+import {useGetRecentTransactionQuery} from 'hooks/queries/useGetRecentTransactionQuery';
 
 export default function RecentTransactionOverview() {
   const navigation = useNavigation<TabNavigationProp>();
 
   const handlePressDetailButton = () => navigation.navigate('Transaction');
 
-  const {data: recentTransactionList = []} = useQuery({
-    queryKey: ['recentTransactionList'],
-    queryFn: ledgerApi.getRecentTransactions,
-  });
+  const recentTransactionList = useGetRecentTransactionQuery();
 
   return (
     <FinancialDataCardBase.Container>
