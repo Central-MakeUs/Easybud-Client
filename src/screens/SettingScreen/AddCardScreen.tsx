@@ -1,20 +1,34 @@
 import {useState} from 'react';
 import {StyleSheet} from 'react-native';
-import {cardUsagePeriodOptions} from 'constants/screens/SettingScreen';
+import {
+  cardUsagePeriodOptions,
+  paymentDateOptions,
+} from 'constants/screens/SettingScreen';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import CommonSelectItem from 'components/@common/CommonSelectItem';
 import InputBottomSheet from 'components/@common/InputBottomSheet';
 import CardSettingFixedButton from 'components/screens/SettingScreen/CardSettingFixedButton';
-import SelectForm from 'components/@common/SelectForm';
+import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
 
 export default function AddCardScreen() {
   const [cardName, setCardName] = useState('');
   const [cardInputText, setCardInputText] = useState('');
   const [isCardNameBottomSheetOpen, setIsCardNameBottomSheetOpen] =
     useState(false);
+  const [cardUsagePeriod, setCardUsagePeriod] = useState('');
   const [cardUsagePeriodList, setCardUsagePeriodList] = useState(
     cardUsagePeriodOptions ?? [],
   );
+  const [
+    isCardUsagePeriodBottomSheetOpen,
+    setIsCardUsagePeriodBottomSheetOpen,
+  ] = useState(false);
+  const [paymentDate, setPaymentDate] = useState('');
+  const [paymentDateList, setPaymentDateList] = useState(
+    paymentDateOptions ?? [],
+  );
+  const [isPaymentDatedBottomSheetOpen, setIsPaymentDatedBottomSheetOpen] =
+    useState(false);
   const [keyNoteText, setKeyNoteText] = useState('');
   const [keyNoteInputText, setKeyNoteInputText] = useState('');
   const [isKeyNoteBottomSheetOpen, setIsKeyNoteBottomSheetOpen] =
@@ -25,6 +39,13 @@ export default function AddCardScreen() {
 
   const handlePressKeyNoteSelectItem = () => {
     setIsKeyNoteBottomSheetOpen(true);
+  };
+
+  const handlePressCardUsagePeriodSelectItem = () =>
+    setIsCardUsagePeriodBottomSheetOpen(true);
+
+  const handlePressPaymentDateSelectItem = () => {
+    setIsPaymentDatedBottomSheetOpen(true);
   };
 
   return (
@@ -49,11 +70,37 @@ export default function AddCardScreen() {
           />
         }
       />
-      <SelectForm
+      <CommonSelectItem
         label={'사용 기간'}
-        placeholder="사용 기간을 선택해주세요"
-        categoryList={cardUsagePeriodList}
-        setCategoryList={setCardUsagePeriodList}
+        handlePressSelectItem={handlePressCardUsagePeriodSelectItem}
+        value={cardUsagePeriod}
+        placeholder={'사용 기간을 선택해주세요'}
+        bottomSheet={
+          <SelectFormBottomSheet
+            label={'사용 기간'}
+            categoryList={cardUsagePeriodList}
+            setCategoryList={setCardUsagePeriodList}
+            isBottomSheetOpen={isCardUsagePeriodBottomSheetOpen}
+            setIsBottomSheetOpen={setIsCardUsagePeriodBottomSheetOpen}
+            setValue={setCardUsagePeriod}
+          />
+        }
+      />
+      <CommonSelectItem
+        label={'결제일'}
+        handlePressSelectItem={handlePressPaymentDateSelectItem}
+        value={paymentDate}
+        placeholder={'결제일을 선택해주세요'}
+        bottomSheet={
+          <SelectFormBottomSheet
+            label={'결제일'}
+            categoryList={paymentDateList}
+            setCategoryList={setPaymentDateList}
+            isBottomSheetOpen={isPaymentDatedBottomSheetOpen}
+            setIsBottomSheetOpen={setIsPaymentDatedBottomSheetOpen}
+            setValue={setPaymentDate}
+          />
+        }
       />
       <CommonSelectItem
         label={'적요'}

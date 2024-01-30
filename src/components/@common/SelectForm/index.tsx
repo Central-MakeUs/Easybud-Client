@@ -1,9 +1,9 @@
-import {useRecoilValue, useSetRecoilState} from 'recoil';
+import {Dispatch, SetStateAction} from 'react';
+import {useRecoilValue} from 'recoil';
 import {categoryState} from 'libs/recoil/states/category';
-import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
 import CommonSelectItem from 'components/@common/CommonSelectItem';
-import {Dispatch, SetStateAction} from 'react';
+
 // import {useCategoryList} from 'hooks/useCategoryList';
 
 // const dummyCategories = [
@@ -27,6 +27,8 @@ export type SelectFormProps = {
   variant?: 'primary' | 'gray';
   categoryList: string[];
   setCategoryList: Dispatch<SetStateAction<string[]>>;
+  isBottomSheetOpen: boolean;
+  setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export default function SelectForm({
@@ -35,9 +37,10 @@ export default function SelectForm({
   variant = 'gray',
   categoryList,
   setCategoryList,
+  isBottomSheetOpen,
+  setIsBottomSheetOpen,
 }: SelectFormProps) {
   const selectedCategory = useRecoilValue(categoryState);
-  const setIsBottomSheetOpen = useSetRecoilState(selectFormBottomSheetState);
 
   const handlePressCategoryItem = () => setIsBottomSheetOpen(true);
 
@@ -46,13 +49,19 @@ export default function SelectForm({
       label={label}
       variant={variant}
       handlePressSelectItem={handlePressCategoryItem}
-      value={selectedCategory}
+      value={
+        label === '사용 기간'
+          ? selectedCategory.usagePeriodDate
+          : selectedCategory.paymentDate
+      }
       placeholder={placeholder}
       bottomSheet={
         <SelectFormBottomSheet
           label={label}
           categoryList={categoryList}
           setCategoryList={setCategoryList}
+          isBottomSheetOpen={isBottomSheetOpen}
+          setIsBottomSheetOpen={setIsBottomSheetOpen}
         />
       }
     />
