@@ -1,5 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {ledgerApi} from 'apis/ledgerApi';
+import {ledgerQueryKeys} from 'constants/queryKeys/ledger';
 
 export const useGetAvailableFundsDataQuery = () => {
   const {
@@ -10,9 +11,14 @@ export const useGetAvailableFundsDataQuery = () => {
       availableFunds: 0,
     },
   } = useQuery({
-    queryKey: ['availableFundsData'],
+    queryKey: [ledgerQueryKeys.availableFundsData],
     queryFn: ledgerApi.getAvailableFundsData,
   });
 
-  return availableFundsData;
+  return {
+    cash: availableFundsData.cash,
+    ordinaryDeposits: availableFundsData.ordinaryDeposits,
+    scheduledDisbursements: availableFundsData.scheduledDisbursements,
+    availableFunds: availableFundsData.availableFunds,
+  };
 };

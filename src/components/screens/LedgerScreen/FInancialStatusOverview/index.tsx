@@ -1,12 +1,16 @@
 import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
+import {useGetFinancialStatusDataQuery} from 'hooks/queries/LedgerScreen/useGetFinancialStatusDataQuery';
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
+import FinancialStatusBottomElement from 'components/screens/LedgerScreen/FinancialStatusOverview/FinancialStatusBottomElement';
 import Tooltip from 'components/@common/Tooltip';
-import FinancialStatusBottomElement from 'components/screens/LedgerScreen/FInancialStatusOverview/FinancialStatusBottomElement';
 
 export default function FinancialStatusOverview() {
   const [hasInitialNetWorth, _] = useState(false);
   const [showTooltipText, setShowTooltipText] = useState(false);
+
+  const {totalAssets, totalLiabilities, netAssets} =
+    useGetFinancialStatusDataQuery();
 
   const handlePressTooltipIcon = () =>
     setShowTooltipText(prevState => !prevState);
@@ -28,9 +32,9 @@ export default function FinancialStatusOverview() {
         <FinancialDataCardBase.BottomElement
           children={
             <FinancialStatusBottomElement
-              networthAmount={170450000}
-              assetAmount={20045000}
-              debtAmount={3000000}
+              networthAmount={netAssets}
+              assetAmount={totalAssets}
+              debtAmount={totalLiabilities}
             />
           }
         />
