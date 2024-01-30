@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import {theme} from 'styles';
 import {formatToLocaleString} from 'utils/formatAmountValue';
 import {categoryList} from 'constants/components/Transaction';
+import {RecentTransactionVariantType} from 'types/components/Transaction';
 import Typography from 'components/@common/Typography';
 import {TransactionProps} from 'components/@common/Transaction';
 
@@ -25,10 +26,10 @@ export default function TransactionSummary({
   amount,
 }: TransactionSummaryProps) {
   return (
-    <View style={transactionSummaryStyles.firstRowContainer}>
+    <View style={transactionSummaryStyles.rowContainer}>
       <View style={transactionSummaryStyles.categoryContainer}>
         <Typography type={'Title2Regular'} color={'gray4'}>
-          {categoryList[category]}
+          {categoryList[category as RecentTransactionVariantType]}
         </Typography>
       </View>
       <View style={transactionSummaryStyles.rightColContainer}>
@@ -56,12 +57,12 @@ export default function TransactionSummary({
 }
 
 const transactionSummaryStyles = StyleSheet.create({
-  firstRowContainer: {
+  rowContainer: {
     height: 44,
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    gap: 15,
   },
   categoryContainer: {
     width: 44,
@@ -77,8 +78,9 @@ const transactionSummaryStyles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     gap: 10,
+    flex: 1,
   },
   keyNoteContainer: {display: 'flex', flexDirection: 'row', gap: 5},
-  amountContainer: {width: 100},
+  amountContainer: {maxWidth: 100},
   amountText: {textAlign: 'right'},
 });
