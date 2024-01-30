@@ -1,4 +1,4 @@
-export type RecentTransactionType = {
+export type RecentTransactionDto = {
   transactionId: number;
   date: string;
   summary: string;
@@ -17,4 +17,11 @@ export type RecentTransactionType = {
     tertiaryCategoryContent?: string | null;
     amount: number;
   };
+};
+
+export type AvailableFundsDto = {
+  cash: number;
+  ordinaryDeposits: number;
+  scheduledDisbursements: number;
+  availableFunds: number;
 };

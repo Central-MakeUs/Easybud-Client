@@ -1,7 +1,21 @@
+import {useQuery} from '@tanstack/react-query';
+import {ledgerApi} from 'apis/ledgerApi';
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
 import AvailableFundsBottomElement from 'components/screens/LedgerScreen/AvailableFundsOverview/AvailableFundsBottomElement';
 
 export default function AvailableFundsOverview() {
+  const {
+    data: availableFundsData = {
+      cash: 0,
+      ordinaryDeposits: 0,
+      scheduledDisbursements: 0,
+      availableFunds: 0,
+    },
+  } = useQuery({
+    queryKey: ['availableFundsData'],
+    queryFn: ledgerApi.getAvailableFundsData,
+  });
+
   return (
     <FinancialDataCardBase.Container>
       <FinancialDataCardBase.TopElementContainer>
@@ -11,10 +25,10 @@ export default function AvailableFundsOverview() {
       <FinancialDataCardBase.BottomElement
         children={
           <AvailableFundsBottomElement
-            availableFunds={1600000}
-            cash={1000000000}
-            savingsAccount={1000000000}
-            plannedExpenditure={111111112}
+            availableFunds={availableFundsData.availableFunds}
+            cash={availableFundsData.cash}
+            savingsAccount={availableFundsData.ordinaryDeposits}
+            plannedExpenditure={availableFundsData.scheduledDisbursements}
           />
         }
       />
