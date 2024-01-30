@@ -8,7 +8,7 @@ import MemberManagementBottomSheetContent from 'components/screens/SettingScreen
 export default function SettingScreen() {
   const navigation = useNavigation();
 
-  const handlePressCardSettingButton = () => navigation.navigate('AddCard');
+  const handlePressCardSettingButton = () => navigation.navigate('CardList');
 
   return (
     <ScreenContainer
