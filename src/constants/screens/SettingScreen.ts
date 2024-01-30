@@ -5,8 +5,8 @@ export const TextVariant: Record<
   Record<VariantType, string>
 > = {
   buttonText: {
-    leave: '탈퇴하기',
-    logout: '로그아웃하기',
+    leave: '회원 탈퇴',
+    logout: '로그아웃',
   },
   warningText: {
     leave: '정말 탈퇴하시겠습니까?',
