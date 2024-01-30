@@ -10,8 +10,8 @@ import TabNavigator from 'navigators/TabNavigator';
 import useInitialData from 'hooks/useInitialData';
 import SettingScreen from 'screens/SettingScreen';
 import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
-import CardSettingScreen from 'screens/SettingScreen/CardListScreen';
-import AddCardScreen from 'screens/SettingScreen/AddCardScreen';
+import CardSettingScreen from 'screens/SettingScreen/AddCardScreen';
+import AddCardScreen from 'screens/SettingScreen/CardListScreen';
 import Icon from 'components/@common/Icon';
 
 export const Stack = createNativeStackNavigator<RootStackParamList>();
