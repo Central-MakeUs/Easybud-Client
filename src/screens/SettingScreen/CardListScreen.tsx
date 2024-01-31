@@ -1,28 +1,38 @@
+import {StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
+import {settingApi} from 'apis/settingApi';
+import CardItem from 'components/screens/SettingScreen/CardItem';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Button from 'components/@common/Buttons/Button';
-import CardItem from 'components/screens/SettingScreen/CardItem';
-import {StyleSheet} from 'react-native';
 
-const mockCardListData = [
-  {
-    name: '신한카드',
-    usagePeriod: '1일 ~ 말일',
-    paymentDate: '1일',
-    keyNote: '쿠팡',
-  },
-  {
-    name: '신한카드',
-    usagePeriod: '1일 ~ 말일',
-    paymentDate: '1일',
-    keyNote: '쿠팡',
-  },
-];
+// TODO 적요 누락 문제 해결 필요
+// const mockCardListData = [
+//   {
+//     cardId: 1,
+//     startDate: 2,
+//     endDate: 1,
+//     paymentDate: 15,
+//     name: '엄마카드',
+//   },
+//   {
+//     cardId: 2,
+//     startDate: 28,
+//     endDate: 27,
+//     paymentDate: 1,
+//     name: '아빠카드',
+//   },
+// ];
 
 export default function CardListScreen() {
   const navigation = useNavigation();
 
   const handlePressAddCardButton = () => navigation.navigate('AddCard');
+
+  const {data: cardListData = []} = useQuery({
+    queryKey: ['cardList'],
+    queryFn: settingApi.getCardList,
+  });
 
   return (
     <ScreenContainer
@@ -30,12 +40,12 @@ export default function CardListScreen() {
         <Button onPress={handlePressAddCardButton}>카드 추가</Button>
       }
       contentContainerStyle={cardListScreenStyles.contentContainer}>
-      {mockCardListData.map(cardData => (
+      {cardListData.map(cardData => (
         <CardItem
           cardName={cardData.name}
-          usagePeriod={cardData.usagePeriod}
-          paymentDate={cardData.paymentDate}
-          keyNote={cardData.keyNote}
+          usagePeriod={`${cardData.startDate}일 ~ ${cardData.endDate}일`}
+          paymentDate={`${cardData.paymentDate}일`}
+          keyNote={``}
         />
       ))}
     </ScreenContainer>
