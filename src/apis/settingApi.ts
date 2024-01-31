@@ -6,4 +6,9 @@ export const settingApi = {
     const response = await axiosApi.get('/cards');
     return response.data.result.cards;
   },
+
+  removeCard: async (cardId: number) => {
+    const response = await axiosApi.delete(`/cards/${cardId}`);
+    return response.data;
+  },
 };
