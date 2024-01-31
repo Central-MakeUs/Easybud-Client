@@ -1,7 +1,3 @@
-export type CardResponseDto = {
-  cardId: number;
-  startDate: number;
-  endDate: number;
-  paymentDate: number;
-  name: string;
-}[];
+import {CardEntity} from 'types/entities/setting';
+
+export type CardResponseDto = CardEntity[];
