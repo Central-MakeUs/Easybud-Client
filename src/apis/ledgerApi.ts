@@ -2,11 +2,11 @@ import {axiosApi} from 'apis/axios';
 import {
   AvailableFundsDto,
   FinancialStatusDto,
-  RecentTransactionDto,
+  TransactionDto,
 } from 'types/dtos/ledger';
 
 export const ledgerApi = {
-  getRecentTransactions: async (): Promise<RecentTransactionDto[]> => {
+  getRecentTransactions: async (): Promise<TransactionDto[]> => {
     const response = await axiosApi.get('/transactions/recent');
     return response.data.result.transactions;
   },
