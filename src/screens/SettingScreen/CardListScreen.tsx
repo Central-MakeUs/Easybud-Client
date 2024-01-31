@@ -1,30 +1,14 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useGetCardListDataQuery} from 'hooks/queries/SettingScreen/useGetCardListDataQuery';
 import CardItem from 'components/screens/SettingScreen/CardItem';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Button from 'components/@common/Buttons/Button';
-// import {useGetCardListDataQuery} from 'hooks/queries/SettingScreen/useGetCardListDataQuery';
-
-// TODO 적요 누락 문제 해결 필요
-const mockCardListData = [
-  {
-    cardId: 1,
-    startDate: 2,
-    endDate: 1,
-    paymentDate: 15,
-    name: '엄마카드',
-  },
-  {
-    cardId: 2,
-    startDate: 28,
-    endDate: 27,
-    paymentDate: 1,
-    name: '아빠카드',
-  },
-];
+import Typography from 'components/@common/Typography';
 
 export default function CardListScreen() {
-  // const cardListData = useGetCardListDataQuery();
+  // TODO 적요 누락 문제 해결 필요
+  const cardListData = useGetCardListDataQuery();
   const navigation = useNavigation();
 
   const handlePressAddCardButton = () => navigation.navigate('AddCard');
@@ -35,16 +19,27 @@ export default function CardListScreen() {
         <Button onPress={handlePressAddCardButton}>카드 추가</Button>
       }
       contentContainerStyle={cardListScreenStyles.contentContainer}>
-      {mockCardListData.map(cardData => (
-        <CardItem
-          key={cardData.cardId}
-          cardId={cardData.cardId}
-          cardName={cardData.name}
-          usagePeriod={`${cardData.startDate}일 ~ ${cardData.endDate}일`}
-          paymentDate={`${cardData.paymentDate}일`}
-          keyNote={``}
-        />
-      ))}
+      {cardListData.length ? (
+        cardListData.map(cardData => (
+          <CardItem
+            key={cardData.cardId}
+            cardId={cardData.cardId}
+            cardName={cardData.name}
+            usagePeriod={`${cardData.startDate}일 ~ ${cardData.endDate}일`}
+            paymentDate={`${cardData.paymentDate}일`}
+            keyNote={``}
+          />
+        ))
+      ) : (
+        <View style={cardListScreenStyles.noCardTextContainer}>
+          <Typography type={'Body1Semibold'} color={'gray6'}>
+            등록된 카드가 없습니다.
+          </Typography>
+          <Typography type={'Body1Semibold'} color={'gray6'}>
+            카드 추가 후 다시 확인해주세요.
+          </Typography>
+        </View>
+      )}
     </ScreenContainer>
   );
 }
@@ -52,5 +47,13 @@ export default function CardListScreen() {
 const cardListScreenStyles = StyleSheet.create({
   contentContainer: {
     gap: 20,
+  },
+  noCardTextContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 15,
+    paddingTop: 30,
   },
 });
