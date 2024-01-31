@@ -1,8 +1,8 @@
 import {StyleSheet, View} from 'react-native';
 import {TransactionListVariant} from 'types/screens/LedgerScreen';
+import {TransactionResponseDto} from 'types/dtos/ledger';
 import {formatDate} from 'utils/formatDate';
 import Transaction from 'components/@common/Transaction';
-import {TransactionDto} from 'types/dtos/ledger';
 import Typography from 'components/@common/Typography';
 
 /**
@@ -11,7 +11,7 @@ import Typography from 'components/@common/Typography';
  * @param amount 최근 거래 리스트에서 보여줄 금액
  */
 export type TransactionListType = {
-  transactionList: TransactionDto[];
+  transactionList: TransactionResponseDto[];
   variant?: TransactionListVariant;
 };
 
