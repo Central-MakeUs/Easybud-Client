@@ -5,8 +5,8 @@ export const TextVariant: Record<
   Record<VariantType, string>
 > = {
   buttonText: {
-    leave: '탈퇴하기',
-    logout: '로그아웃하기',
+    leave: '회원 탈퇴',
+    logout: '로그아웃',
   },
   warningText: {
     leave: '정말 탈퇴하시겠습니까?',
@@ -43,4 +43,35 @@ export const cardUsagePeriodOptions = [
   '26일 ~ 25일',
   '27일 ~ 26일',
   '28일 ~ 27일',
+];
+
+export const paymentDateOptions = [
+  '1일',
+  '2일',
+  '3일',
+  '4일',
+  '5일',
+  '6일',
+  '7일',
+  '8일',
+  '9일',
+  '10일',
+  '11일',
+  '12일',
+  '13일',
+  '14일',
+  '15일',
+  '16일',
+  '17일',
+  '18일',
+  '19일',
+  '20일',
+  '21일',
+  '22일',
+  '23일',
+  '24일',
+  '25일',
+  '26일',
+  '27일',
+  '말일',
 ];

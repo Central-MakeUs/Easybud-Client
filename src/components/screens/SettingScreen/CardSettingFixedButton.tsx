@@ -1,29 +1,36 @@
-import {useRecoilValue} from 'recoil';
 import {useNavigation} from '@react-navigation/native';
-import {categoryState} from 'libs/recoil/states/category';
 import Button from 'components/@common/Buttons/Button';
 
+/**
+ * @param cardName 카드명
+ * @param keyNoteText 적요
+ * @param cardUsagePeriod 사용 기간
+ * @param paymentDate 결제일
+ */
 type CardSettingFixedButtonProps = {
   cardName: string;
   keyNoteText: string;
+  cardUsagePeriod: string;
+  paymentDate: string;
 };
 
 export default function CardSettingFixedButton({
   cardName,
   keyNoteText,
+  cardUsagePeriod,
+  paymentDate,
 }: CardSettingFixedButtonProps) {
-  const selectedCategory = useRecoilValue(categoryState);
   const navigation = useNavigation();
 
   const handlePressSaveButton = () => {
-    navigation.navigate('Setting');
+    navigation.navigate('CardList');
   };
 
   return (
     <Button
-      disabled={!cardName || !keyNoteText || !selectedCategory}
+      disabled={!cardName || !keyNoteText || !cardUsagePeriod || !paymentDate}
       onPress={handlePressSaveButton}>
-      저장하기
+      저장
     </Button>
   );
 }
