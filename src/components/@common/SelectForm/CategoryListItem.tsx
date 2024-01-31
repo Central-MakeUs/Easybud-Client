@@ -1,35 +1,38 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
-import {useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
 import {AddCategoryText} from 'constants/components/SelectForm';
-import {categoryState} from 'libs/recoil/states/category';
-import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import Typography from 'components/@common/Typography';
-import {CategoryListProps} from 'components/@common/SelectForm/CategoryList';
+import {
+  RenderBottomSheetChildrenParamsType,
+  SelectFormBottomSheetProps,
+} from 'components/@common/SelectForm/SelectFormBottomSheet';
 
 /**
  * @param categoryName 카테고리명
  * @param setInputState input 상태를 변경하는 함수
+ * @param setValue selectedCategory를 변경하는 함수
+ * @param setIsBottomSheetOpen bottomSheet open여부를 변경하는 함수
  */
 type CategoryListItemProps = {
   categoryName: string;
-  setInputState: CategoryListProps['setInputState'];
+  setInputState: RenderBottomSheetChildrenParamsType['setInputState'];
+  setValue: SelectFormBottomSheetProps['setValue'];
+  setIsBottomSheetOpen: SelectFormBottomSheetProps['setIsBottomSheetOpen'];
 };
 
 export default function CategoryListItem({
   categoryName,
   setInputState,
+  setValue,
+  setIsBottomSheetOpen,
 }: CategoryListItemProps) {
-  const setIsBottomSheetOpen = useSetRecoilState(selectFormBottomSheetState);
-  const setSelectedCategory = useSetRecoilState(categoryState);
-
   const handlePressCategoryItem = () => {
     if (categoryName === AddCategoryText) {
       setInputState(true);
     } else {
       setInputState(false);
       setIsBottomSheetOpen(false);
-      setSelectedCategory(categoryName);
+      setValue(categoryName);
     }
   };
 

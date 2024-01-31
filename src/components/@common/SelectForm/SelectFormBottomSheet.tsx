@@ -7,10 +7,7 @@ import {
 } from 'react';
 import {View, StyleSheet} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
-import {SetterOrUpdater, useRecoilState, useSetRecoilState} from 'recoil';
 import {theme} from 'styles';
-import {categoryState} from 'libs/recoil/states/category';
-import {selectFormBottomSheetState} from 'libs/recoil/states/selectForm';
 import {AddCategoryText} from 'constants/components/SelectForm';
 import BottomSheet from 'components/@common/BottomSheet';
 import Typography from 'components/@common/Typography';
@@ -22,26 +19,30 @@ import {SelectFormProps} from 'components/@common/SelectForm';
 /**
  * @param label label 텍스트
  * @param categoryList 카테고리
- * @param setCategoryList SelectForm 종류를 나타냄 'primary' | 'gray'
+ * @param setCategoryList SelectForm 종류 'primary' | 'gray'
+ * @param isBottomSheetOpen bottomSheet open여부
+ * @param setIsBottomSheetOpen bottomSheet open여부를 변경하는 함수
+ * @param setValue selectedCategory를 변경하는 함수
  */
-type SelectFormBottomSheetProps = {
+export type SelectFormBottomSheetProps = {
   label: SelectFormProps['label'];
   categoryList: string[];
   setCategoryList: Dispatch<SetStateAction<string[]>>;
+  isBottomSheetOpen: boolean;
+  setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
+  setValue: Dispatch<SetStateAction<string>>;
 };
 
 export default function SelectFormBottomSheet({
   label,
   categoryList,
   setCategoryList,
+  isBottomSheetOpen,
+  setIsBottomSheetOpen,
+  setValue,
 }: SelectFormBottomSheetProps) {
   const [inputState, setInputState] = useState(false);
   const [inputText, setInputText] = useState('');
-
-  const setSelectedCategory = useSetRecoilState(categoryState);
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useRecoilState(
-    selectFormBottomSheetState,
-  );
 
   useEffect(() => {
     setInputText('');
@@ -49,8 +50,8 @@ export default function SelectFormBottomSheet({
 
   useFocusEffect(
     useCallback(() => {
-      setSelectedCategory('');
-    }, [setSelectedCategory]),
+      setValue('');
+    }, [setValue]),
   );
 
   const calculateBottomSheetHeight = () =>
@@ -67,7 +68,7 @@ export default function SelectFormBottomSheet({
         categoryList,
         inputState,
         inputText,
-        setSelectedCategory,
+        setValue,
         setInputState,
         setInputText,
         setCategoryList,
@@ -77,27 +78,29 @@ export default function SelectFormBottomSheet({
   );
 }
 
+export type RenderBottomSheetChildrenParamsType = {
+  label: string;
+  categoryList: SelectFormBottomSheetProps['categoryList'];
+  inputState: boolean;
+  inputText: string;
+  setValue: SelectFormBottomSheetProps['setValue'];
+  setInputState: Dispatch<SetStateAction<boolean>>;
+  setInputText: Dispatch<SetStateAction<string>>;
+  setCategoryList: SelectFormBottomSheetProps['setCategoryList'];
+  setIsBottomSheetOpen: SelectFormBottomSheetProps['setIsBottomSheetOpen'];
+};
+
 function renderBottomSheetChildren({
   label,
   categoryList,
   inputState,
   inputText,
-  setSelectedCategory,
+  setValue,
   setInputState,
   setInputText,
   setCategoryList,
   setIsBottomSheetOpen,
-}: {
-  label: string;
-  categoryList: string[];
-  inputState: boolean;
-  inputText: string;
-  setSelectedCategory: Dispatch<SetStateAction<string>>;
-  setInputState: Dispatch<SetStateAction<boolean>>;
-  setInputText: Dispatch<SetStateAction<string>>;
-  setCategoryList: Dispatch<SetStateAction<string[]>>;
-  setIsBottomSheetOpen: SetterOrUpdater<boolean>;
-}) {
+}: RenderBottomSheetChildrenParamsType) {
   const handlePressAddCategoryButton = () => {
     if (inputText.length) {
       setCategoryList(prevCategoryList => [
@@ -105,7 +108,7 @@ function renderBottomSheetChildren({
         inputText,
         AddCategoryText,
       ]);
-      setSelectedCategory(inputText);
+      setValue(inputText);
       setIsBottomSheetOpen(false);
       setInputState(false);
     }
@@ -129,7 +132,12 @@ function renderBottomSheetChildren({
           {label}
         </Typography>
       </View>
-      <CategoryList categoryList={categoryList} setInputState={setInputState} />
+      <CategoryList
+        categoryList={categoryList}
+        setInputState={setInputState}
+        setValue={setValue}
+        setIsBottomSheetOpen={setIsBottomSheetOpen}
+      />
     </View>
   );
 }
