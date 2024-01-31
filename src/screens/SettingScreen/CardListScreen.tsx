@@ -1,10 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useQuery} from '@tanstack/react-query';
-import {settingApi} from 'apis/settingApi';
 import CardItem from 'components/screens/SettingScreen/CardItem';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Button from 'components/@common/Buttons/Button';
+import {useGetCardListDataQuery} from 'hooks/queries/SettingScreen/useGetCardListDataQuery';
 
 // TODO 적요 누락 문제 해결 필요
 // const mockCardListData = [
@@ -25,14 +24,10 @@ import Button from 'components/@common/Buttons/Button';
 // ];
 
 export default function CardListScreen() {
+  const cardListData = useGetCardListDataQuery();
   const navigation = useNavigation();
 
   const handlePressAddCardButton = () => navigation.navigate('AddCard');
-
-  const {data: cardListData = []} = useQuery({
-    queryKey: ['cardList'],
-    queryFn: settingApi.getCardList,
-  });
 
   return (
     <ScreenContainer
