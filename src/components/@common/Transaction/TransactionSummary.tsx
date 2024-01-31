@@ -16,7 +16,7 @@ type TransactionSummaryProps = {
   category: TransactionProps['category'];
   keyNote: TransactionProps['keyNote'];
   date: TransactionProps['date'];
-  amount: TransactionProps['amount'];
+  amount?: TransactionProps['amount'];
 };
 
 export default function TransactionSummary({
@@ -33,7 +33,11 @@ export default function TransactionSummary({
         </Typography>
       </View>
       <View style={transactionSummaryStyles.rightColContainer}>
-        <View style={transactionSummaryStyles.keyNoteContainer}>
+        <View
+          style={[
+            transactionSummaryStyles.keyNoteDateContainer,
+            {marginLeft: amount ? undefined : 'auto'},
+          ]}>
           <Typography type={'Title2Regular'} color={'gray4'}>
             {keyNote}
           </Typography>
@@ -77,10 +81,9 @@ const transactionSummaryStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    gap: 10,
     flex: 1,
   },
-  keyNoteContainer: {display: 'flex', flexDirection: 'row', gap: 5},
+  keyNoteDateContainer: {display: 'flex', flexDirection: 'row', gap: 5},
   amountContainer: {maxWidth: 100},
   amountText: {textAlign: 'right'},
 });

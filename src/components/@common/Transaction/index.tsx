@@ -1,6 +1,5 @@
 import {StyleSheet, View} from 'react-native';
 import {DebitCreditType} from 'types/components/Transaction';
-import {TransactionDataType} from 'types/screens/TransactionScreen';
 import DebitCreditList from 'components/@common/Transaction/DebitCreditList';
 import TransactionSummary from 'components/@common/Transaction/TransactionSummary';
 
@@ -20,7 +19,7 @@ export type TransactionProps = {
   debitList: DebitCreditType[];
   creditList: DebitCreditType[];
   showAll?: boolean;
-  amount?: TransactionDataType<'recent'>['amount'];
+  amount?: number;
 };
 
 export default function Transaction({
@@ -48,5 +47,9 @@ export default function Transaction({
 }
 
 const transactionStyles = StyleSheet.create({
-  container: {display: 'flex', flexDirection: 'column', gap: 15},
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 15,
+  },
 });

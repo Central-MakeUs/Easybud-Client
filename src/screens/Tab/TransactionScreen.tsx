@@ -3,86 +3,77 @@ import {View, StyleSheet} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import 'dayjs/locale/ko';
 import {theme} from 'styles';
-import {TransactionDataType} from 'types/screens/TransactionScreen';
+import {TransactionDto} from 'types/dtos/ledger';
 import FinancialCalendar from 'components/screens/TransactionScreen/FinancialCalendar';
 import FinancialOverview from 'components/screens/TransactionScreen/FinancialOverview';
 import MonthHeader from 'components/screens/TransactionScreen/MonthHeader';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import TransactionList from 'components/@common/TransactionList';
 
-export const dummyTransactionDatas: TransactionDataType<'default'>[] = [
+export const dummyTransactionDatas: TransactionDto[] = [
   {
-    category: 'cost',
-    keyNote: '쿠팡',
-    date: '2023.04.21',
-    debitList: [
+    transactionId: 15,
+    date: '2024-01-31T14:30:11.086Z',
+    summary: '스타벅스',
+    type: 'EXPENSE_TRANSACTION',
+    accounts: [
       {
-        name: '현금',
-        amount: '100,000원',
-      },
-      {
-        name: '카카오페이',
-        amount: '200,000원',
-      },
-      {
-        name: '카카오페이',
-        amount: '100,000원',
-      },
-    ],
-    creditList: [
-      {
-        name: '미수금',
-        amount: '100,000원',
+        accountId: 1,
+        accountType: {
+          typeName: 'ASSET',
+          typeState: 'INCREASE',
+        },
+        primaryCategoryId: 6,
+        primaryCategoryContent: '비용',
+        secondaryCategoryId: 18,
+        secondaryCategoryContent: '생활비',
+        tertiaryCategoryId: 47,
+        tertiaryCategoryContent: '카페/간식',
+        amount: 12000,
       },
     ],
   },
   {
-    category: 'cost',
-    keyNote: '쿠팡',
-    date: '2023.04.21',
-    debitList: [
+    transactionId: 15,
+    date: '2024-01-31T15:30:11.086Z',
+    summary: '스타벅스',
+    type: 'EXPENSE_TRANSACTION',
+    accounts: [
       {
-        name: '현금',
-        amount: '100,000원',
-      },
-      {
-        name: '카카오페이',
-        amount: '200,000원',
-      },
-      {
-        name: '카카오페이',
-        amount: '100,000원',
-      },
-    ],
-    creditList: [
-      {
-        name: '미수금',
-        amount: '100,000원',
+        accountId: 1,
+        accountType: {
+          typeName: 'ASSET',
+          typeState: 'INCREASE',
+        },
+        primaryCategoryId: 6,
+        primaryCategoryContent: '비용',
+        secondaryCategoryId: 18,
+        secondaryCategoryContent: '생활비',
+        tertiaryCategoryId: 47,
+        tertiaryCategoryContent: '카페/간식',
+        amount: 12000,
       },
     ],
   },
   {
-    category: 'cost',
-    keyNote: '쿠팡',
-    date: '2023.04.21',
-    debitList: [
+    transactionId: 15,
+    date: '2024-01-31T17:30:11.086Z',
+    summary: '스타벅스',
+    type: 'EXPENSE_TRANSACTION',
+    accounts: [
       {
-        name: '현금',
-        amount: '100,000원',
-      },
-      {
-        name: '카카오페이',
-        amount: '200,000원',
-      },
-      {
-        name: '카카오페이',
-        amount: '100,000원',
-      },
-    ],
-    creditList: [
-      {
-        name: '미수금',
-        amount: '100,000원',
+        accountId: 1,
+        accountType: {
+          typeName: 'ASSET',
+          typeState: 'INCREASE',
+        },
+        primaryCategoryId: 6,
+        primaryCategoryContent: '비용',
+        secondaryCategoryId: 18,
+        secondaryCategoryContent: '생활비',
+        tertiaryCategoryId: 47,
+        tertiaryCategoryContent: '카페/간식',
+        amount: 12000,
       },
     ],
   },

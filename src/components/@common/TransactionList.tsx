@@ -29,7 +29,11 @@ export default function TransactionList({
             category={transactionData.type}
             keyNote={transactionData.summary}
             date={formatDate(transactionData.date)}
-            amount={transactionData.accounts[0].amount}
+            amount={
+              variant === 'recent'
+                ? transactionData.accounts[0].amount
+                : undefined
+            }
             debitList={[]}
             creditList={[]}
           />
