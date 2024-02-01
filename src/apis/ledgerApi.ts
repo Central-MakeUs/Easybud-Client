@@ -2,6 +2,7 @@ import {axiosApi} from 'apis/axios';
 import {
   AvailableFundsResponseDto,
   FinancialStatusResponseDto,
+  IncomeStatusResponseDto,
   RecentTransactionResponseDto,
 } from 'types/dtos/ledger';
 
@@ -18,6 +19,16 @@ export const ledgerApi = {
 
   getFinancialStatusData: async (): Promise<FinancialStatusResponseDto> => {
     const response = await axiosApi.get('/financials/financial-statement');
+    return response.data.result;
+  },
+
+  getIncomeStatusData: async (
+    startDate: string,
+    endDate: string,
+  ): Promise<IncomeStatusResponseDto> => {
+    const response = await axiosApi.get(
+      `/financials/income-statement?startDate=${startDate}&endDate=${endDate}`,
+    );
     return response.data.result;
   },
 };

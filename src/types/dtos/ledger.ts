@@ -31,3 +31,12 @@ export type FinancialStatusResponseDto = {
   totalLiabilities: number;
   netAssets: number;
 };
+
+export type IncomeStatusResponseDto = {
+  startDate: string;
+  endDate: string;
+  revenue: number;
+  expense: number;
+  revenuePercentage: number;
+  expensePercentage: number;
+};

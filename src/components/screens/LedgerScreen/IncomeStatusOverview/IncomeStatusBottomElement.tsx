@@ -1,45 +1,17 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {VictoryPie} from 'victory-native';
 import {KeyOfPalette} from 'styles/types';
 import {colorScale} from 'constants/screens/LedgerScreen';
+import {getDatePeriod} from 'utils/formatDate';
+import {calculateGraphPosition, getGraphData} from 'utils/getGraphData';
+import {useGetIncomeStatusDataQuery} from 'hooks/queries/LedgerScreen/useGetIncomeStatusDataQuery';
 import {
   FirstLabelType,
   GraphDataType,
   LabelTextColor,
 } from 'types/screens/LedgerScreen';
 import Typography from 'components/@common/Typography';
-
-const dummyGraphData: GraphDataType[] = [
-  {y: 40, label: '수익\n111,111,112원\n목표 대비 88%'},
-  {y: 60, label: '비용\n111,111,112원\n예산 대비 88%'},
-];
-
-const calculateGraphPosition = (
-  datum: GraphDataType,
-  label1: FirstLabelType,
-  x: number,
-  y: number,
-) => {
-  let top, left;
-  const incomeCondition = label1 === '수익';
-
-  if (!datum.y) {
-    top = incomeCondition ? y + 40 : y + 38;
-    left = incomeCondition ? x + 70 : x - 155;
-  } else if (datum.y === 100) {
-    top = incomeCondition ? y - 113 : y - 100;
-    left = incomeCondition ? x + 67 : x - 155;
-  } else if (datum.y > 50) {
-    top = incomeCondition ? y - 18 : y - 26;
-    left = incomeCondition ? x - 10 : x - 79;
-  } else {
-    top = incomeCondition ? y - 50 : y - 48;
-    left = incomeCondition ? x - 6 : x - 83;
-  }
-
-  return {top, left};
-};
 
 const getLabelTextColor = (
   datum: GraphDataType,
@@ -98,21 +70,54 @@ const Label = ({x, y, datum}: LabelProps) => {
   );
 };
 
-export default function IncomeStatementBottomElement() {
-  const height = !dummyGraphData[0].y || !dummyGraphData[1].y ? 150 : 230;
+export default function IncomeStatusBottomElement() {
+  const [currentDate, _] = useState(new Date());
+
+  const {startDate, endDate} = getDatePeriod(currentDate);
+
+  const {revenue, expense, revenuePercentage, expensePercentage} =
+    useGetIncomeStatusDataQuery(startDate, endDate);
+
+  const graphData = getGraphData(
+    revenue,
+    expense,
+    revenuePercentage,
+    expensePercentage,
+  );
+
+  const height =
+    !graphData[0].y && !graphData[1].y
+      ? 80
+      : !graphData[0].y || !graphData[1].y
+        ? 150
+        : 230;
 
   return (
     <View style={[{height}]}>
       <View
         style={[incomeStatementBottomElementStyles.graphContainer, {height}]}>
-        <VictoryPie
-          data={dummyGraphData}
-          width={210}
-          height={210}
-          colorScale={colorScale}
-          innerRadius={15}
-          labelComponent={<Label />}
-        />
+        {revenue || expense ? (
+          <VictoryPie
+            data={graphData}
+            width={210}
+            height={210}
+            colorScale={colorScale}
+            innerRadius={15}
+            labelComponent={<Label />}
+          />
+        ) : (
+          <View
+            style={
+              incomeStatementBottomElementStyles.noIncomeStatusTextContainer
+            }>
+            <Typography type={'Body1Semibold'} color={'gray6'}>
+              손익 현황 데이터가 없습니다.
+            </Typography>
+            <Typography type={'Body1Semibold'} color={'gray6'}>
+              거래 추가 후 다시 확인해주세요.
+            </Typography>
+          </View>
+        )}
       </View>
     </View>
   );
@@ -133,5 +138,12 @@ const incomeStatementBottomElementStyles = StyleSheet.create({
   },
   text: {
     marginBottom: 18,
+  },
+  noIncomeStatusTextContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 5,
   },
 });
