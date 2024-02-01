@@ -2,11 +2,9 @@ import React, {useMemo} from 'react';
 import {TextInputProps} from 'react-native';
 import TextField from 'components/@common/TextFields/TextField';
 import {formatNumber, isDebit} from 'utils/formatAmountValue';
-import {isEqual} from 'lodash';
-import {useRecoilValue} from 'recoil';
-import {accountState} from 'libs/recoil/states/account';
+import {isEqual, xor} from 'lodash';
 import UpdateButton from 'components/CreateTransactionStack/UpdateButton';
-import {balanceState} from 'libs/recoil/states/balance';
+import useAccount from 'hooks/useAccount';
 
 /**
  * @param accountIndex 현 계좌 index
@@ -23,11 +21,12 @@ export default function AmountTextField({
   accountIndex,
   onChange,
 }: TextFieldProps) {
-  const {amount, type} = useRecoilValue(accountState(accountIndex));
-  const balance = useRecoilValue(balanceState({accountIndex}));
-
+  const {balance, account} = useAccount({accountIndex});
+  const {amount, type} = account;
   const disabled = useMemo(
-    () => (balance > 0 && isDebit(type)) || balance === 0,
+    () =>
+      balance === 0 ||
+      Boolean(xor([balance > 0, isDebit(type)], [false, true])[0]),
     [balance, type],
   );
 
