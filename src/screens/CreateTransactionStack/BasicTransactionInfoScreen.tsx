@@ -1,12 +1,10 @@
-import {useRecoilState} from 'recoil';
-import {transactionState} from 'libs/recoil/states/transaction';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
-import {NewTransaction} from 'types/transaction';
 import DatePicker from 'components/@common/DatePicker';
 import InputForm from 'components/@common/InputForm';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import RightButton from 'components/CreateTransactionStack/RightButton';
 import Container from 'components/CreateTransactionStack/Container';
+import useTransaction from 'hooks/useTransaction';
 
 type BasicTransactionInfoScreenProps = {
   route: CreateTransactionStackRouteProp<'BasicTransactionInfo'>;
@@ -16,10 +14,7 @@ type BasicTransactionInfoScreenProps = {
 export default function BasicTransactionInfoScreen({
   route: {params},
 }: BasicTransactionInfoScreenProps) {
-  const [transaction, setTransaction] = useRecoilState(transactionState);
-
-  const handleChange = (key: keyof NewTransaction, value: Date | string) =>
-    setTransaction(prev => ({...prev, [key]: value}));
+  const {transaction, updateTransaction} = useTransaction();
 
   return (
     <Container
@@ -37,14 +32,14 @@ export default function BasicTransactionInfoScreen({
       }>
       <DatePicker
         date={transaction.date}
-        updateDate={date => handleChange('date', date)}
+        updateDate={date => updateTransaction('date', date)}
       />
       <InputForm
         autoFocus
         label={'적요'}
         value={transaction.summary ?? ''}
         maxLength={15}
-        onChangeText={summary => handleChange('summary', summary)}
+        onChangeText={summary => updateTransaction('summary', summary)}
         placeholder="적요를 작성하세요"
       />
     </Container>

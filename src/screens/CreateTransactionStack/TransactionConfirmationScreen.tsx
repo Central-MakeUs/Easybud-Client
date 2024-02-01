@@ -1,7 +1,5 @@
-import {useCallback, useMemo} from 'react';
+import {useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {useRecoilState, useRecoilValue, useResetRecoilState} from 'recoil';
-import {transactionState} from 'libs/recoil/states/transaction';
 import {
   CreateTransactionStackScreenName,
   RootStackNavigationProp,
@@ -13,10 +11,9 @@ import Icon from 'components/@common/Icon';
 import {getFormattedDate} from 'utils/formatDate';
 import UpdateButton from 'components/CreateTransactionStack/UpdateButton';
 import DebitCreditOverview from 'components/CreateTransactionStack/DebitCreditOverview';
-import {balanceState} from 'libs/recoil/states/balance';
 import {theme} from 'styles';
 import AccountDetails from 'screens/CreateTransactionStack/AccountDetails';
-import {cloneDeep, pullAt} from 'lodash';
+import useTransaction from 'hooks/useTransaction';
 
 type TransactionConfirmationScreenProps = {
   navigation: RootStackNavigationProp;
@@ -26,14 +23,12 @@ type TransactionConfirmationScreenProps = {
 export default function TransactionConfirmationScreen({
   navigation,
 }: TransactionConfirmationScreenProps) {
-  const [transaction, setTransaction] = useRecoilState(transactionState);
-  const balance = useRecoilValue(balanceState({}));
-  const {accounts} = transaction;
-  const clearTransaction = useResetRecoilState(transactionState);
+  const {transaction, balance, accounts, deleteAccount, clearTransaction} =
+    useTransaction();
 
   const handleSave = () => {
-    console.log(transaction);
     clearTransaction();
+    console.log(transaction);
     navigation.navigate('Tab', {screen: 'Ledger'});
   };
 
@@ -57,24 +52,6 @@ export default function TransactionConfirmationScreen({
       });
     }
   };
-
-  const deleteAccount = useCallback(
-    (accountIndex: number) => {
-      const newAccounts = cloneDeep(accounts);
-
-      if (accountIndex >= accounts.length) {
-        console.error(
-          `지우고자 하는 계정 인덱스(${accountIndex})가 범위를 벗어납니다.`,
-        );
-        return;
-      }
-
-      pullAt(newAccounts, accountIndex);
-
-      setTransaction(prevState => ({...prevState, accounts: newAccounts}));
-    },
-    [accounts, setTransaction],
-  );
 
   const disabledSubmit = useMemo(() => balance !== 0, [balance]);
 
