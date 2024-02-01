@@ -8,6 +8,7 @@ export const useGetFinancialStatusDataQuery = () => {
       totalAssets: 0,
       totalLiabilities: 0,
       netAssets: 0,
+      initialNetAssetDefined: false,
     },
   } = useQuery({
     queryKey: [ledgerQueryKeys.financialStatusData],
@@ -18,5 +19,6 @@ export const useGetFinancialStatusDataQuery = () => {
     totalAssets: financialStatusData.totalAssets,
     totalLiabilities: financialStatusData.totalLiabilities,
     netAssets: financialStatusData.netAssets,
+    initialNetAssetDefined: financialStatusData.initialNetAssetDefined,
   };
 };

@@ -30,6 +30,7 @@ export type FinancialStatusResponseDto = {
   totalAssets: number;
   totalLiabilities: number;
   netAssets: number;
+  initialNetAssetDefined: boolean;
 };
 
 export type IncomeStatusResponseDto = {
