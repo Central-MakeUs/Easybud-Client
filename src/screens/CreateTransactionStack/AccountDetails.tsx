@@ -1,6 +1,7 @@
 import InputForm from 'components/@common/InputForm';
 import Typography from 'components/@common/Typography';
-import React from 'react';
+import useTransaction from 'hooks/useTransaction';
+import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {UpdateTransactionType} from 'screens/CreateTransactionStack/TransactionConfirmationScreen';
 import {theme} from 'styles';
@@ -20,7 +21,12 @@ export default function AccountDetails({
   updateTransaction,
   deleteAccount,
 }: AccountDetailsProps) {
+  const {accounts} = useTransaction();
   const {type, category, amount} = account;
+
+  const isTheOnlyOne = useMemo(() => {
+    return accounts.length === 1 && accountIndex === 0;
+  }, [accountIndex, accounts.length]);
 
   return (
     <View style={styles.account}>
@@ -33,15 +39,17 @@ export default function AccountDetails({
           marginBottom: 5,
         }}>
         <Typography type="Body2Semibold">계정 {accountIndex + 1}</Typography>
-        <TouchableOpacity
-          onPress={() => deleteAccount(accountIndex)}
-          style={styles.deleteButton}>
-          <Typography
-            type="Body2Regular"
-            style={{textAlign: 'right', textDecorationLine: 'underline'}}>
-            삭제
-          </Typography>
-        </TouchableOpacity>
+        {isTheOnlyOne ? null : (
+          <TouchableOpacity
+            onPress={() => deleteAccount(accountIndex)}
+            style={styles.deleteButton}>
+            <Typography
+              type="Body2Regular"
+              style={{textAlign: 'right', textDecorationLine: 'underline'}}>
+              삭제
+            </Typography>
+          </TouchableOpacity>
+        )}
       </View>
       <InputForm
         size="sm"
