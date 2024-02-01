@@ -87,7 +87,7 @@ export default function IncomeStatusBottomElement() {
 
   const height =
     !graphData[0].y && !graphData[1].y
-      ? 80
+      ? 70
       : !graphData[0].y || !graphData[1].y
         ? 150
         : 230;
