@@ -32,14 +32,14 @@ export default function TransactionConfirmationScreen({
     navigation.navigate('Tab', {screen: 'Ledger'});
   };
 
-  const addNewAccount = () => {
+  const navigateAddAccountScreen = () => {
     navigation.push('CreateTransactionStack', {
       screen: 'AccountType',
       params: {accountIndex: transaction.accounts.length},
     });
   };
 
-  const updateTransaction = ({screen, accountIndex}: Basic | Account) => {
+  const navigateUpdateScreen = ({screen, accountIndex}: Basic | Account) => {
     if (screen === 'BasicTransactionInfo') {
       navigation.push('CreateTransactionStack', {
         screen,
@@ -66,7 +66,7 @@ export default function TransactionConfirmationScreen({
       }}
       fixedBottomComponent={
         <>
-          <Button variant="secondary" onPress={addNewAccount}>
+          <Button variant="secondary" onPress={navigateAddAccountScreen}>
             새 계정 추가
           </Button>
           <Button disabled={disabledSubmit} onPress={handleSave}>
@@ -80,7 +80,9 @@ export default function TransactionConfirmationScreen({
             기본 정보
           </Typography>
           <UpdateButton
-            onPress={() => updateTransaction({screen: 'BasicTransactionInfo'})}
+            onPress={() =>
+              navigateUpdateScreen({screen: 'BasicTransactionInfo'})
+            }
             endIcon={<Icon color="gray5" name="Pencil" size={12} />}>
             {(transaction.summary ?? '')?.length > 10
               ? `${transaction.summary?.slice(0, 10)}...`
@@ -97,7 +99,7 @@ export default function TransactionConfirmationScreen({
             key={index}
             accountIndex={index}
             account={account}
-            updateTransaction={updateTransaction}
+            updateTransaction={navigateUpdateScreen}
             deleteAccount={deleteAccount}
           />
         ))}
