@@ -2,7 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import {TransactionListVariant} from 'types/screens/LedgerScreen';
 import {formatDate} from 'utils/formatDate';
 import Transaction from 'components/@common/Transaction';
-import {RecentTransactionType} from 'types/dtos/ledger';
+import {TransactionResponseDto} from 'types/dtos/ledger';
 import Typography from 'components/@common/Typography';
 
 /**
@@ -11,7 +11,7 @@ import Typography from 'components/@common/Typography';
  * @param amount 최근 거래 리스트에서 보여줄 금액
  */
 export type TransactionListType = {
-  transactionList: RecentTransactionType[];
+  transactionList: TransactionResponseDto[];
   variant?: TransactionListVariant;
 };
 
@@ -29,7 +29,7 @@ export default function TransactionList({
             category={transactionData.type}
             keyNote={transactionData.summary}
             date={formatDate(transactionData.date)}
-            amount={transactionData.accounts.amount}
+            amount={transactionData.accounts[0].amount}
             debitList={[]}
             creditList={[]}
           />
