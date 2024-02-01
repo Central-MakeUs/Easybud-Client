@@ -1,17 +1,16 @@
-import {balanceState} from 'libs/recoil/states/balance';
 import {transactionState} from 'libs/recoil/states/transaction';
 import {cloneDeep, pullAt} from 'lodash';
-import {useCallback} from 'react';
-import {useRecoilState, useRecoilValue, useResetRecoilState} from 'recoil';
+import {useCallback, useMemo} from 'react';
+import {useRecoilState, useResetRecoilState} from 'recoil';
 import {NewTransaction} from 'types/transaction';
+import {calculateBalance} from 'utils/formatAmountValue';
 
 export default function useTransaction() {
   const [transaction, setTransaction] = useRecoilState(transactionState);
-  const balance = useRecoilValue(balanceState({}));
+  const {accounts} = transaction;
+  const balance = useMemo(() => calculateBalance(accounts), [accounts]);
 
   const clearTransaction = useResetRecoilState(transactionState);
-
-  const {accounts} = transaction;
 
   const updateTransaction = (key: keyof NewTransaction, value: Date | string) =>
     setTransaction(prev => ({...prev, [key]: value}));
