@@ -1,4 +1,4 @@
-export type RecentTransactionDto = {
+export type RecentTransactionResponseDto = {
   transactionId: number;
   date: string;
   summary: string;
@@ -19,14 +19,14 @@ export type RecentTransactionDto = {
   };
 };
 
-export type AvailableFundsDto = {
+export type AvailableFundsResponseDto = {
   cash: number;
   ordinaryDeposits: number;
   scheduledDisbursements: number;
   availableFunds: number;
 };
 
-export type FinancialStatusDto = {
+export type FinancialStatusResponseDto = {
   totalAssets: number;
   totalLiabilities: number;
   netAssets: number;
