@@ -1,8 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import {
-  DebitCreditType,
-  TransactionCategoryType,
-} from 'types/components/Transaction';
+import {DebitCreditType} from 'types/components/Transaction';
 import {TransactionDataType} from 'types/screens/TransactionScreen';
 import DebitCreditList from 'components/@common/Transaction/DebitCreditList';
 import TransactionSummary from 'components/@common/Transaction/TransactionSummary';
@@ -17,7 +14,7 @@ import TransactionSummary from 'components/@common/Transaction/TransactionSummar
  * @param amount 최근 거래 내역에서 보여줄 금액
  */
 export type TransactionProps = {
-  category: TransactionCategoryType;
+  category: string;
   keyNote: string;
   date: string;
   debitList: DebitCreditType[];

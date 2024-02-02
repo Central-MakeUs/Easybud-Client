@@ -1,7 +1,11 @@
+import {useGetAvailableFundsDataQuery} from 'hooks/queries/LedgerScreen/useGetAvailableFundsDataQuery';
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
 import AvailableFundsBottomElement from 'components/screens/LedgerScreen/AvailableFundsOverview/AvailableFundsBottomElement';
 
 export default function AvailableFundsOverview() {
+  const {cash, ordinaryDeposits, scheduledDisbursements, availableFunds} =
+    useGetAvailableFundsDataQuery();
+
   return (
     <FinancialDataCardBase.Container>
       <FinancialDataCardBase.TopElementContainer>
@@ -11,10 +15,10 @@ export default function AvailableFundsOverview() {
       <FinancialDataCardBase.BottomElement
         children={
           <AvailableFundsBottomElement
-            availableFunds={1600000}
-            cash={1000000000}
-            savingsAccount={1000000000}
-            plannedExpenditure={111111112}
+            availableFunds={availableFunds}
+            cash={cash}
+            savingsAccount={ordinaryDeposits}
+            plannedExpenditure={scheduledDisbursements}
           />
         }
       />
