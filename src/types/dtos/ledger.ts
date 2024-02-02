@@ -14,7 +14,7 @@ export type TransactionResponseDto = {
     secondaryCategoryId: number;
     secondaryCategoryContent: string;
     tertiaryCategoryId: number;
-    tertiaryCategoryContent: string | null;
+    tertiaryCategoryContent?: string | null;
     amount: number;
   }[];
 };
@@ -30,4 +30,14 @@ export type FinancialStatusResponseDto = {
   totalAssets: number;
   totalLiabilities: number;
   netAssets: number;
+  initialNetAssetDefined: boolean;
+};
+
+export type IncomeStatusResponseDto = {
+  startDate: string;
+  endDate: string;
+  revenue: number;
+  expense: number;
+  revenuePercentage: number;
+  expensePercentage: number;
 };

@@ -3,14 +3,14 @@ import {View, StyleSheet} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import 'dayjs/locale/ko';
 import {theme} from 'styles';
-import {TransactionDto} from 'types/dtos/ledger';
+import {TransactionResponseDto} from 'types/dtos/ledger';
 import FinancialCalendar from 'components/screens/TransactionScreen/FinancialCalendar';
 import FinancialOverview from 'components/screens/TransactionScreen/FinancialOverview';
 import MonthHeader from 'components/screens/TransactionScreen/MonthHeader';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import TransactionList from 'components/@common/TransactionList';
 
-export const dummyTransactionDatas: TransactionDto[] = [
+export const dummyTransactionDatas: TransactionResponseDto[] = [
   {
     transactionId: 15,
     date: '2024-01-31T14:30:11.086Z',

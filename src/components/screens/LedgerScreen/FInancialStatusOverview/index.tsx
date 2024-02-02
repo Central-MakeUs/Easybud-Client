@@ -6,10 +6,9 @@ import FinancialStatusBottomElement from 'components/screens/LedgerScreen/Financ
 import Tooltip from 'components/@common/Tooltip';
 
 export default function FinancialStatusOverview() {
-  const [hasInitialNetWorth, _] = useState(false);
   const [showTooltipText, setShowTooltipText] = useState(false);
 
-  const {totalAssets, totalLiabilities, netAssets} =
+  const {totalAssets, totalLiabilities, netAssets, initialNetAssetDefined} =
     useGetFinancialStatusDataQuery();
 
   const handlePressTooltipIcon = () =>
@@ -23,7 +22,7 @@ export default function FinancialStatusOverview() {
             style={financialStatusOverviewStyles.topElementFirstColContainer}>
             <FinancialDataCardBase.Label label={'재무상태'} />
             <FinancialDataCardBase.TooltipIcon
-              isVisible={!hasInitialNetWorth}
+              isVisible={!initialNetAssetDefined}
               onPress={handlePressTooltipIcon}
             />
           </View>

@@ -1,7 +1,7 @@
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
-import IncomeStatementBottomElement from 'components/screens/LedgerScreen/IncomeStatementOverview/IncomeStatementBottomElement';
+import IncomeStatementBottomElement from 'components/screens/LedgerScreen/IncomeStatusOverview/IncomeStatusBottomElement';
 
-export default function IncomeStatementOverview() {
+export default function IncomeStatusOverview() {
   return (
     <FinancialDataCardBase.Container>
       <FinancialDataCardBase.TopElementContainer>

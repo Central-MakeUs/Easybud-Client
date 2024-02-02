@@ -81,6 +81,7 @@ const transactionSummaryStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    gap: 10,
     flex: 1,
   },
   keyNoteDateContainer: {display: 'flex', flexDirection: 'row', gap: 5},
