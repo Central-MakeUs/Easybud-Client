@@ -12,6 +12,26 @@ export default function CardListScreen() {
 
   const handlePressAddCardButton = () => navigation.navigate('AddCard');
 
+  const getCardDataDate = (
+    startDate: number,
+    endDate: number,
+    paymentDate: number,
+  ) => {
+    const formatDateString = (date: number) => {
+      if (date === -1) {
+        return '말일';
+      } else {
+        return `${date}일`;
+      }
+    };
+
+    const startDateString = formatDateString(startDate);
+    const endDateString = formatDateString(endDate);
+    const paymentDateString = formatDateString(paymentDate);
+
+    return {startDateString, endDateString, paymentDateString};
+  };
+
   return (
     <ScreenContainer
       fixedBottomComponent={
@@ -19,16 +39,24 @@ export default function CardListScreen() {
       }
       contentContainerStyle={cardListScreenStyles.contentContainer}>
       {cardListData.length ? (
-        cardListData.map(cardData => (
-          <CardItem
-            key={cardData.cardId}
-            cardId={cardData.cardId}
-            cardName={cardData.name}
-            usagePeriod={`${cardData.startDate}일 ~ ${cardData.endDate}일`}
-            paymentDate={`${cardData.paymentDate}일`}
-            keyNote={cardData.summary}
-          />
-        ))
+        cardListData.map(cardData => {
+          const formattedDates = getCardDataDate(
+            cardData.startDate,
+            cardData.endDate,
+            cardData.paymentDate,
+          );
+
+          return (
+            <CardItem
+              key={cardData.cardId}
+              cardId={cardData.cardId}
+              cardName={cardData.name}
+              usagePeriod={`${formattedDates.startDateString} ~ ${formattedDates.endDateString}`}
+              paymentDate={formattedDates.paymentDateString}
+              keyNote={cardData.summary}
+            />
+          );
+        })
       ) : (
         <View style={cardListScreenStyles.noCardTextContainer}>
           <Typography type={'Body1Semibold'} color={'gray6'}>
