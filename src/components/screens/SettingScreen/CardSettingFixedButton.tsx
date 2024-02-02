@@ -38,6 +38,7 @@ export default function CardSettingFixedButton({
       endDate: endDateData,
       paymentDate: paymentDateData,
       name: cardName,
+      summary: keyNoteText,
     });
     navigation.navigate('CardList');
   };

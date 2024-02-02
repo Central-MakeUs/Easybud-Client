@@ -19,6 +19,7 @@ export const settingApi = {
       endDate: cardData.endDate,
       paymentDate: cardData.paymentDate,
       name: cardData.name,
+      summary: cardData.summary,
     });
     return response.data;
   },
