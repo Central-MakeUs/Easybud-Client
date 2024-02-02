@@ -4,4 +4,5 @@ export type CardEntity = {
   endDate: number;
   paymentDate: number;
   name: string;
+  summary: string;
 };

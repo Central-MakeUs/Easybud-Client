@@ -7,7 +7,6 @@ import Button from 'components/@common/Buttons/Button';
 import Typography from 'components/@common/Typography';
 
 export default function CardListScreen() {
-  // TODO 적요 누락 문제 해결 필요
   const cardListData = useGetCardListDataQuery();
   const navigation = useNavigation();
 
@@ -27,7 +26,7 @@ export default function CardListScreen() {
             cardName={cardData.name}
             usagePeriod={`${cardData.startDate}일 ~ ${cardData.endDate}일`}
             paymentDate={`${cardData.paymentDate}일`}
-            keyNote={``}
+            keyNote={cardData.summary}
           />
         ))
       ) : (
