@@ -1,5 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import {DebitCreditType} from 'types/components/Transaction';
+import {DebitCreditEntity} from 'types/entities/ledger';
 import DebitCreditList from 'components/@common/Transaction/DebitCreditList';
 import TransactionSummary from 'components/@common/Transaction/TransactionSummary';
 
@@ -16,8 +16,8 @@ export type TransactionProps = {
   category: string;
   keyNote: string;
   date: string;
-  debitList: DebitCreditType[];
-  creditList: DebitCreditType[];
+  debitList: DebitCreditEntity[];
+  creditList: DebitCreditEntity[];
   showAll?: boolean;
   amount?: number;
 };
