@@ -47,14 +47,14 @@ export default function AccountTypeScreen({
         </>
       }>
       <View style={styles.container}>
-        {accountTypes.map(item => (
+        {accountTypes.map(type => (
           <Button
             style={styles.item}
-            key={`${item.name} ${item.change}`}
-            onPress={() => updateAccount('type', item)}
+            key={`${type.name} ${type.change}`}
+            onPress={() => updateAccount('type', type)}
             variant={
-              isEqual(account.type, item) ? 'primary' : 'secondary'
-            }>{`${item.name} ${item.change}`}</Button>
+              isEqual(account.type, type) ? 'primary' : 'secondary'
+            }>{`${type.name} ${type.change}`}</Button>
         ))}
       </View>
     </Container>
