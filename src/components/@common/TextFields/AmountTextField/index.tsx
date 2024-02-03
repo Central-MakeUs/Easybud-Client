@@ -2,15 +2,16 @@ import React, {useMemo} from 'react';
 import {TextInputProps} from 'react-native';
 import TextField from 'components/@common/TextFields/TextField';
 import {formatNumber, isDebit} from 'utils/formatAmountValue';
-import {isEqual, xor} from 'lodash';
+import {isEqual} from 'lodash';
 import UpdateButton from 'components/CreateTransactionStack/UpdateButton';
-import useAccount from 'hooks/useAccount';
+import {NewAccount} from 'types/account';
 
 /**
  * @param accountIndex 현 계좌 index
  */
 type TextFieldProps = {
-  accountIndex: number;
+  balance: number;
+  account: NewAccount;
   onChange: (amount: number) => void;
 } & Omit<
   TextInputProps,
@@ -18,21 +19,26 @@ type TextFieldProps = {
 >;
 
 export default function AmountTextField({
-  accountIndex,
+  balance,
+  account,
   onChange,
 }: TextFieldProps) {
-  const {balance, account} = useAccount({accountIndex});
   const {amount, type} = account;
+
   const disabled = useMemo(
     () =>
       balance === 0 ||
-      Boolean(xor([balance > 0, isDebit(type)], [false, true])[0]),
+      (balance > 0 && isDebit(type)) ||
+      (balance < 0 && !isDebit(type)),
     [balance, type],
   );
 
   const isButtonHidden = useMemo(() => {
-    return balance === 0 ? true : isEqual(amount, Math.abs(balance));
-  }, [amount, balance]);
+    if (balance === 0 || isEqual(amount, Math.abs(balance))) {
+      return true;
+    }
+    return isDebit(type) ? balance < 0 : balance > 0;
+  }, [amount, balance, type]);
 
   return (
     <>
@@ -46,7 +52,7 @@ export default function AmountTextField({
       {isButtonHidden ? null : (
         <UpdateButton
           disabled={disabled}
-          onPress={() => onChange(Math.abs(balance))}>
+          onPress={() => onChange(amount + Math.abs(balance))}>
           현재 대차: {formatNumber(balance)}원 입력
         </UpdateButton>
       )}

@@ -15,9 +15,13 @@ export default function AccountAmountScreen({
   route: {params},
 }: AccountAmountScreenProps) {
   const {isUpdateStep, accountIndex} = params;
-  const {account, updateAccount} = useAccount({accountIndex});
+  const {account, balance, updateAccount} = useAccount({accountIndex});
 
   const disabled = useMemo(() => account.amount === 0, [account.amount]);
+
+  if (!account) {
+    return null;
+  }
 
   return (
     <Container
@@ -36,7 +40,8 @@ export default function AccountAmountScreen({
         </>
       }>
       <AmountTextField
-        accountIndex={accountIndex}
+        balance={balance}
+        account={account}
         onChange={amount => updateAccount('amount', amount)}
       />
     </Container>
