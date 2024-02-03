@@ -36,7 +36,7 @@ export default function MonthHeader({
         type={'Title1Bold'}
         color={'gray4'}
         style={monthHeaderStyles.text}>
-        {currentDate.getMonth() + 1}월
+        {currentDate.getFullYear()}년 {currentDate.getMonth() + 1}월
       </Typography>
       <Icon
         name={'ArrowRightSmall'}
@@ -58,7 +58,7 @@ const monthHeaderStyles = StyleSheet.create({
   },
   text: {
     marginBottom: 3,
-    width: 50,
+    width: 150,
     textAlign: 'center',
   },
 });

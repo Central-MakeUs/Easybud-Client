@@ -1,5 +1,5 @@
 import {ComponentStory} from '@storybook/react';
-import CommonBottomSheet from 'components/@common/BottomSheet';
+import CommonBottomSheet from 'components/@common/BottomSheet/GorhomBottomSheet';
 
 const meta = {
   title: 'components/BottomSheet',

@@ -29,7 +29,6 @@ const debitCreditListStyles = StyleSheet.create({
   secondRowContainer: {
     display: 'flex',
     flexDirection: 'row',
-    paddingVertical: 5,
   },
   divider: {
     backgroundColor: theme.palette.gray4,

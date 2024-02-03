@@ -1,10 +1,10 @@
 import React, {useMemo} from 'react';
 import {TextInputProps} from 'react-native';
-import TextField from 'components/@common/TextFields/TextField';
 import {formatNumber, isDebit} from 'utils/formatAmountValue';
 import {isEqual} from 'lodash';
-import UpdateButton from 'components/CreateTransactionStack/UpdateButton';
 import {NewAccount} from 'types/account';
+import UpdateButton from 'components/screens/CreateTransactionStack/UpdateButton';
+import TextInput from 'components/@common/TextFields/TextInput';
 
 /**
  * @param accountIndex 현 계좌 index
@@ -42,7 +42,7 @@ export default function AmountTextField({
 
   return (
     <>
-      <TextField
+      <TextInput
         type="number"
         autoFocus
         value={amount}

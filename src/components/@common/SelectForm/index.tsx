@@ -1,11 +1,16 @@
 import InputForm from 'components/@common/InputForm';
-import CommonBottomSheet from 'components/@common/BottomSheet';
+import CommonBottomSheet from 'components/@common/BottomSheet/GorhomBottomSheet';
 import Typography from 'components/@common/Typography';
 import {useState} from 'react';
-import {View, StyleSheet, TextInput, ScrollView} from 'react-native';
+import {
+  View,
+  StyleSheet,
+  TextInput,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import {theme} from 'styles';
 import useBottomSheet from 'hooks/useBottomSheet';
-import ListItem from 'components/@common/SelectForm/CategoryListItem';
 import {isEmpty} from 'lodash';
 import Button from 'components/@common/Buttons/Button';
 import {CategoryName} from 'constants/components/SelectForm';
@@ -14,7 +19,7 @@ import {CategoryName} from 'constants/components/SelectForm';
  * @param label label 텍스트
  * @param placeholder placeholder 텍스트
  */
-type SelectFormProps = {
+export type SelectFormProps = {
   items: string[];
   value: string | null | undefined;
   label: string;
@@ -113,4 +118,29 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   button: {height: 40, padding: 10, minWidth: 120, maxWidth: 120},
+});
+
+type ListItemProps = {
+  value: string;
+  onSelect: (value: string) => void;
+};
+
+const ListItem = ({value, onSelect}: ListItemProps) => {
+  return (
+    <TouchableOpacity
+      style={categoryListItemStyles.container}
+      onPress={() => onSelect(value)}>
+      <Typography type={'Body1Semibold'} color={'black'}>
+        {value}
+      </Typography>
+    </TouchableOpacity>
+  );
+};
+
+const categoryListItemStyles = StyleSheet.create({
+  container: {
+    borderBottomColor: theme.palette.gray3,
+    borderBottomWidth: 1,
+    padding: 20,
+  },
 });

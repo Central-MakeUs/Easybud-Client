@@ -37,5 +37,19 @@ export default function DatePicker({date, updateDate}: DatePickerProps) {
         onCancel={close}
       />
     </>
+    // <CommonSelectItem
+    //   label={'날짜'}
+    //   handlePressSelectItem={handlePressDateTimePicker}
+    //   value={formattedDate}
+    //   placeholder="날짜를 선택하세요"
+    //   bottomSheet={
+    //     <DateTimePickerModal
+    //       isVisible={isDateTimePickerVisible}
+    //       mode="date"
+    //       onConfirm={handleConfirmDateTimePicker}
+    //       onCancel={handleCancelDateTimePicker}
+    //     />
+    //   }
+    // />
   );
 }

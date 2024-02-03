@@ -3,11 +3,11 @@ import {isEqual} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import {AccountTypeUnion} from 'types/account';
 
-import RightButton from 'components/CreateTransactionStack/RightButton';
-import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import Button from 'components/@common/Buttons/Button';
-import Container from 'components/CreateTransactionStack/Container';
 import useAccount from 'hooks/useAccount';
+import Container from 'components/screens/CreateTransactionStack/Container';
+import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
+import RightButton from 'components/screens/CreateTransactionStack/RightButton';
 
 const accountTypes: AccountTypeUnion[] = [
   {name: '자산', change: '증가'}, // 차변

@@ -1,6 +1,6 @@
 import {
   View,
-  TextInput,
+  TextInput as RNTextInput,
   TouchableOpacity,
   StyleSheet,
   TextInputProps,
@@ -22,7 +22,7 @@ type TextFieldProps = Omit<TextInputProps, 'value'> & {
   type?: 'number' | 'string';
 };
 
-export default function TextField({
+export default function TextInput({
   value,
   onChangeText,
   label,
@@ -53,7 +53,7 @@ export default function TextField({
           {label}
         </Typography>
       )}
-      <TextInput
+      <RNTextInput
         maxLength={20}
         value={formatNumber(value)}
         onChangeText={handleChangeText}

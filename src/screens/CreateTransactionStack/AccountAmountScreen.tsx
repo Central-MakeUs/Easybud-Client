@@ -1,10 +1,10 @@
 import {useMemo} from 'react';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
-import RightButton from 'components/CreateTransactionStack/RightButton';
-import LeftButton from 'components/CreateTransactionStack/LeftButton';
 import AmountTextField from 'components/@common/TextFields/AmountTextField';
-import Container from 'components/CreateTransactionStack/Container';
 import useAccount from 'hooks/useAccount';
+import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
+import RightButton from 'components/screens/CreateTransactionStack/RightButton';
+import Container from 'components/screens/CreateTransactionStack/Container';
 
 type AccountAmountScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountAmount'>;

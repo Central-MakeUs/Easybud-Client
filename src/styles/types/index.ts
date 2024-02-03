@@ -24,6 +24,8 @@ export type TypeOfPalette = Readonly<{
   green: string;
   pink: string;
   error: string;
+  red: string;
+  blue: string;
 }>;
 
 /** keyof styles */

@@ -1,5 +1,16 @@
 import {AccountTypeUnion, NewAccount} from 'types/account';
 
+export const formatToLocaleString = <T extends string | number>(
+  value: T,
+): string | undefined => {
+  if (typeof value === 'string') {
+    return Number(value).toLocaleString();
+  } else if (typeof value === 'number') {
+    return value.toLocaleString();
+  }
+  return;
+};
+
 /** 차변 여부 판단 */
 export function isDebit(type: AccountTypeUnion) {
   switch (type.name) {

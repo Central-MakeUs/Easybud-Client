@@ -1,10 +1,10 @@
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import DatePicker from 'components/@common/DatePicker';
 import InputForm from 'components/@common/InputForm';
-import LeftButton from 'components/CreateTransactionStack/LeftButton';
-import RightButton from 'components/CreateTransactionStack/RightButton';
-import Container from 'components/CreateTransactionStack/Container';
 import useTransaction from 'hooks/useTransaction';
+import Container from 'components/screens/CreateTransactionStack/Container';
+import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
+import RightButton from 'components/screens/CreateTransactionStack/RightButton';
 
 type BasicTransactionInfoScreenProps = {
   route: CreateTransactionStackRouteProp<'BasicTransactionInfo'>;

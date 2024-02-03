@@ -3,4 +3,7 @@ export type DebitCreditType = {
   amount: string;
 };
 
-export type TransactionCategoryType = 'profit' | 'cost' | 'account';
+export type RecentTransactionVariantType =
+  | 'EXPENSE_TRANSACTION'
+  | 'REVENUE_TRANSACTION'
+  | 'ACCOUNT_TRANSFER';

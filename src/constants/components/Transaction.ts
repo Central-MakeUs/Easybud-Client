@@ -1,5 +1,5 @@
 export const categoryList = {
-  profit: '수익',
-  cost: '비용',
-  account: '계정',
-} as const;
+  REVENUE_TRANSACTION: '수익',
+  EXPENSE_TRANSACTION: '비용',
+  ACCOUNT_TRANSFER: '계정',
+};

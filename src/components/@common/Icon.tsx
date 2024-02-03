@@ -10,11 +10,12 @@ import {KeyOfIcons} from 'types/components/Icon';
  * @param fill 아이콘 색
  * @param style 추가적인 style 속성
  */
-type IconProps = SvgProps & {
+type IconProps = Omit<SvgProps, 'onPress'> & {
   name: KeyOfIcons;
   size?: number | undefined;
   fill?: KeyOfPalette;
   style?: React.CSSProperties | Array<React.CSSProperties>;
+  onPress?: (...args: any[]) => void;
 };
 
 export default function Icon({

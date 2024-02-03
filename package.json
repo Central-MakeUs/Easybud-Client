@@ -43,7 +43,8 @@
     "react-native-screens": "^3.29.0",
     "react-native-svg": "13.10.0",
     "react-native-web": "^0.18.10",
-    "recoil": "^0.7.7"
+    "recoil": "^0.7.7",
+    "victory-native": "^36.8.2"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

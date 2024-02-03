@@ -1,8 +1,5 @@
 import {StyleSheet, View} from 'react-native';
-import {
-  DebitCreditType,
-  TransactionCategoryType,
-} from 'types/components/Transaction';
+import {DebitCreditEntity} from 'types/entities/ledger';
 import DebitCreditList from 'components/@common/Transaction/DebitCreditList';
 import TransactionSummary from 'components/@common/Transaction/TransactionSummary';
 
@@ -12,13 +9,17 @@ import TransactionSummary from 'components/@common/Transaction/TransactionSummar
  * @param date 날짜 (형식: 2023.02.21)
  * @param debitList 차변 리스트
  * @param creditList 대변 리스트
+ * @param showAll 거래 전체를 보여줄 것인지 요약만 보여줄 것인지 여부
+ * @param amount 최근 거래 내역에서 보여줄 금액
  */
 export type TransactionProps = {
-  category: TransactionCategoryType;
+  category: string;
   keyNote: string;
   date: string;
-  debitList: DebitCreditType[];
-  creditList: DebitCreditType[];
+  debitList: DebitCreditEntity[];
+  creditList: DebitCreditEntity[];
+  showAll?: boolean;
+  amount?: number;
 };
 
 export default function Transaction({
@@ -27,15 +28,28 @@ export default function Transaction({
   date,
   debitList,
   creditList,
+  showAll = true,
+  amount,
 }: TransactionProps) {
   return (
     <View style={transactionStyles.container}>
-      <TransactionSummary category={category} keyNote={keyNote} date={date} />
-      <DebitCreditList debitList={debitList} creditList={creditList} />
+      <TransactionSummary
+        category={category}
+        keyNote={keyNote}
+        date={date}
+        amount={amount}
+      />
+      {showAll && (
+        <DebitCreditList debitList={debitList} creditList={creditList} />
+      )}
     </View>
   );
 }
 
 const transactionStyles = StyleSheet.create({
-  container: {display: 'flex', flexDirection: 'column'},
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 15,
+  },
 });

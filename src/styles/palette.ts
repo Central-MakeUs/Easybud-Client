@@ -13,6 +13,8 @@ const commonPalette = {
   green: '#26A060',
   pink: '#E76587',
   error: '#F38686',
+  red: '#E24A59',
+  blue: '#3781EA',
 };
 
 export const lightPalette: TypeOfPalette = {

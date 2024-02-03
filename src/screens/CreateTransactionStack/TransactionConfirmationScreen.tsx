@@ -5,15 +5,15 @@ import {
   RootStackNavigationProp,
 } from 'navigators/types';
 import Button from 'components/@common/Buttons/Button';
-import Container from 'components/CreateTransactionStack/Container';
 import Typography from 'components/@common/Typography';
 import Icon from 'components/@common/Icon';
 import {getFormattedDate} from 'utils/formatDate';
-import UpdateButton from 'components/CreateTransactionStack/UpdateButton';
-import DebitCreditOverview from 'components/CreateTransactionStack/DebitCreditOverview';
 import {theme} from 'styles';
 import AccountDetails from 'screens/CreateTransactionStack/AccountDetails';
 import useTransaction from 'hooks/useTransaction';
+import DebitCreditOverview from 'components/screens/CreateTransactionStack/DebitCreditOverview';
+import UpdateButton from 'components/screens/CreateTransactionStack/UpdateButton';
+import Container from 'components/screens/CreateTransactionStack/Container';
 
 type TransactionConfirmationScreenProps = {
   navigation: RootStackNavigationProp;
