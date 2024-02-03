@@ -1,14 +1,14 @@
 import {StyleSheet, View} from 'react-native';
 import {TransactionListVariant} from 'types/screens/LedgerScreen';
+import {TransactionResponseDto} from 'types/dtos/ledger';
+import {DebitCreditEntity} from 'types/entities/ledger';
 import {formatDate} from 'utils/formatDate';
 import Transaction from 'components/@common/Transaction';
-import {TransactionResponseDto} from 'types/dtos/ledger';
 import Typography from 'components/@common/Typography';
 
 /**
  * @param transactionList 거래 데이터 배열
  * @param variant 최근 거래 리스트인지 기본 거래 리스트인지 여부
- * @param amount 최근 거래 리스트에서 보여줄 금액
  */
 export type TransactionListType = {
   transactionList: TransactionResponseDto[];
@@ -19,6 +19,14 @@ export default function TransactionList({
   transactionList,
   variant = 'default',
 }: TransactionListType) {
+  const getAmount = (debitAccounts: DebitCreditEntity[]) => {
+    let amount = 0;
+
+    debitAccounts.forEach(debitAccount => (amount += debitAccount.amount));
+
+    return amount;
+  };
+
   return (
     <View style={transactionListStyles.transactionContainer}>
       {transactionList.length ? (
@@ -29,9 +37,13 @@ export default function TransactionList({
             category={transactionData.type}
             keyNote={transactionData.summary}
             date={formatDate(transactionData.date)}
-            amount={transactionData.accounts[0].amount}
-            debitList={[]}
-            creditList={[]}
+            amount={
+              variant === 'recent'
+                ? getAmount(transactionData.debitAccounts)
+                : undefined
+            }
+            debitList={transactionData.debitAccounts}
+            creditList={transactionData.creditAccounts}
           />
         ))
       ) : (

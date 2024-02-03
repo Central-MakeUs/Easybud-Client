@@ -1,4 +1,5 @@
 import {StyleSheet, View} from 'react-native';
+import {formatToLocaleString} from 'utils/formatAmountValue';
 import Typography from 'components/@common/Typography';
 import {TransactionProps} from 'components/@common/Transaction';
 
@@ -16,15 +17,15 @@ export default function DebitCreditListItem({
 }: DebitCreditListItemProps) {
   return (
     <View style={debitCreditListItemStyles.debitCreditListContainer}>
-      {debitCreditList.map((debitCredit, index) => (
+      {debitCreditList?.map((debitCredit, index) => (
         <View
           key={index}
           style={debitCreditListItemStyles.debitCreditContainer}>
           <Typography type={'Body2Semibold'} color={'gray4'}>
-            {debitCredit.name}
+            {debitCredit.secondaryCategoryContent}
           </Typography>
           <Typography type={'Body2Semibold'} color={'gray6'}>
-            {debitCredit.amount}
+            {formatToLocaleString(debitCredit.amount)}원
           </Typography>
         </View>
       ))}

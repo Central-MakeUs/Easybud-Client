@@ -1,28 +1,36 @@
+import {StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useGetCardListDataQuery} from 'hooks/queries/SettingScreen/useGetCardListDataQuery';
+import CardItem from 'components/screens/SettingScreen/CardItem';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Button from 'components/@common/Buttons/Button';
-import CardItem from 'components/screens/SettingScreen/CardItem';
-import {StyleSheet} from 'react-native';
-
-const mockCardListData = [
-  {
-    name: '신한카드',
-    usagePeriod: '1일 ~ 말일',
-    paymentDate: '1일',
-    keyNote: '쿠팡',
-  },
-  {
-    name: '신한카드',
-    usagePeriod: '1일 ~ 말일',
-    paymentDate: '1일',
-    keyNote: '쿠팡',
-  },
-];
+import Typography from 'components/@common/Typography';
 
 export default function CardListScreen() {
+  const cardListData = useGetCardListDataQuery();
   const navigation = useNavigation();
 
   const handlePressAddCardButton = () => navigation.navigate('AddCard');
+
+  const getCardDataDate = (
+    startDate: number,
+    endDate: number,
+    paymentDate: number,
+  ) => {
+    const formatDateString = (date: number) => {
+      if (date === -1) {
+        return '말일';
+      } else {
+        return `${date}일`;
+      }
+    };
+
+    const startDateString = formatDateString(startDate);
+    const endDateString = formatDateString(endDate);
+    const paymentDateString = formatDateString(paymentDate);
+
+    return {startDateString, endDateString, paymentDateString};
+  };
 
   return (
     <ScreenContainer
@@ -30,14 +38,35 @@ export default function CardListScreen() {
         <Button onPress={handlePressAddCardButton}>카드 추가</Button>
       }
       contentContainerStyle={cardListScreenStyles.contentContainer}>
-      {mockCardListData.map(cardData => (
-        <CardItem
-          cardName={cardData.name}
-          usagePeriod={cardData.usagePeriod}
-          paymentDate={cardData.paymentDate}
-          keyNote={cardData.keyNote}
-        />
-      ))}
+      {cardListData.length ? (
+        cardListData.map(cardData => {
+          const formattedDates = getCardDataDate(
+            cardData.startDate,
+            cardData.endDate,
+            cardData.paymentDate,
+          );
+
+          return (
+            <CardItem
+              key={cardData.cardId}
+              cardId={cardData.cardId}
+              cardName={cardData.name}
+              usagePeriod={`${formattedDates.startDateString} ~ ${formattedDates.endDateString}`}
+              paymentDate={formattedDates.paymentDateString}
+              keyNote={cardData.summary}
+            />
+          );
+        })
+      ) : (
+        <View style={cardListScreenStyles.noCardTextContainer}>
+          <Typography type={'Body1Semibold'} color={'gray6'}>
+            등록된 카드가 없습니다.
+          </Typography>
+          <Typography type={'Body1Semibold'} color={'gray6'}>
+            카드 추가 후 다시 확인해주세요.
+          </Typography>
+        </View>
+      )}
     </ScreenContainer>
   );
 }
@@ -45,5 +74,13 @@ export default function CardListScreen() {
 const cardListScreenStyles = StyleSheet.create({
   contentContainer: {
     gap: 20,
+  },
+  noCardTextContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    gap: 15,
+    paddingTop: 30,
   },
 });

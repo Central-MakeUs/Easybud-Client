@@ -1,5 +1,7 @@
 import {useNavigation} from '@react-navigation/native';
+import {useCardMutation} from 'hooks/mutations/SettingScreen/useCardMutation';
 import Button from 'components/@common/Buttons/Button';
+import {parseDateFromString} from 'utils/parseDateFromString';
 
 /**
  * @param cardName 카드명
@@ -20,9 +22,24 @@ export default function CardSettingFixedButton({
   cardUsagePeriod,
   paymentDate,
 }: CardSettingFixedButtonProps) {
+  const {addCardMutation} = useCardMutation();
   const navigation = useNavigation();
 
   const handlePressSaveButton = () => {
+    const [startDate, endDate] = cardUsagePeriod
+      .split('~')
+      .map(date => date.trim());
+    const startDateData = parseDateFromString(startDate);
+    const endDateData = parseDateFromString(endDate);
+    const paymentDateData = parseDateFromString(paymentDate);
+
+    addCardMutation.mutate({
+      startDate: startDateData,
+      endDate: endDateData,
+      paymentDate: paymentDateData,
+      name: cardName,
+      summary: keyNoteText,
+    });
     navigation.navigate('CardList');
   };
 

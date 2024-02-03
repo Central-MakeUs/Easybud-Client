@@ -10,13 +10,29 @@ import MonthHeader from 'components/screens/TransactionScreen/MonthHeader';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import TransactionList from 'components/@common/TransactionList';
 
-export const dummyTransactionDatas: TransactionResponseDto[] = [
+const mockTransactionList: TransactionResponseDto[] = [
   {
     transactionId: 15,
-    date: '2024-01-31T14:30:11.086Z',
+    date: '2024-02-02T14:34:01.696Z',
     summary: '스타벅스',
     type: 'EXPENSE_TRANSACTION',
-    accounts: [
+    debitAccounts: [
+      {
+        accountId: 1,
+        accountType: {
+          typeName: 'ASSET',
+          typeState: 'INCREASE',
+        },
+        primaryCategoryId: 6,
+        primaryCategoryContent: '비용',
+        secondaryCategoryId: 18,
+        secondaryCategoryContent: '생활비',
+        tertiaryCategoryId: 47,
+        tertiaryCategoryContent: '카페/간식',
+        amount: 12000,
+      },
+    ],
+    creditAccounts: [
       {
         accountId: 1,
         accountType: {
@@ -35,10 +51,40 @@ export const dummyTransactionDatas: TransactionResponseDto[] = [
   },
   {
     transactionId: 15,
-    date: '2024-01-31T15:30:11.086Z',
+    date: '2024-02-02T14:34:01.696Z',
     summary: '스타벅스',
     type: 'EXPENSE_TRANSACTION',
-    accounts: [
+    debitAccounts: [
+      {
+        accountId: 1,
+        accountType: {
+          typeName: 'ASSET',
+          typeState: 'INCREASE',
+        },
+        primaryCategoryId: 6,
+        primaryCategoryContent: '비용',
+        secondaryCategoryId: 18,
+        secondaryCategoryContent: '생활비',
+        tertiaryCategoryId: 47,
+        tertiaryCategoryContent: '카페/간식',
+        amount: 12000,
+      },
+      {
+        accountId: 1,
+        accountType: {
+          typeName: 'ASSET',
+          typeState: 'INCREASE',
+        },
+        primaryCategoryId: 6,
+        primaryCategoryContent: '비용',
+        secondaryCategoryId: 18,
+        secondaryCategoryContent: '생활비',
+        tertiaryCategoryId: 47,
+        tertiaryCategoryContent: '카페/간식',
+        amount: 12000,
+      },
+    ],
+    creditAccounts: [
       {
         accountId: 1,
         accountType: {
@@ -57,10 +103,40 @@ export const dummyTransactionDatas: TransactionResponseDto[] = [
   },
   {
     transactionId: 15,
-    date: '2024-01-31T17:30:11.086Z',
+    date: '2024-02-02T14:34:01.696Z',
     summary: '스타벅스',
     type: 'EXPENSE_TRANSACTION',
-    accounts: [
+    debitAccounts: [
+      {
+        accountId: 1,
+        accountType: {
+          typeName: 'ASSET',
+          typeState: 'INCREASE',
+        },
+        primaryCategoryId: 6,
+        primaryCategoryContent: '비용',
+        secondaryCategoryId: 18,
+        secondaryCategoryContent: '생활비',
+        tertiaryCategoryId: 47,
+        tertiaryCategoryContent: '카페/간식',
+        amount: 12000,
+      },
+    ],
+    creditAccounts: [
+      {
+        accountId: 1,
+        accountType: {
+          typeName: 'ASSET',
+          typeState: 'INCREASE',
+        },
+        primaryCategoryId: 6,
+        primaryCategoryContent: '비용',
+        secondaryCategoryId: 18,
+        secondaryCategoryContent: '생활비',
+        tertiaryCategoryId: 47,
+        tertiaryCategoryContent: '카페/간식',
+        amount: 12000,
+      },
       {
         accountId: 1,
         accountType: {
@@ -95,7 +171,7 @@ export default function TransactionScreen() {
       <FinancialOverview />
       <FinancialCalendar currentDate={currentDate} />
       <View style={transactionScreenStyles.divider} />
-      <TransactionList transactionList={dummyTransactionDatas} />
+      <TransactionList transactionList={mockTransactionList} />
     </ScreenContainer>
   );
 }
