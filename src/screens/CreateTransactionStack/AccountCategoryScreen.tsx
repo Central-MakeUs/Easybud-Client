@@ -1,4 +1,4 @@
-import {useMemo} from 'react';
+import {useCallback, useMemo} from 'react';
 import {isEmpty} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import LeftButton from 'components/CreateTransactionStack/LeftButton';
@@ -32,9 +32,16 @@ export default function AccountCategoryScreen({
     account.category.tertiary,
   ]);
 
-  const handleChange = (label: keyof AccountCategory, category: string) => {
-    updateAccount('category', {...account.category, [label]: category});
-  };
+  const handleChange = useCallback(
+    (label: keyof AccountCategory, category: string) => {
+      updateAccount('category', {[label]: category});
+    },
+    [updateAccount],
+  );
+
+  if (!account) {
+    return null;
+  }
 
   return (
     <Container
