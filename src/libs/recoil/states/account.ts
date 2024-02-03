@@ -21,7 +21,9 @@ export const accountState = selectorFamily<NewAccount, number>({
       if (index === accounts.length) {
         accounts.push(initialAccount);
       } else if (index > accounts.length) {
-        throw new Error(`Index ${index} is out of bounds for accounts array.`);
+        throw new Error(
+          `Error: Index ${index} is out of bounds for accounts array.(get account state)`,
+        );
       }
 
       return accounts[index];
@@ -30,8 +32,7 @@ export const accountState = selectorFamily<NewAccount, number>({
     index =>
     ({get, set}, newAccount: NewAccount | DefaultValue) => {
       if (newAccount instanceof DefaultValue) {
-        console.error('instanceof DefaultValue', newAccount);
-        return;
+        throw new Error('Error: Not Account Type (instanceof DefaultValue)');
       }
 
       const {accounts: prevAccounts} = get(transactionState);
@@ -39,7 +40,7 @@ export const accountState = selectorFamily<NewAccount, number>({
 
       if (index > accounts.length) {
         throw new Error(
-          `Error: Index ${index} is out of bounds for accounts array.`,
+          `Error: Index ${index} is out of bounds for accounts array.(update account state)`,
         );
       }
 
