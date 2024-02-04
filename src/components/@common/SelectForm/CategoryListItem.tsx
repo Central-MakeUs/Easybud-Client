@@ -1,7 +1,11 @@
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from 'styles';
+import {AddCategoryText} from 'constants/components/SelectForm';
 import Typography from 'components/@common/Typography';
-import {SelectFormBottomSheetProps} from 'components/@common/SelectForm/SelectFormBottomSheet';
+import {
+  RenderBottomSheetChildrenParamsType,
+  SelectFormBottomSheetProps,
+} from 'components/@common/SelectForm/SelectFormBottomSheet';
 
 /**
  * @param categoryName 카테고리명
@@ -11,18 +15,25 @@ import {SelectFormBottomSheetProps} from 'components/@common/SelectForm/SelectFo
  */
 type CategoryListItemProps = {
   categoryName: string;
+  setInputState: RenderBottomSheetChildrenParamsType['setInputState'];
   setValue: SelectFormBottomSheetProps['setValue'];
   setIsBottomSheetOpen: SelectFormBottomSheetProps['setIsBottomSheetOpen'];
 };
 
 export default function CategoryListItem({
   categoryName,
+  setInputState,
   setValue,
   setIsBottomSheetOpen,
 }: CategoryListItemProps) {
   const handlePressCategoryItem = () => {
-    setIsBottomSheetOpen(false);
-    setValue(categoryName);
+    if (categoryName === AddCategoryText) {
+      setInputState(true);
+    } else {
+      setInputState(false);
+      setIsBottomSheetOpen(false);
+      setValue(categoryName);
+    }
   };
 
   return (
