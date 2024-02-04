@@ -37,8 +37,9 @@ export default function AmountTextField({
     if (balance === 0 || isEqual(amount, Math.abs(balance))) {
       return true;
     }
-    return isDebit(type) ? balance < 0 : balance > 0;
-  }, [amount, balance, type]);
+    // return isDebit(type) ? balance < 0 : balance > 0;
+    return false;
+  }, [amount, balance]);
 
   return (
     <>
@@ -52,7 +53,7 @@ export default function AmountTextField({
       {isButtonHidden ? null : (
         <UpdateButton
           disabled={disabled}
-          onPress={() => onChange(amount + Math.abs(balance))}>
+          onPress={() => onChange(Math.abs(balance))}>
           현재 대차: {formatNumber(balance)}원 입력
         </UpdateButton>
       )}
