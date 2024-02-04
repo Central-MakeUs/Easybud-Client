@@ -52,7 +52,7 @@ export default function AddCardScreen() {
       }>
       <CommonSelectItem
         label={'카드명'}
-        handlePressSelectItem={() => setBottomSheet(BottomSheetType.CardName)}
+        onPress={() => setBottomSheet(BottomSheetType.CardName)}
         value={card.cardName}
         placeholder="카드명을 입력해주세요"
         bottomSheet={
@@ -68,9 +68,7 @@ export default function AddCardScreen() {
       />
       <CommonSelectItem
         label={'사용 기간'}
-        handlePressSelectItem={() =>
-          setBottomSheet(BottomSheetType.CardUsagePeriod)
-        }
+        onPress={() => setBottomSheet(BottomSheetType.CardUsagePeriod)}
         value={card.cardUsagePeriod}
         placeholder={'사용 기간을 선택해주세요'}
         bottomSheet={
@@ -92,7 +90,7 @@ export default function AddCardScreen() {
       />
       <CommonSelectItem
         label={'결제일'}
-        handlePressSelectItem={() => setBottomSheet(BottomSheetType.Payment)}
+        onPress={() => setBottomSheet(BottomSheetType.Payment)}
         value={card.paymentDate}
         placeholder={'결제일을 선택해주세요'}
         bottomSheet={
@@ -115,7 +113,7 @@ export default function AddCardScreen() {
       />
       <CommonSelectItem
         label={'적요'}
-        handlePressSelectItem={() => setBottomSheet(BottomSheetType.KeyNote)}
+        onPress={() => setBottomSheet(BottomSheetType.KeyNote)}
         value={card.keyNoteText}
         placeholder={'적요를 입력해주세요'}
         bottomSheet={

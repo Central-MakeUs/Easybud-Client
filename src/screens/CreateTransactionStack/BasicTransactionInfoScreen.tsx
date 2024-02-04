@@ -46,7 +46,7 @@ export default function BasicTransactionInfoScreen({
       />
       <CommonSelectItem
         label={'적요'}
-        handlePressSelectItem={open}
+        onPress={open}
         value={updatedTransaction.summary ?? ''}
         placeholder="적요를 입력해주세요"
         bottomSheet={
