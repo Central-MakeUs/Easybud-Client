@@ -39,7 +39,8 @@ export default function ScreenContainer({
           styles.scrollViewContent,
           props?.style,
           props?.contentContainerStyle,
-        ]}>
+        ]}
+        keyboardShouldPersistTaps="handled">
         {loading ? (
           <View style={styles.loadingContainer}>
             <ActivityIndicator size="large" color={theme.palette.primary} />
@@ -49,7 +50,7 @@ export default function ScreenContainer({
         )}
       </ScrollView>
       {fixedBottomComponent && (
-        <View style={styles.fixBottomComponent}>{fixedBottomComponent}</View>
+        <View style={styles.fixedBottomComponent}>{fixedBottomComponent}</View>
       )}
     </KeyboardAvoidingView>
   );
@@ -59,21 +60,22 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: {flex: 1},
   scrollViewContent: {
     backgroundColor: theme.palette.gray1,
-    paddingTop: 5,
-    paddingBottom: 20,
+    paddingTop: 5, //
+    paddingBottom: 20, //
     paddingHorizontal: 20,
     flexGrow: 1,
+    gap: 10,
   },
   loadingContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  fixBottomComponent: {
+  fixedBottomComponent: {
     position: 'absolute',
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: 10,
     margin: 20,
     borderRadius: 12,
     alignItems: 'center',

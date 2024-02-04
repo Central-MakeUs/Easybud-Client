@@ -1,8 +1,5 @@
 import {FlatList, StyleSheet} from 'react-native';
-import {
-  RenderBottomSheetChildrenParamsType,
-  SelectFormBottomSheetProps,
-} from 'components/@common/SelectForm/SelectFormBottomSheet';
+import {SelectFormBottomSheetProps} from 'components/@common/SelectForm/SelectFormBottomSheet';
 import CategoryListItem from 'components/@common/SelectForm/CategoryListItem';
 
 /**
@@ -13,14 +10,12 @@ import CategoryListItem from 'components/@common/SelectForm/CategoryListItem';
  */
 export type CategoryListProps = {
   categoryList: SelectFormBottomSheetProps['categoryList'];
-  setInputState: RenderBottomSheetChildrenParamsType['setInputState'];
   setValue: SelectFormBottomSheetProps['setValue'];
   setIsBottomSheetOpen: SelectFormBottomSheetProps['setIsBottomSheetOpen'];
 };
 
 export default function CategoryList({
   categoryList,
-  setInputState,
   setValue,
   setIsBottomSheetOpen,
 }: CategoryListProps) {
@@ -30,7 +25,6 @@ export default function CategoryList({
       renderItem={({item}) => (
         <CategoryListItem
           categoryName={item}
-          setInputState={setInputState}
           setValue={setValue}
           setIsBottomSheetOpen={setIsBottomSheetOpen}
         />

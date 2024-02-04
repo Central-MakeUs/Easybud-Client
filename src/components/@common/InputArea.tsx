@@ -11,7 +11,7 @@ type TextAreaProps = {
   setText: Dispatch<SetStateAction<string>>;
 };
 
-export default function TextArea({
+export default function InputArea({
   placeholder = '적요를 작성하세요',
   setText,
 }: TextAreaProps) {

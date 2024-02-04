@@ -1,8 +1,8 @@
 import {Dispatch, SetStateAction, useEffect} from 'react';
 import {View, StyleSheet} from 'react-native';
-import BottomSheet from 'components/@common/BottomSheet';
-import TextArea from 'components/@common/TextArea';
 import Button from 'components/@common/Buttons/Button';
+import BottomSheet from 'components/@common/BottomSheet/BottomSheet';
+import InputArea from 'components/@common/InputArea';
 
 /**
  * @param isBottomSheetOpen bottomSheet의 open 여부
@@ -44,7 +44,7 @@ export default function InputBottomSheet({
       setIsBottomSheetOpen={setIsBottomSheetOpen}
       children={
         <View style={keyNoteStyles.bottomSheetContainer}>
-          <TextArea setText={setInputText} placeholder={placeholder} />
+          <InputArea setText={setInputText} placeholder={placeholder} />
           <Button
             disabled={!inputText.length}
             children={'작성 완료하기'}

@@ -1,7 +1,7 @@
 import {ReactNode, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from 'styles';
-import BottomSheet from 'components/@common/BottomSheet';
+import BottomSheet from 'components/@common/BottomSheet/GorhomBottomSheet';
 import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
 

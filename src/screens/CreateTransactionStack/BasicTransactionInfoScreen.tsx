@@ -1,31 +1,54 @@
-import {useNavigation} from '@react-navigation/native';
-import ScreenContainer from 'components/@common/ScreenContainer';
-import Typography from 'components/@common/Typography';
+import {useState} from 'react';
+import {CreateTransactionStackRouteProp} from 'navigators/types';
+import DatePicker from 'components/@common/DatePicker';
+import InputForm from 'components/@common/InputForm';
+import useTransaction from 'hooks/useTransaction';
+import Container from 'components/screens/CreateTransactionStack/Container';
 import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
 import RightButton from 'components/screens/CreateTransactionStack/RightButton';
+import {NewTransaction} from 'types/transaction';
 
-export default function BasicTransactionInfoScreen() {
-  const navigation = useNavigation();
+type BasicTransactionInfoScreenProps = {
+  route: CreateTransactionStackRouteProp<'BasicTransactionInfo'>;
+};
 
-  const handlePressNextButton = () => {
-    navigation.navigate('CreateTransactionStack', {
-      screen: 'DebitCreditDecider',
-    });
-  };
+/** 거래 추가 Step 1 */
+export default function BasicTransactionInfoScreen({
+  route: {params},
+}: BasicTransactionInfoScreenProps) {
+  const {transaction} = useTransaction();
 
-  const handlePressPrevButton = () => {
-    navigation.goBack();
-  };
+  const [updatedTransaction, setUpdatedTransaction] =
+    useState<NewTransaction>(transaction);
 
   return (
-    <ScreenContainer
+    <Container
+      screen="BasicTransactionInfo"
+      header={{title: '거래 정보를 입력해주세요'}}
       fixedBottomComponent={
         <>
-          <LeftButton onPress={handlePressPrevButton} />
-          <RightButton onPress={handlePressNextButton} />
+          {params?.isUpdateStep ? <LeftButton isUpdateStep /> : null}
+          <RightButton
+            nextScreen="AccountType"
+            isUpdateStep={params?.isUpdateStep}
+            accountIndex={0}
+            transaction={updatedTransaction}
+          />
         </>
       }>
-      <Typography>BasicTransactionInfoScreen</Typography>
-    </ScreenContainer>
+      <DatePicker
+        date={updatedTransaction.date}
+        updateDate={date => setUpdatedTransaction(prev => ({...prev, date}))}
+      />
+      <InputForm
+        label={'적요'}
+        value={updatedTransaction.summary ?? ''}
+        maxLength={15}
+        onChangeText={summary =>
+          setUpdatedTransaction(prev => ({...prev, summary}))
+        }
+        placeholder="적요를 작성하세요"
+      />
+    </Container>
   );
 }

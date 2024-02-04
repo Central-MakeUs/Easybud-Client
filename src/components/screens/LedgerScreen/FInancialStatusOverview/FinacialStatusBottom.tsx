@@ -9,7 +9,7 @@ type FinacialStatusBottomElementProps = {
   debtAmount: number;
 };
 
-export default function FinacialStatusBottomElement({
+export default function FinacialStatusBottom({
   networthAmount,
   assetAmount,
   debtAmount,

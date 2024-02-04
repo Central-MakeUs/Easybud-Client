@@ -1,9 +1,9 @@
 import RecentTransactionOverview from 'components/screens/LedgerScreen/RecentTransactionOverview';
 import AvailableFundsOverview from 'components/screens/LedgerScreen/AvailableFundsOverview';
-import FinancialStatusOverview from 'components/screens/LedgerScreen/FinancialStatusOverview';
 import IncomeStatusOverview from 'components/screens/LedgerScreen/IncomeStatusOverview';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Divider from 'components/@common/Divider';
+import FinancialStatusOverview from 'components/screens/LedgerScreen/FinancialStatusOverview';
 
 export default function LedgerScreen() {
   return (

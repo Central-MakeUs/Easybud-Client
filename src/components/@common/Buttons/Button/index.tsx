@@ -35,7 +35,8 @@ export default function Button({
   return (
     <TouchableOpacity
       {...props}
-      style={[props.style, buttonStyles.button, {backgroundColor}]}>
+      disabled={disabled}
+      style={[buttonStyles.button, props.style, {backgroundColor}]}>
       <Typography type={'Body1Semibold'} color={textColor}>
         {children}
       </Typography>
@@ -49,9 +50,8 @@ const buttonStyles = StyleSheet.create({
     minHeight: 56,
     maxHeight: 56,
     borderRadius: 12,
-    display: 'flex',
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 1,
   },
 });

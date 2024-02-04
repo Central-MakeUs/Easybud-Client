@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useGetFinancialStatusDataQuery} from 'hooks/queries/LedgerScreen/useGetFinancialStatusDataQuery';
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
-import FinancialStatusBottomElement from 'components/screens/LedgerScreen/FinancialStatusOverview/FinancialStatusBottomElement';
 import Tooltip from 'components/@common/Tooltip';
+import FinacialStatusBottom from 'components/screens/LedgerScreen/FinancialStatusOverview/FinacialStatusBottom';
 
 export default function FinancialStatusOverview() {
   const [showTooltipText, setShowTooltipText] = useState(false);
@@ -30,7 +30,7 @@ export default function FinancialStatusOverview() {
         </FinancialDataCardBase.TopElementContainer>
         <FinancialDataCardBase.BottomElement
           children={
-            <FinancialStatusBottomElement
+            <FinacialStatusBottom
               networthAmount={netAssets}
               assetAmount={totalAssets}
               debtAmount={totalLiabilities}

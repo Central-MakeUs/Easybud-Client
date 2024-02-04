@@ -49,6 +49,7 @@ export default function BottomSheet({
 
   return (
     <RBSheet
+      // known issue
       ref={bottomSheetRef}
       onOpen={handleOpenBottomSheet}
       onClose={handleCloseBottomSheet}

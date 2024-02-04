@@ -1,41 +1,55 @@
-import {useState} from 'react';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import {getFormattedDate} from 'utils/formatDate';
-import CommonSelectItem from 'components/@common/CommonSelectItem';
+import InputForm from 'components/@common/InputForm';
+import {useMemo, useState} from 'react';
 
-export default function DatePicker() {
-  const [formattedDate, setFormattedDate] = useState<string>(
-    getFormattedDate(new Date()),
+type DatePickerProps = {date: Date; updateDate: (date: Date) => void};
+
+export default function DatePicker({date, updateDate}: DatePickerProps) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
+
+  const dateInstance = useMemo(
+    () => (date instanceof Date ? date : new Date(date)),
+    [date],
   );
-  const [isDateTimePickerVisible, setIsDateTimePickerVisible] = useState(false);
 
-  const handlePressDateTimePicker = () => {
-    setIsDateTimePickerVisible(true);
-  };
-
-  const handleCancelDateTimePicker = () => {
-    setIsDateTimePickerVisible(false);
-  };
-
-  const handleConfirmDateTimePicker = (date: Date) => {
-    setIsDateTimePickerVisible(false);
-    setFormattedDate(getFormattedDate(date));
+  const handleConfirmDateTimePicker = (updatedDate: Date) => {
+    close();
+    updateDate(updatedDate);
   };
 
   return (
-    <CommonSelectItem
-      label={'날짜'}
-      handlePressSelectItem={handlePressDateTimePicker}
-      value={formattedDate}
-      placeholder="날짜를 선택하세요"
-      bottomSheet={
-        <DateTimePickerModal
-          isVisible={isDateTimePickerVisible}
-          mode="date"
-          onConfirm={handleConfirmDateTimePicker}
-          onCancel={handleCancelDateTimePicker}
-        />
-      }
-    />
+    <>
+      <InputForm
+        onPress={open}
+        label={'날짜'}
+        value={getFormattedDate(date)}
+        placeholder={'날짜를 선택하세요'}
+      />
+      <DateTimePickerModal
+        isVisible={isOpen}
+        mode="date"
+        date={dateInstance}
+        onConfirm={handleConfirmDateTimePicker}
+        onCancel={close}
+      />
+    </>
+    // <CommonSelectItem
+    //   label={'날짜'}
+    //   handlePressSelectItem={handlePressDateTimePicker}
+    //   value={formattedDate}
+    //   placeholder="날짜를 선택하세요"
+    //   bottomSheet={
+    //     <DateTimePickerModal
+    //       isVisible={isDateTimePickerVisible}
+    //       mode="date"
+    //       onConfirm={handleConfirmDateTimePicker}
+    //       onCancel={handleCancelDateTimePicker}
+    //     />
+    //   }
+    // />
   );
 }

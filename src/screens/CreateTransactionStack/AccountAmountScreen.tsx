@@ -1,31 +1,52 @@
-import {useNavigation} from '@react-navigation/native';
-import ScreenContainer from 'components/@common/ScreenContainer';
-import Typography from 'components/@common/Typography';
+import {useMemo, useState} from 'react';
+import {CreateTransactionStackRouteProp} from 'navigators/types';
+import AmountTextField from 'components/@common/TextFields/AmountTextField';
+import useAccount from 'hooks/useAccount';
 import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
 import RightButton from 'components/screens/CreateTransactionStack/RightButton';
+import Container from 'components/screens/CreateTransactionStack/Container';
+import {NewAccount} from 'types/account';
 
-export default function AccountAmountScreen() {
-  const navigation = useNavigation();
+type AccountAmountScreenProps = {
+  route: CreateTransactionStackRouteProp<'AccountAmount'>;
+};
 
-  const handlePressNextButton = () => {
-    navigation.navigate('CreateTransactionStack', {
-      screen: 'TransactionConfirmation',
-    });
-  };
+/** 거래 추가 Step 4 */
+export default function AccountAmountScreen({
+  route: {params},
+}: AccountAmountScreenProps) {
+  const {isUpdateStep, accountIndex} = params;
+  const {account, balance} = useAccount({accountIndex});
 
-  const handlePressPrevButton = () => {
-    navigation.goBack();
-  };
+  const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
+
+  const disabled = useMemo(
+    () => updatedAccount.amount === 0,
+    [updatedAccount.amount],
+  );
 
   return (
-    <ScreenContainer
+    <Container
+      screen="AccountAmount"
+      accountIndex={accountIndex}
+      header={{title: '금액을 입력해주세요'}}
       fixedBottomComponent={
         <>
-          <LeftButton onPress={handlePressPrevButton} />
-          <RightButton onPress={handlePressNextButton} />
+          <LeftButton isUpdateStep={isUpdateStep} />
+          <RightButton
+            account={updatedAccount}
+            disabled={disabled}
+            nextScreen="TransactionConfirmation"
+            isUpdateStep={isUpdateStep}
+            accountIndex={accountIndex}
+          />
         </>
       }>
-      <Typography>AccountAmountScreen</Typography>
-    </ScreenContainer>
+      <AmountTextField
+        balance={balance}
+        account={updatedAccount}
+        onChange={amount => setUpdatedAccount(prev => ({...prev, amount}))}
+      />
+    </Container>
   );
 }

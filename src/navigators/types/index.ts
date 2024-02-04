@@ -7,7 +7,6 @@ import {
   NativeStackNavigationProp,
   NativeStackScreenProps,
 } from '@react-navigation/native-stack';
-import {NewTransaction} from 'types/transaction';
 
 /** param list */
 
@@ -26,20 +25,32 @@ export type TabParamList = {
   NavigateCreateTransaction: undefined;
 };
 
-type Params = {transaction: NewTransaction; prevScreen?: string} | undefined;
+// only navigate this screen
+type Update = {
+  isUpdateStep: true;
+  accountIndex: number;
+};
+
+// navigate step by step
+type Create = {
+  isUpdateStep?: false | undefined;
+  accountIndex: number;
+};
+
 export type CreateTransactionStackParamList = {
-  BasicTransactionInfo: Params;
-  DebitCreditDecider: Params;
-  AccountType: Params;
-  AccountAmount: Params;
-  TransactionConfirmation: Params;
+  BasicTransactionInfo: undefined | {isUpdateStep: true};
+  AccountType: Create | Update;
+  AccountCategory: Create | Update;
+  AccountAmount: Create | Update;
+  TransactionConfirmation: undefined;
 };
 
 /** screen name */
 
 export type TabScreenName = keyof TabParamList;
 type RootStackScreenName = keyof RootStackParamList;
-type CreateTransactionStackScreenName = keyof CreateTransactionStackParamList;
+export type CreateTransactionStackScreenName =
+  keyof CreateTransactionStackParamList;
 
 /** route props */
 

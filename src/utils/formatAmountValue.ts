@@ -1,3 +1,5 @@
+import {AccountTypeUnion, NewAccount} from 'types/account';
+
 export const formatToLocaleString = <T extends string | number>(
   value: T,
 ): string | undefined => {
@@ -9,14 +11,44 @@ export const formatToLocaleString = <T extends string | number>(
   return;
 };
 
-export const parseNumberFromString = (value: string) => {
-  return value.replace(/[^0-9]/g, '');
-};
+/** 차변 여부 판단 */
+export function isDebit(type: AccountTypeUnion) {
+  switch (type.name) {
+    case '자산':
+      return type.change === '증가';
+    case '부채':
+    case '자본':
+      return type.change === '감소';
+    case '수익':
+      return false;
+    case '비용':
+      return true;
+  }
+}
 
-export const formatValue = (value?: string): string => {
-  if (!value) return '0원';
+export function formatNumber(amount: string | number): string {
+  return amount
+    .toString()
+    .replace(/,/g, '')
+    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
 
-  const formattedValue = formatToLocaleString(parseNumberFromString(value));
+export function extractNumbers(str: string) {
+  return str.replace(/[^0-9]/g, '');
+}
 
-  return `${formattedValue}원`;
-};
+export function calculateBalance(
+  accounts: NewAccount[],
+  accountIndex?: number | undefined,
+): number {
+  let totalDebit = 0;
+  let totalCredit = 0;
+
+  accounts.forEach(({type, amount}, index) => {
+    if (!accountIndex || index !== accountIndex) {
+      isDebit(type) ? (totalDebit += amount) : (totalCredit += amount);
+    }
+  });
+
+  return totalDebit - totalCredit;
+}

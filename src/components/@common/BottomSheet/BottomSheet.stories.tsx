@@ -1,19 +1,15 @@
 import {ComponentStory} from '@storybook/react';
-import BottomSheet from 'components/@common/BottomSheet';
+import CommonBottomSheet from 'components/@common/BottomSheet/GorhomBottomSheet';
 
 const meta = {
   title: 'components/BottomSheet',
-  component: BottomSheet,
+  component: CommonBottomSheet,
 };
 
 export default meta;
 
-type Story = ComponentStory<typeof BottomSheet>;
+type Story = ComponentStory<typeof CommonBottomSheet>;
 
-const Template: Story = args => <BottomSheet {...args} />;
+const Template: Story = args => <CommonBottomSheet {...args} />;
 
 export const DefaultBottomSheet = Template.bind({});
-DefaultBottomSheet.args = {
-  isBottomSheetOpen: true,
-  setIsBottomSheetOpen: () => {},
-};
