@@ -14,6 +14,7 @@ import useTransaction from 'hooks/useTransaction';
 import DebitCreditOverview from 'components/screens/CreateTransactionStack/DebitCreditOverview';
 import UpdateButton from 'components/screens/CreateTransactionStack/UpdateButton';
 import Container from 'components/screens/CreateTransactionStack/Container';
+import {isEmpty} from 'lodash';
 
 type TransactionConfirmationScreenProps = {
   navigation: RootStackNavigationProp;
@@ -53,6 +54,20 @@ export default function TransactionConfirmationScreen({
     }
   };
 
+  const basicInfoLabel = useMemo(() => {
+    const date = getFormattedDate(transaction.date);
+    if (!transaction.summary || isEmpty(transaction.summary)) {
+      return date;
+    }
+
+    const summary =
+      transaction.summary?.length > 10
+        ? `${transaction.summary?.slice(0, 10)}...`
+        : transaction.summary;
+
+    return `${summary} ${date}`;
+  }, [transaction.date, transaction.summary]);
+
   const disabledSubmit = useMemo(() => balance !== 0, [balance]);
 
   return (
@@ -84,10 +99,7 @@ export default function TransactionConfirmationScreen({
               navigateUpdateScreen({screen: 'BasicTransactionInfo'})
             }
             endIcon={<Icon color="gray5" name="Pencil" size={12} />}>
-            {(transaction.summary ?? '')?.length > 10
-              ? `${transaction.summary?.slice(0, 10)}...`
-              : transaction.summary}{' '}
-            {getFormattedDate(transaction.date)}
+            {basicInfoLabel}
           </UpdateButton>
         </View>
         <DebitCreditOverview accounts={accounts} />
