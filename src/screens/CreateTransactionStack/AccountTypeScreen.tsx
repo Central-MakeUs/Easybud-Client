@@ -1,13 +1,14 @@
 import {StyleSheet, View} from 'react-native';
 import {isEqual} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
-import {AccountTypeUnion} from 'types/account';
+import {AccountTypeUnion, NewAccount} from 'types/account';
 
 import Button from 'components/@common/Buttons/Button';
 import useAccount from 'hooks/useAccount';
 import Container from 'components/screens/CreateTransactionStack/Container';
 import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
 import RightButton from 'components/screens/CreateTransactionStack/RightButton';
+import {useState} from 'react';
 
 const accountTypes: AccountTypeUnion[] = [
   {name: '자산', change: '증가'}, // 차변
@@ -29,7 +30,10 @@ export default function AccountTypeScreen({
   route: {params},
 }: AccountTypeScreenProps) {
   const {isUpdateStep, accountIndex} = params;
-  const {account, updateAccount} = useAccount({accountIndex});
+
+  const {account} = useAccount({accountIndex});
+
+  const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
 
   return (
     <Container
@@ -40,6 +44,7 @@ export default function AccountTypeScreen({
         <>
           <LeftButton isUpdateStep={isUpdateStep} />
           <RightButton
+            account={updatedAccount}
             nextScreen="AccountCategory"
             isUpdateStep={isUpdateStep}
             accountIndex={accountIndex}
@@ -51,9 +56,9 @@ export default function AccountTypeScreen({
           <Button
             style={styles.item}
             key={`${type.name} ${type.change}`}
-            onPress={() => updateAccount('type', type)}
+            onPress={() => setUpdatedAccount(prev => ({...prev, type}))}
             variant={
-              isEqual(account.type, type) ? 'primary' : 'secondary'
+              isEqual(updatedAccount.type, type) ? 'primary' : 'secondary'
             }>{`${type.name} ${type.change}`}</Button>
         ))}
       </View>

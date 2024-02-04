@@ -1,10 +1,11 @@
-import {useMemo} from 'react';
+import {useMemo, useState} from 'react';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import AmountTextField from 'components/@common/TextFields/AmountTextField';
 import useAccount from 'hooks/useAccount';
 import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
 import RightButton from 'components/screens/CreateTransactionStack/RightButton';
 import Container from 'components/screens/CreateTransactionStack/Container';
+import {NewAccount} from 'types/account';
 
 type AccountAmountScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountAmount'>;
@@ -15,13 +16,14 @@ export default function AccountAmountScreen({
   route: {params},
 }: AccountAmountScreenProps) {
   const {isUpdateStep, accountIndex} = params;
-  const {account, balance, updateAccount} = useAccount({accountIndex});
+  const {account, balance} = useAccount({accountIndex});
 
-  const disabled = useMemo(() => account.amount === 0, [account.amount]);
+  const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
 
-  if (!account) {
-    return null;
-  }
+  const disabled = useMemo(
+    () => updatedAccount.amount === 0,
+    [updatedAccount.amount],
+  );
 
   return (
     <Container
@@ -32,6 +34,7 @@ export default function AccountAmountScreen({
         <>
           <LeftButton isUpdateStep={isUpdateStep} />
           <RightButton
+            account={updatedAccount}
             disabled={disabled}
             nextScreen="TransactionConfirmation"
             isUpdateStep={isUpdateStep}
@@ -41,8 +44,8 @@ export default function AccountAmountScreen({
       }>
       <AmountTextField
         balance={balance}
-        account={account}
-        onChange={amount => updateAccount('amount', amount)}
+        account={updatedAccount}
+        onChange={amount => setUpdatedAccount(prev => ({...prev, amount}))}
       />
     </Container>
   );

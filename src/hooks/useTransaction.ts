@@ -2,7 +2,6 @@ import {transactionState} from 'libs/recoil/states/transaction';
 import {cloneDeep, pullAt} from 'lodash';
 import {useCallback, useMemo} from 'react';
 import {useRecoilState, useResetRecoilState} from 'recoil';
-import {NewTransaction} from 'types/transaction';
 import {calculateBalance} from 'utils/formatAmountValue';
 
 export default function useTransaction() {
@@ -11,9 +10,6 @@ export default function useTransaction() {
   const balance = useMemo(() => calculateBalance(accounts), [accounts]);
 
   const clearTransaction = useResetRecoilState(transactionState);
-
-  const updateTransaction = (key: keyof NewTransaction, value: Date | string) =>
-    setTransaction(prev => ({...prev, [key]: value}));
 
   const deleteAccount = useCallback(
     (index: number) => {
@@ -36,8 +32,8 @@ export default function useTransaction() {
   return {
     balance,
     transaction,
+    updateTransaction: setTransaction,
     accounts,
-    updateTransaction,
     deleteAccount,
     clearTransaction,
   };

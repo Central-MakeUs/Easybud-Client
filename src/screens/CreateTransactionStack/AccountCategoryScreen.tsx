@@ -1,7 +1,7 @@
-import {useCallback, useMemo} from 'react';
+import {useCallback, useMemo, useState} from 'react';
 import {isEmpty} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
-import {AccountCategory} from 'types/account';
+import {AccountCategory, NewAccount} from 'types/account';
 import SelectForm from 'components/@common/SelectForm';
 import {CategoryName} from 'constants/components/SelectForm';
 import Container from 'components/screens/CreateTransactionStack/Container';
@@ -18,30 +18,32 @@ export default function AccountCategoryScreen({
   route: {params},
 }: AccountCategoryScreenProps) {
   const {isUpdateStep, accountIndex} = params;
-  const {account, updateAccount} = useAccount({accountIndex});
+
+  const {account} = useAccount({accountIndex});
+
+  const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
 
   const disabled = useMemo(() => {
     return (
-      isEmpty(account.category.primary) ||
-      isEmpty(account.category.secondary) ||
-      isEmpty(account.category.tertiary)
+      isEmpty(updatedAccount.category.primary) ||
+      isEmpty(updatedAccount.category.secondary) ||
+      isEmpty(updatedAccount.category.tertiary)
     );
   }, [
-    account.category.primary,
-    account.category.secondary,
-    account.category.tertiary,
+    updatedAccount.category.primary,
+    updatedAccount.category.secondary,
+    updatedAccount.category.tertiary,
   ]);
 
   const handleChange = useCallback(
-    (label: keyof AccountCategory, category: string) => {
-      updateAccount('category', {[label]: category});
+    (key: keyof AccountCategory, category: string) => {
+      setUpdatedAccount(prev => ({
+        ...prev,
+        category: {...prev.category, [key]: category},
+      }));
     },
-    [updateAccount],
+    [],
   );
-
-  if (!account) {
-    return null;
-  }
 
   return (
     <Container
@@ -52,6 +54,7 @@ export default function AccountCategoryScreen({
         <>
           <LeftButton isUpdateStep={isUpdateStep} />
           <RightButton
+            account={updatedAccount}
             disabled={disabled}
             nextScreen="AccountAmount"
             isUpdateStep={isUpdateStep}
@@ -60,19 +63,19 @@ export default function AccountCategoryScreen({
         </>
       }>
       <SelectForm
-        value={account.category.primary}
+        value={updatedAccount.category.primary}
         label={CategoryName.primary}
         items={dummyCategories}
         onSelect={category => handleChange('primary', category)}
       />
       <SelectForm
-        value={account.category.secondary}
+        value={updatedAccount.category.secondary}
         label={CategoryName.secondary}
         items={dummyCategories}
         onSelect={category => handleChange('secondary', category)}
       />
       <SelectForm
-        value={account.category.tertiary}
+        value={updatedAccount.category.tertiary}
         label={CategoryName.tertiary}
         items={dummyCategories}
         onSelect={category => handleChange('tertiary', category)}

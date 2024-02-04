@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import DatePicker from 'components/@common/DatePicker';
 import InputForm from 'components/@common/InputForm';
@@ -5,6 +6,7 @@ import useTransaction from 'hooks/useTransaction';
 import Container from 'components/screens/CreateTransactionStack/Container';
 import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
 import RightButton from 'components/screens/CreateTransactionStack/RightButton';
+import {NewTransaction} from 'types/transaction';
 
 type BasicTransactionInfoScreenProps = {
   route: CreateTransactionStackRouteProp<'BasicTransactionInfo'>;
@@ -14,7 +16,10 @@ type BasicTransactionInfoScreenProps = {
 export default function BasicTransactionInfoScreen({
   route: {params},
 }: BasicTransactionInfoScreenProps) {
-  const {transaction, updateTransaction} = useTransaction();
+  const {transaction} = useTransaction();
+
+  const [updatedTransaction, setUpdatedTransaction] =
+    useState<NewTransaction>(transaction);
 
   return (
     <Container
@@ -27,18 +32,21 @@ export default function BasicTransactionInfoScreen({
             nextScreen="AccountType"
             isUpdateStep={params?.isUpdateStep}
             accountIndex={0}
+            transaction={updatedTransaction}
           />
         </>
       }>
       <DatePicker
-        date={transaction.date}
-        updateDate={date => updateTransaction('date', date)}
+        date={updatedTransaction.date}
+        updateDate={date => setUpdatedTransaction(prev => ({...prev, date}))}
       />
       <InputForm
         label={'적요'}
-        value={transaction.summary ?? ''}
+        value={updatedTransaction.summary ?? ''}
         maxLength={15}
-        onChangeText={summary => updateTransaction('summary', summary)}
+        onChangeText={summary =>
+          setUpdatedTransaction(prev => ({...prev, summary}))
+        }
         placeholder="적요를 작성하세요"
       />
     </Container>
