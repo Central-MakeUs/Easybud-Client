@@ -61,6 +61,7 @@ export default function TextInput({
         onFocus={handleFocus}
         onBlur={handleBlur}
         underlineColorAndroid="transparent"
+        style={{color: theme.palette.black}}
         {...props}
       />
       <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
