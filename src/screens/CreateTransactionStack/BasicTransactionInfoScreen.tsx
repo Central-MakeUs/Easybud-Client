@@ -1,12 +1,13 @@
 import {useState} from 'react';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import DatePicker from 'components/@common/DatePicker';
-import InputForm from 'components/@common/InputForm';
 import useTransaction from 'hooks/useTransaction';
 import Container from 'components/screens/CreateTransactionStack/Container';
 import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
 import RightButton from 'components/screens/CreateTransactionStack/RightButton';
 import {NewTransaction} from 'types/transaction';
+import InputBottomSheet from 'components/@common/InputBottomSheet';
+import CommonSelectItem from 'components/@common/CommonSelectItem';
 
 type BasicTransactionInfoScreenProps = {
   route: CreateTransactionStackRouteProp<'BasicTransactionInfo'>;
@@ -17,6 +18,9 @@ export default function BasicTransactionInfoScreen({
   route: {params},
 }: BasicTransactionInfoScreenProps) {
   const {transaction} = useTransaction();
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const open = () => setIsOpen(true);
+  const close = () => setIsOpen(false);
 
   const [updatedTransaction, setUpdatedTransaction] =
     useState<NewTransaction>(transaction);
@@ -40,14 +44,23 @@ export default function BasicTransactionInfoScreen({
         date={updatedTransaction.date}
         updateDate={date => setUpdatedTransaction(prev => ({...prev, date}))}
       />
-      <InputForm
+      <CommonSelectItem
         label={'적요'}
+        handlePressSelectItem={open}
         value={updatedTransaction.summary ?? ''}
-        maxLength={15}
-        onChangeText={summary =>
-          setUpdatedTransaction(prev => ({...prev, summary}))
+        placeholder="적요를 입력해주세요"
+        bottomSheet={
+          <InputBottomSheet
+            text={updatedTransaction.summary ?? ''}
+            isOpen={isOpen}
+            onOpen={open}
+            onClose={close}
+            placeholder="적요를 입력해주세요"
+            setText={summary =>
+              setUpdatedTransaction(prev => ({...prev, summary}))
+            }
+          />
         }
-        placeholder="적요를 작성하세요"
       />
     </Container>
   );

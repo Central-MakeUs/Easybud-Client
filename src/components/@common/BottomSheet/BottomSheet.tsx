@@ -1,33 +1,36 @@
-import {Dispatch, ReactNode, SetStateAction, useEffect, useRef} from 'react';
+import {
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  useEffect,
+  useRef,
+} from 'react';
 import {StyleSheet} from 'react-native';
-import {SetterOrUpdater} from 'recoil';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {theme} from 'styles';
 
 /**
  * @param isBottomSheetOpen bottomSheet의 open 여부
- * @param setIsBottomSheetOpen bottomSheet의 open 여부를 변경하는 함수
  * @param setInputState input 상태를 변경하는 함수
  * @param height bottomSheet의 높이
  * @param children bottomSheet 내부에 들어갈 content
  */
 type BottomSheetProps = {
   isBottomSheetOpen: boolean;
-  setIsBottomSheetOpen:
-    | Dispatch<SetStateAction<boolean>>
-    | SetterOrUpdater<boolean>;
+  onOpen: () => void;
+  onClose: () => void;
   setInputState?: Dispatch<SetStateAction<boolean>>;
   height?: number;
-  children: ReactNode;
 };
 
 export default function BottomSheet({
   isBottomSheetOpen,
-  setIsBottomSheetOpen,
+  onOpen,
+  onClose,
   setInputState,
   height,
   children,
-}: BottomSheetProps) {
+}: PropsWithChildren<BottomSheetProps>) {
   const bottomSheetRef = useRef<RBSheet>(null);
 
   useEffect(() => {
@@ -39,11 +42,11 @@ export default function BottomSheet({
   }, [isBottomSheetOpen]);
 
   const handleOpenBottomSheet = () => {
-    setIsBottomSheetOpen(true);
+    onOpen();
   };
 
   const handleCloseBottomSheet = () => {
-    setIsBottomSheetOpen(false);
+    onClose();
     setInputState?.(false);
   };
 

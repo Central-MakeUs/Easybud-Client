@@ -1,12 +1,5 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import {Dispatch, SetStateAction, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
 import {theme} from 'styles';
 import {AddCategoryText} from 'constants/components/SelectForm';
 import Typography from 'components/@common/Typography';
@@ -27,10 +20,12 @@ import BottomSheet from 'components/@common/BottomSheet/BottomSheet';
 export type SelectFormBottomSheetProps = {
   label: SelectFormProps['label'];
   categoryList: string[];
-  setCategoryList: Dispatch<SetStateAction<string[]>>;
+  setCategoryList: (list: string[]) => void;
+  onOpen: () => void;
+  onClose: () => void;
   isBottomSheetOpen: boolean;
   setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
-  setValue: Dispatch<SetStateAction<string>>;
+  setValue: (text: string) => void;
 };
 
 export default function SelectFormBottomSheet({
@@ -38,21 +33,13 @@ export default function SelectFormBottomSheet({
   categoryList,
   setCategoryList,
   isBottomSheetOpen,
+  onOpen,
+  onClose,
   setIsBottomSheetOpen,
   setValue,
 }: SelectFormBottomSheetProps) {
   const [inputState, setInputState] = useState(false);
   const [inputText, setInputText] = useState('');
-
-  useEffect(() => {
-    setInputText('');
-  }, [isBottomSheetOpen]);
-
-  useFocusEffect(
-    useCallback(() => {
-      setValue('');
-    }, [setValue]),
-  );
 
   const calculateBottomSheetHeight = () =>
     categoryList.length >= 4 ? 270 : 200;
@@ -60,10 +47,11 @@ export default function SelectFormBottomSheet({
   return (
     <BottomSheet
       isBottomSheetOpen={isBottomSheetOpen}
-      setIsBottomSheetOpen={setIsBottomSheetOpen}
+      onClose={onClose}
+      onOpen={onOpen}
       height={calculateBottomSheetHeight()}
-      setInputState={setInputState}
-      children={renderBottomSheetChildren({
+      setInputState={setInputState}>
+      {renderBottomSheetChildren({
         label,
         categoryList,
         inputState,
@@ -74,21 +62,23 @@ export default function SelectFormBottomSheet({
         setCategoryList,
         setIsBottomSheetOpen,
       })}
-    />
+    </BottomSheet>
   );
 }
 
 export type RenderBottomSheetChildrenParamsType = {
-  label: string;
-  categoryList: SelectFormBottomSheetProps['categoryList'];
   inputState: boolean;
   inputText: string;
-  setValue: SelectFormBottomSheetProps['setValue'];
-  setInputState: Dispatch<SetStateAction<boolean>>;
   setInputText: Dispatch<SetStateAction<string>>;
-  setCategoryList: SelectFormBottomSheetProps['setCategoryList'];
-  setIsBottomSheetOpen: SelectFormBottomSheetProps['setIsBottomSheetOpen'];
-};
+  setInputState: Dispatch<SetStateAction<boolean>>;
+} & Pick<
+  SelectFormBottomSheetProps,
+  | 'label'
+  | 'setValue'
+  | 'categoryList'
+  | 'setCategoryList'
+  | 'setIsBottomSheetOpen'
+>;
 
 function renderBottomSheetChildren({
   label,
@@ -103,8 +93,8 @@ function renderBottomSheetChildren({
 }: RenderBottomSheetChildrenParamsType) {
   const handlePressAddCategoryButton = () => {
     if (inputText.length) {
-      setCategoryList(prevCategoryList => [
-        ...prevCategoryList.slice(0, -1),
+      setCategoryList([
+        ...categoryList.slice(0, -1),
         inputText,
         AddCategoryText,
       ]);
