@@ -3,6 +3,7 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from 'styles';
 import Typography from 'components/@common/Typography';
 import {ThemeVariants} from 'constants/components/CommonSelectItem';
+import {TouchableOpacityProps} from 'react-native';
 
 /**
  * @param label label 텍스트
@@ -15,19 +16,18 @@ import {ThemeVariants} from 'constants/components/CommonSelectItem';
 type CommonSelectButtonProps = {
   label: string;
   variant?: 'primary' | 'gray';
-  handlePressSelectItem: () => void;
   value: string;
   placeholder?: string;
   bottomSheet: ReactNode;
-};
+} & TouchableOpacityProps;
 
 export default function CommonSelectItem({
   label,
   variant = 'gray',
-  handlePressSelectItem,
   value,
   placeholder,
   bottomSheet,
+  ...props
 }: CommonSelectButtonProps) {
   const {
     backgroundColor,
@@ -39,14 +39,22 @@ export default function CommonSelectItem({
   return (
     <>
       <TouchableOpacity
-        onPress={handlePressSelectItem}
+        {...props}
         style={[selectFormStyles.container, {backgroundColor}]}>
-        <Typography type={'Body1Semibold'} color={labelTextColor}>
+        <Typography
+          type={'Body1Semibold'}
+          color={props.disabled ? 'gray4' : labelTextColor}>
           {label}
         </Typography>
         <Typography
           type={'Body1Semibold'}
-          color={value ? valueTextColor : placeholderTextColor}>
+          color={
+            value
+              ? valueTextColor
+              : props.disabled
+                ? 'gray3'
+                : placeholderTextColor
+          }>
           {value || placeholder}
         </Typography>
       </TouchableOpacity>

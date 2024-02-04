@@ -13,6 +13,8 @@ import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
 import Icon from 'components/@common/Icon';
 import AddCardScreen from 'screens/SettingScreen/AddCardScreen';
 import CardListScreen from 'screens/SettingScreen/CardListScreen';
+import {useNavigation} from '@react-navigation/native';
+import useTransaction from 'hooks/useTransaction';
 
 export const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -80,17 +82,11 @@ export default function RootStackNavigator() {
 
 const screenOptions: (props: {
   navigation: RootStackNavigationProp;
-}) => NativeStackNavigationOptions = ({navigation}) => ({
+}) => NativeStackNavigationOptions = () => ({
   headerShown: false,
   headerShadowVisible: false,
   headerBackTitleVisible: false,
-  headerLeft: props => (
-    <TouchableOpacity
-      {...props}
-      onPress={() => (navigation.canGoBack() ? navigation.goBack() : null)}>
-      <Icon name="X" />
-    </TouchableOpacity>
-  ),
+  headerLeft: () => <CloseButton />,
   headerStyle: {
     height: 50,
     borderWidth: 1,
@@ -101,3 +97,19 @@ const screenOptions: (props: {
   },
   headerTitleAlign: 'center',
 });
+
+const CloseButton = () => {
+  const navigation = useNavigation();
+
+  const {clearTransaction} = useTransaction();
+
+  return (
+    <TouchableOpacity
+      onPress={() => {
+        clearTransaction();
+        navigation.navigate('Tab', {screen: 'Ledger'});
+      }}>
+      <Icon name="X" />
+    </TouchableOpacity>
+  );
+};

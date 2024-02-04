@@ -8,6 +8,7 @@ import {
   View,
   ScrollViewProps,
 } from 'react-native';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {theme} from 'styles';
 
 /**
@@ -30,29 +31,32 @@ export default function ScreenContainer({
   ...props
 }: ScreenContainerProps) {
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      style={styles.keyboardAvoidingView}>
-      <ScrollView
-        contentContainerStyle={[
-          fixedBottomComponent ? {paddingBottom: 100} : {},
-          styles.scrollViewContent,
-          props?.style,
-          props?.contentContainerStyle,
-        ]}
-        keyboardShouldPersistTaps="handled">
-        {loading ? (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color={theme.palette.primary} />
+    <GestureHandlerRootView style={{flex: 1}}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.keyboardAvoidingView}>
+        <ScrollView
+          contentContainerStyle={[
+            styles.scrollViewContent,
+            props?.style,
+            props?.contentContainerStyle,
+          ]}
+          keyboardShouldPersistTaps="handled">
+          {loading ? (
+            <View style={styles.loadingContainer}>
+              <ActivityIndicator size="large" color={theme.palette.primary} />
+            </View>
+          ) : (
+            children
+          )}
+        </ScrollView>
+        {fixedBottomComponent && (
+          <View style={styles.fixedBottomComponent}>
+            {fixedBottomComponent}
           </View>
-        ) : (
-          children
         )}
-      </ScrollView>
-      {fixedBottomComponent && (
-        <View style={styles.fixedBottomComponent}>{fixedBottomComponent}</View>
-      )}
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </GestureHandlerRootView>
   );
 }
 
@@ -60,8 +64,7 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: {flex: 1},
   scrollViewContent: {
     backgroundColor: theme.palette.gray1,
-    paddingTop: 5, //
-    paddingBottom: 20, //
+    paddingBottom: 100,
     paddingHorizontal: 20,
     flexGrow: 1,
     gap: 10,

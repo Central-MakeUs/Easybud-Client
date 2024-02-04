@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction, useEffect} from 'react';
+import {useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Button from 'components/@common/Buttons/Button';
 import BottomSheet from 'components/@common/BottomSheet/BottomSheet';
@@ -8,45 +8,43 @@ import InputArea from 'components/@common/InputArea';
  * @param isBottomSheetOpen bottomSheet의 open 여부
  * @param setIsBottomSheetOpen bottomSheet의 open 여부를 변경하는 함수
  * @param placeholder input의 placeholder
- * @param inputText input에 들어갈 텍스트
+ * @param text input에 들어갈 텍스트
  * @param setText 컴포넌트에 들어갈 텍스트를 변경하는 함수
- * @param setInputText input에 들어갈 텍스트를 변경하는 함수
  */
 type InputBottomSheetProps = {
-  isBottomSheetOpen: boolean;
-  setIsBottomSheetOpen: Dispatch<SetStateAction<boolean>>;
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
   placeholder?: string;
-  inputText: string;
-  setText: Dispatch<SetStateAction<string>>;
-  setInputText: Dispatch<SetStateAction<string>>;
+  setText: (text: string) => void;
+  text: string;
 };
 
 export default function InputBottomSheet({
-  isBottomSheetOpen,
-  setIsBottomSheetOpen,
+  isOpen,
+  onOpen,
+  onClose,
   placeholder,
-  inputText,
+  text,
   setText,
-  setInputText,
 }: InputBottomSheetProps) {
-  useEffect(() => {
-    setInputText('');
-  }, [isBottomSheetOpen, setInputText]);
+  const [input, setInput] = useState<string>(text);
 
   const handlePressCompleteButton = () => {
-    inputText.length && setText(inputText);
-    setIsBottomSheetOpen(false);
+    input.length && setText(input);
+    onClose();
   };
 
   return (
     <BottomSheet
-      isBottomSheetOpen={isBottomSheetOpen}
-      setIsBottomSheetOpen={setIsBottomSheetOpen}
+      isBottomSheetOpen={isOpen}
+      onClose={onClose}
+      onOpen={onOpen}
       children={
         <View style={keyNoteStyles.bottomSheetContainer}>
-          <InputArea setText={setInputText} placeholder={placeholder} />
+          <InputArea setText={setInput} placeholder={placeholder} />
           <Button
-            disabled={!inputText.length}
+            disabled={!input.length}
             children={'작성 완료하기'}
             onPress={handlePressCompleteButton}
           />

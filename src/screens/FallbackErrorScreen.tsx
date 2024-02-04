@@ -33,7 +33,7 @@ export default function FallbackErrorScreen({
 
   return (
     <ScreenContainer>
-      <Typography>문제가 발생했습니다</Typography>
+      <Typography style={{marginTop: 200}}>문제가 발생했습니다</Typography>
       <Typography>{error.message}</Typography>
       <TouchableOpacity onPress={handlePressButton}>
         <Typography>홈으로 돌아가기</Typography>

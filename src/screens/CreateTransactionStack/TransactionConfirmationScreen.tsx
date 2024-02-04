@@ -76,7 +76,7 @@ export default function TransactionConfirmationScreen({
       header={{
         title: '입력하신 정보를 확인해주세요',
         errorMessage: disabledSubmit
-          ? '차대변 합계가 달라요! 새 계정을 추가하거나 금액을 수정해주세요'
+          ? `차대변 합계가 달라요!\n새 계정을 추가하거나 금액을 수정해주세요`
           : undefined,
       }}
       fixedBottomComponent={

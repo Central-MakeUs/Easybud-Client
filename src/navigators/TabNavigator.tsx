@@ -17,6 +17,7 @@ import NullScreen from 'navigators/components/NullScreen';
 import LedgerScreen from 'screens/Tab/LedgerScreen';
 import TransactionScreen from 'screens/Tab/TransactionScreen';
 import Icon from 'components/@common/Icon';
+import {TouchableOpacity} from 'react-native';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -88,10 +89,8 @@ const screenOptions: (props: {
     paddingRight: 15,
   },
   headerRight: () => (
-    <Icon
-      name={'Setting'}
-      size={24}
-      onPress={() => navigation.navigate('Setting')}
-    />
+    <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
+      <Icon name={'Setting'} size={24} />
+    </TouchableOpacity>
   ),
 });

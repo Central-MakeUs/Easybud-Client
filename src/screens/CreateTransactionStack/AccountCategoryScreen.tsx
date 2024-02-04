@@ -1,17 +1,24 @@
-import {useCallback, useMemo, useState} from 'react';
+import {useMemo, useState} from 'react';
 import {isEmpty} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
-import {AccountCategory, NewAccount} from 'types/account';
-import SelectForm from 'components/@common/SelectForm';
+import {NewAccount} from 'types/account';
 import {CategoryName} from 'constants/components/SelectForm';
 import Container from 'components/screens/CreateTransactionStack/Container';
 import useAccount from 'hooks/useAccount';
 import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
 import RightButton from 'components/screens/CreateTransactionStack/RightButton';
+import CommonSelectItem from 'components/@common/CommonSelectItem';
+import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
 
 type AccountCategoryScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountCategory'>;
 };
+
+const enum BottomSheetType {
+  Primary,
+  Secondary,
+  Tertiary,
+}
 
 /** 거래 추가 Step 3 */
 export default function AccountCategoryScreen({
@@ -22,6 +29,9 @@ export default function AccountCategoryScreen({
   const {account} = useAccount({accountIndex});
 
   const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
+
+  const [bottomSheet, setBottomSheet] = useState<BottomSheetType | null>(null);
+  const close = () => setBottomSheet(null);
 
   const disabled = useMemo(() => {
     return (
@@ -34,16 +44,6 @@ export default function AccountCategoryScreen({
     updatedAccount.category.secondary,
     updatedAccount.category.tertiary,
   ]);
-
-  const handleChange = useCallback(
-    (key: keyof AccountCategory, category: string) => {
-      setUpdatedAccount(prev => ({
-        ...prev,
-        category: {...prev.category, [key]: category},
-      }));
-    },
-    [],
-  );
 
   return (
     <Container
@@ -62,23 +62,84 @@ export default function AccountCategoryScreen({
           />
         </>
       }>
-      <SelectForm
-        value={updatedAccount.category.primary}
+      <CommonSelectItem
         label={CategoryName.primary}
-        items={dummyCategories}
-        onSelect={category => handleChange('primary', category)}
+        onPress={() => setBottomSheet(BottomSheetType.Primary)}
+        value={updatedAccount.category.primary}
+        placeholder={'선택'}
+        bottomSheet={
+          <SelectFormBottomSheet
+            label={CategoryName.primary}
+            categoryList={dummyCategories}
+            setCategoryList={console.log}
+            isBottomSheetOpen={bottomSheet === BottomSheetType.Primary}
+            setIsBottomSheetOpen={close}
+            onOpen={() => setBottomSheet(BottomSheetType.Primary)}
+            onClose={close}
+            setValue={primary =>
+              setUpdatedAccount(prev => ({
+                ...prev,
+                category: {primary: primary, secondary: '', tertiary: ''},
+              }))
+            }
+          />
+        }
       />
-      <SelectForm
-        value={updatedAccount.category.secondary}
+      <CommonSelectItem
         label={CategoryName.secondary}
-        items={dummyCategories}
-        onSelect={category => handleChange('secondary', category)}
+        disabled={isEmpty(updatedAccount.category.primary)}
+        onPress={() => setBottomSheet(BottomSheetType.Secondary)}
+        value={updatedAccount.category.secondary}
+        placeholder={
+          isEmpty(updatedAccount.category.primary)
+            ? '대분류를 먼저 선택해주세요'
+            : '선택'
+        }
+        bottomSheet={
+          <SelectFormBottomSheet
+            label={CategoryName.secondary}
+            categoryList={dummyCategories}
+            setCategoryList={console.log}
+            isBottomSheetOpen={bottomSheet === BottomSheetType.Secondary}
+            setIsBottomSheetOpen={close}
+            onOpen={() => setBottomSheet(BottomSheetType.Secondary)}
+            onClose={close}
+            setValue={secondary =>
+              setUpdatedAccount(prev => ({
+                ...prev,
+                category: {...prev.category, secondary, tertiary: ''},
+              }))
+            }
+          />
+        }
       />
-      <SelectForm
-        value={updatedAccount.category.tertiary}
+      <CommonSelectItem
         label={CategoryName.tertiary}
-        items={dummyCategories}
-        onSelect={category => handleChange('tertiary', category)}
+        disabled={isEmpty(updatedAccount.category.secondary)}
+        onPress={() => setBottomSheet(BottomSheetType.Tertiary)}
+        value={updatedAccount.category.tertiary}
+        placeholder={
+          isEmpty(updatedAccount.category.secondary)
+            ? '중분류를 먼저 선택해주세요'
+            : '선택'
+        }
+        bottomSheet={
+          <SelectFormBottomSheet
+            label={CategoryName.tertiary}
+            categoryList={dummyCategories}
+            setCategoryList={console.log}
+            isBottomSheetOpen={bottomSheet === BottomSheetType.Tertiary}
+            setIsBottomSheetOpen={close}
+            onOpen={() => setBottomSheet(BottomSheetType.Tertiary)}
+            onClose={close}
+            setValue={tertiary =>
+              setUpdatedAccount(prev => ({
+                ...prev,
+                category: {...prev.category, tertiary},
+              }))
+            }
+          />
+        }
       />
     </Container>
   );
