@@ -1,23 +1,13 @@
 import {useQuery} from '@tanstack/react-query';
 import {ledgerApi} from 'apis/ledgerApi';
+import {defaultIncomeStatusData} from 'constants/queries/ledger';
 import {ledgerQueryKeys} from 'constants/queryKeys/ledger';
 
 export const useGetIncomeStatusDataQuery = (
   startDate: string,
   endDate: string,
 ) => {
-  const {
-    data: incomeStatusData = {
-      startDate: '',
-      endDate: '',
-      revenue: 0,
-      expense: 0,
-      revenuePercentage: 0,
-      expensePercentage: 0,
-      revenueChangePercentage: 0,
-      expenseChangePercentage: 0,
-    },
-  } = useQuery({
+  const {data: incomeStatusData = defaultIncomeStatusData} = useQuery({
     queryKey: [ledgerQueryKeys.incomeStatusData],
     queryFn: () => ledgerApi.getIncomeStatusData(startDate, endDate),
   });
