@@ -1,5 +1,5 @@
 import RecentTransactionOverview from 'components/screens/LedgerScreen/RecentTransactionOverview';
-// import AvailableFundsOverview from 'components/screens/LedgerScreen/AvailableFundsOverview';
+import AvailableFundsOverview from 'components/screens/LedgerScreen/AvailableFundsOverview';
 import IncomeStatusOverview from 'components/screens/LedgerScreen/IncomeStatusOverview';
 import FinancialStatusOverview from 'components/screens/LedgerScreen/FInancialStatusOverview';
 import ScreenContainer from 'components/@common/ScreenContainer';
@@ -11,7 +11,7 @@ export default function LedgerScreen() {
       contentContainerStyle={ledgerScreenStyles.contentContainer}>
       <RecentTransactionOverview />
       <Divider style={ledgerScreenStyles.divider} />
-      {/* <AvailableFundsOverview /> */}
+      <AvailableFundsOverview />
       <Divider style={ledgerScreenStyles.divider} />
       <FinancialStatusOverview />
       <Divider style={ledgerScreenStyles.divider} />

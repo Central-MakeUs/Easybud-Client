@@ -18,7 +18,7 @@ export const authApi = {
   patchAccessToken: async (body: {
     refreshToken: string;
   }): Promise<AuthResponseDto> => {
-    const response = await axiosApi.patch('auth/reissue/', body.refreshToken);
+    const response = await axiosApi.patch('auth/reissue', body.refreshToken);
     return response.data.result;
   },
 };

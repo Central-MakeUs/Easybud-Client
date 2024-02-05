@@ -26,14 +26,14 @@ export class LocalStorage implements StorageType {
     try {
       return JSON.parse(value);
     } catch (e) {
-      return null;
+      return value;
     }
   };
 
   async get(key: string) {
     try {
       const value = await AsyncStorage.getItem(key);
-      return this.deserialize(value);
+      return await this.deserialize(value);
     } catch (e) {
       console.error('Error reading key: ' + key, e);
       return null;

@@ -1,4 +1,6 @@
+import {useRecoilState} from 'recoil';
 import useAuthStorage from 'hooks/useAuthStorage';
+import {authState} from 'libs/recoil/states/auth';
 
 /** 프로젝트 최상단에서 user 데이터 불러오기  */
 export default function useInitialData() {
@@ -6,8 +8,7 @@ export default function useInitialData() {
   const {token} = useAuthStorage();
   token;
 
-  // Todo: check authenticated
-  const isAuthenticated = false;
+  const [authData, setAuthData] = useRecoilState(authState);
 
   // Todo: navigate login page
   const isVerifyTokenError = false;
@@ -15,5 +16,5 @@ export default function useInitialData() {
 
   const isVerifyTokenLoading = false;
 
-  return {isAuthenticated, isVerifyTokenLoading};
+  return {authData, setAuthData, isVerifyTokenLoading};
 }

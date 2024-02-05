@@ -1,6 +1,7 @@
 import axios, {AxiosError, AxiosResponse} from 'axios';
 import {authApi} from 'apis/authApi';
 import localStorage from 'libs/async-storage';
+import {TokenKeys} from 'libs/async-storage/constants/keys';
 
 export const baseURL = 'https://easybud.store/api';
 
@@ -14,8 +15,8 @@ export const axiosApi = axios.create({
 });
 
 axiosApi.interceptors.request.use(
-  config => {
-    const accessToken = localStorage.get('accessToken');
+  async config => {
+    const accessToken = await localStorage.get(TokenKeys.AccessToken);
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
@@ -36,7 +37,7 @@ const onRejected = async (error: AxiosError) => {
   const originalConfig = error.config;
 
   try {
-    const value = await localStorage.get('localStorage');
+    const value = await localStorage.get(TokenKeys.RefreshToken);
     const refreshToken = value as string;
 
     if (

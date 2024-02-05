@@ -15,9 +15,9 @@ import CardListScreen from 'screens/SettingScreen/CardListScreen';
 import Icon from 'components/@common/Icon';
 
 export default function RootStackNavigator() {
-  const {isAuthenticated, isVerifyTokenLoading} = useInitialData();
+  const {authData, isVerifyTokenLoading} = useInitialData();
 
-  const initialRouteName = isAuthenticated ? 'Tab' : 'OnBoarding';
+  const initialRouteName = authData.isAuthenticated ? 'Tab' : 'OnBoarding';
 
   if (isVerifyTokenLoading) {
     return null; // Todo: global loading
@@ -27,7 +27,7 @@ export default function RootStackNavigator() {
     <Stack.Navigator
       initialRouteName={initialRouteName}
       screenOptions={screenOptions}>
-      {isAuthenticated ? (
+      {authData.isAuthenticated ? (
         <>
           <Stack.Screen name={'Tab'} component={TabNavigator} />
           <Stack.Screen
