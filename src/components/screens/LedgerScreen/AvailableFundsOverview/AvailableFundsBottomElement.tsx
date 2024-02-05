@@ -1,5 +1,7 @@
+import {useRecoilValue} from 'recoil';
 import {View, StyleSheet} from 'react-native';
 import {theme} from 'styles';
+import {userInfoState} from 'libs/recoil/states/userInfo';
 import {formatToLocaleString} from 'utils/formatAmountValue';
 import Typography from 'components/@common/Typography';
 
@@ -22,11 +24,13 @@ export default function AvailableFundsBottomElement({
   savingsAccount,
   plannedExpenditure,
 }: AvailableFundsBottomElementProps) {
+  const {username} = useRecoilValue(userInfoState);
+
   return (
     <View>
       <View style={availableFundsBottomElementStyles.availableFundsContainer}>
         <Typography type={'Body2Semibold'} color={'gray6'}>
-          보민님의 순자산
+          {username}님의 순자산
         </Typography>
         <Typography type={'Title1Semibold2'}>
           {formatToLocaleString(availableFunds)}원

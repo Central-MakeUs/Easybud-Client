@@ -1,5 +1,7 @@
 import {StyleSheet, View} from 'react-native';
+import {useRecoilValue} from 'recoil';
 import {theme} from 'styles';
+import {userInfoState} from 'libs/recoil/states/userInfo';
 import {formatToLocaleString} from 'utils/formatAmountValue';
 import Typography from 'components/@common/Typography';
 
@@ -14,11 +16,13 @@ export default function FinacialStatusBottom({
   assetAmount,
   debtAmount,
 }: FinacialStatusBottomElementProps) {
+  const {username} = useRecoilValue(userInfoState);
+
   return (
     <View>
       <View style={finacialStatusBottomElementStyles.networthContainer}>
         <Typography type={'Body2Semibold'} color={'gray6'}>
-          보민님의 순자산
+          {username}님의 순자산
         </Typography>
         <Typography type={'Title1Semibold2'}>
           {formatToLocaleString(networthAmount)}원

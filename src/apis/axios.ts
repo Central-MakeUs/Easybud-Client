@@ -40,6 +40,7 @@ const onRejected = async (error: AxiosError) => {
     const value = await localStorage.get(TokenKeys.RefreshToken);
     const refreshToken = value as string;
 
+    // TODO 서버에서 보내주는 응답 코드에 따라 변경 필요
     if (
       (originalConfig && error.response?.status === 401) ||
       error.response?.status === 500
