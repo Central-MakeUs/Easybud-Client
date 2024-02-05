@@ -6,7 +6,7 @@ import {
 import {theme} from 'styles';
 import Logo from 'assets/logos/logo-white.png';
 import {SetStepActionType} from 'types/screens/FunnelScreen';
-import useSocialLoginMutation from 'hooks/mutations/Auth/useSocialLoginMutation';
+import useSocialLoginMutation from 'hooks/mutations/AuthScreen/useSocialLoginMutation';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import SocialLoginButton from 'components/@common/Buttons/SocialLoginButton';
