@@ -93,7 +93,6 @@ export function DetailButton({
             <Typography type={'Body2Regular'} color={'gray4'}>
               {getDatePeriod()}
             </Typography>
-            <Icon name={'ArrowRightSmall'} />
           </View>
         )
       )}
