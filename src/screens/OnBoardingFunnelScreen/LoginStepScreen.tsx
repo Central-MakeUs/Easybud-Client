@@ -1,8 +1,12 @@
 import {Image, StyleSheet, View} from 'react-native';
-import {loginWithKakaoAccount} from '@react-native-seoul/kakao-login';
+import {
+  getProfile,
+  loginWithKakaoAccount,
+} from '@react-native-seoul/kakao-login';
 import {theme} from 'styles';
 import Logo from 'assets/logos/logo-white.png';
 import {SetStepActionType} from 'types/screens/FunnelScreen';
+import useSocialLoginMutation from 'hooks/mutations/Auth/useSocialLoginMutation';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import SocialLoginButton from 'components/@common/Buttons/SocialLoginButton';
@@ -10,9 +14,27 @@ import SocialLoginButton from 'components/@common/Buttons/SocialLoginButton';
 type LoginStepScreenProps = SetStepActionType;
 
 export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
+  const {useAuthMutation} = useSocialLoginMutation();
+
   const handlePressKakaoLoginButton = async () => {
     const kakaoResult = await loginWithKakaoAccount();
-    console.log(kakaoResult);
+    const kakaoProfile = await getProfile();
+
+    useAuthMutation.mutate(
+      {
+        type: 'KAKAO',
+        idToken: kakaoResult.idToken,
+      },
+      {
+        onSuccess: data => {
+          // TODO accessToken, refreshToken 저장 필요
+          console.log(data.accessToken, data.refreshToken);
+        },
+      },
+    );
+
+    // TODO 사용자 닉네임 저장 필요
+    console.log(kakaoProfile.nickname);
   };
 
   return (
