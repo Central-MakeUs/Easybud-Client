@@ -32,11 +32,7 @@ export default function SocialLoginButton({
     <TouchableOpacity
       {...props}
       style={[socialLoginButtonStyles.button, buttonStyles]}>
-      <Icon
-        name={logo}
-        size={iconSize}
-        style={[socialLoginButtonStyles.logo, iconStyles]}
-      />
+      <Icon name={logo} size={iconSize} style={[iconStyles]} />
       <Typography style={[socialLoginButtonStyles.text, {color: textColor}]}>
         {text}
       </Typography>
@@ -54,6 +50,5 @@ const socialLoginButtonStyles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  logo: {},
   text: {textAlign: 'center'},
 });

@@ -1,4 +1,5 @@
 import {Image, StyleSheet, View} from 'react-native';
+import {loginWithKakaoAccount} from '@react-native-seoul/kakao-login';
 import {theme} from 'styles';
 import Logo from 'assets/logos/logo-white.png';
 import {SetStepActionType} from 'types/screens/FunnelScreen';
@@ -9,6 +10,11 @@ import SocialLoginButton from 'components/@common/Buttons/SocialLoginButton';
 type LoginStepScreenProps = SetStepActionType;
 
 export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
+  const handlePressKakaoLoginButton = async () => {
+    const kakaoResult = await loginWithKakaoAccount();
+    console.log(kakaoResult);
+  };
+
   return (
     <ScreenContainer style={loginStyles.container}>
       <View style={loginStyles.imageContainer}>
@@ -28,7 +34,10 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
         </Typography>
       </View>
       <View style={loginStyles.buttonContainer}>
-        <SocialLoginButton variant="kakao" onPress={onNext} />
+        <SocialLoginButton
+          variant="kakao"
+          onPress={handlePressKakaoLoginButton}
+        />
         <SocialLoginButton variant="apple" onPress={onNext} />
       </View>
     </ScreenContainer>
