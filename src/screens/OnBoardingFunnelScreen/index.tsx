@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'navigators/types';
+import {OnBoardingNavigationProp} from 'navigators/types';
 import {Stack} from 'navigators/constants/stack';
 import useInitialData from 'hooks/useInitialData';
 import LoginStepScreen from 'screens/OnBoardingFunnelScreen/LoginStepScreen';
@@ -10,7 +10,7 @@ import AccountTypeDescriptionScreen from 'screens/OnBoardingFunnelScreen/Account
 import LedgerDescriptionScreen from 'screens/OnBoardingFunnelScreen/LedgerDescriptionScreen';
 
 export default function OnBoardingFunnelScreen() {
-  const navigation = useNavigation<RootStackNavigationProp>();
+  const navigation = useNavigation<OnBoardingNavigationProp>();
 
   const {setAuthData} = useInitialData();
 
