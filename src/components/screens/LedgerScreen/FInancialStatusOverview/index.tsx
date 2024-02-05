@@ -3,7 +3,7 @@ import {StyleSheet, View} from 'react-native';
 import {useGetFinancialStatusDataQuery} from 'hooks/queries/LedgerScreen/useGetFinancialStatusDataQuery';
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
 import Tooltip from 'components/@common/Tooltip';
-import FinacialStatusBottom from 'components/screens/LedgerScreen/FInancialStatusOverview/FinacialStatusBottom';
+import FinacialStatusBottom from 'components/screens/LedgerScreen/FinancialStatusOverview/FinacialStatusBottom';
 
 export default function FinancialStatusOverview() {
   const [showTooltipText, setShowTooltipText] = useState(false);
