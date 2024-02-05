@@ -1,18 +1,8 @@
-import axios, {AxiosError, AxiosResponse} from 'axios';
+import {AxiosResponse, AxiosError} from 'axios';
 import {authApi} from 'apis/authApi';
+import {axiosApi} from 'apis/axiosInstance';
 import localStorage from 'libs/async-storage';
 import {TokenKeys} from 'libs/async-storage/constants/keys';
-
-export const baseURL = 'https://easybud.store/api';
-
-export const axiosApi = axios.create({
-  baseURL,
-  timeout: 10 * 1000,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json',
-  },
-});
 
 axiosApi.interceptors.request.use(
   async config => {

@@ -1,4 +1,4 @@
-import {axiosApi} from 'apis/axios';
+import {axiosApi} from 'apis/axiosInstance';
 import {TransactionResponseDto} from 'types/dtos/ledger';
 
 export const transactionApi = {

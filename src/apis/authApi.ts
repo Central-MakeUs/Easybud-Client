@@ -1,4 +1,4 @@
-import {axiosApi} from 'apis/axios';
+import {axiosApi} from 'apis/axiosInstance';
 import {AuthResponseDto} from 'types/dtos/auth';
 
 export const authApi = {
