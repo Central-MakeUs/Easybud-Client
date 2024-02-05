@@ -18,16 +18,16 @@ const steps: NonEmptyArray<OnBoardingStep> = [
   'Step5',
 ];
 
-const stepInfoList: Steps<typeof steps> = {
-  Step1: <LoginStepScreen />,
-  Step2: <LedgerDescriptionScreen />,
-  Step3: <AccountTypeDescriptionScreen />,
-  Step4: <AccountCategoryDescriptionScreen />,
-  Step5: <AccountDetailsDescriptionScreen />,
-};
-
 export default function OnBoardingFunnelScreen() {
-  const [currentStep] = useState<OnBoardingStep>('Step1');
+  const [currentStep, setCurrentStep] = useState<OnBoardingStep>('Step2');
+
+  const stepInfoList: Steps<typeof steps> = {
+    Step1: <LoginStepScreen />,
+    Step2: <LedgerDescriptionScreen onNext={() => setCurrentStep('Step3')} />,
+    Step3: <AccountTypeDescriptionScreen />,
+    Step4: <AccountCategoryDescriptionScreen />,
+    Step5: <AccountDetailsDescriptionScreen />,
+  };
 
   return (
     <Funnel steps={steps} step={currentStep}>

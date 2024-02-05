@@ -26,14 +26,26 @@ export const typographyStyles = StyleSheet.create({
   Title2Bold: {
     fontFamily: 'Pretendard-Bold',
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: 20,
     lineHeight: 36,
   },
-  /** Title2_l - size: 16, weight: 400 */
+  /** size: 20, weight: 600 */
+  Title2SemiBold: {
+    fontFamily: 'Pretendard-Regular',
+    fontWeight: '600',
+    fontSize: 20,
+  },
+  /** Title2_l - size: 20, weight: 400 */
   Title2Regular: {
     fontFamily: 'Pretendard-Regular',
     fontWeight: '400',
-    fontSize: 16,
+    fontSize: 20,
+  },
+
+  Title3SemiBold: {
+    fontFamily: 'Pretendard-Regular',
+    fontWeight: '600',
+    fontSize: 18,
   },
 
   /** size: 16, weight: 600 */
