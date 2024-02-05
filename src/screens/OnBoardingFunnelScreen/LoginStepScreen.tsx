@@ -1,11 +1,14 @@
 import {Image, StyleSheet, View} from 'react-native';
 import {theme} from 'styles';
 import Logo from 'assets/logos/logo-white.png';
+import {SetStepActionType} from 'types/screens/FunnelScreen';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import SocialLoginButton from 'components/@common/Buttons/SocialLoginButton';
 
-export default function LoginStepScreen() {
+type LoginStepScreenProps = SetStepActionType;
+
+export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
   return (
     <ScreenContainer style={loginStyles.container}>
       <View style={loginStyles.imageContainer}>
@@ -25,8 +28,8 @@ export default function LoginStepScreen() {
         </Typography>
       </View>
       <View style={loginStyles.buttonContainer}>
-        <SocialLoginButton variant="kakao" />
-        <SocialLoginButton variant="apple" />
+        <SocialLoginButton variant="kakao" onPress={onNext} />
+        <SocialLoginButton variant="apple" onPress={onNext} />
       </View>
     </ScreenContainer>
   );

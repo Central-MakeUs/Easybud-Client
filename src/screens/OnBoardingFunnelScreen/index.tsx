@@ -1,17 +1,18 @@
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {RootStackNavigationProp} from 'navigators/types';
+import {Stack} from 'navigators/constants/stack';
+import LoginStepScreen from 'screens/OnBoardingFunnelScreen/LoginStepScreen';
 import AccountCategoryDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountCategoryDescriptionScreen';
 import AccountDetailsDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountDetailsDescriptionScreen';
 import AccountTypeDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountTypeDescriptionScreen';
 import LedgerDescriptionScreen from 'screens/OnBoardingFunnelScreen/LedgerDescriptionScreen';
-import {useNavigation} from '@react-navigation/native';
-import {RootStackNavigationProp} from 'navigators/types';
-import {Stack} from 'navigators/constants/stack';
 
 export default function OnBoardingFunnelScreen() {
   const navigation = useNavigation<RootStackNavigationProp>();
 
   const stepInfoList = {
-    // Step1: <LoginStepScreen onNext={() => setCurrentStep('Step2')} />,
+    Step1: <LoginStepScreen onNext={() => navigation.navigate('Step2')} />,
     Step2: (
       <LedgerDescriptionScreen onNext={() => navigation.navigate('Step3')} />
     ),
