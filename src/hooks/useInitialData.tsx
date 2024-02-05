@@ -8,6 +8,7 @@ export default function useInitialData() {
 
   // Todo: check authenticated
   const isAuthenticated = false;
+
   // Todo: navigate login page
   const isVerifyTokenError = false;
   isVerifyTokenError;

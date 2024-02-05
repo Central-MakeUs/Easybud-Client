@@ -1,18 +1,18 @@
 import {TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import {theme} from 'styles';
+import {Stack} from 'navigators/constants/stack';
 import {RootStackNavigationProp} from 'navigators/types';
 import CreateTransactionStackNavigator from 'navigators/CreateTransactionStackNavigator';
 import TabNavigator from 'navigators/TabNavigator';
+import useTransaction from 'hooks/useTransaction';
 import useInitialData from 'hooks/useInitialData';
 import SettingScreen from 'screens/SettingScreen';
 import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
-import Icon from 'components/@common/Icon';
 import AddCardScreen from 'screens/SettingScreen/AddCardScreen';
 import CardListScreen from 'screens/SettingScreen/CardListScreen';
-import {useNavigation} from '@react-navigation/native';
-import useTransaction from 'hooks/useTransaction';
-import {Stack} from 'navigators/constants/stack';
+import Icon from 'components/@common/Icon';
 
 export default function RootStackNavigator() {
   const {isAuthenticated, isVerifyTokenLoading} = useInitialData();

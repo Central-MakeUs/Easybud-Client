@@ -7,9 +7,12 @@ import AccountCategoryDescriptionScreen from 'screens/OnBoardingFunnelScreen/Acc
 import AccountDetailsDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountDetailsDescriptionScreen';
 import AccountTypeDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountTypeDescriptionScreen';
 import LedgerDescriptionScreen from 'screens/OnBoardingFunnelScreen/LedgerDescriptionScreen';
+import useAuthStorage from 'hooks/useAuthStorage';
 
 export default function OnBoardingFunnelScreen() {
   const navigation = useNavigation<RootStackNavigationProp>();
+
+  const {setIsAuthenticated} = useAuthStorage();
 
   const stepInfoList = {
     Step1: <LoginStepScreen onNext={() => navigation.navigate('Step2')} />,
@@ -26,7 +29,13 @@ export default function OnBoardingFunnelScreen() {
         onNext={() => navigation.navigate('Step5')}
       />
     ),
-    Step5: <AccountDetailsDescriptionScreen onNext={() => {}} />,
+    Step5: (
+      <AccountDetailsDescriptionScreen
+        onNext={() => {
+          setIsAuthenticated({isAuthenticated: true});
+        }}
+      />
+    ),
   };
 
   return (

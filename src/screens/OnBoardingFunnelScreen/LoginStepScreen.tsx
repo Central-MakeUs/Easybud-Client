@@ -37,11 +37,12 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
             accessToken: data.accessToken,
             refreshToken: data.refreshToken,
           });
+          setUserInfo({username: kakaoProfile.nickname});
+
+          onNext();
         },
       },
     );
-
-    setUserInfo({username: kakaoProfile.nickname});
   };
 
   return (

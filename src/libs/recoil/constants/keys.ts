@@ -4,6 +4,9 @@ export const enum RecoilStateKeys {
   AccessToken = 'AccessToken',
   RefreshToken = 'RefreshToken',
 
+  /** AuthState */
+  Auth = 'auth',
+
   /** UserInfo */
   UserInfo = 'userInfo',
 

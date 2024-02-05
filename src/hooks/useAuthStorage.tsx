@@ -2,10 +2,12 @@ import {useCallback} from 'react';
 import {useRecoilState} from 'recoil';
 import {TokenType} from 'types/token';
 import {tokenState} from 'libs/recoil/states/token';
+import {authState} from 'libs/recoil/states/auth';
 
 /** auth token manager */
 export default function useAuthStorage() {
   const [token, setToken] = useRecoilState(tokenState);
+  const [isAuthenticated, setIsAuthenticated] = useRecoilState(authState);
 
   const isEmptyToken =
     token?.accessToken?.length === 0 && token?.refreshToken?.length === 0;
@@ -32,5 +34,7 @@ export default function useAuthStorage() {
     token,
     setAuthData,
     clear,
+    isAuthenticated,
+    setIsAuthenticated,
   };
 }
