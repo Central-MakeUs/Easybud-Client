@@ -1,11 +1,14 @@
+import {useSetRecoilState} from 'recoil';
 import {Image, StyleSheet, View} from 'react-native';
 import {
   getProfile,
   loginWithKakaoAccount,
 } from '@react-native-seoul/kakao-login';
+import {userInfoState} from 'libs/recoil/states/userInfo';
 import {theme} from 'styles';
 import Logo from 'assets/logos/logo-white.png';
 import {SetStepActionType} from 'types/screens/FunnelScreen';
+import useAuthStorage from 'hooks/useAuthStorage';
 import useSocialLoginMutation from 'hooks/mutations/AuthScreen/useSocialLoginMutation';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
@@ -14,6 +17,9 @@ import SocialLoginButton from 'components/@common/Buttons/SocialLoginButton';
 type LoginStepScreenProps = SetStepActionType;
 
 export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
+  const {setAuthData} = useAuthStorage();
+  const setUserInfo = useSetRecoilState(userInfoState);
+
   const {useAuthMutation} = useSocialLoginMutation();
 
   const handlePressKakaoLoginButton = async () => {
@@ -27,14 +33,15 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
       },
       {
         onSuccess: data => {
-          // TODO accessToken, refreshToken 저장 필요
-          console.log(data.accessToken, data.refreshToken);
+          setAuthData({
+            accessToken: data.accessToken,
+            refreshToken: data.refreshToken,
+          });
         },
       },
     );
 
-    // TODO 사용자 닉네임 저장 필요
-    console.log(kakaoProfile.nickname);
+    setUserInfo({username: kakaoProfile.nickname});
   };
 
   return (

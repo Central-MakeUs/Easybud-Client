@@ -1,1 +1,4 @@
-export type TokenType = string | null;
+export type TokenType = {
+  accessToken: string | null;
+  refreshToken: string | null;
+};

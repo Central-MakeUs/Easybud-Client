@@ -1,6 +1,11 @@
 export const enum RecoilStateKeys {
   /** Token */
   Token = 'token',
+  AccessToken = 'AccessToken',
+  RefreshToken = 'RefreshToken',
+
+  /** UserInfo */
+  UserInfo = 'userInfo',
 
   /** Transaction */
   Transaction = 'transaction',
