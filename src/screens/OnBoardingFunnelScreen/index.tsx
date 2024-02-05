@@ -1,23 +1,33 @@
 import React, {useState} from 'react';
-import type {NonEmptyArray, Steps} from 'types/components/Funnel';
-import DescriptionStepScreen from 'screens/OnBoardingFunnelScreen/DescriptionStepScreen';
+import {NonEmptyArray, Steps} from 'types/components/Funnel';
+import Funnel from 'components/@common/Funnel/Funnel';
+import Step from 'components/@common/Funnel/Step';
+import AccountCategoryDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountCategoryDescriptionScreen';
+import AccountDetailsDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountDetailsDescriptionScreen';
+import AccountTypeDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountTypeDescriptionScreen';
+import LedgerDescriptionScreen from 'screens/OnBoardingFunnelScreen/LedgerDescriptionScreen';
 import LoginStepScreen from 'screens/OnBoardingFunnelScreen/LoginStepScreen';
-import UserInfoStepScreen from 'screens/OnBoardingFunnelScreen/UserInfoStepScreen';
-import Funnel from 'components/@common/funnel/Funnel';
-import Step from 'components/@common/funnel/Step';
 
-type OnBoardingStep = 'Step1' | 'Step2' | 'Step3';
+type OnBoardingStep = 'Step1' | 'Step2' | 'Step3' | 'Step4' | 'Step5';
 
-const steps: NonEmptyArray<OnBoardingStep> = ['Step1', 'Step2', 'Step3'];
+const steps: NonEmptyArray<OnBoardingStep> = [
+  'Step1',
+  'Step2',
+  'Step3',
+  'Step4',
+  'Step5',
+];
 
 const stepInfoList: Steps<typeof steps> = {
-  Step1: <DescriptionStepScreen />,
-  Step2: <LoginStepScreen />,
-  Step3: <UserInfoStepScreen />,
+  Step1: <LoginStepScreen />,
+  Step2: <LedgerDescriptionScreen />,
+  Step3: <AccountTypeDescriptionScreen />,
+  Step4: <AccountCategoryDescriptionScreen />,
+  Step5: <AccountDetailsDescriptionScreen />,
 };
 
 export default function OnBoardingFunnelScreen() {
-  const [currentStep] = useState<OnBoardingStep>('Step2');
+  const [currentStep] = useState<OnBoardingStep>('Step1');
 
   return (
     <Funnel steps={steps} step={currentStep}>
