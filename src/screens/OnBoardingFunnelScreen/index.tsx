@@ -27,7 +27,11 @@ export default function OnBoardingFunnelScreen() {
     Step3: (
       <AccountTypeDescriptionScreen onNext={() => setCurrentStep('Step4')} />
     ),
-    Step4: <AccountCategoryDescriptionScreen />,
+    Step4: (
+      <AccountCategoryDescriptionScreen
+        onNext={() => setCurrentStep('Step5')}
+      />
+    ),
     Step5: <AccountDetailsDescriptionScreen />,
   };
 
