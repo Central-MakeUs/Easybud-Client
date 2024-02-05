@@ -14,6 +14,8 @@ export const useGetIncomeStatusDataQuery = (
       expense: 0,
       revenuePercentage: 0,
       expensePercentage: 0,
+      revenueChangePercentage: 0,
+      expenseChangePercentage: 0,
     },
   } = useQuery({
     queryKey: [ledgerQueryKeys.incomeStatusData],
@@ -25,5 +27,7 @@ export const useGetIncomeStatusDataQuery = (
     expense: incomeStatusData.expense,
     revenuePercentage: incomeStatusData.revenuePercentage,
     expensePercentage: incomeStatusData.expensePercentage,
+    revenueChangePercentage: incomeStatusData.revenueChangePercentage,
+    expenseChangePercentage: incomeStatusData.expenseChangePercentage,
   };
 };
