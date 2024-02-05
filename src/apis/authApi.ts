@@ -14,11 +14,4 @@ export const authApi = {
     );
     return response.data.result;
   },
-
-  patchAccessToken: async (body: {
-    refreshToken: string;
-  }): Promise<AuthResponseDto> => {
-    const response = await axiosApi.patch('auth/reissue', body.refreshToken);
-    return response.data.result;
-  },
 };
