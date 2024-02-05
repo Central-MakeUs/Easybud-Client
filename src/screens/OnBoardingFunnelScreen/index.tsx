@@ -1,47 +1,46 @@
-import React, {useState} from 'react';
-import {NonEmptyArray, Steps} from 'types/components/Funnel';
-import Funnel from 'components/@common/Funnel/Funnel';
-import Step from 'components/@common/Funnel/Step';
+import React from 'react';
 import AccountCategoryDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountCategoryDescriptionScreen';
 import AccountDetailsDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountDetailsDescriptionScreen';
 import AccountTypeDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountTypeDescriptionScreen';
 import LedgerDescriptionScreen from 'screens/OnBoardingFunnelScreen/LedgerDescriptionScreen';
-import LoginStepScreen from 'screens/OnBoardingFunnelScreen/LoginStepScreen';
-
-type OnBoardingStep = 'Step1' | 'Step2' | 'Step3' | 'Step4' | 'Step5';
-
-const steps: NonEmptyArray<OnBoardingStep> = [
-  'Step1',
-  'Step2',
-  'Step3',
-  'Step4',
-  'Step5',
-];
+import {useNavigation} from '@react-navigation/native';
+import {RootStackNavigationProp} from 'navigators/types';
+import {Stack} from 'navigators/constants/stack';
 
 export default function OnBoardingFunnelScreen() {
-  const [currentStep, setCurrentStep] = useState<OnBoardingStep>('Step2');
+  const navigation = useNavigation<RootStackNavigationProp>();
 
-  const stepInfoList: Steps<typeof steps> = {
-    Step1: <LoginStepScreen />,
-    Step2: <LedgerDescriptionScreen onNext={() => setCurrentStep('Step3')} />,
+  const stepInfoList = {
+    // Step1: <LoginStepScreen onNext={() => setCurrentStep('Step2')} />,
+    Step2: (
+      <LedgerDescriptionScreen onNext={() => navigation.navigate('Step3')} />
+    ),
     Step3: (
-      <AccountTypeDescriptionScreen onNext={() => setCurrentStep('Step4')} />
+      <AccountTypeDescriptionScreen
+        onNext={() => navigation.navigate('Step4')}
+      />
     ),
     Step4: (
       <AccountCategoryDescriptionScreen
-        onNext={() => setCurrentStep('Step5')}
+        onNext={() => navigation.navigate('Step5')}
       />
     ),
-    Step5: <AccountDetailsDescriptionScreen />,
+    Step5: <AccountDetailsDescriptionScreen onNext={() => {}} />,
   };
 
   return (
-    <Funnel steps={steps} step={currentStep}>
-      {Object.entries(stepInfoList).map(([name, component]) => (
-        <Step key={name} name={name}>
-          {component}
-        </Step>
-      ))}
-    </Funnel>
+    <Stack.Navigator>
+      {Object.entries(stepInfoList).map(([name, component]) => {
+        const ScreenComponent = () => component;
+        return (
+          <Stack.Screen
+            key={name}
+            name={name as keyof typeof stepInfoList}
+            component={ScreenComponent}
+            options={{headerShown: false}}
+          />
+        );
+      })}
+    </Stack.Navigator>
   );
 }

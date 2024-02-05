@@ -17,6 +17,11 @@ export type RootStackParamList = {
   Setting: undefined;
   CardList: undefined;
   AddCard: undefined;
+  Step1: undefined;
+  Step2: undefined;
+  Step3: undefined;
+  Step4: undefined;
+  Step5: undefined;
 };
 
 export type TabParamList = {

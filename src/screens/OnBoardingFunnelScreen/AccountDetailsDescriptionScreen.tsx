@@ -1,13 +1,22 @@
 import {StyleSheet} from 'react-native';
 import {theme} from 'styles';
+import {SetStepActionType} from 'types/screens/FunnelScreen';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import Button from 'components/@common/Buttons/Button';
 
-export default function AccountDetailsDescriptionScreen() {
+type AccountDetailsDescriptionScreenProps = SetStepActionType;
+
+export default function AccountDetailsDescriptionScreen({
+  onNext,
+}: AccountDetailsDescriptionScreenProps) {
   return (
     <ScreenContainer
-      fixedBottomComponent={<Button variant="secondary">다음</Button>}
+      fixedBottomComponent={
+        <Button variant="secondary" onPress={onNext}>
+          다음
+        </Button>
+      }
       contentContainerStyle={accountDetailsDescriptionScreenStyles.container}>
       <Typography type={'Title3SemiBold'} color={'white'}>
         차・대변 데이터를 바탕으로
