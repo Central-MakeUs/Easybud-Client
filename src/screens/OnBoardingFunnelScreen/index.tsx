@@ -24,7 +24,9 @@ export default function OnBoardingFunnelScreen() {
   const stepInfoList: Steps<typeof steps> = {
     Step1: <LoginStepScreen />,
     Step2: <LedgerDescriptionScreen onNext={() => setCurrentStep('Step3')} />,
-    Step3: <AccountTypeDescriptionScreen />,
+    Step3: (
+      <AccountTypeDescriptionScreen onNext={() => setCurrentStep('Step4')} />
+    ),
     Step4: <AccountCategoryDescriptionScreen />,
     Step5: <AccountDetailsDescriptionScreen />,
   };

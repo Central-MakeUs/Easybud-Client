@@ -1,12 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {theme} from 'styles';
+import {SetStepActionType} from 'types/screens/FunnelScreen';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import Button from 'components/@common/Buttons/Button';
 
-type LedgerDescriptionScreenProps = {
-  onNext: () => void;
-};
+type LedgerDescriptionScreenProps = SetStepActionType;
 
 export default function LedgerDescriptionScreen({
   onNext,
