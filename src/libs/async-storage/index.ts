@@ -7,7 +7,7 @@ type SerializableParam =
   | object
   | null
   | undefined
-  | symbol;
+  | Symbol;
 
 type StorageType = {
   get(key: string): Promise<string | null>;
@@ -26,14 +26,14 @@ export class LocalStorage implements StorageType {
     try {
       return JSON.parse(value);
     } catch (e) {
-      return value;
+      return null;
     }
   };
 
   async get(key: string) {
     try {
       const value = await AsyncStorage.getItem(key);
-      return await this.deserialize(value);
+      return this.deserialize(value);
     } catch (e) {
       console.error('Error reading key: ' + key, e);
       return null;
