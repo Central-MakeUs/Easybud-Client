@@ -9,6 +9,7 @@ import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
 import RightButton from 'components/screens/CreateTransactionStack/RightButton';
 import CommonSelectItem from 'components/@common/CommonSelectItem';
 import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
+import useGetCategoryList from 'hooks/queries/AccountCategoryScreen/useGetCategoryList';
 
 type AccountCategoryScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountCategory'>;
@@ -27,6 +28,9 @@ export default function AccountCategoryScreen({
   const {isUpdateStep, accountIndex} = params;
 
   const {account} = useAccount({accountIndex});
+  const {data} = useGetCategoryList();
+  // Todo: suspense
+  data;
 
   const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
 
