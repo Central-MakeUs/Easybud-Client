@@ -73,6 +73,7 @@ export default function CardListScreen() {
 
 const cardListScreenStyles = StyleSheet.create({
   contentContainer: {
+    paddingTop: 10,
     gap: 20,
   },
   noCardTextContainer: {

@@ -133,6 +133,7 @@ export default function AddCardScreen() {
 
 const cardSettingScreenStyles = StyleSheet.create({
   contentContainer: {
+    paddingTop: 10,
     gap: 10,
   },
 });
