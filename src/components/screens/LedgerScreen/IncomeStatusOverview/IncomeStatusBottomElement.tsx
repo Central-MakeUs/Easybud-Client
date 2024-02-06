@@ -75,14 +75,22 @@ export default function IncomeStatusBottomElement() {
 
   const {startDate, endDate} = getDatePeriod(currentDate);
 
-  const {revenue, expense, revenuePercentage, expensePercentage} =
-    useGetIncomeStatusDataQuery(startDate, endDate);
+  const {
+    revenue,
+    expense,
+    revenuePercentage,
+    expensePercentage,
+    revenueChangePercentage,
+    expenseChangePercentage,
+  } = useGetIncomeStatusDataQuery(startDate, endDate);
 
   const graphData = getGraphData(
     revenue,
     expense,
     revenuePercentage,
     expensePercentage,
+    revenueChangePercentage,
+    expenseChangePercentage,
   );
 
   const height =

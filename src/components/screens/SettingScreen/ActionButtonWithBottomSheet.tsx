@@ -1,9 +1,9 @@
 import {ReactNode, useState} from 'react';
 import {StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from 'styles';
-import BottomSheet from 'components/@common/BottomSheet/GorhomBottomSheet';
 import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
+// import BottomSheet from 'components/@common/BottomSheet/BottomSheet';
 
 type ActionButtonWithBottomSheetProps = {
   buttonText: string;
@@ -13,10 +13,10 @@ type ActionButtonWithBottomSheetProps = {
 
 export default function ActionButtonWithBottomSheet({
   buttonText,
-  bottomSheetContent,
+  // bottomSheetContent,
   onPress,
 }: ActionButtonWithBottomSheetProps) {
-  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+  const [, setIsBottomSheetOpen] = useState(false);
 
   const handlePressActionButton = () => setIsBottomSheetOpen(true);
 
@@ -30,14 +30,14 @@ export default function ActionButtonWithBottomSheet({
         </Typography>
         <Icon name={'ArrowRightSmall'} />
       </TouchableOpacity>
-      {bottomSheetContent && (
+      {/* {bottomSheetContent && (
         <BottomSheet
           isBottomSheetOpen={isBottomSheetOpen}
           setIsBottomSheetOpen={setIsBottomSheetOpen}
           height={140}
           children={bottomSheetContent}
         />
-      )}
+      )} */}
     </>
   );
 }

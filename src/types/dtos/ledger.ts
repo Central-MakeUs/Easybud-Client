@@ -30,4 +30,6 @@ export type IncomeStatusResponseDto = {
   expense: number;
   revenuePercentage: number;
   expensePercentage: number;
+  revenueChangePercentage: number;
+  expenseChangePercentage: number;
 };

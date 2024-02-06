@@ -15,7 +15,10 @@ export default function RecentTransactionOverview() {
     <FinancialDataCardBase.Container>
       <FinancialDataCardBase.TopElementContainer>
         <FinancialDataCardBase.Label label={'최근 거래'} />
-        <FinancialDataCardBase.DetailButton onPress={handlePressDetailButton} />
+        <FinancialDataCardBase.DetailButton
+          variant={'detail'}
+          onPress={handlePressDetailButton}
+        />
       </FinancialDataCardBase.TopElementContainer>
       <FinancialDataCardBase.BottomElement
         children={

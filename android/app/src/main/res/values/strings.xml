@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Easybud</string>
+    <string name="kakao_app_key">@string/APP_KEY_WITH_KAKAO</string>
 </resources>
