@@ -48,6 +48,11 @@ export const typographyStyles = StyleSheet.create({
     fontSize: 18,
   },
 
+  Body1Bold: {
+    fontFamily: 'Pretendard-SemiBold',
+    fontWeight: '700',
+    fontSize: 16,
+  },
   /** size: 16, weight: 600 */
   Body1Semibold: {
     fontFamily: 'Pretendard-SemiBold',
