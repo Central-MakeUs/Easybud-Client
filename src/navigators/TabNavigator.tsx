@@ -1,3 +1,4 @@
+import {TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {
@@ -17,7 +18,6 @@ import NullScreen from 'navigators/components/NullScreen';
 import LedgerScreen from 'screens/Tab/LedgerScreen';
 import TransactionScreen from 'screens/Tab/TransactionScreen';
 import Icon from 'components/@common/Icon';
-import {TouchableOpacity} from 'react-native';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 

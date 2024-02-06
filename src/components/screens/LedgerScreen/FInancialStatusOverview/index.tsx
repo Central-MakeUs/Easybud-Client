@@ -1,9 +1,10 @@
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {useGetFinancialStatusDataQuery} from 'hooks/queries/LedgerScreen/useGetFinancialStatusDataQuery';
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
 import Tooltip from 'components/@common/Tooltip';
 import FinacialStatusBottom from 'components/screens/LedgerScreen/FinancialStatusOverview/FinacialStatusBottom';
+import {useFocusEffect} from '@react-navigation/native';
 
 export default function FinancialStatusOverview() {
   const [showTooltipText, setShowTooltipText] = useState(false);
@@ -13,6 +14,12 @@ export default function FinancialStatusOverview() {
 
   const handlePressTooltipIcon = () =>
     setShowTooltipText(prevState => !prevState);
+
+  const handleFocusEffect = useCallback(() => {
+    setShowTooltipText(false);
+  }, []);
+
+  useFocusEffect(handleFocusEffect);
 
   return (
     <View>

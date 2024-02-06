@@ -1,31 +1,56 @@
-import React, {useState} from 'react';
-import type {NonEmptyArray, Steps} from 'types/components/Funnel';
-import DescriptionStepScreen from 'screens/OnBoardingFunnelScreen/DescriptionStepScreen';
+import React from 'react';
+import {useNavigation} from '@react-navigation/native';
+import {OnBoardingNavigationProp} from 'navigators/types';
+import {Stack} from 'navigators/constants/stack';
+import useInitialData from 'hooks/useInitialData';
 import LoginStepScreen from 'screens/OnBoardingFunnelScreen/LoginStepScreen';
-import UserInfoStepScreen from 'screens/OnBoardingFunnelScreen/UserInfoStepScreen';
-import Funnel from 'components/@common/funnel/Funnel';
-import Step from 'components/@common/funnel/Step';
-
-type OnBoardingStep = 'Step1' | 'Step2' | 'Step3';
-
-const steps: NonEmptyArray<OnBoardingStep> = ['Step1', 'Step2', 'Step3'];
-
-const stepInfoList: Steps<typeof steps> = {
-  Step1: <DescriptionStepScreen />,
-  Step2: <LoginStepScreen />,
-  Step3: <UserInfoStepScreen />,
-};
+import AccountCategoryDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountCategoryDescriptionScreen';
+import AccountDetailsDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountDetailsDescriptionScreen';
+import AccountTypeDescriptionScreen from 'screens/OnBoardingFunnelScreen/AccountTypeDescriptionScreen';
+import LedgerDescriptionScreen from 'screens/OnBoardingFunnelScreen/LedgerDescriptionScreen';
 
 export default function OnBoardingFunnelScreen() {
-  const [currentStep] = useState<OnBoardingStep>('Step2');
+  const navigation = useNavigation<OnBoardingNavigationProp>();
+
+  const {setAuthData} = useInitialData();
+
+  const stepInfoList = {
+    Step1: <LoginStepScreen onNext={() => navigation.navigate('Step2')} />,
+    Step2: (
+      <LedgerDescriptionScreen onNext={() => navigation.navigate('Step3')} />
+    ),
+    Step3: (
+      <AccountTypeDescriptionScreen
+        onNext={() => navigation.navigate('Step4')}
+      />
+    ),
+    Step4: (
+      <AccountCategoryDescriptionScreen
+        onNext={() => navigation.navigate('Step5')}
+      />
+    ),
+    Step5: (
+      <AccountDetailsDescriptionScreen
+        onNext={() => {
+          setAuthData({isAuthenticated: true});
+        }}
+      />
+    ),
+  };
 
   return (
-    <Funnel steps={steps} step={currentStep}>
-      {Object.entries(stepInfoList).map(([name, component]) => (
-        <Step key={name} name={name}>
-          {component}
-        </Step>
-      ))}
-    </Funnel>
+    <Stack.Navigator>
+      {Object.entries(stepInfoList).map(([name, component]) => {
+        const ScreenComponent = () => component;
+        return (
+          <Stack.Screen
+            key={name}
+            name={name as keyof typeof stepInfoList}
+            component={ScreenComponent}
+            options={{headerShown: false}}
+          />
+        );
+      })}
+    </Stack.Navigator>
   );
 }

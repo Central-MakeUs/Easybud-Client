@@ -6,16 +6,17 @@ export const getGraphData = (
   expense: number,
   revenuePercentage: number,
   expensePercentage: number,
+  revenueChangePercentage: number,
+  expenseChangePercentage: number,
 ) => {
-  // TODO 퍼센트 변경 필요
   return [
     {
       y: revenuePercentage,
-      label: `수익\n${formatToLocaleString(revenue)}원\n목표 대비 88%`,
+      label: `수익\n${formatToLocaleString(revenue)}원\n전월 대비 ${revenueChangePercentage}%`,
     },
     {
       y: expensePercentage,
-      label: `비용\n${formatToLocaleString(expense)}원\n예산 대비 88%`,
+      label: `비용\n${formatToLocaleString(expense)}원\n전월 대비 ${expenseChangePercentage}%`,
     },
   ];
 };

@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
   keyboardAvoidingView: {flex: 1},
   scrollViewContent: {
     backgroundColor: theme.palette.gray1,
-    paddingBottom: 100,
+    paddingBottom: 30,
     paddingHorizontal: 20,
     flexGrow: 1,
     gap: 10,

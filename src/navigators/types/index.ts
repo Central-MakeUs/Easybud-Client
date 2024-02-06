@@ -25,6 +25,14 @@ export type TabParamList = {
   NavigateCreateTransaction: undefined;
 };
 
+export type OnBoardingParamList = {
+  Step1: undefined;
+  Step2: undefined;
+  Step3: undefined;
+  Step4: undefined;
+  Step5: undefined;
+};
+
 // only navigate this screen
 type Update = {
   isUpdateStep: true;
@@ -68,6 +76,8 @@ export type CreateTransactionStackNavigationProp =
   NativeStackNavigationProp<CreateTransactionStackParamList>;
 
 export type TabNavigationProp = NavigationProp<TabParamList>;
+
+export type OnBoardingNavigationProp = NavigationProp<OnBoardingParamList>;
 
 /** screen props - unused*/
 
