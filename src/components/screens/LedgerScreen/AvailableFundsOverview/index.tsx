@@ -1,4 +1,4 @@
-import {useGetAvailableFundsDataQuery} from 'hooks/queries/LedgerScreen/useGetAvailableFundsDataQuery';
+import {useGetAvailableFundsDataQuery} from 'hooks/queries/Ledger/useGetAvailableFundsDataQuery';
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
 import AvailableFundsBottomElement from 'components/screens/LedgerScreen/AvailableFundsOverview/AvailableFundsBottomElement';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {OnBoardingNavigationProp} from 'navigators/types';
+import {OnBoardingNavigationProp, RootStackParamList} from 'navigators/types';
 import {Stack} from 'navigators/constants/stack';
 import useInitialData from 'hooks/useInitialData';
 import LoginStepScreen from 'screens/OnBoardingFunnelScreen/LoginStepScreen';
@@ -45,7 +45,7 @@ export default function OnBoardingFunnelScreen() {
         return (
           <Stack.Screen
             key={name}
-            name={name as keyof typeof stepInfoList}
+            name={name as keyof RootStackParamList}
             component={ScreenComponent}
             options={{headerShown: false}}
           />
