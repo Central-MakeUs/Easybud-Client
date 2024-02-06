@@ -3,8 +3,13 @@ import {StyleSheet, TouchableOpacity} from 'react-native';
 import {theme} from 'styles';
 import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
-// import BottomSheet from 'components/@common/BottomSheet/BottomSheet';
+import BottomSheet from 'components/@common/BottomSheet/BottomSheet';
 
+/**
+ * @param buttonText 버튼 텍스트
+ * @param bottomSheetContent bottomSheet에 들어갈 요소
+ * @param onPress 버튼을 눌렀을 때 동작하는 함수
+ */
 type ActionButtonWithBottomSheetProps = {
   buttonText: string;
   bottomSheetContent?: ReactNode;
@@ -13,12 +18,14 @@ type ActionButtonWithBottomSheetProps = {
 
 export default function ActionButtonWithBottomSheet({
   buttonText,
-  // bottomSheetContent,
+  bottomSheetContent,
   onPress,
 }: ActionButtonWithBottomSheetProps) {
-  const [, setIsBottomSheetOpen] = useState(false);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   const handlePressActionButton = () => setIsBottomSheetOpen(true);
+  const handleOpenBottomSheet = () => setIsBottomSheetOpen(true);
+  const handleCloseBottomSheet = () => setIsBottomSheetOpen(false);
 
   return (
     <>
@@ -30,22 +37,23 @@ export default function ActionButtonWithBottomSheet({
         </Typography>
         <Icon name={'ArrowRightSmall'} />
       </TouchableOpacity>
-      {/* {bottomSheetContent && (
+      {bottomSheetContent && (
         <BottomSheet
           isBottomSheetOpen={isBottomSheetOpen}
-          setIsBottomSheetOpen={setIsBottomSheetOpen}
+          onOpen={handleOpenBottomSheet}
+          onClose={handleCloseBottomSheet}
           height={140}
           children={bottomSheetContent}
         />
-      )} */}
+      )}
     </>
   );
 }
 
 const actionButtonWithBottomSheetStyles = StyleSheet.create({
   button: {
-    height: 68,
     width: '100%',
+    height: 68,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
