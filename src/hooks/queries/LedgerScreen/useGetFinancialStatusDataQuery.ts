@@ -1,16 +1,10 @@
 import {useQuery} from '@tanstack/react-query';
 import {ledgerApi} from 'apis/ledgerApi';
+import {defaultFinancialStatusData} from 'constants/queries/ledger';
 import {ledgerQueryKeys} from 'constants/queryKeys/ledger';
 
 export const useGetFinancialStatusDataQuery = () => {
-  const {
-    data: financialStatusData = {
-      totalAssets: 0,
-      totalLiabilities: 0,
-      netAssets: 0,
-      initialNetAssetDefined: false,
-    },
-  } = useQuery({
+  const {data: financialStatusData = defaultFinancialStatusData} = useQuery({
     queryKey: [ledgerQueryKeys.financialStatusData],
     queryFn: ledgerApi.getFinancialStatusData,
   });

@@ -1,4 +1,4 @@
-import {axiosApi} from 'apis/axios';
+import {axiosApi} from 'apis/axiosInstance';
 import {CardResponseDto} from 'types/dtos/setting';
 import {CardEntity} from 'types/entities/setting';
 

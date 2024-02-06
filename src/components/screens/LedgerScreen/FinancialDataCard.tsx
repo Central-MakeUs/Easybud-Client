@@ -64,7 +64,10 @@ export function TooltipIcon({onPress, isVisible}: TooltipIconProps) {
  */
 type DetailButtonProps = {variant?: 'detail' | 'time'; onPress?: () => void};
 
-export function DetailButton({variant = 'detail', onPress}: DetailButtonProps) {
+export function DetailButton({
+  variant = undefined,
+  onPress,
+}: DetailButtonProps) {
   const [currentDate, _] = useState(new Date());
 
   const getDatePeriod = () => {
@@ -82,15 +85,16 @@ export function DetailButton({variant = 'detail', onPress}: DetailButtonProps) {
           type={'Body2Regular'}
           color={'gray4'}
           style={financialDataCardStyles.button}>
-          상세보기
+          거래 더보기
         </Typography>
       ) : (
-        <View style={financialDataCardStyles.timeDetailButton}>
-          <Typography type={'Body2Regular'} color={'gray4'}>
-            {getDatePeriod()}
-          </Typography>
-          <Icon name={'ArrowRightSmall'} />
-        </View>
+        variant === 'time' && (
+          <View style={financialDataCardStyles.timeDetailButton}>
+            <Typography type={'Body2Regular'} color={'gray4'}>
+              {getDatePeriod()}
+            </Typography>
+          </View>
+        )
       )}
     </TouchableOpacity>
   );

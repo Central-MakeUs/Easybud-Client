@@ -1,5 +1,4 @@
 import axios, {AxiosError, AxiosResponse} from 'axios';
-import {authApi} from 'apis/authApi';
 import localStorage from 'libs/async-storage';
 import {TokenKeys} from 'libs/async-storage/constants/keys';
 
@@ -45,9 +44,10 @@ const onRejected = async (error: AxiosError) => {
       (originalConfig && error.response?.status === 401) ||
       error.response?.status === 500
     ) {
-      const result = await authApi.patchAccessToken({
+      const response = await axiosApi.patch('auth/reissue', {
         refreshToken,
       });
+      const result = response.data.result;
 
       axiosApi.request({
         ...originalConfig,

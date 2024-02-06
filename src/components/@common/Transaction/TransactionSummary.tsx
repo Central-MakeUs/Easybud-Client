@@ -28,7 +28,7 @@ export default function TransactionSummary({
   return (
     <View style={transactionSummaryStyles.rowContainer}>
       <View style={transactionSummaryStyles.categoryContainer}>
-        <Typography type={'Title2Regular'} color={'gray4'}>
+        <Typography type={'Title3SemiBold'} color={'gray4'}>
           {categoryList[category as RecentTransactionVariantType]}
         </Typography>
       </View>
@@ -38,17 +38,17 @@ export default function TransactionSummary({
             transactionSummaryStyles.keyNoteDateContainer,
             {marginLeft: amount ? undefined : 'auto'},
           ]}>
-          <Typography type={'Title2Regular'} color={'gray4'}>
+          <Typography type={'Body1Semibold'} color={'gray4'}>
             {keyNote}
           </Typography>
-          <Typography type={'Title2Regular'} color={'gray4'}>
+          <Typography type={'Body1Semibold'} color={'gray4'}>
             {date}
           </Typography>
         </View>
         {amount && (
           <View style={transactionSummaryStyles.amountContainer}>
             <Typography
-              type={'Title2Bold'}
+              type={'Body1Semibold'}
               color={'gray6'}
               style={transactionSummaryStyles.amountText}>
               {formatToLocaleString(amount)}원
