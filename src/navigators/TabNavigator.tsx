@@ -18,6 +18,7 @@ import NullScreen from 'navigators/components/NullScreen';
 import LedgerScreen from 'screens/Tab/LedgerScreen';
 import TransactionScreen from 'screens/Tab/TransactionScreen';
 import Icon from 'components/@common/Icon';
+import Typography from 'components/@common/Typography';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
@@ -83,8 +84,19 @@ const screenOptions: (props: {
     backgroundColor: theme.palette.gray1,
   },
   headerShadowVisible: false,
-  headerTitle: '로고',
   headerTitleStyle: theme.typography.Body1Semibold,
+  headerTitle: '',
+  headerLeft: () => (
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Tab', {screen: 'Ledger'})}>
+      <Typography type={'Body1Bold'} color={'primary'}>
+        Easybud
+      </Typography>
+    </TouchableOpacity>
+  ),
+  headerLeftContainerStyle: {
+    paddingLeft: 15,
+  },
   headerRightContainerStyle: {
     paddingRight: 15,
   },
