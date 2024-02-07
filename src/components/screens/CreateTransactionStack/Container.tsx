@@ -47,7 +47,9 @@ export default function Container({
   }, [accountIndex, accounts.length, screen]);
 
   return (
-    <ScreenContainer fixedBottomComponent={fixedBottomComponent}>
+    <ScreenContainer
+      fixedBottomComponent={fixedBottomComponent}
+      style={{paddingBottom: 120}}>
       <ProgressStep stepCount={step} currentStep={currentStep} />
       <View style={styles.header}>
         <Typography type="Title1Semibold1">{title}</Typography>

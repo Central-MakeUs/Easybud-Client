@@ -1,3 +1,4 @@
+import Icon from 'components/@common/Icon';
 import InputForm from 'components/@common/InputForm';
 import Typography from 'components/@common/Typography';
 import useTransaction from 'hooks/useTransaction';
@@ -38,16 +39,10 @@ export default function AccountDetails({
           gap: 10,
           marginBottom: 5,
         }}>
-        <Typography type="Body2Semibold">계정 {accountIndex + 1}</Typography>
+        <Typography type="Body1Semibold">계정 {accountIndex + 1}</Typography>
         {isTheOnlyOne ? null : (
-          <TouchableOpacity
-            onPress={() => deleteAccount(accountIndex)}
-            style={styles.deleteButton}>
-            <Typography
-              type="Body2Regular"
-              style={{textAlign: 'right', textDecorationLine: 'underline'}}>
-              삭제
-            </Typography>
+          <TouchableOpacity onPress={() => deleteAccount(accountIndex)}>
+            <Icon name={'Bin'} size={20} />
           </TouchableOpacity>
         )}
       </View>
@@ -92,17 +87,9 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
   },
   account: {
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 8,
-    borderWidth: 1,
-    borderColor: theme.palette.gray3,
+    padding: 15,
+    borderRadius: 12,
     gap: 5,
-  },
-  deleteButton: {
-    alignSelf: 'flex-end',
-    borderRadius: 10,
-    paddingHorizontal: 8,
-    paddingVertical: 6,
+    backgroundColor: theme.palette.white,
   },
 });

@@ -104,18 +104,15 @@ export default function TransactionConfirmationScreen({
         </View>
         <DebitCreditOverview accounts={accounts} />
       </View>
-      <View style={styles.info}>
-        <Typography type="Body1Semibold">상세 정보</Typography>
-        {accounts.map((account, index) => (
-          <AccountDetails
-            key={index}
-            accountIndex={index}
-            account={account}
-            updateTransaction={navigateUpdateScreen}
-            deleteAccount={deleteAccount}
-          />
-        ))}
-      </View>
+      {accounts.map((account, index) => (
+        <AccountDetails
+          key={index}
+          accountIndex={index}
+          account={account}
+          updateTransaction={navigateUpdateScreen}
+          deleteAccount={deleteAccount}
+        />
+      ))}
     </Container>
   );
 }
@@ -132,6 +129,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.palette.white,
     borderRadius: 12,
     padding: 15,
+    marginBottom: 10,
   },
   account: {
     paddingHorizontal: 15,

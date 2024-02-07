@@ -40,7 +40,7 @@ export default function DebitCreditOverview({
               <Typography type={'Body2Semibold'} color={'gray4'}>
                 {account.category.secondary}
               </Typography>
-              <Typography type={'Body2Semibold'} color={'gray5'}>
+              <Typography type={'Body1Semibold'} color={'gray5'}>
                 {formatToLocaleString(account.amount)}원
               </Typography>
             </View>
