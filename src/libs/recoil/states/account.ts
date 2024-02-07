@@ -6,7 +6,7 @@ import {NewAccount} from 'types/account';
 
 const initialAccount: NewAccount = {
   type: {name: '자산', change: '증가'},
-  category: {primary: '', secondary: '', tertiary: ''},
+  category: {primaryId: null, secondaryId: null, tertiaryId: null},
   amount: 0,
 };
 

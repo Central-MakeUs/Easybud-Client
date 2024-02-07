@@ -31,7 +31,7 @@ export default function DebitCreditOverview({
           {debits.map((account, index) => (
             <View key={index} style={styles.item}>
               <Typography type={'Body2Semibold'} color={'gray4'}>
-                {account.category.secondary}
+                {account.category.secondaryId}
               </Typography>
               <Typography type={'Body2Semibold'} color={'gray5'}>
                 {formatNumber(account.amount)}원
@@ -50,7 +50,7 @@ export default function DebitCreditOverview({
             {credits.map((account, index) => (
               <View key={index} style={styles.item}>
                 <Typography type={'Body2Semibold'} color={'gray4'}>
-                  {account.category.secondary}
+                  {account.category.secondaryId}
                 </Typography>
                 <Typography type={'Body2Semibold'} color={'gray5'}>
                   {formatNumber(account.amount)}원

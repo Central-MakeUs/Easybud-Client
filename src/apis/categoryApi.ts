@@ -1,75 +1,17 @@
-import {axiosApi} from 'apis/axios';
-import {set} from 'lodash';
+import {axiosApi} from 'apis/axiosInstance';
+import {find} from 'lodash';
+import {
+  CategoryList,
+  PrimaryCategory,
+  SecondaryCategory,
+  TertiaryCategory,
+} from 'types/components/Transaction';
 
 const categoryApi = {
   getCategoryList: async (): Promise<CategoryList | undefined> => {
     const {data} = await axiosApi.get(`/categories`);
 
-    if (!data) {
-      return data;
-    }
-
-    const parsedData: CategoryList = new Map();
-
-    (data.result.accountCategories as CategoryListDTO).forEach(
-      ({
-        primaryCategoryId: primaryId,
-        primaryCategoryContent: primaryContent,
-        secondaryCategoryId: secondaryId,
-        secondaryCategoryContent: secondaryContent,
-        tertiaryCategoryId: tertiaryId,
-        tertiaryCategoryContent: tertiaryContent,
-      }) => {
-        // primaryId 키로 가지는 PrimaryCategory가 이미 Map에 있는지 확인
-        const primary = parsedData.get(primaryId);
-
-        if (!primary) {
-          // Map에 PrimaryCategory가 없을 경우 새로운 PrimaryCategory를 생성하여 Map에 추가
-          const newPrimary: PrimaryCategory = {
-            id: primaryId,
-            name: primaryContent,
-            subList: new Map(),
-          };
-
-          // secondaryId를 키로 가지는 SecondaryCategory를 생성하여 PrimaryCategory에 추가
-          const newSecondary: SecondaryCategory = {
-            id: secondaryId,
-            name: secondaryContent,
-            subList: new Map([
-              [tertiaryId, {id: tertiaryId, name: tertiaryContent}],
-            ]),
-          };
-
-          set(newPrimary, ['subList', secondaryId], newSecondary);
-
-          // Map에 새로운 PrimaryCategory를 추가
-          parsedData.set(primaryId, newPrimary);
-        } else {
-          // Map에 이미 존재하는 PrimaryCategory일 경우 secondaryId를 키로 가지는 SecondaryCategory를 확인
-          const secondary = primary.subList.get(secondaryId);
-
-          if (!secondary) {
-            // SecondaryCategory가 없을 경우 새로운 SecondaryCategory를 생성하여 PrimaryCategory에 추가
-            const newSecondary: SecondaryCategory = {
-              id: secondaryId,
-              name: secondaryContent,
-              subList: new Map([
-                [tertiaryId, {id: tertiaryId, name: tertiaryContent}],
-              ]),
-            };
-
-            set(primary, ['subList', secondaryId], newSecondary);
-          } else {
-            // SecondaryCategory가 이미 존재할 경우 tertiaryId를 키로 가지는 TertiaryCategory를 추가
-            set(secondary, ['subList', tertiaryId], {
-              id: tertiaryId,
-              name: tertiaryContent,
-            });
-          }
-        }
-      },
-    );
-    return parsedData;
+    return data ? parseCategoryData(data.result.accountCategories) : data;
   },
 };
 
@@ -85,21 +27,75 @@ type CategoryListDTO = {
   isDefault: boolean;
 }[];
 
-type TertiaryCategory = {
-  id: number;
-  name: string;
-};
+const parseCategoryData = (data: CategoryListDTO): PrimaryCategory[] => {
+  const categoryMap: PrimaryCategory[] = [];
 
-type SecondaryCategory = {
-  id: number;
-  name: string;
-  subList: Map<number, TertiaryCategory>;
-};
+  const updatePrimaryCategory = (
+    primaryId: number,
+    primaryContent: string,
+  ): PrimaryCategory => {
+    const newPrimary: PrimaryCategory = {
+      id: primaryId,
+      name: primaryContent,
+      subList: [],
+    };
+    categoryMap.push(newPrimary);
+    return newPrimary;
+  };
 
-type PrimaryCategory = {
-  id: number;
-  name: string;
-  subList: Map<number, SecondaryCategory>;
-};
+  const updateSecondaryCategory = (
+    primary: PrimaryCategory,
+    secondaryId: number,
+    secondaryContent: string,
+  ): SecondaryCategory => {
+    const newSecondary: SecondaryCategory = {
+      id: secondaryId,
+      name: secondaryContent,
+      subList: [],
+    };
+    primary.subList.push(newSecondary);
+    return newSecondary;
+  };
 
-type CategoryList = Map<number, PrimaryCategory>;
+  const updateTertiaryCategory = (
+    secondary: SecondaryCategory,
+    tertiaryId: number,
+    tertiaryContent: string,
+  ): TertiaryCategory => {
+    const newTertiary: TertiaryCategory = {
+      id: tertiaryId,
+      name: tertiaryContent,
+    };
+    secondary.subList.push(newTertiary);
+    return newTertiary;
+  };
+
+  data.forEach(
+    ({
+      primaryCategoryId: primaryId,
+      primaryCategoryContent: primaryContent,
+      secondaryCategoryId: secondaryId,
+      secondaryCategoryContent: secondaryContent,
+      tertiaryCategoryId: tertiaryId,
+      tertiaryCategoryContent: tertiaryContent,
+    }) => {
+      let primary = find(categoryMap, {id: primaryId});
+      if (!primary) {
+        primary = updatePrimaryCategory(primaryId, primaryContent);
+      }
+
+      let secondary = find(primary.subList, {id: secondaryId});
+      if (!secondary) {
+        secondary = updateSecondaryCategory(
+          primary,
+          secondaryId,
+          secondaryContent,
+        );
+      }
+
+      updateTertiaryCategory(secondary, tertiaryId, tertiaryContent);
+    },
+  );
+
+  return categoryMap;
+};

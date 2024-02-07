@@ -62,7 +62,7 @@ export default function AccountDetails({
         size="sm"
         label="분류"
         editIcon
-        value={`${category.primary} > ${category.secondary} > ${category.tertiary}`}
+        value={`${category.primaryId} > ${category.secondaryId} > ${category.tertiaryId}`}
         onPress={() =>
           updateTransaction({screen: 'AccountCategory', accountIndex})
         }
