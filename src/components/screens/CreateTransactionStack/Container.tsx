@@ -50,7 +50,7 @@ export default function Container({
     <ScreenContainer fixedBottomComponent={fixedBottomComponent}>
       <ProgressStep stepCount={step} currentStep={currentStep} />
       <View style={styles.header}>
-        <Typography type="Title1Bold">{title}</Typography>
+        <Typography type="Title1Semibold1">{title}</Typography>
         {errorMessage && (
           <Typography
             type="Body2Semibold"
