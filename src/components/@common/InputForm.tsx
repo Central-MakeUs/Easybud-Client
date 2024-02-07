@@ -79,6 +79,7 @@ const selectFormStyles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    height: 62,
   },
   md: {
     padding: 20,
