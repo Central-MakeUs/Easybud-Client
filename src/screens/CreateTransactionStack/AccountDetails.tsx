@@ -6,7 +6,7 @@ import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {UpdateTransactionType} from 'screens/CreateTransactionStack/TransactionConfirmationScreen';
 import {theme} from 'styles';
 import {NewAccount} from 'types/account';
-import {formatNumber} from 'utils/formatAmountValue';
+import {formatToLocaleString} from 'utils/formatAmountValue';
 
 type AccountDetailsProps = {
   accountIndex: number;
@@ -71,7 +71,7 @@ export default function AccountDetails({
         size="sm"
         label="금액"
         editIcon
-        value={`${formatNumber(amount)}원`}
+        value={`${formatToLocaleString(amount)}원`}
         onPress={() =>
           updateTransaction({screen: 'AccountAmount', accountIndex})
         }

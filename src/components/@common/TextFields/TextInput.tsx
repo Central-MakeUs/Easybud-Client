@@ -9,7 +9,7 @@ import {theme} from 'styles';
 import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
 import {useState} from 'react';
-import {extractNumbers, formatNumber} from 'utils/formatAmountValue';
+import {extractNumbers, formatToLocaleString} from 'utils/formatAmountValue';
 
 /**
  * @param type number, string
@@ -54,7 +54,7 @@ export default function TextInput({
       )}
       <RNTextInput
         maxLength={20}
-        value={formatNumber(value)}
+        value={formatToLocaleString(value)}
         onChangeText={handleChangeText}
         placeholderTextColor={theme.palette.gray3}
         onFocus={handleFocus}
