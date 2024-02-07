@@ -84,9 +84,9 @@ const loginStyles = StyleSheet.create({
   },
   imageContainer: {
     position: 'absolute',
-    left: 0,
+    left: -10,
     right: 0,
-    top: '30%',
+    top: '34%',
     justifyContent: 'center',
     alignItems: 'center',
   },
