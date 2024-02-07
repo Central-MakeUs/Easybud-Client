@@ -1,37 +1,53 @@
 import {StyleSheet, View} from 'react-native';
 import {theme} from 'styles';
-import {textColor} from 'constants/screens/TransactionScreen';
+import {formatToLocaleString} from 'utils/formatAmountValue';
 import Typography from 'components/@common/Typography';
+import {IncomeStatusSummaryKeyVariant} from 'types/screens/TransactionScreen';
+import {
+  incomeStatusSummaryText,
+  incomeStatusSummaryTextColor,
+} from 'constants/screens/TransactionScreen';
+import {useGetIncomeStatusByMonthQuery} from 'hooks/queries/TransactionScreen/useGetIncomeStatusByMonthQuery';
 
-const dummyFinancialDatas = [
-  {
-    name: '수익',
-    amount: '57,183,436원',
-  },
-  {
-    name: '비용',
-    amount: '69,950,244원',
-  },
-  {
-    name: '손익',
-    amount: '7,800,858원',
-  },
-] as const;
+/**
+ * @param currentDate 현재 날짜
+ */
+type FinancialOverviewProps = {
+  currentDate: Date;
+};
 
-export default function FinancialOverview() {
+export default function FinancialOverview({
+  currentDate,
+}: FinancialOverviewProps) {
+  const year = currentDate.getFullYear();
+  const month = currentDate.getMonth() + 1;
+
+  const incomeStatusByMonth = useGetIncomeStatusByMonthQuery(year, month);
+
   return (
     <View style={financialOverviewStyles.container}>
-      {dummyFinancialDatas.map((data, index) => (
-        <View style={financialOverviewStyles.columnContainer} key={index}>
+      {Object.entries(incomeStatusByMonth).map(([name, value], index) => (
+        <View style={financialOverviewStyles.columnContainer} key={name}>
           <View style={financialOverviewStyles.textContainer}>
             <Typography
               type={'Body2Regular'}
               color={'gray4'}
               style={financialOverviewStyles.text}>
-              {data.name}
+              {
+                incomeStatusSummaryText[
+                  name as IncomeStatusSummaryKeyVariant[number]
+                ]
+              }
             </Typography>
-            <Typography type={'Body2Regular'} color={textColor[data.name]}>
-              {data.amount}
+            <Typography
+              type={'Body2Regular'}
+              color={
+                incomeStatusSummaryTextColor[
+                  name as IncomeStatusSummaryKeyVariant[number]
+                ]
+              }
+              style={financialOverviewStyles.text}>
+              {formatToLocaleString(value)}원
             </Typography>
           </View>
           {index !== 2 && <Typography color={'gray4'}>{'|'}</Typography>}
@@ -57,11 +73,13 @@ const financialOverviewStyles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
   },
   textContainer: {
     display: 'flex',
     flexDirection: 'column',
     paddingHorizontal: 10,
+    flex: 1,
   },
   text: {
     textAlign: 'center',
