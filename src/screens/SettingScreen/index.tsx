@@ -1,9 +1,9 @@
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {theme} from 'styles';
-import ScreenContainer from 'components/@common/ScreenContainer';
 import ActionButtonWithBottomSheet from 'components/screens/SettingScreen/ActionButtonWithBottomSheet';
 import MemberManagementBottomSheetContent from 'components/screens/SettingScreen/MemberManagementBottomSheetContent';
+import Divider from 'components/@common/Divider';
+import ScreenContainer from 'components/@common/ScreenContainer';
 
 export default function SettingScreen() {
   const navigation = useNavigation();
@@ -17,7 +17,7 @@ export default function SettingScreen() {
         buttonText={'카드 설정'}
         onPress={handlePressCardSettingButton}
       />
-      <View style={settingScreenStyles.divider} />
+      <Divider />
       <ActionButtonWithBottomSheet
         buttonText={'로그아웃'}
         bottomSheetContent={
@@ -37,28 +37,6 @@ export default function SettingScreen() {
 const settingScreenStyles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: 0,
-  },
-  button: {
-    height: 68,
-    width: '100%',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    borderColor: theme.palette.gray3,
-    borderBottomWidth: 1,
-  },
-  divider: {
-    width: '100%',
-    height: 7,
-    backgroundColor: theme.palette.gray3,
-  },
-  bottomSheetContainer: {
-    height: '100%',
-    padding: 20,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    gap: 0,
   },
 });

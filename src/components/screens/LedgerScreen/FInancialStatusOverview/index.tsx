@@ -1,6 +1,6 @@
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {useGetFinancialStatusDataQuery} from 'hooks/queries/LedgerScreen/useGetFinancialStatusDataQuery';
+import {useGetFinancialStatusDataQuery} from 'hooks/queries/Ledger/useGetFinancialStatusDataQuery';
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
 import Tooltip from 'components/@common/Tooltip';
 import FinacialStatusBottom from 'components/screens/LedgerScreen/FinancialStatusOverview/FinacialStatusBottom';

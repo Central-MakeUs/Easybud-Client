@@ -1,5 +1,5 @@
 import {TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
 import {theme} from 'styles';
 import {Stack} from 'navigators/constants/stack';
@@ -96,6 +96,7 @@ const screenOptions: (props: {
 
 const CloseButton = () => {
   const navigation = useNavigation();
+  const route = useRoute();
 
   const {clearTransaction} = useTransaction();
 
@@ -103,7 +104,12 @@ const CloseButton = () => {
     <TouchableOpacity
       onPress={() => {
         clearTransaction();
-        navigation.navigate('Tab', {screen: 'Ledger'});
+
+        if (route.name === 'CardList') {
+          navigation.goBack();
+        } else {
+          navigation.navigate('Tab', {screen: 'Ledger'});
+        }
       }}>
       <Icon name="X" />
     </TouchableOpacity>

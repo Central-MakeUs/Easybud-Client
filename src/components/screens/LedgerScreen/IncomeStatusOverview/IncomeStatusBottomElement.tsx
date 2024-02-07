@@ -5,7 +5,7 @@ import {KeyOfPalette} from 'styles/types';
 import {colorScale} from 'constants/screens/LedgerScreen';
 import {getDatePeriod} from 'utils/formatDate';
 import {calculateGraphPosition, getGraphData} from 'utils/getGraphData';
-import {useGetIncomeStatusDataQuery} from 'hooks/queries/LedgerScreen/useGetIncomeStatusDataQuery';
+import {useGetIncomeStatusDataQuery} from 'hooks/queries/Ledger/useGetIncomeStatusDataQuery';
 import {
   FirstLabelType,
   GraphDataType,

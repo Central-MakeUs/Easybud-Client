@@ -1,6 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import {useGetCardListDataQuery} from 'hooks/queries/SettingScreen/useGetCardListDataQuery';
+import {useGetCardListDataQuery} from 'hooks/queries/Setting/useGetCardListDataQuery';
 import CardItem from 'components/screens/SettingScreen/CardItem';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Button from 'components/@common/Buttons/Button';
@@ -73,6 +73,7 @@ export default function CardListScreen() {
 
 const cardListScreenStyles = StyleSheet.create({
   contentContainer: {
+    paddingTop: 10,
     gap: 20,
   },
   noCardTextContainer: {
