@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {TabNavigationProp} from 'navigators/types';
-import {useGetRecentTransactionQuery} from 'hooks/queries/LedgerScreen/useGetRecentTransactionQuery';
+import {useGetRecentTransactionQuery} from 'hooks/queries/Ledger/useGetRecentTransactionQuery';
 import {FinancialDataCardBase} from 'components/screens/LedgerScreen/FinancialDataCard';
 import TransactionList from 'components/@common/TransactionList';
 

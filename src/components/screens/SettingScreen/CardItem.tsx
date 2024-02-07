@@ -1,6 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import {theme} from 'styles';
-import {useCardMutation} from 'hooks/mutations/SettingScreen/useCardMutation';
+import {useCardMutation} from 'hooks/mutations/Setting/useCardMutation';
 import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
 

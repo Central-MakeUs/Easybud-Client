@@ -15,7 +15,7 @@ export const axiosApi = axios.create({
 
 axiosApi.interceptors.request.use(
   async config => {
-    const accessToken = await localStorage.get(TokenKeys.AccessToken);
+    const accessToken: string = await localStorage.get(TokenKeys.AccessToken);
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
@@ -35,36 +35,25 @@ const onFulfilled = (res: AxiosResponse) => {
 const onRejected = async (error: AxiosError) => {
   const originalConfig = error.config;
 
-  try {
-    const value = await localStorage.get(TokenKeys.RefreshToken);
-    const refreshToken = value as string;
+  const value = await localStorage.get(TokenKeys.RefreshToken);
+  const refreshToken = value as string;
 
-    // TODO 서버에서 보내주는 응답 코드에 따라 변경 필요
-    if (
-      (originalConfig && error.response?.status === 401) ||
-      error.response?.status === 500
-    ) {
+  if (originalConfig && error.response?.status === 4101) {
+    try {
       const response = await axiosApi.patch('auth/reissue', {
         refreshToken,
       });
       const result = response.data.result;
 
-      axiosApi.request({
-        ...originalConfig,
-        headers: {
-          Authorization: `Bearer ${result.accessToken}`,
-        },
-      });
+      localStorage.set(TokenKeys.AccessToken, result.accessToken);
+      localStorage.set(TokenKeys.RefreshToken, result.refreshToken);
 
-      localStorage.set('accessToken', result.accessToken);
-      localStorage.set('refreshToken', result.refreshToken);
+      originalConfig.headers.Authorization = `Bearer ${result.accessToken}`;
 
-      throw new Error('Access token refreshed. Retry the original request.');
+      return axiosApi(originalConfig);
+    } catch (e) {
+      return Promise.reject(e);
     }
-  } catch (e) {
-    throw new Error(
-      'Error occurred during token refresh. Retry the original request.',
-    );
   }
 };
 
