@@ -1,5 +1,6 @@
 import InputForm from 'components/@common/InputForm';
 import Typography from 'components/@common/Typography';
+import CategoryListButton from 'components/screens/CreateTransactionStack/CategoryListButton';
 import useTransaction from 'hooks/useTransaction';
 import React, {useMemo} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
@@ -58,11 +59,8 @@ export default function AccountDetails({
         value={`${type.name} ${type.change}`}
         onPress={() => updateTransaction({screen: 'AccountType', accountIndex})}
       />
-      <InputForm
-        size="sm"
-        label="분류"
-        editIcon
-        value={`${category.primaryId} > ${category.secondaryId} > ${category.tertiaryId}`}
+      <CategoryListButton
+        category={category}
         onPress={() =>
           updateTransaction({screen: 'AccountCategory', accountIndex})
         }
