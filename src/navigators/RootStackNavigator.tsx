@@ -105,7 +105,7 @@ const CloseButton = () => {
       onPress={() => {
         clearTransaction();
 
-        if (route.name === 'CardList') {
+        if (route.name === 'CardList' || route.name === 'AddCard') {
           navigation.goBack();
         } else {
           navigation.navigate('Tab', {screen: 'Ledger'});
