@@ -30,7 +30,7 @@ export default function AvailableFundsBottomElement({
     <View>
       <View style={availableFundsBottomElementStyles.availableFundsContainer}>
         <Typography type={'Body2Semibold'} color={'gray6'}>
-          {username}님의 순자산
+          {username}님의 가용자금
         </Typography>
         <Typography type={'Title1Semibold2'}>
           {formatToLocaleString(availableFunds)}원
