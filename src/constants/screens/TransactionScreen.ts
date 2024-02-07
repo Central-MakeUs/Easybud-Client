@@ -1,6 +1,10 @@
 import {theme} from 'styles';
 import {KeyOfPalette} from 'styles/types';
 import {typographyStyles} from 'styles/typography';
+import {
+  IncomeStatusSummaryKeyVariant,
+  IncomeStatusSummaryValueVariant,
+} from 'types/screens/TransactionScreen';
 
 export const days = ['일', '월', '화', '수', '목', '금', '토'] as const;
 
@@ -24,8 +28,20 @@ export const calendarTheme = {
   },
 } as const;
 
-export const textColor: Record<'수익' | '비용' | '손익', KeyOfPalette> = {
-  수익: 'green',
-  비용: 'pink',
-  손익: 'gray5',
+export const incomeStatusSummaryText: Record<
+  IncomeStatusSummaryKeyVariant[number],
+  IncomeStatusSummaryValueVariant[number]
+> = {
+  revenue: '수익',
+  expense: '비용',
+  profitLoss: '손익',
+};
+
+export const incomeStatusSummaryTextColor: Record<
+  IncomeStatusSummaryKeyVariant[number],
+  KeyOfPalette
+> = {
+  revenue: 'green',
+  expense: 'pink',
+  profitLoss: 'gray5',
 };

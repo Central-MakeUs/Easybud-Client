@@ -15,7 +15,7 @@ export const axiosApi = axios.create({
 
 axiosApi.interceptors.request.use(
   async config => {
-    const accessToken = await localStorage.get(TokenKeys.AccessToken);
+    const accessToken: string = await localStorage.get(TokenKeys.AccessToken);
 
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;

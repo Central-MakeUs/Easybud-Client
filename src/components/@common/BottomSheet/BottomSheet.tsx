@@ -11,6 +11,8 @@ import {theme} from 'styles';
 
 /**
  * @param isBottomSheetOpen bottomSheet의 open 여부
+ * @param onOpen bottomSheet를 open하는 함수
+ * @param onClose bottomSheet를 close하는 함수
  * @param setInputState input 상태를 변경하는 함수
  * @param height bottomSheet의 높이
  * @param children bottomSheet 내부에 들어갈 content

@@ -1,5 +1,5 @@
 import {useNavigation} from '@react-navigation/native';
-import {useCardMutation} from 'hooks/mutations/SettingScreen/useCardMutation';
+import {useCardMutation} from 'hooks/mutations/Setting/useCardMutation';
 import Button from 'components/@common/Buttons/Button';
 import {parseDateFromString} from 'utils/parseDateFromString';
 
