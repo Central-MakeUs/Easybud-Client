@@ -10,11 +10,11 @@ export default function LedgerScreen() {
     <ScreenContainer
       contentContainerStyle={ledgerScreenStyles.contentContainer}>
       <RecentTransactionOverview />
-      <Divider style={ledgerScreenStyles.divider} />
+      <Divider color="gray2" style={ledgerScreenStyles.divider} />
       <AvailableFundsOverview />
-      <Divider style={ledgerScreenStyles.divider} />
+      <Divider color="gray2" style={ledgerScreenStyles.divider} />
       <FinancialStatusOverview />
-      <Divider style={ledgerScreenStyles.divider} />
+      <Divider color="gray2" style={ledgerScreenStyles.divider} />
       <IncomeStatusOverview />
     </ScreenContainer>
   );
