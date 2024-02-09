@@ -7,7 +7,7 @@ export const useWithdrawalMutation = () => {
   const {setAuthData} = useInitialData();
 
   const withdrawalMutation = useMutation({
-    mutationFn: authApi.postWithdrawalUser,
+    mutationFn: authApi.deleteUser,
     onSuccess: () => {
       setAuthData({isAuthenticated: false});
       localStorage.clearAll();

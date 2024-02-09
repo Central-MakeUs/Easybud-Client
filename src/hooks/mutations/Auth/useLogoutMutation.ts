@@ -7,7 +7,7 @@ export const useLogoutMutation = () => {
   const {setAuthData} = useInitialData();
 
   const logoutMutation = useMutation({
-    mutationFn: authApi.postlLogoutUser,
+    mutationFn: authApi.postLogoutUser,
     onSuccess: () => {
       setAuthData({isAuthenticated: false});
       localStorage.clearAll();

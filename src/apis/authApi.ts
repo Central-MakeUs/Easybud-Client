@@ -15,15 +15,15 @@ export const authApi = {
     return response.data.result;
   },
 
-  postlLogoutUser: async (body: {refreshToken: string}) => {
+  postLogoutUser: async (body: {refreshToken: string}) => {
     const response = await axiosApi.post('/auth/logout', {
       refreshToken: body.refreshToken,
     });
     return response.data.result;
   },
 
-  postWithdrawalUser: async () => {
-    const response = await axiosApi.post('/auth/withdrawal');
+  deleteUser: async () => {
+    const response = await axiosApi.delete('/auth/withdrawal');
     return response.data.result;
   },
 };
