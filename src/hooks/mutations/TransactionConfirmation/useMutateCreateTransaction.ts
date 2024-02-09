@@ -5,11 +5,7 @@ import {NewTransaction} from 'types/transaction';
 
 export default function useMutateCreateTransaction() {
   const queryClient = useQueryClient();
-  const {
-    mutate: createTransaction,
-    isPending,
-    isError,
-  } = useMutation({
+  const {mutate: createTransaction, ...props} = useMutation({
     mutationFn: (transaction: NewTransaction) => {
       return transactionApi.postTransaction(transaction);
     },
@@ -25,7 +21,6 @@ export default function useMutateCreateTransaction() {
 
   return {
     createTransaction,
-    isPending,
-    isError,
+    ...props,
   };
 }
