@@ -94,7 +94,7 @@ export default function AccountCategoryScreen({
     <Container
       screen="AccountCategory"
       accountIndex={accountIndex}
-      header={{title: '자산항목을 선택해 주세요'}}
+      header={{title: '자산 항목을 선택해 주세요'}}
       fixedBottomComponent={
         <>
           <LeftButton isUpdateStep={isUpdateStep} />
@@ -120,7 +120,9 @@ export default function AccountCategoryScreen({
               disabled={isLoading}
               onPress={() => setBottomSheet(BottomSheetType.Primary)}
               value={primaryCategory?.name}
-              placeholder={isLoading ? '불러오는 중...' : '선택'}
+              placeholder={
+                isLoading ? '불러오는 중...' : '대분류를 선택해주세요'
+              }
               bottomSheet={
                 <SelectFormBottomSheet
                   label={CategoryName.primary}
@@ -153,7 +155,9 @@ export default function AccountCategoryScreen({
               onPress={() => setBottomSheet(BottomSheetType.Secondary)}
               value={secondaryCategory?.name}
               placeholder={
-                !primaryCategory ? '대분류를 먼저 선택해주세요' : '선택'
+                !primaryCategory
+                  ? '대분류를 먼저 선택해주세요'
+                  : '중분류를 선택해주세요'
               }
               bottomSheet={
                 <SelectFormBottomSheet
@@ -192,7 +196,9 @@ export default function AccountCategoryScreen({
               onPress={() => setBottomSheet(BottomSheetType.Tertiary)}
               value={tertiaryCategory?.name}
               placeholder={
-                !secondaryCategory ? '중분류를 먼저 선택해주세요' : '선택'
+                !secondaryCategory
+                  ? '중분류를 먼저 선택해주세요'
+                  : '소분류를 선택해주세요'
               }
               bottomSheet={
                 <SelectFormBottomSheet

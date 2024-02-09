@@ -1,9 +1,8 @@
 import Typography from 'components/@common/Typography';
 import React, {useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {theme} from 'styles';
 import {NewAccount} from 'types/account';
-import {formatNumber, isDebit} from 'utils/formatAmountValue';
+import {formatToLocaleString, isDebit} from 'utils/formatAmountValue';
 
 type DebitCreditOverviewProps = {accounts: NewAccount[]};
 
@@ -24,27 +23,42 @@ export default function DebitCreditOverview({
   return (
     <View style={styles.container}>
       <View style={{gap: 10, flex: 1}}>
-        <Typography color="primary" type="Body2Semibold">
-          차변
-        </Typography>
+        <View
+          style={[
+            styles.debitCreditTextContainer,
+            {
+              backgroundColor: 'rgba(0, 87, 255, 0.1)',
+            },
+          ]}>
+          <Typography color="primary" type="Body2Semibold">
+            차변
+          </Typography>
+        </View>
         <View style={[styles.list]}>
           {debits.map((account, index) => (
             <View key={index} style={styles.item}>
               <Typography type={'Body2Semibold'} color={'gray4'}>
                 {account.category.secondaryId}
               </Typography>
-              <Typography type={'Body2Semibold'} color={'gray5'}>
-                {formatNumber(account.amount)}원
+              <Typography type={'Body1Semibold'} color={'gray5'}>
+                {formatToLocaleString(account.amount)}원
               </Typography>
             </View>
           ))}
         </View>
       </View>
-      <View style={styles.divider} />
       <View style={{gap: 10, flex: 1}}>
-        <Typography color="pink" type="Body2Semibold">
-          대변
-        </Typography>
+        <View
+          style={[
+            styles.debitCreditTextContainer,
+            {
+              backgroundColor: `rgba(254, 7, 7, 0.1)`,
+            },
+          ]}>
+          <Typography color="pink" type="Body2Semibold">
+            대변
+          </Typography>
+        </View>
         <View style={styles.list}>
           <View style={[styles.list, {alignItems: 'flex-start'}]}>
             {credits.map((account, index) => (
@@ -52,8 +66,8 @@ export default function DebitCreditOverview({
                 <Typography type={'Body2Semibold'} color={'gray4'}>
                   {account.category.secondaryId}
                 </Typography>
-                <Typography type={'Body2Semibold'} color={'gray5'}>
-                  {formatNumber(account.amount)}원
+                <Typography type={'Body1Semibold'} color={'gray5'}>
+                  {formatToLocaleString(account.amount)}원
                 </Typography>
               </View>
             ))}
@@ -69,6 +83,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     gap: 15,
   },
+  debitCreditTextContainer: {
+    paddingVertical: 3,
+    paddingHorizontal: 8,
+    width: 40,
+    borderRadius: 4,
+  },
   list: {
     flex: 1,
     gap: 10,
@@ -77,10 +97,5 @@ const styles = StyleSheet.create({
   item: {
     gap: 2,
     justifyContent: 'space-between',
-  },
-  divider: {
-    backgroundColor: theme.palette.gray4,
-    height: '100%',
-    width: 1,
   },
 });

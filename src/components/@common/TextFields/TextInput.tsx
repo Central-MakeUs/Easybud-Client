@@ -4,13 +4,12 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInputProps,
-  Text,
 } from 'react-native';
 import {theme} from 'styles';
 import Icon from 'components/@common/Icon';
 import Typography from 'components/@common/Typography';
 import {useState} from 'react';
-import {extractNumbers, formatNumber} from 'utils/formatAmountValue';
+import {extractNumbers, formatToLocaleString} from 'utils/formatAmountValue';
 
 /**
  * @param type number, string
@@ -55,17 +54,30 @@ export default function TextInput({
       )}
       <RNTextInput
         maxLength={20}
-        value={formatNumber(value)}
+        value={formatToLocaleString(value)}
         onChangeText={handleChangeText}
         placeholderTextColor={theme.palette.gray3}
         onFocus={handleFocus}
         onBlur={handleBlur}
         underlineColorAndroid="transparent"
-        style={{color: theme.palette.black}}
+        style={{
+          color: theme.palette.black,
+          ...theme.typography.Title1Semibold1,
+          flex: 1,
+        }}
         {...props}
       />
-      <View style={{flexDirection: 'row', gap: 10, alignItems: 'center'}}>
-        {type === 'number' && <Text style={styles.unit}>원</Text>}
+      <View
+        style={{
+          flexDirection: 'row',
+          gap: 10,
+          alignItems: 'center',
+        }}>
+        {type === 'number' && (
+          <Typography type={'Title2SemiBold'} color={'gray6'}>
+            원
+          </Typography>
+        )}
         {value !== '' && (
           <TouchableOpacity onPress={handleClearInput}>
             <Icon name="XCircle" color={theme.palette.gray3} />
@@ -84,7 +96,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     gap: 10,
-    paddingVertical: 11,
     paddingRight: 16,
     width: '100%',
     marginBottom: 10,
@@ -94,9 +105,6 @@ const styles = StyleSheet.create({
     maxWidth: '93%',
     flex: 1,
     color: theme.palette.black,
-  },
-  unit: {
-    color: theme.palette.gray4,
   },
   label: {
     position: 'absolute',

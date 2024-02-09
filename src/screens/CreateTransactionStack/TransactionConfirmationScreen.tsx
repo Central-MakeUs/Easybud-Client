@@ -79,7 +79,7 @@ export default function TransactionConfirmationScreen({
       header={{
         title: '입력하신 정보를 확인해주세요',
         errorMessage: disabledSubmit
-          ? `차대변 합계가 달라요!\n새 계정을 추가하거나 금액을 수정해주세요`
+          ? `차・대변 합계가 달라요!\n새 계정을 추가하거나 금액을 수정해주세요`
           : undefined,
       }}
       fixedBottomComponent={
@@ -107,18 +107,15 @@ export default function TransactionConfirmationScreen({
         </View>
         <DebitCreditOverview accounts={accounts} />
       </View>
-      <View style={styles.info}>
-        <Typography type="Body1Semibold">상세 정보</Typography>
-        {accounts.map((account, index) => (
-          <AccountDetails
-            key={index}
-            accountIndex={index}
-            account={account}
-            updateTransaction={navigateUpdateScreen}
-            deleteAccount={deleteAccount}
-          />
-        ))}
-      </View>
+      {accounts.map((account, index) => (
+        <AccountDetails
+          key={index}
+          accountIndex={index}
+          account={account}
+          updateTransaction={navigateUpdateScreen}
+          deleteAccount={deleteAccount}
+        />
+      ))}
     </Container>
   );
 }
@@ -132,7 +129,10 @@ const styles = StyleSheet.create({
   },
   info: {
     gap: 20,
-    paddingBottom: 10,
+    backgroundColor: theme.palette.white,
+    borderRadius: 12,
+    padding: 15,
+    marginBottom: 10,
   },
   account: {
     paddingHorizontal: 15,

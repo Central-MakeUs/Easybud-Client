@@ -1,6 +1,6 @@
 import React, {useMemo} from 'react';
 import {TextInputProps} from 'react-native';
-import {formatNumber, isDebit} from 'utils/formatAmountValue';
+import {formatToLocaleString, isDebit} from 'utils/formatAmountValue';
 import {isEqual} from 'lodash';
 import {NewAccount} from 'types/account';
 import UpdateButton from 'components/screens/CreateTransactionStack/UpdateButton';
@@ -54,7 +54,7 @@ export default function AmountTextField({
         <UpdateButton
           disabled={disabled}
           onPress={() => onChange(Math.abs(balance))}>
-          현재 대차: {formatNumber(balance)}원 입력
+          현재 대차: {formatToLocaleString(balance)}원 입력
         </UpdateButton>
       )}
     </>

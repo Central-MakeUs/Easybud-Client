@@ -26,13 +26,6 @@ export function isDebit(type: AccountTypeUnion) {
   }
 }
 
-export function formatNumber(amount: string | number): string {
-  return amount
-    .toString()
-    .replace(/,/g, '')
-    .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
-
 export function extractNumbers(str: string) {
   return str.replace(/[^0-9]/g, '');
 }

@@ -66,8 +66,8 @@ export default function CommonSelectItem({
 const selectFormStyles = StyleSheet.create({
   container: {
     width: '100%',
-    height: 49,
-    borderRadius: 18,
+    height: 62,
+    borderRadius: 12,
     backgroundColor: theme.palette.gray2,
     paddingHorizontal: 21,
     display: 'flex',

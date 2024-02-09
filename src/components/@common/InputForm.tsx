@@ -41,7 +41,12 @@ export default function InputForm({
         {label}
       </Typography>
       {onPress ? (
-        <View style={{gap: 5, flexDirection: 'row', alignItems: 'center'}}>
+        <View
+          style={{
+            gap: 5,
+            flexDirection: 'row',
+            alignItems: 'center',
+          }}>
           <Typography
             type={size === 'md' ? 'Body1Semibold' : 'Body2Regular'}
             color={isEmpty(value) ? 'gray3' : 'gray5'}>
