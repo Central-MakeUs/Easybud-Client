@@ -15,6 +15,7 @@ import DebitCreditOverview from 'components/screens/CreateTransactionStack/Debit
 import UpdateButton from 'components/screens/CreateTransactionStack/UpdateButton';
 import Container from 'components/screens/CreateTransactionStack/Container';
 import {isEmpty} from 'lodash';
+import useMutateCreateTransaction from 'hooks/mutations/TransactionConfirmation/useMutateCreateTransaction';
 
 type TransactionConfirmationScreenProps = {
   navigation: RootStackNavigationProp;
@@ -27,9 +28,11 @@ export default function TransactionConfirmationScreen({
   const {transaction, balance, accounts, deleteAccount, clearTransaction} =
     useTransaction();
 
+  const {createTransaction, isPending} = useMutateCreateTransaction();
+
   const handleSave = () => {
+    createTransaction(transaction);
     clearTransaction();
-    console.log(transaction);
     navigation.navigate('Tab', {screen: 'Ledger'});
   };
 
@@ -84,7 +87,7 @@ export default function TransactionConfirmationScreen({
           <Button variant="secondary" onPress={navigateAddAccountScreen}>
             새 계정 추가
           </Button>
-          <Button disabled={disabledSubmit} onPress={handleSave}>
+          <Button disabled={disabledSubmit || isPending} onPress={handleSave}>
             저장
           </Button>
         </>

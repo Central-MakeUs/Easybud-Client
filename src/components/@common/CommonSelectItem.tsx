@@ -16,7 +16,7 @@ import {TouchableOpacityProps} from 'react-native';
 type CommonSelectButtonProps = {
   label: string;
   variant?: 'primary' | 'gray';
-  value: string;
+  value: string | undefined;
   placeholder?: string;
   bottomSheet: ReactNode;
 } & TouchableOpacityProps;

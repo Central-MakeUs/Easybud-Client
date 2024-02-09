@@ -13,17 +13,17 @@ export type Account = {
 
 /** 거래의 8요소 중 하나에 해당하는 계정 타입 */
 export type AccountTypeUnion = {
-  [K in AccountName]: AccountType<K>;
-}[AccountName];
+  [K in AccountTypeName]: AccountType<K>;
+}[AccountTypeName];
 
 /** 거래의 8요소*/
-export type AccountType<T extends AccountName> = {
+export type AccountType<T extends AccountTypeName> = {
   name: T;
   change: Changes[T];
 };
 
 /** 계정 이름 */
-type AccountName =
+export type AccountTypeName =
   | '자산' // Asset
   | '부채' // Liability
   | '자본' // Equity
@@ -49,11 +49,11 @@ type Occurrence = '발생';
 /** 계정의 대분류, 중분류, 소분류, 세분류를 포함하는 분류 */
 export type AccountCategory = {
   /** 대분류 */
-  primary: string;
+  primaryId: number | null;
   /** 중분류 */
-  secondary: string;
+  secondaryId: number | null;
   /** 소분류 */
-  tertiary: string;
+  tertiaryId: number | null;
 };
 
 /////////////////////////////////////////////
