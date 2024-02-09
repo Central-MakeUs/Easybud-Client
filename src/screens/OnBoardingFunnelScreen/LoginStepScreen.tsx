@@ -7,14 +7,15 @@ import {
 import {userInfoState} from 'libs/recoil/states/userInfo';
 import {theme} from 'styles';
 import Logo from 'assets/logos/logo-white.png';
-import {SetStepActionType} from 'types/screens/FunnelScreen';
 import useAuthStorage from 'hooks/useAuthStorage';
 import useSocialLoginMutation from 'hooks/mutations/Auth/useSocialLoginMutation';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
 import SocialLoginButton from 'components/@common/Buttons/SocialLoginButton';
 
-type LoginStepScreenProps = SetStepActionType;
+type LoginStepScreenProps = {
+  onNext: (type: string) => void;
+};
 
 export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
   const {setAuthData} = useAuthStorage();
@@ -39,7 +40,7 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
           });
           setUserInfo({username: kakaoProfile.nickname});
 
-          onNext();
+          onNext(data.type);
         },
       },
     );
@@ -68,7 +69,7 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
           variant="kakao"
           onPress={handlePressKakaoLoginButton}
         />
-        <SocialLoginButton variant="apple" onPress={onNext} />
+        <SocialLoginButton variant="apple" onPress={() => {}} />
       </View>
     </ScreenContainer>
   );

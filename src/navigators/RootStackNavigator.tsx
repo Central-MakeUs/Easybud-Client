@@ -27,7 +27,7 @@ export default function RootStackNavigator() {
     <Stack.Navigator
       initialRouteName={initialRouteName}
       screenOptions={screenOptions}>
-      {!authData.isAuthenticated ? (
+      {authData.isAuthenticated ? (
         <>
           <Stack.Screen name={'Tab'} component={TabNavigator} />
           <Stack.Screen

@@ -42,8 +42,13 @@ export const typographyStyles = StyleSheet.create({
     fontSize: 20,
   },
 
+  Title3Bold: {
+    fontFamily: 'Pretendard-Bold',
+    fontWeight: '700',
+    fontSize: 18,
+  },
   Title3SemiBold: {
-    fontFamily: 'Pretendard-Regular',
+    fontFamily: 'Pretendard-SemiBold',
     fontWeight: '600',
     fontSize: 18,
   },

@@ -1,5 +1,6 @@
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View, Image} from 'react-native';
 import {theme} from 'styles';
+import accountCategoryDescription from 'assets/images/account-category-description.png';
 import {SetStepActionType} from 'types/screens/FunnelScreen';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Button from 'components/@common/Buttons/Button';
@@ -13,30 +14,54 @@ export default function AccountCategoryDescriptionScreen({
   return (
     <ScreenContainer
       fixedBottomComponent={
-        <Button variant="secondary" onPress={onNext}>
+        <Button variant="primary" onPress={onNext}>
           다음
         </Button>
       }
       contentContainerStyle={accountCategoryDescriptionScreenStyles.container}>
-      <Typography type={'Title3SemiBold'} color={'white'}>
-        계정 카테고리를 커스터마이징하여
-      </Typography>
-      <Typography
-        type={'Title3SemiBold'}
-        color={'white'}
-        style={accountCategoryDescriptionScreenStyles.text}>
-        세분화된 계정 정보를 입력해요
-      </Typography>
+      <View style={accountCategoryDescriptionScreenStyles.textContainer}>
+        <Typography
+          type={'Title3SemiBold'}
+          color={'black'}
+          style={accountCategoryDescriptionScreenStyles.text}>
+          계정 카테고리를 커스터마이징하여
+        </Typography>
+        <Typography
+          type={'Title3SemiBold'}
+          color={'black'}
+          style={accountCategoryDescriptionScreenStyles.text}>
+          세분화된 계정 정보를 입력해요
+        </Typography>
+      </View>
+      <View style={accountCategoryDescriptionScreenStyles.imageContainer}>
+        <Image
+          source={accountCategoryDescription}
+          style={accountCategoryDescriptionScreenStyles.image}
+        />
+      </View>
     </ScreenContainer>
   );
 }
 
 const accountCategoryDescriptionScreenStyles = StyleSheet.create({
   container: {
-    backgroundColor: theme.palette.primary,
+    backgroundColor: theme.palette.gray2,
     paddingTop: 30,
+    paddingHorizontal: 0,
+    gap: 10,
+  },
+  textContainer: {
+    paddingHorizontal: 20,
   },
   text: {
-    lineHeight: 39,
+    lineHeight: 35,
+  },
+  imageContainer: {
+    flex: 1,
+    marginBottom: 80,
+  },
+  image: {
+    width: '100%',
+    height: '100%',
   },
 });

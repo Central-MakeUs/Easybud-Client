@@ -8,11 +8,5 @@ export default function useInitialData() {
 
   const [authData, setAuthData] = useRecoilState(authState);
 
-  // Todo: navigate login page
-  const isVerifyTokenError = false;
-  isVerifyTokenError;
-
-  const isVerifyTokenLoading = false;
-
-  return {authData, setAuthData, token, isVerifyTokenLoading};
+  return {authData, setAuthData, token};
 }

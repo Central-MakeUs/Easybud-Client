@@ -15,7 +15,17 @@ export default function OnBoardingFunnelScreen() {
   const {setAuthData} = useInitialData();
 
   const stepInfoList = {
-    Step1: <LoginStepScreen onNext={() => navigation.navigate('Step2')} />,
+    Step1: (
+      <LoginStepScreen
+        onNext={(type: string) => {
+          if (type === 'REGISTER') {
+            navigation.navigate('Step2');
+          } else {
+            setAuthData({isAuthenticated: true});
+          }
+        }}
+      />
+    ),
     Step2: (
       <LedgerDescriptionScreen onNext={() => navigation.navigate('Step3')} />
     ),
