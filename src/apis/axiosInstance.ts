@@ -38,9 +38,16 @@ const onRejected = async (error: AxiosError) => {
   const value = await localStorage.get(TokenKeys.RefreshToken);
   const refreshToken = value as string;
 
-  if (originalConfig && error.response?.status === 4101) {
+  if (
+    originalConfig &&
+    (error.response?.status === 4100 ||
+      error.response?.status === 4101 ||
+      error.response?.status === 4102 ||
+      error.response?.status === 4103 ||
+      error.response?.status === 4104)
+  ) {
     try {
-      const response = await axiosApi.patch('auth/reissue', {
+      const response = await axiosApi.post('auth/reissue', {
         refreshToken,
       });
       const result = response.data.result;
