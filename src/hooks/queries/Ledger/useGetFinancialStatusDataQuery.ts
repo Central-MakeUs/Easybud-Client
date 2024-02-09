@@ -4,15 +4,11 @@ import {defaultFinancialStatusData} from 'constants/queries/ledger';
 import {ledgerQueryKeys} from 'constants/queryKeys/ledger';
 
 export const useGetFinancialStatusDataQuery = () => {
-  const {data: financialStatusData = defaultFinancialStatusData} = useQuery({
+  const {data: financialStatusData} = useQuery({
+    initialData: defaultFinancialStatusData,
     queryKey: [ledgerQueryKeys.financialStatusData],
     queryFn: ledgerApi.getFinancialStatusData,
   });
 
-  return {
-    totalAssets: financialStatusData.totalAssets,
-    totalLiabilities: financialStatusData.totalLiabilities,
-    netAssets: financialStatusData.netAssets,
-    initialNetAssetDefined: financialStatusData.initialNetAssetDefined,
-  };
+  return financialStatusData;
 };

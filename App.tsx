@@ -1,7 +1,15 @@
+import {useEffect} from 'react';
+import SplashScreen from 'react-native-splash-screen';
 import AppSetupWrapper from 'containers/AppSetupContainer';
 import RootStackNavigator from 'navigators/RootStackNavigator';
 
 const App = () => {
+  useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000);
+  }, []);
+
   return (
     <AppSetupWrapper>
       <RootStackNavigator />
