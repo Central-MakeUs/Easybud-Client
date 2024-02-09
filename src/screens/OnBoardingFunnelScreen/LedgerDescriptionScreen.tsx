@@ -1,5 +1,7 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
+import ledgerDescription1 from 'assets/images/ledger-description-1.png';
+import ledgerDescription2 from 'assets/images/ledger-description-2.png';
 import {theme} from 'styles';
 import {SetStepActionType} from 'types/screens/FunnelScreen';
 import ScreenContainer from 'components/@common/ScreenContainer';
@@ -33,7 +35,16 @@ export default function LedgerDescriptionScreen({
           거래 내역과 재무 데이터를 확인할 수 있어요
         </Typography>
       </View>
-      <View style={ledgerDescriptionScreenStyles.imageContainer} />
+      <View style={ledgerDescriptionScreenStyles.imageContainer}>
+        <Image
+          source={ledgerDescription1}
+          style={ledgerDescriptionScreenStyles.image1}
+        />
+        <Image
+          source={ledgerDescription2}
+          style={ledgerDescriptionScreenStyles.image2}
+        />
+      </View>
     </ScreenContainer>
   );
 }
@@ -54,9 +65,23 @@ const ledgerDescriptionScreenStyles = StyleSheet.create({
   imageContainer: {
     flex: 1,
     marginBottom: 80,
+    position: 'relative',
   },
-  image: {
-    width: '100%',
-    height: '100%',
+  image1: {
+    width: '75%',
+    height: 0,
+    paddingBottom: '200%',
+    position: 'absolute',
+    top: 18,
+    right: 20,
+    zIndex: 999,
+  },
+  image2: {
+    width: '60%',
+    height: 0,
+    paddingBottom: '210%',
+    position: 'absolute',
+    top: 10,
+    left: 20,
   },
 });
