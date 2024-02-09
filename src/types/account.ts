@@ -13,17 +13,17 @@ export type Account = {
 
 /** 거래의 8요소 중 하나에 해당하는 계정 타입 */
 export type AccountTypeUnion = {
-  [K in AccountName]: AccountType<K>;
-}[AccountName];
+  [K in AccountTypeName]: AccountType<K>;
+}[AccountTypeName];
 
 /** 거래의 8요소*/
-export type AccountType<T extends AccountName> = {
+export type AccountType<T extends AccountTypeName> = {
   name: T;
   change: Changes[T];
 };
 
 /** 계정 이름 */
-type AccountName =
+export type AccountTypeName =
   | '자산' // Asset
   | '부채' // Liability
   | '자본' // Equity
