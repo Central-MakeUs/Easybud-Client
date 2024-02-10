@@ -1,12 +1,20 @@
+import {useEffect} from 'react';
 import {TouchableOpacity} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {NativeStackNavigationOptions} from '@react-navigation/native-stack';
+import {useSetRecoilState} from 'recoil';
+import {getProfile} from '@react-native-seoul/kakao-login';
 import {theme} from 'styles';
 import {RootStackNavigationProp} from 'navigators/types';
 import CreateTransactionStackNavigator from 'navigators/CreateTransactionStackNavigator';
 import TabNavigator from 'navigators/TabNavigator';
 import useTransaction from 'hooks/useTransaction';
 import useInitialData from 'hooks/useInitialData';
+import {axiosApi} from 'apis/axiosInstance';
+import localStorage from 'libs/async-storage';
+import {TokenKeys} from 'libs/async-storage/constants/keys';
+import {userInfoState} from 'libs/recoil/states/userInfo';
+import {authApi} from 'apis/authApi';
 import {Stack} from 'navigators/constants/stack';
 import SettingScreen from 'screens/SettingScreen';
 import OnBoardingFunnelScreen from 'screens/OnBoardingFunnelScreen';
@@ -15,13 +23,41 @@ import CardListScreen from 'screens/SettingScreen/CardListScreen';
 import Icon from 'components/@common/Icon';
 
 export default function RootStackNavigator() {
-  const {authData, isVerifyTokenLoading} = useInitialData();
+  const {authData, setAuthData} = useInitialData();
+  const setUserInfo = useSetRecoilState(userInfoState);
 
   const initialRouteName = authData.isAuthenticated ? 'Tab' : 'OnBoarding';
 
-  if (isVerifyTokenLoading) {
-    return null; // Todo: global loading
-  }
+  useEffect(() => {
+    const autoLogin = async () => {
+      const refreshToken = await localStorage.get(TokenKeys.RefreshToken);
+
+      if (refreshToken !== null) {
+        try {
+          const response = await axiosApi.post('auth/reissue', {
+            refreshToken,
+          });
+
+          const result = response.data.result;
+
+          localStorage.set(TokenKeys.AccessToken, result.accessToken);
+          localStorage.set(TokenKeys.RefreshToken, result.refreshToken);
+
+          if (!!result.accessToken && !!result.refreshToken) {
+            const userProfile = await getProfile();
+            setUserInfo({username: userProfile.nickname});
+
+            setAuthData({isAuthenticated: true});
+          }
+        } catch (e) {
+          const response = await authApi.postLogoutUser({refreshToken});
+          return response.data;
+        }
+      }
+    };
+
+    autoLogin();
+  }, [setAuthData, setUserInfo]);
 
   return (
     <Stack.Navigator
@@ -37,8 +73,6 @@ export default function RootStackNavigator() {
               headerShown: true,
               headerBackTitleVisible: true,
               headerTitle: '거래 추가',
-              // note: navigation.push()로 인해 새 계정 추가 시 아래 설정으로 stack이 쌓이기에 통일성을 위해 변경하지 않음
-              // presentation: 'containedModal',
             }}
           />
           <Stack.Screen
