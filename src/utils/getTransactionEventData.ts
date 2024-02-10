@@ -11,7 +11,12 @@ export const getTransactionEventData = (
     const day = Number(dayString);
 
     const profitLoss = formatToLocaleString(data.profitLoss);
-    const title = data.profitLoss >= 0 ? `+${profitLoss}` : `-${profitLoss}`;
+    const title =
+      data.profitLoss > 0
+        ? `+${profitLoss}`
+        : data.profitLoss === 0
+          ? '-'
+          : `-${profitLoss}`;
 
     return {
       title,
