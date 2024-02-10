@@ -28,12 +28,15 @@ export default function TransactionConfirmationScreen({
   const {transaction, balance, accounts, deleteAccount, clearTransaction} =
     useTransaction();
 
-  const {createTransaction, isPending} = useMutateCreateTransaction();
+  const {createTransaction, isPending, isSuccess} =
+    useMutateCreateTransaction();
 
   const handleSave = () => {
     createTransaction(transaction);
-    clearTransaction();
-    navigation.navigate('Tab', {screen: 'Ledger'});
+    if (isSuccess) {
+      clearTransaction();
+      navigation.navigate('Tab', {screen: 'Ledger'});
+    }
   };
 
   const navigateAddAccountScreen = () => {
