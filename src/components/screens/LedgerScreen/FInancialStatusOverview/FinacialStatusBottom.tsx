@@ -2,7 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import {useRecoilValue} from 'recoil';
 import {theme} from 'styles';
 import {userInfoState} from 'libs/recoil/states/userInfo';
-import {formatToLocaleString} from 'utils/formatAmountValue';
+import {formatNullableAmount} from 'utils/formatAmountValue';
 import Typography from 'components/@common/Typography';
 
 type FinacialStatusBottomElementProps = {
@@ -25,7 +25,7 @@ export default function FinacialStatusBottom({
           {username}님의 순자산
         </Typography>
         <Typography type={'Title1Semibold2'}>
-          {formatToLocaleString(networthAmount)}원
+          {formatNullableAmount(networthAmount)}원
         </Typography>
       </View>
       <View style={finacialStatusBottomElementStyles.assetDebtContainer}>
@@ -34,7 +34,7 @@ export default function FinacialStatusBottom({
             자산
           </Typography>
           <Typography type={'Body1Semibold'} color={'green'}>
-            {formatToLocaleString(assetAmount)}원
+            {formatNullableAmount(assetAmount)}원
           </Typography>
         </View>
         <View style={finacialStatusBottomElementStyles.debtContainer}>
@@ -42,7 +42,7 @@ export default function FinacialStatusBottom({
             부채
           </Typography>
           <Typography type={'Body1Semibold'} color={'pink'}>
-            {formatToLocaleString(debtAmount)}원
+            {formatNullableAmount(debtAmount)}원
           </Typography>
         </View>
       </View>
