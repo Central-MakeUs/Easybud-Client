@@ -28,7 +28,6 @@ export default function AccountAmountScreen({
   return (
     <Container
       screen="AccountAmount"
-      accountIndex={accountIndex}
       header={{title: '금액을 입력해주세요'}}
       fixedBottomComponent={
         <>

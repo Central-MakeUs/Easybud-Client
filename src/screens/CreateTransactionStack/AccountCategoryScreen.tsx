@@ -54,14 +54,24 @@ export default function AccountCategoryScreen({
     secondaryCategory: SecondaryCategory | undefined;
     tertiaryCategory: TertiaryCategory | undefined;
   } = useMemo(() => {
-    const primary = updatedAccount.category.primaryId
+    let primary: PrimaryCategory | undefined;
+    let secondary: SecondaryCategory | undefined;
+    let tertiary: TertiaryCategory | undefined;
+
+    if (!categoryList) {
+      return {
+        primaryCategory: primary,
+        secondaryCategory: secondary,
+        tertiaryCategory: tertiary,
+      };
+    }
+
+    primary = updatedAccount.category.primaryId
       ? find(categoryList, {
           id: updatedAccount.category.primaryId,
         })
       : undefined;
 
-    let secondary: SecondaryCategory | undefined;
-    let tertiary: TertiaryCategory | undefined;
     if (primary) {
       secondary = updatedAccount.category.secondaryId
         ? find(primary.subList, {
@@ -93,7 +103,6 @@ export default function AccountCategoryScreen({
   return (
     <Container
       screen="AccountCategory"
-      accountIndex={accountIndex}
       header={{title: '자산 항목을 선택해 주세요'}}
       fixedBottomComponent={
         <>

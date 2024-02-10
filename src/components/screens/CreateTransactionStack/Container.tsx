@@ -1,11 +1,9 @@
 import ProgressStep from 'components/@common/ProgressStep';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
-import {transactionState} from 'libs/recoil/states/transaction';
 import {CreateTransactionStackScreenName} from 'navigators/types';
 import React, {ReactNode, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {useRecoilValue} from 'recoil';
 
 type ContainerProps = {
   header: {
@@ -15,7 +13,6 @@ type ContainerProps = {
   children: ReactNode;
   fixedBottomComponent?: ReactNode;
   screen: CreateTransactionStackScreenName;
-  accountIndex?: number;
 };
 
 export default function Container({
@@ -23,34 +20,29 @@ export default function Container({
   fixedBottomComponent,
   children,
   screen,
-  accountIndex = -1,
 }: ContainerProps) {
   const {title, errorMessage} = header;
-  const {accounts} = useRecoilValue(transactionState);
-  const step = useMemo(() => {
-    return (accounts.length === 0 ? 1 : accounts.length) * 3 + 2;
-  }, [accounts.length]);
 
   const currentStep = useMemo(() => {
     switch (screen) {
       case 'BasicTransactionInfo':
         return 1;
       case 'AccountType':
-        return accountIndex * 3 + 2;
+        return 2;
       case 'AccountCategory':
-        return accountIndex * 3 + 3;
+        return 3;
       case 'AccountAmount':
-        return accountIndex * 3 + 4;
+        return 4;
       case 'TransactionConfirmation':
-        return accounts.length * 3 + 2;
+        return 5;
     }
-  }, [accountIndex, accounts.length, screen]);
+  }, [screen]);
 
   return (
     <ScreenContainer
       fixedBottomComponent={fixedBottomComponent}
       style={{paddingBottom: 120}}>
-      <ProgressStep stepCount={step} currentStep={currentStep} />
+      <ProgressStep stepCount={5} currentStep={currentStep} />
       <View style={styles.header}>
         <Typography type="Title1Semibold1">{title}</Typography>
         {errorMessage && (

@@ -8,7 +8,7 @@ import useAccount from 'hooks/useAccount';
 import Container from 'components/screens/CreateTransactionStack/Container';
 import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
 import RightButton from 'components/screens/CreateTransactionStack/RightButton';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 const accountTypes: AccountTypeUnion[] = [
   {name: '자산', change: '증가'}, // 차변
@@ -35,10 +35,13 @@ export default function AccountTypeScreen({
 
   const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
 
+  useEffect(() => {
+    setUpdatedAccount(account);
+  }, [account]);
+
   return (
     <Container
       screen="AccountType"
-      accountIndex={accountIndex}
       header={{title: '거래 요소를 선택해주세요'}}
       fixedBottomComponent={
         <>
