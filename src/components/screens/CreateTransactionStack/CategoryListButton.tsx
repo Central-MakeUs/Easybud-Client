@@ -19,7 +19,7 @@ export default function CategoryListButton({
 
   const label = useMemo(() => {
     if (!categoryList) {
-      return '불러오는 중...';
+      return '';
     }
 
     const primary = find(categoryList, {

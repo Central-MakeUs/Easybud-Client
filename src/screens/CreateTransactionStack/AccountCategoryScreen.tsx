@@ -10,7 +10,6 @@ import RightButton from 'components/screens/CreateTransactionStack/RightButton';
 import CommonSelectItem from 'components/@common/CommonSelectItem';
 import SelectFormBottomSheet from 'components/@common/SelectForm/SelectFormBottomSheet';
 import useGetCategoryList from 'hooks/queries/AccountCategoryScreen/useGetCategoryList';
-import Typography from 'components/@common/Typography';
 import {
   PrimaryCategory,
   SecondaryCategory,
@@ -54,6 +53,7 @@ export default function AccountCategoryScreen({
     secondaryCategory: SecondaryCategory | undefined;
     tertiaryCategory: TertiaryCategory | undefined;
   } = useMemo(() => {
+    // eslint-disable-next-line prefer-const
     let primary: PrimaryCategory | undefined;
     let secondary: SecondaryCategory | undefined;
     let tertiary: TertiaryCategory | undefined;
@@ -118,8 +118,7 @@ export default function AccountCategoryScreen({
       }>
       {(() => {
         if (isLoading || !categoryList) {
-          // Todo: suspense
-          return <Typography>불러오는 중</Typography>;
+          return null;
         }
 
         return (
@@ -129,9 +128,7 @@ export default function AccountCategoryScreen({
               disabled={isLoading}
               onPress={() => setBottomSheet(BottomSheetType.Primary)}
               value={primaryCategory?.name}
-              placeholder={
-                isLoading ? '불러오는 중...' : '대분류를 선택해주세요'
-              }
+              placeholder={'대분류를 선택해주세요'}
               bottomSheet={
                 <SelectFormBottomSheet
                   label={CategoryName.primary}

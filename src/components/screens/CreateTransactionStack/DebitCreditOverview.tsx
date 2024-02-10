@@ -20,7 +20,7 @@ export default function DebitCreditOverview({
 
     accounts.forEach(({type, category, amount}) => {
       const newAccount = {
-        name: '불러오는 중...',
+        name: '',
         amount: amount,
       };
 
