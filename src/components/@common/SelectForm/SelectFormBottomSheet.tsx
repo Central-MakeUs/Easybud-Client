@@ -112,7 +112,7 @@ function renderBottomSheetChildren({
       <Button
         onPress={handlePressAddCategoryButton}
         disabled={!inputText.length}>
-        항목 추가하기
+        항목 추가
       </Button>
     </View>
   ) : (
