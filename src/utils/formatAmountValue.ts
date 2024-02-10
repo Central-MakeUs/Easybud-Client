@@ -4,9 +4,9 @@ export const formatToLocaleString = <T extends string | number>(
   value: T,
 ): string | undefined => {
   if (typeof value === 'string') {
-    return Number(value).toLocaleString();
+    return Number(value).toLocaleString() ?? 0;
   } else if (typeof value === 'number') {
-    return value.toLocaleString();
+    return value.toLocaleString() ?? 0;
   }
   return;
 };

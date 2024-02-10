@@ -1,76 +1,74 @@
 import {View, StyleSheet} from 'react-native';
 import {Calendar} from 'react-native-big-calendar';
 import {theme} from 'styles';
+import {formatToLocaleString} from 'utils/formatAmountValue';
 import {calendarTheme} from 'constants/screens/TransactionScreen';
 import DayHeader from 'components/screens/TransactionScreen/DayHeader';
+import {Dispatch, SetStateAction} from 'react';
 
-const dummyEvents = [
+const datas = [
   {
-    title: '-151,900',
-    start: new Date(2024, 0, 1, 0, 0),
-    end: new Date(2024, 0, 1, 23, 59),
+    date: '2024-02-01',
+    profitLoss: -123123,
   },
   {
-    title: '-151,900',
-    start: new Date(2024, 0, 2, 0, 0),
-    end: new Date(2024, 0, 2, 23, 59),
+    date: '2024-02-02',
+    profitLoss: 234,
   },
   {
-    title: '-151,900',
-    start: new Date(2024, 0, 3, 0, 0),
-    end: new Date(2024, 0, 3, 23, 59),
+    date: '2024-02-03',
+    profitLoss: 0,
   },
   {
-    title: '-151,900',
-    start: new Date(2024, 0, 4, 0, 0),
-    end: new Date(2024, 0, 4, 23, 59),
+    date: '2024-02-04',
+    profitLoss: 0,
   },
   {
-    title: '-151,900',
-    start: new Date(2024, 0, 5, 0, 0),
-    end: new Date(2024, 0, 5, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 6, 0, 0),
-    end: new Date(2024, 0, 6, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 7, 0, 0),
-    end: new Date(2024, 0, 7, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 8, 0, 0),
-    end: new Date(2024, 0, 8, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 9, 0, 0),
-    end: new Date(2024, 0, 9, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 10, 0, 0),
-    end: new Date(2024, 0, 10, 23, 59),
+    date: '2024-02-05',
+    profitLoss: 0,
   },
 ];
+
+const getEventData = (
+  dataList: {date: string; profitLoss: number}[],
+): {title: string; start: Date; end: Date}[] =>
+  dataList.map(data => ({
+    title:
+      data.profitLoss >= 0
+        ? `+${formatToLocaleString(data.profitLoss)}`
+        : `-${formatToLocaleString(data.profitLoss)}`,
+    start: new Date(
+      Number(data.date.slice(0, 4)),
+      Number(data.date.slice(5, 7)) - 1,
+      Number(data.date.slice(8, 10)),
+      0,
+      0,
+    ),
+    end: new Date(
+      Number(data.date.slice(0, 4)),
+      Number(data.date.slice(5, 7)) - 1,
+      Number(data.date.slice(8, 10)),
+      23,
+      59,
+    ),
+  }));
 
 /**
  * @param currentDate 현재 날짜
  */
 type FinancialCalendarProps = {
   currentDate: Date;
+  setCurrentDate: Dispatch<SetStateAction<Date>>;
 };
 
 export default function FinancialCalendar({
   currentDate,
+  setCurrentDate,
 }: FinancialCalendarProps) {
   return (
     <View style={financialCalendarStyles.container}>
       <Calendar
-        events={dummyEvents}
+        events={getEventData(datas)}
         height={310}
         mode="month"
         locale="ko"
@@ -79,6 +77,9 @@ export default function FinancialCalendar({
         theme={calendarTheme}
         eventCellStyle={financialCalendarStyles.eventCel}
         renderHeaderForMonthView={() => <DayHeader />}
+        onPressCell={date => setCurrentDate(date)}
+        onLongPressCell={date => setCurrentDate(date)}
+        onPressEvent={event => setCurrentDate(event.start)}
       />
     </View>
   );
@@ -94,6 +95,9 @@ const financialCalendarStyles = StyleSheet.create({
     borderColor: 'transparent',
   },
   eventCel: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 0,
     borderColor: theme.palette.white,
     backgroundColor: theme.palette.white,

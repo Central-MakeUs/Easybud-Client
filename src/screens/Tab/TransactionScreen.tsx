@@ -28,9 +28,15 @@ export default function TransactionScreen() {
       contentContainerStyle={transactionScreenStyles.contentContainer}>
       <MonthHeader currentDate={currentDate} setCurrentDate={setCurrentDate} />
       <FinancialOverview currentDate={currentDate} />
-      <FinancialCalendar currentDate={currentDate} />
+      <FinancialCalendar
+        currentDate={currentDate}
+        setCurrentDate={setCurrentDate}
+      />
       <View style={transactionScreenStyles.divider} />
-      <TransactionList transactionList={transactionList} />
+      <TransactionList
+        transactionList={transactionList}
+        currentDate={currentDate}
+      />
     </ScreenContainer>
   );
 }

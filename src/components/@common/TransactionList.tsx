@@ -13,11 +13,13 @@ import Typography from 'components/@common/Typography';
 export type TransactionListType = {
   transactionList: TransactionResponseDto[];
   variant?: TransactionListVariant;
+  currentDate: Date;
 };
 
 export default function TransactionList({
   transactionList,
   variant = 'default',
+  currentDate,
 }: TransactionListType) {
   const getAmount = (debitAccounts: DebitCreditEntity[]) => {
     let amount = 0;
@@ -46,10 +48,20 @@ export default function TransactionList({
             creditList={transactionData.creditAccounts}
           />
         ))
-      ) : (
+      ) : variant === 'recent' ? (
         <View style={transactionListStyles.noTransactionTextContainer}>
           <Typography type={'Body1Semibold'} color={'gray6'}>
             최근 거래가 없습니다.
+          </Typography>
+          <Typography type={'Body1Semibold'} color={'gray6'}>
+            거래 추가 후 다시 확인해주세요.
+          </Typography>
+        </View>
+      ) : (
+        <View style={transactionListStyles.noTransactionTextContainer}>
+          <Typography type={'Body1Semibold'} color={'gray6'}>
+            {new Date(currentDate).getMonth() + 1}월{' '}
+            {new Date(currentDate).getDate()}일에는 거래가 없습니다.
           </Typography>
           <Typography type={'Body1Semibold'} color={'gray6'}>
             거래 추가 후 다시 확인해주세요.
