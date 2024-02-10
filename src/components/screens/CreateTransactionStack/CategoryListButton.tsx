@@ -18,6 +18,13 @@ export default function CategoryListButton({
   const {data: categoryList} = useGetCategoryList();
 
   const label = useMemo(() => {
+    if (!categoryList) {
+      return '불러오는 중...';
+    }
+
+    if (!category.primaryId || !category.primaryId || !category.secondaryId) {
+      return '카테고리 설정에 문제가 있습니다.';
+    }
     const primary = find(categoryList, {
       id: category.primaryId,
     }) as PrimaryCategory;
@@ -37,6 +44,7 @@ export default function CategoryListButton({
     category.secondaryId,
     category.tertiaryId,
   ]);
+
   return (
     <InputForm
       size="sm"

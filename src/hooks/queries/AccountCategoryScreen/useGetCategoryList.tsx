@@ -6,6 +6,7 @@ export default function useGetCategoryList() {
   const {data, isLoading} = useQuery({
     queryKey: [AccountCategoryQueryKeys.AccountCategoryList],
     queryFn: categoryApi.getCategoryList,
+    placeholderData: previousData => previousData,
   });
 
   return {data, isLoading};
