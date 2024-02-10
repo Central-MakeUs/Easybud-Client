@@ -6,7 +6,7 @@ import useTransaction from 'hooks/useTransaction';
 import {AccountTypeUnion} from 'types/account';
 import {TransactionDTO, AccountTypeDTO} from 'types/dtos/transaction';
 
-export default function useMutateCreateTransaction() {
+export default function useCreateTransaction() {
   const queryClient = useQueryClient();
 
   const navigation = useNavigation();

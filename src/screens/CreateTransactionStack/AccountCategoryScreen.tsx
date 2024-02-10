@@ -107,10 +107,6 @@ export default function AccountCategoryScreen({
 
   const tertiaryCategoryList = useMemo(() => {
     if (secondaryCategory && secondaryCategory.subList.length > 0) {
-      if (secondaryCategory.subList[0].id === null) {
-        return [AddCategoryText];
-      }
-
       return [
         ...secondaryCategory.subList.map(secondary => secondary.name),
         AddCategoryText,
@@ -237,9 +233,6 @@ export default function AccountCategoryScreen({
                     });
 
                     // setValue
-
-                    // close
-                    // close();
                   }}
                   isBottomSheetOpen={bottomSheet === BottomSheetType.Tertiary}
                   setIsBottomSheetOpen={close}
