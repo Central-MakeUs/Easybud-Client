@@ -1,4 +1,4 @@
-import {Dispatch, SetStateAction, useState} from 'react';
+import {Dispatch, SetStateAction, useMemo, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {theme} from 'styles';
 import Typography from 'components/@common/Typography';
@@ -40,15 +40,16 @@ export default function SelectFormBottomSheet({
   const [inputState, setInputState] = useState(false);
   const [inputText, setInputText] = useState('');
 
-  const calculateBottomSheetHeight = () =>
-    categoryList.length >= 4 ? 470 : 400;
+  const height = useMemo(() => {
+    return inputState ? 200 : categoryList.length >= 4 ? 470 : 400;
+  }, [categoryList.length, inputState]);
 
   return (
     <BottomSheet
       isBottomSheetOpen={isBottomSheetOpen}
       onClose={onClose}
       onOpen={onOpen}
-      height={calculateBottomSheetHeight()}
+      height={height}
       setInputState={setInputState}>
       {renderBottomSheetChildren({
         label,
