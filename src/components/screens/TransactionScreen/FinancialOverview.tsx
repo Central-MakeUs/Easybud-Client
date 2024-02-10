@@ -1,13 +1,13 @@
 import {StyleSheet, View} from 'react-native';
 import {theme} from 'styles';
-import {formatToLocaleString} from 'utils/formatAmountValue';
-import Typography from 'components/@common/Typography';
+import {formatNullableAmount} from 'utils/formatAmountValue';
 import {IncomeStatusSummaryKeyVariant} from 'types/screens/TransactionScreen';
 import {
   incomeStatusSummaryText,
   incomeStatusSummaryTextColor,
 } from 'constants/screens/TransactionScreen';
 import {useGetIncomeStatusByMonthQuery} from 'hooks/queries/TransactionScreen/useGetIncomeStatusByMonthQuery';
+import Typography from 'components/@common/Typography';
 
 /**
  * @param currentDate 현재 날짜
@@ -47,7 +47,7 @@ export default function FinancialOverview({
                 ]
               }
               style={financialOverviewStyles.text}>
-              {value ? formatToLocaleString(value) : '- '}원
+              {formatNullableAmount(value)}원
             </Typography>
           </View>
           {index !== 2 && <Typography color={'gray4'}>{'|'}</Typography>}

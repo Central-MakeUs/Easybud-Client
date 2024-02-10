@@ -45,3 +45,7 @@ export function calculateBalance(
 
   return totalDebit - totalCredit;
 }
+
+export const formatNullableAmount = (amount: number | string) => {
+  return amount ? formatToLocaleString(amount) : '- ';
+};
