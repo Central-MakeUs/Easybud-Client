@@ -1,60 +1,15 @@
+import {Dispatch, SetStateAction} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Calendar} from 'react-native-big-calendar';
 import {theme} from 'styles';
-import {formatToLocaleString} from 'utils/formatAmountValue';
+import {getTransactionEventData} from 'utils/getTransactionEventData';
+import useGetIncomeSummaryByDateQuery from 'hooks/queries/TransactionScreen/useGetIncomeSummaryByDateQuery';
 import {calendarTheme} from 'constants/screens/TransactionScreen';
 import DayHeader from 'components/screens/TransactionScreen/DayHeader';
-import {Dispatch, SetStateAction} from 'react';
-
-const datas = [
-  {
-    date: '2024-02-01',
-    profitLoss: -123123,
-  },
-  {
-    date: '2024-02-02',
-    profitLoss: 234,
-  },
-  {
-    date: '2024-02-03',
-    profitLoss: 0,
-  },
-  {
-    date: '2024-02-04',
-    profitLoss: 0,
-  },
-  {
-    date: '2024-02-05',
-    profitLoss: 0,
-  },
-];
-
-const getEventData = (
-  dataList: {date: string; profitLoss: number}[],
-): {title: string; start: Date; end: Date}[] =>
-  dataList.map(data => ({
-    title:
-      data.profitLoss >= 0
-        ? `+${formatToLocaleString(data.profitLoss)}`
-        : `-${formatToLocaleString(data.profitLoss)}`,
-    start: new Date(
-      Number(data.date.slice(0, 4)),
-      Number(data.date.slice(5, 7)) - 1,
-      Number(data.date.slice(8, 10)),
-      0,
-      0,
-    ),
-    end: new Date(
-      Number(data.date.slice(0, 4)),
-      Number(data.date.slice(5, 7)) - 1,
-      Number(data.date.slice(8, 10)),
-      23,
-      59,
-    ),
-  }));
 
 /**
  * @param currentDate 현재 날짜
+ * @param setCurrentDate 현재 날짜를 변경하는 함수
  */
 type FinancialCalendarProps = {
   currentDate: Date;
@@ -65,10 +20,17 @@ export default function FinancialCalendar({
   currentDate,
   setCurrentDate,
 }: FinancialCalendarProps) {
+  const {year, month} = {
+    year: new Date(currentDate).getFullYear(),
+    month: new Date(currentDate).getMonth() + 1,
+  };
+
+  const incomeStatusByMonth = useGetIncomeSummaryByDateQuery(year, month);
+
   return (
     <View style={financialCalendarStyles.container}>
       <Calendar
-        events={getEventData(datas)}
+        events={getTransactionEventData(incomeStatusByMonth)}
         height={310}
         mode="month"
         locale="ko"
