@@ -5,7 +5,7 @@ export type AccountTypeDTO = {
 
 export type TransactionDTO = {
   date: Date;
-  summary: string | null;
+  summary: string;
   accounts: {
     accountType: AccountTypeDTO;
     amount: number;

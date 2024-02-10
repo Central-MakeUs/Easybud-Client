@@ -22,22 +22,23 @@ export default function CategoryListButton({
       return '불러오는 중...';
     }
 
-    if (!category.primaryId || !category.primaryId || !category.secondaryId) {
-      return '카테고리 설정에 문제가 있습니다.';
-    }
     const primary = find(categoryList, {
       id: category.primaryId,
     }) as PrimaryCategory;
 
-    const secondary = find(primary.subList, {
-      id: category.secondaryId,
-    }) as SecondaryCategory;
+    if (primary) {
+      const secondary = find(primary.subList, {
+        id: category.secondaryId,
+      }) as SecondaryCategory;
 
-    const tertiary = find(secondary.subList, {
-      id: category.tertiaryId,
-    }) as TertiaryCategory;
+      const tertiary = find(secondary.subList, {
+        id: category.tertiaryId,
+      }) as TertiaryCategory;
 
-    return `${primary.name} > ${secondary.name} > ${tertiary.name}`;
+      return `${primary.name} > ${secondary.name} > ${tertiary.name}`;
+    }
+
+    return '카테고리 설정에 문제가 있습니다.';
   }, [
     categoryList,
     category.primaryId,

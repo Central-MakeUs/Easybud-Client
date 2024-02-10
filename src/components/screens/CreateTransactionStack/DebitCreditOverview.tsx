@@ -1,7 +1,10 @@
 import Typography from 'components/@common/Typography';
+import useGetCategoryList from 'hooks/queries/AccountCategoryScreen/useGetCategoryList';
+import {find} from 'lodash';
 import React, {useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {NewAccount} from 'types/account';
+import {PrimaryCategory, SecondaryCategory} from 'types/components/Transaction';
 import {formatToLocaleString, isDebit} from 'utils/formatAmountValue';
 
 type DebitCreditOverviewProps = {accounts: NewAccount[]};
@@ -9,16 +12,37 @@ type DebitCreditOverviewProps = {accounts: NewAccount[]};
 export default function DebitCreditOverview({
   accounts,
 }: DebitCreditOverviewProps) {
-  const [debits, credits] = useMemo(() => {
-    const debit: NewAccount[] = [];
-    const credit: NewAccount[] = [];
+  const {data: categoryList} = useGetCategoryList();
 
-    accounts.forEach(account => {
-      isDebit(account.type) ? debit.push(account) : credit.push(account);
+  const [debits, credits] = useMemo(() => {
+    const debit: {name: string; amount: number}[] = [];
+    const credit: {name: string; amount: number}[] = [];
+
+    accounts.forEach(({type, category, amount}) => {
+      const newAccount = {
+        name: '불러오는 중...',
+        amount: amount,
+      };
+
+      if (categoryList) {
+        const primary = find(categoryList, {
+          id: category.primaryId,
+        }) as PrimaryCategory;
+
+        if (primary) {
+          const secondary = find(primary.subList, {
+            id: category.secondaryId,
+          }) as SecondaryCategory;
+
+          newAccount.name = secondary.name;
+        }
+      }
+
+      isDebit(type) ? debit.push(newAccount) : credit.push(newAccount);
     });
 
     return [debit, credit];
-  }, [accounts]);
+  }, [accounts, categoryList]);
 
   return (
     <View style={styles.container}>
@@ -35,16 +59,18 @@ export default function DebitCreditOverview({
           </Typography>
         </View>
         <View style={[styles.list]}>
-          {debits.map((account, index) => (
-            <View key={index} style={styles.item}>
-              <Typography type={'Body2Semibold'} color={'gray4'}>
-                {account.category.secondaryId}
-              </Typography>
-              <Typography type={'Body1Semibold'} color={'gray5'}>
-                {formatToLocaleString(account.amount)}원
-              </Typography>
-            </View>
-          ))}
+          {debits.map((account, index) => {
+            return (
+              <View key={index} style={styles.item}>
+                <Typography type={'Body2Semibold'} color={'gray4'}>
+                  {account.name}
+                </Typography>
+                <Typography type={'Body1Semibold'} color={'gray5'}>
+                  {formatToLocaleString(account.amount)}원
+                </Typography>
+              </View>
+            );
+          })}
         </View>
       </View>
       <View style={{gap: 10, flex: 1}}>
@@ -64,7 +90,7 @@ export default function DebitCreditOverview({
             {credits.map((account, index) => (
               <View key={index} style={styles.item}>
                 <Typography type={'Body2Semibold'} color={'gray4'}>
-                  {account.category.secondaryId}
+                  {account.name}
                 </Typography>
                 <Typography type={'Body1Semibold'} color={'gray5'}>
                   {formatToLocaleString(account.amount)}원

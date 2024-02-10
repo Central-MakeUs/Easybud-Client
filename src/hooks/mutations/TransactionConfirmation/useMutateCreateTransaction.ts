@@ -12,7 +12,7 @@ export default function useMutateCreateTransaction() {
     mutationFn: ({date, summary, accounts}: NewTransaction) => {
       const transaction: TransactionDTO = {
         date: date,
-        summary: summary ?? null,
+        summary: summary ?? '',
         accounts: accounts.map(({amount, category, type}) => ({
           accountType: getAccountType(type),
           amount,
