@@ -24,10 +24,8 @@ export const transactionApi = {
   },
 
   postTransaction: async (transaction: TransactionDTO) => {
-    return (
-      await axiosApi.post(`/transactions`, {
-        data: transaction,
-      })
-    ).data;
+    const response = await axiosApi.post(`/transactions`, transaction);
+
+    return response;
   },
 };

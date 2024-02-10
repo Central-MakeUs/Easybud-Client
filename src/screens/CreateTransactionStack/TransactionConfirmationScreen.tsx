@@ -1,4 +1,4 @@
-import {useMemo} from 'react';
+import {useEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
   CreateTransactionStackScreenName,
@@ -31,13 +31,12 @@ export default function TransactionConfirmationScreen({
   const {createTransaction, isPending, isSuccess} =
     useMutateCreateTransaction();
 
-  const handleSave = () => {
-    createTransaction(transaction);
+  useEffect(() => {
     if (isSuccess) {
       clearTransaction();
       navigation.navigate('Tab', {screen: 'Ledger'});
     }
-  };
+  }, [clearTransaction, isSuccess, navigation]);
 
   const navigateAddAccountScreen = () => {
     navigation.push('CreateTransactionStack', {
@@ -90,7 +89,9 @@ export default function TransactionConfirmationScreen({
           <Button variant="secondary" onPress={navigateAddAccountScreen}>
             새 계정 추가
           </Button>
-          <Button disabled={disabledSubmit || isPending} onPress={handleSave}>
+          <Button
+            disabled={disabledSubmit || isPending}
+            onPress={() => createTransaction()}>
             저장
           </Button>
         </>

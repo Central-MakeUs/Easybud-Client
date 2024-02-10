@@ -1,26 +1,30 @@
+import {useNavigation} from '@react-navigation/native';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {transactionApi} from 'apis/transactionApi';
 import {ledgerQueryKeys} from 'constants/queryKeys/ledger';
+import useTransaction from 'hooks/useTransaction';
 import {AccountTypeUnion} from 'types/account';
 import {TransactionDTO, AccountTypeDTO} from 'types/dtos/transaction';
-import {NewTransaction} from 'types/transaction';
 
 export default function useMutateCreateTransaction() {
   const queryClient = useQueryClient();
 
+  const navigation = useNavigation();
+  const {transaction, clearTransaction} = useTransaction();
+
   const {mutate: createTransaction, ...props} = useMutation({
-    mutationFn: ({date, summary, accounts}: NewTransaction) => {
-      const transaction: TransactionDTO = {
-        date: date,
-        summary: summary ?? '',
-        accounts: accounts.map(({amount, category, type}) => ({
+    mutationFn: () => {
+      const transactionDTO: TransactionDTO = {
+        date: transaction.date,
+        summary: transaction.summary ?? '',
+        accounts: transaction.accounts.map(({amount, category, type}) => ({
           accountType: getAccountType(type),
           amount,
           tertiaryCategoryId: category.tertiaryId as number,
         })),
       };
 
-      return transactionApi.postTransaction(transaction);
+      return transactionApi.postTransaction(transactionDTO);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -29,6 +33,10 @@ export default function useMutateCreateTransaction() {
           [ledgerQueryKeys.availableFundsData],
         ],
       });
+
+      navigation.navigate('Tab', {screen: 'Ledger'});
+
+      clearTransaction();
     },
   });
 
