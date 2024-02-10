@@ -12,8 +12,8 @@
 				<string>kakao${KAKAO_NATIVE_APP_KEY_WITH_KAKAO}</string>
 			</array>
 		</dict>
-	 </array>
-  <key>KAKAO_APP_KEY</key>
+	</array>
+	<key>KAKAO_APP_KEY</key>
 	<string>${KAKAO_NATIVE_APP_KEY_WITH_KAKAO}</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
@@ -70,15 +70,16 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Pretendard-Black.otf</string>
-		<string>Pretendard-Bold.otf</string>
-		<string>Pretendard-ExtraBold.otf</string>
-		<string>Pretendard-ExtraLight.otf</string>
-		<string>Pretendard-Light.otf</string>
-		<string>Pretendard-Medium.otf</string>
-		<string>Pretendard-Regular.otf</string>
-		<string>Pretendard-SemiBold.otf</string>
-		<string>Pretendard-Thin.otf</string>
+		<string>Pretendard-Black.ttf</string>
+		<string>Pretendard-Bold.ttf</string>
+		<string>Pretendard-ExtraBold.ttf</string>
+		<string>Pretendard-ExtraLight.ttf</string>
+		<string>Pretendard-Light.ttf</string>
+		<string>Pretendard-Medium.ttf</string>
+		<string>Pretendard-Regular.ttf</string>
+		<string>Pretendard-SemiBold.ttf</string>
+		<string>Pretendard-Thin.ttf</string>
+		<string>PretendardVariable.ttf</string>
 	</array>
 </dict>
 </plist>
