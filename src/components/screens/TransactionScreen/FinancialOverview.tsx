@@ -47,7 +47,7 @@ export default function FinancialOverview({
                 ]
               }
               style={financialOverviewStyles.text}>
-              {formatToLocaleString(value)}원
+              {value ? formatToLocaleString(value) : '- '}원
             </Typography>
           </View>
           {index !== 2 && <Typography color={'gray4'}>{'|'}</Typography>}
