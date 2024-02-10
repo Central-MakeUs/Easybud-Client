@@ -1,7 +1,6 @@
 import {Dispatch, SetStateAction, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {theme} from 'styles';
-import {AddCategoryText} from 'constants/components/SelectForm';
 import Typography from 'components/@common/Typography';
 import CategoryList from 'components/@common/SelectForm/CategoryList';
 import TextArea from 'components/@common/TextArea';
@@ -20,7 +19,7 @@ import BottomSheet from 'components/@common/BottomSheet/BottomSheet';
 export type SelectFormBottomSheetProps = {
   label: SelectFormProps['label'];
   categoryList: string[];
-  setCategoryList: (list: string[]) => void;
+  addCategory: (category: string) => void;
   onOpen: () => void;
   onClose: () => void;
   isBottomSheetOpen: boolean;
@@ -31,7 +30,7 @@ export type SelectFormBottomSheetProps = {
 export default function SelectFormBottomSheet({
   label,
   categoryList,
-  setCategoryList,
+  addCategory,
   isBottomSheetOpen,
   onOpen,
   onClose,
@@ -42,7 +41,7 @@ export default function SelectFormBottomSheet({
   const [inputText, setInputText] = useState('');
 
   const calculateBottomSheetHeight = () =>
-    categoryList.length >= 4 ? 270 : 200;
+    categoryList.length >= 4 ? 470 : 400;
 
   return (
     <BottomSheet
@@ -59,7 +58,7 @@ export default function SelectFormBottomSheet({
         setValue,
         setInputState,
         setInputText,
-        setCategoryList,
+        addCategory,
         setIsBottomSheetOpen,
       })}
     </BottomSheet>
@@ -73,11 +72,7 @@ export type RenderBottomSheetChildrenParamsType = {
   setInputState: Dispatch<SetStateAction<boolean>>;
 } & Pick<
   SelectFormBottomSheetProps,
-  | 'label'
-  | 'setValue'
-  | 'categoryList'
-  | 'setCategoryList'
-  | 'setIsBottomSheetOpen'
+  'label' | 'setValue' | 'categoryList' | 'addCategory' | 'setIsBottomSheetOpen'
 >;
 
 function renderBottomSheetChildren({
@@ -88,18 +83,12 @@ function renderBottomSheetChildren({
   setValue,
   setInputState,
   setInputText,
-  setCategoryList,
+  addCategory,
   setIsBottomSheetOpen,
 }: RenderBottomSheetChildrenParamsType) {
   const handlePressAddCategoryButton = () => {
     if (inputText.length) {
-      setCategoryList([
-        ...categoryList.slice(0, -1),
-        inputText,
-        AddCategoryText,
-      ]);
-      setValue(inputText);
-      setIsBottomSheetOpen(false);
+      addCategory(inputText);
       setInputState(false);
     }
   };
@@ -138,7 +127,6 @@ const selectFormStyles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 15,
   },
   addCategoryBottomSheetContainer: {
     display: 'flex',

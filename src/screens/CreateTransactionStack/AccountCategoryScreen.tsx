@@ -2,7 +2,7 @@ import {useMemo, useState} from 'react';
 import {find} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import {NewAccount} from 'types/account';
-import {CategoryName} from 'constants/components/SelectForm';
+import {AddCategoryText, CategoryName} from 'constants/components/SelectForm';
 import Container from 'components/screens/CreateTransactionStack/Container';
 import useAccount from 'hooks/useAccount';
 import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
@@ -15,6 +15,7 @@ import {
   SecondaryCategory,
   TertiaryCategory,
 } from 'types/components/Transaction';
+import useCreateTertiaryCategory from 'hooks/queries/AccountCategoryScreen/useCreateTertiaryCategory';
 
 type AccountCategoryScreenProps = {
   route: CreateTransactionStackRouteProp<'AccountCategory'>;
@@ -33,12 +34,16 @@ export default function AccountCategoryScreen({
   const {isUpdateStep, accountIndex} = params;
 
   const {account} = useAccount({accountIndex});
-  const {data: categoryList, isLoading} = useGetCategoryList();
-
   const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
 
   const [bottomSheet, setBottomSheet] = useState<BottomSheetType | null>(null);
   const close = () => setBottomSheet(null);
+
+  const {data: categoryList, isLoading: isGetCategoryListLoading} =
+    useGetCategoryList();
+
+  const {createTertiaryCategory, isPending: isCreateTertiaryCategoryPending} =
+    useCreateTertiaryCategory();
 
   const disabled = useMemo(() => {
     return !updatedAccount.category.tertiaryId;
@@ -100,6 +105,20 @@ export default function AccountCategoryScreen({
     updatedAccount.category.tertiaryId,
   ]);
 
+  const tertiaryCategoryList = useMemo(() => {
+    if (secondaryCategory && secondaryCategory.subList.length > 0) {
+      if (secondaryCategory.subList[0].id === null) {
+        return [AddCategoryText];
+      }
+
+      return [
+        ...secondaryCategory.subList.map(secondary => secondary.name),
+        AddCategoryText,
+      ];
+    }
+    return [AddCategoryText];
+  }, [secondaryCategory]);
+
   return (
     <Container
       screen="AccountCategory"
@@ -117,7 +136,7 @@ export default function AccountCategoryScreen({
         </>
       }>
       {(() => {
-        if (isLoading || !categoryList) {
+        if (isGetCategoryListLoading || !categoryList) {
           return null;
         }
 
@@ -125,7 +144,7 @@ export default function AccountCategoryScreen({
           <>
             <CommonSelectItem
               label={CategoryName.primary}
-              disabled={isLoading}
+              disabled={isGetCategoryListLoading}
               onPress={() => setBottomSheet(BottomSheetType.Primary)}
               value={primaryCategory?.name}
               placeholder={'대분류를 선택해주세요'}
@@ -133,7 +152,7 @@ export default function AccountCategoryScreen({
                 <SelectFormBottomSheet
                   label={CategoryName.primary}
                   categoryList={categoryList.map(primary => primary.name)}
-                  setCategoryList={console.log}
+                  addCategory={console.log}
                   isBottomSheetOpen={bottomSheet === BottomSheetType.Primary}
                   setIsBottomSheetOpen={close}
                   onOpen={() => setBottomSheet(BottomSheetType.Primary)}
@@ -173,7 +192,7 @@ export default function AccountCategoryScreen({
                       ? primaryCategory.subList.map(secondary => secondary.name)
                       : []
                   }
-                  setCategoryList={console.log}
+                  addCategory={console.log}
                   isBottomSheetOpen={bottomSheet === BottomSheetType.Secondary}
                   setIsBottomSheetOpen={close}
                   onOpen={() => setBottomSheet(BottomSheetType.Secondary)}
@@ -198,7 +217,7 @@ export default function AccountCategoryScreen({
             />
             <CommonSelectItem
               label={CategoryName.tertiary}
-              disabled={!secondaryCategory}
+              disabled={!secondaryCategory || isCreateTertiaryCategoryPending}
               onPress={() => setBottomSheet(BottomSheetType.Tertiary)}
               value={tertiaryCategory?.name}
               placeholder={
@@ -209,14 +228,19 @@ export default function AccountCategoryScreen({
               bottomSheet={
                 <SelectFormBottomSheet
                   label={CategoryName.tertiary}
-                  categoryList={
-                    secondaryCategory
-                      ? secondaryCategory.subList.map(
-                          secondary => secondary.name,
-                        )
-                      : []
-                  }
-                  setCategoryList={console.log}
+                  categoryList={tertiaryCategoryList}
+                  addCategory={category => {
+                    console.log(category);
+                    createTertiaryCategory({
+                      secondaryCategory: secondaryCategory?.name as string,
+                      tertiaryCategory: category,
+                    });
+
+                    // setValue
+
+                    // close
+                    // close();
+                  }}
                   isBottomSheetOpen={bottomSheet === BottomSheetType.Tertiary}
                   setIsBottomSheetOpen={close}
                   onOpen={() => setBottomSheet(BottomSheetType.Tertiary)}

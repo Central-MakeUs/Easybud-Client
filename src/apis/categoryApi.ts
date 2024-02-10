@@ -1,4 +1,5 @@
 import {axiosApi} from 'apis/axiosInstance';
+import axios from 'axios';
 import {find} from 'lodash';
 import {
   CategoryList,
@@ -12,6 +13,12 @@ const categoryApi = {
     const {data} = await axiosApi.get(`/categories`);
 
     return data ? parseCategoryData(data.result.accountCategories) : data;
+  },
+  createTertiaryCategory: async (request: {
+    secondaryCategory: string;
+    tertiaryCategory: string;
+  }) => {
+    return (await axios.post(`/categories/tertiary`, request)).data;
   },
 };
 
