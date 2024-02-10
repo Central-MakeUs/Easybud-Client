@@ -1,0 +1,10 @@
+//
+//  Config.xcconfig
+//  Easybud
+//
+//  Created by 김보민 on 2/9/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+#include? "tmp.xcconfig"
