@@ -7,9 +7,10 @@ export default function useCreateTertiaryCategory() {
 
   const {mutate: createTertiaryCategory, ...props} = useMutation({
     mutationFn: categoryApi.createTertiaryCategory,
-    onSuccess: () => {
+    onSuccess: response => {
+      response;
       queryClient.invalidateQueries({
-        queryKey: [[AccountCategoryQueryKeys.AccountCategoryList]],
+        queryKey: [AccountCategoryQueryKeys.AccountCategoryList],
       });
     },
   });

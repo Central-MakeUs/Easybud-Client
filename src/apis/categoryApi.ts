@@ -1,5 +1,4 @@
 import {axiosApi} from 'apis/axiosInstance';
-import axios from 'axios';
 import {CategoryListDTO} from 'types/dtos/category';
 
 const categoryApi = {
@@ -10,9 +9,12 @@ const categoryApi = {
   },
   createTertiaryCategory: async (request: {
     secondaryCategoryId: number;
-    tertiaryCategory: string;
+    tertiaryCategoryContent: string;
   }) => {
-    return (await axios.post(`/categories/tertiary`, request)).data;
+    const response = await axiosApi.post(`/categories/tertiary`, {
+      params: request,
+    });
+    return response;
   },
 };
 

@@ -41,8 +41,12 @@ export default function SelectFormBottomSheet({
   const [inputText, setInputText] = useState('');
 
   const height = useMemo(() => {
-    return inputState ? 200 : categoryList.length >= 4 ? 470 : 400;
-  }, [categoryList.length, inputState]);
+    return categoryList.length >= 6
+      ? 500
+      : categoryList.length >= 4
+        ? 370
+        : 250;
+  }, [categoryList.length]);
 
   return (
     <BottomSheet
@@ -94,10 +98,12 @@ function renderBottomSheetChildren({
     }
   };
 
-  const height = categoryList.length >= 4 ? '50%' : '70%';
-
   return inputState ? (
-    <View style={[selectFormStyles.addCategoryBottomSheetContainer, {height}]}>
+    <View
+      style={[
+        selectFormStyles.addCategoryBottomSheetContainer,
+        {height: categoryList.length >= 4 ? '50%' : '70%'},
+      ]}>
       <TextArea setText={setInputText} placeholder="추가할 항목을 작성하세요" />
       <Button
         onPress={handlePressAddCategoryButton}
@@ -130,9 +136,7 @@ const selectFormStyles = StyleSheet.create({
     alignItems: 'center',
   },
   addCategoryBottomSheetContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    gap: 20,
     paddingHorizontal: 20,
   },
   bottomSheetDataListContainer: {
