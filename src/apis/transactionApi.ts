@@ -4,6 +4,7 @@ import {
   TransactionResponseDto,
 } from 'types/dtos/ledger';
 import {TransactionDTO} from 'types/dtos/transaction';
+import {IncomeStatusSummaryByMonthResponseDto} from 'types/dtos/transaction';
 
 export const transactionApi = {
   getTransactionByDate: async (
@@ -27,5 +28,15 @@ export const transactionApi = {
     const response = await axiosApi.post(`/transactions`, transaction);
 
     return response;
+  },
+
+  getIncomeSummaryByDate: async (
+    year: number,
+    month: number,
+  ): Promise<IncomeStatusSummaryByMonthResponseDto> => {
+    const response = await axiosApi.get(
+      `/financials/income-statement/summary/daily?year=${year}&month=${month}`,
+    );
+    return response.data.result.profitLosses;
   },
 };

@@ -1,76 +1,36 @@
+import {Dispatch, SetStateAction} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Calendar} from 'react-native-big-calendar';
 import {theme} from 'styles';
+import {getTransactionEventData} from 'utils/getTransactionEventData';
+import useGetIncomeSummaryByDateQuery from 'hooks/queries/TransactionScreen/useGetIncomeSummaryByDateQuery';
 import {calendarTheme} from 'constants/screens/TransactionScreen';
 import DayHeader from 'components/screens/TransactionScreen/DayHeader';
 
-const dummyEvents = [
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 1, 0, 0),
-    end: new Date(2024, 0, 1, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 2, 0, 0),
-    end: new Date(2024, 0, 2, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 3, 0, 0),
-    end: new Date(2024, 0, 3, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 4, 0, 0),
-    end: new Date(2024, 0, 4, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 5, 0, 0),
-    end: new Date(2024, 0, 5, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 6, 0, 0),
-    end: new Date(2024, 0, 6, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 7, 0, 0),
-    end: new Date(2024, 0, 7, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 8, 0, 0),
-    end: new Date(2024, 0, 8, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 9, 0, 0),
-    end: new Date(2024, 0, 9, 23, 59),
-  },
-  {
-    title: '-151,900',
-    start: new Date(2024, 0, 10, 0, 0),
-    end: new Date(2024, 0, 10, 23, 59),
-  },
-];
-
 /**
  * @param currentDate 현재 날짜
+ * @param setCurrentDate 현재 날짜를 변경하는 함수
  */
 type FinancialCalendarProps = {
   currentDate: Date;
+  setCurrentDate: Dispatch<SetStateAction<Date>>;
 };
 
 export default function FinancialCalendar({
   currentDate,
+  setCurrentDate,
 }: FinancialCalendarProps) {
+  const {year, month} = {
+    year: new Date(currentDate).getFullYear(),
+    month: new Date(currentDate).getMonth() + 1,
+  };
+
+  const incomeStatusByMonth = useGetIncomeSummaryByDateQuery(year, month);
+
   return (
     <View style={financialCalendarStyles.container}>
       <Calendar
-        events={dummyEvents}
+        events={getTransactionEventData(incomeStatusByMonth)}
         height={310}
         mode="month"
         locale="ko"
@@ -79,6 +39,9 @@ export default function FinancialCalendar({
         theme={calendarTheme}
         eventCellStyle={financialCalendarStyles.eventCel}
         renderHeaderForMonthView={() => <DayHeader />}
+        onPressCell={date => setCurrentDate(date)}
+        onLongPressCell={date => setCurrentDate(date)}
+        onPressEvent={event => setCurrentDate(event.start)}
       />
     </View>
   );
@@ -94,6 +57,9 @@ const financialCalendarStyles = StyleSheet.create({
     borderColor: 'transparent',
   },
   eventCel: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderWidth: 0,
     borderColor: theme.palette.white,
     backgroundColor: theme.palette.white,

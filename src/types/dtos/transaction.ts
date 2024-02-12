@@ -13,3 +13,8 @@ export type TransactionDTO = {
     cardId?: number;
   }[];
 };
+
+export type IncomeStatusSummaryByMonthResponseDto = {
+  date: string;
+  profitLoss: number;
+}[];

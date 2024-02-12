@@ -1,4 +1,4 @@
-import {TouchableOpacity} from 'react-native';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {
   useQueryClient,
@@ -6,14 +6,14 @@ import {
 } from '@tanstack/react-query';
 import ScreenContainer from 'components/@common/ScreenContainer';
 import Typography from 'components/@common/Typography';
+import Icon from 'components/@common/Icon';
+import {theme} from 'styles';
 
 type FallbackErrorScreenProps = {
-  error: Error;
   resetError: () => void;
 };
 
 export default function FallbackErrorScreen({
-  error,
   resetError,
 }: FallbackErrorScreenProps) {
   const queryClient = useQueryClient();
@@ -32,12 +32,45 @@ export default function FallbackErrorScreen({
   };
 
   return (
-    <ScreenContainer>
-      <Typography style={{marginTop: 200}}>문제가 발생했습니다</Typography>
-      <Typography>{error.message}</Typography>
-      <TouchableOpacity onPress={handlePressButton}>
-        <Typography>홈으로 돌아가기</Typography>
-      </TouchableOpacity>
+    <ScreenContainer
+      contentContainerStyle={fallbackErrorScreenStyles.contentContainer}>
+      <Icon name={'ExclamationCircle'} fill={'red'} size={100} />
+      <View style={fallbackErrorScreenStyles.bottomElementContainer}>
+        <Typography type={'Title1Semibold1'} color={'gray5'}>
+          문제가 발생했습니다!
+        </Typography>
+        <TouchableOpacity
+          onPress={handlePressButton}
+          style={fallbackErrorScreenStyles.button}>
+          <Typography type={'Body1Regular'} color={'white'}>
+            홈으로 돌아가기
+          </Typography>
+        </TouchableOpacity>
+      </View>
     </ScreenContainer>
   );
 }
+
+const fallbackErrorScreenStyles = StyleSheet.create({
+  contentContainer: {
+    backgroundColor: theme.palette.gray2,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 25,
+  },
+  bottomElementContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+    gap: 10,
+  },
+  button: {
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: theme.palette.gray4,
+    borderRadius: 15,
+  },
+});
