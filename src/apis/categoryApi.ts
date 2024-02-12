@@ -9,7 +9,7 @@ const categoryApi = {
     return data ? data.result.accountCategories : undefined;
   },
   createTertiaryCategory: async (request: {
-    secondaryCategory: string;
+    secondaryCategoryId: number;
     tertiaryCategory: string;
   }) => {
     return (await axios.post(`/categories/tertiary`, request)).data;

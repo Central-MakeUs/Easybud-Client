@@ -226,9 +226,12 @@ export default function AccountCategoryScreen({
                   label={CategoryName.tertiary}
                   categoryList={tertiaryCategoryList}
                   addCategory={category => {
-                    console.log(category);
+                    if (!secondaryCategory) {
+                      return;
+                    }
+
                     createTertiaryCategory({
-                      secondaryCategory: secondaryCategory?.name as string,
+                      secondaryCategoryId: secondaryCategory.id,
                       tertiaryCategory: category,
                     });
 
