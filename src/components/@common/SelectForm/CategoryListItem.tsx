@@ -40,7 +40,9 @@ export default function CategoryListItem({
     <TouchableOpacity
       style={categoryListItemStyles.container}
       onPress={handlePressCategoryItem}>
-      <Typography type={'Body1Semibold'} color={'black'}>
+      <Typography
+        type={categoryName === AddCategoryText ? 'Body1Bold' : 'Body1Semibold'}
+        color={categoryName === AddCategoryText ? 'blue' : 'black'}>
         {categoryName}
       </Typography>
     </TouchableOpacity>
