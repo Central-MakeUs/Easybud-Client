@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
   View,
   ScrollViewProps,
+  SafeAreaView,
 } from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {theme} from 'styles';
@@ -35,26 +36,28 @@ export default function ScreenContainer({
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.keyboardAvoidingView}>
-        <ScrollView
-          contentContainerStyle={[
-            styles.scrollViewContent,
-            props?.style,
-            props?.contentContainerStyle,
-          ]}
-          keyboardShouldPersistTaps="handled">
-          {loading ? (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator size="large" color={theme.palette.primary} />
+        <SafeAreaView style={{flex: 1}}>
+          <ScrollView
+            contentContainerStyle={[
+              styles.scrollViewContent,
+              props?.style,
+              props?.contentContainerStyle,
+            ]}
+            keyboardShouldPersistTaps="handled">
+            {loading ? (
+              <View style={styles.loadingContainer}>
+                <ActivityIndicator size="large" color={theme.palette.primary} />
+              </View>
+            ) : (
+              children
+            )}
+          </ScrollView>
+          {fixedBottomComponent && (
+            <View style={styles.fixedBottomComponent}>
+              {fixedBottomComponent}
             </View>
-          ) : (
-            children
           )}
-        </ScrollView>
-        {fixedBottomComponent && (
-          <View style={styles.fixedBottomComponent}>
-            {fixedBottomComponent}
-          </View>
-        )}
+        </SafeAreaView>
       </KeyboardAvoidingView>
     </GestureHandlerRootView>
   );
