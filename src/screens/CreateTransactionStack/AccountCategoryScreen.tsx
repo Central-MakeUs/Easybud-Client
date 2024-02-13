@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {find} from 'lodash';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import {NewAccount} from 'types/account';
@@ -35,6 +35,10 @@ export default function AccountCategoryScreen({
 
   const {account} = useAccount({accountIndex});
   const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
+
+  useEffect(() => {
+    setUpdatedAccount(account);
+  }, [account, accountIndex]);
 
   const [bottomSheet, setBottomSheet] = useState<BottomSheetType | null>(null);
   const close = () => setBottomSheet(null);

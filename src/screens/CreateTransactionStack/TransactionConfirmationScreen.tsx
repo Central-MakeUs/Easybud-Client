@@ -64,7 +64,17 @@ export default function TransactionConfirmationScreen({
     return `${summary} ${date}`;
   }, [transaction.date, transaction.summary]);
 
-  const disabledSubmit = useMemo(() => balance !== 0, [balance]);
+  const disabledSubmit = useMemo(() => {
+    // account validation
+    for (const account of accounts) {
+      const {amount, category} = account;
+      if (amount === 0 || category.tertiaryId === null) {
+        return true;
+      }
+    }
+
+    return balance !== 0;
+  }, [accounts, balance]);
 
   return (
     <Container
@@ -102,15 +112,21 @@ export default function TransactionConfirmationScreen({
         </View>
         <DebitCreditOverview accounts={accounts} />
       </View>
-      {accounts.map((account, index) => (
-        <AccountDetails
-          key={index}
-          accountIndex={index}
-          account={account}
-          updateTransaction={navigateUpdateScreen}
-          deleteAccount={deleteAccount}
-        />
-      ))}
+      {accounts.map((account, index) => {
+        if (account.amount === 0) {
+          return null;
+        }
+
+        return (
+          <AccountDetails
+            key={index}
+            accountIndex={index}
+            account={account}
+            updateTransaction={navigateUpdateScreen}
+            deleteAccount={deleteAccount}
+          />
+        );
+      })}
     </Container>
   );
 }

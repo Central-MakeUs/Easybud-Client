@@ -18,28 +18,30 @@ export default function DebitCreditOverview({
     const debit: {name: string; amount: number}[] = [];
     const credit: {name: string; amount: number}[] = [];
 
-    accounts.forEach(({type, category, amount}) => {
-      const newAccount = {
-        name: '',
-        amount,
-      };
+    accounts
+      .filter(({amount}) => amount !== 0)
+      .forEach(({type, category, amount}) => {
+        const newAccount = {
+          name: '',
+          amount,
+        };
 
-      if (categoryList) {
-        const primary = find(categoryList, {
-          id: category.primaryId,
-        }) as PrimaryCategory;
+        if (categoryList) {
+          const primary = find(categoryList, {
+            id: category.primaryId,
+          }) as PrimaryCategory;
 
-        if (primary) {
-          const secondary = find(primary.subList, {
-            id: category.secondaryId,
-          }) as SecondaryCategory;
+          if (primary) {
+            const secondary = find(primary.subList, {
+              id: category.secondaryId,
+            }) as SecondaryCategory;
 
-          newAccount.name = secondary.name;
+            newAccount.name = secondary.name;
+          }
         }
-      }
 
-      isDebit(type) ? debit.push(newAccount) : credit.push(newAccount);
-    });
+        isDebit(type) ? debit.push(newAccount) : credit.push(newAccount);
+      });
 
     return [debit, credit];
   }, [accounts, categoryList]);

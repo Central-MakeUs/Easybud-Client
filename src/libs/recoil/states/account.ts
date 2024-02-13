@@ -17,13 +17,15 @@ export const accountState = selectorFamily<NewAccount, number>({
     ({get}) => {
       const {accounts: prevAccounts} = get(transactionState);
       const accounts = cloneDeep(prevAccounts);
-      // 배열의 '마지막 다음' 인덱스에 접근하려 할 때 새 계좌를 추가
-      if (index === accounts.length) {
-        accounts.push(initialAccount);
-      } else if (index > accounts.length) {
+
+      if (index > accounts.length) {
         throw new Error(
-          `Error: Index ${index} is out of bounds for accounts array.(get account state)`,
+          `Error: Index ${index} is out of bounds for accounts array. (get recoil state)`,
         );
+      }
+
+      if (index === accounts.length) {
+        return initialAccount;
       }
 
       return accounts[index];
@@ -38,9 +40,12 @@ export const accountState = selectorFamily<NewAccount, number>({
       const {accounts: prevAccounts} = get(transactionState);
       const accounts = cloneDeep(prevAccounts);
 
-      if (index > accounts.length) {
+      // 배열의 '마지막 다음' 인덱스에 접근하려 할 때 새 계좌를 추가
+      if (index === accounts.length) {
+        accounts.push(initialAccount);
+      } else if (index > accounts.length) {
         throw new Error(
-          `Error: Index ${index} is out of bounds for accounts array.(update account state)`,
+          `Error: Index ${index} is out of bounds for accounts array. (set recoil state)`,
         );
       }
 

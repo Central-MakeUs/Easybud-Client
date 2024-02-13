@@ -9,6 +9,7 @@ import Container from 'components/screens/CreateTransactionStack/Container';
 import LeftButton from 'components/screens/CreateTransactionStack/LeftButton';
 import RightButton from 'components/screens/CreateTransactionStack/RightButton';
 import {useEffect, useState} from 'react';
+import useTransaction from 'hooks/useTransaction';
 
 const accountTypes: AccountTypeUnion[] = [
   {name: '자산', change: '증가'}, // 차변
@@ -32,12 +33,13 @@ export default function AccountTypeScreen({
   const {isUpdateStep, accountIndex} = params;
 
   const {account} = useAccount({accountIndex});
+  const {deleteAccount, accounts} = useTransaction();
 
   const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
 
   useEffect(() => {
     setUpdatedAccount(account);
-  }, [account]);
+  }, [account, accountIndex]);
 
   return (
     <Container
@@ -45,7 +47,14 @@ export default function AccountTypeScreen({
       header={{title: '거래 요소를 선택해주세요'}}
       fixedBottomComponent={
         <>
-          <LeftButton isUpdateStep={isUpdateStep} />
+          <LeftButton
+            isUpdateStep={isUpdateStep}
+            onPress={() => {
+              if (accountIndex < accounts.length && account.amount === 0) {
+                deleteAccount(accountIndex);
+              }
+            }}
+          />
           <RightButton
             account={updatedAccount}
             nextScreen="AccountCategory"
