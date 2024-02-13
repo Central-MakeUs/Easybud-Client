@@ -11,10 +11,7 @@ const categoryApi = {
     secondaryCategoryId: number;
     tertiaryCategoryContent: string;
   }) => {
-    const response = await axiosApi.post(`/categories/tertiary`, {
-      params: request,
-    });
-    return response;
+    return await axiosApi.post(`/categories/tertiary`, request);
   },
 };
 

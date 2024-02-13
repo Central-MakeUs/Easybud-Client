@@ -232,7 +232,7 @@ export default function AccountCategoryScreen({
 
                     createTertiaryCategory({
                       secondaryCategoryId: secondaryCategory.id,
-                      tertiaryCategory: category,
+                      tertiaryCategoryContent: category,
                     });
 
                     // setValue
