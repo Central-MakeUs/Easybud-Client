@@ -21,7 +21,7 @@ export default function DebitCreditOverview({
     accounts.forEach(({type, category, amount}) => {
       const newAccount = {
         name: '',
-        amount: amount,
+        amount,
       };
 
       if (categoryList) {
