@@ -42,7 +42,7 @@ export default function CategoryListItem({
       onPress={handlePressCategoryItem}>
       <Typography
         type={categoryName === AddCategoryText ? 'Body1Bold' : 'Body1Semibold'}
-        color={categoryName === AddCategoryText ? 'blue' : 'black'}>
+        color={categoryName === AddCategoryText ? 'gray4' : 'black'}>
         {categoryName}
       </Typography>
     </TouchableOpacity>
