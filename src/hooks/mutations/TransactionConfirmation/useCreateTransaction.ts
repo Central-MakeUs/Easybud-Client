@@ -13,8 +13,11 @@ export default function useCreateTransaction() {
 
   const {mutate: createTransaction, ...props} = useMutation({
     mutationFn: () => {
+      const currentDate = new Date(transaction.date);
+      currentDate.setDate(currentDate.getDate() + 1);
+
       const transactionDTO: TransactionDTO = {
-        date: transaction.date,
+        date: currentDate,
         summary: transaction.summary ?? '',
         accounts: transaction.accounts.map(({amount, category, type}) => ({
           accountType: getAccountType(type),

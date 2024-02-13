@@ -1,4 +1,4 @@
-import {useEffect, useMemo} from 'react';
+import {useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
   CreateTransactionStackScreenName,
@@ -25,17 +25,9 @@ type TransactionConfirmationScreenProps = {
 export default function TransactionConfirmationScreen({
   navigation,
 }: TransactionConfirmationScreenProps) {
-  const {transaction, balance, accounts, deleteAccount, clearTransaction} =
-    useTransaction();
+  const {transaction, balance, accounts, deleteAccount} = useTransaction();
 
-  const {createTransaction, isPending, isSuccess} = useCreateTransaction();
-
-  useEffect(() => {
-    if (isSuccess) {
-      clearTransaction();
-      navigation.navigate('Tab', {screen: 'Ledger'});
-    }
-  }, [clearTransaction, isSuccess, navigation]);
+  const {createTransaction, isPending} = useCreateTransaction();
 
   const navigateAddAccountScreen = () => {
     navigation.push('CreateTransactionStack', {
