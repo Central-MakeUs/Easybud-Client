@@ -1,7 +1,6 @@
 import {useNavigation} from '@react-navigation/native';
 import {useMutation, useQueryClient} from '@tanstack/react-query';
 import {transactionApi} from 'apis/transactionApi';
-import {ledgerQueryKeys} from 'constants/queryKeys/ledger';
 import useTransaction from 'hooks/useTransaction';
 import {AccountTypeUnion} from 'types/account';
 import {TransactionDTO, AccountTypeDTO} from 'types/dtos/transaction';
@@ -27,12 +26,7 @@ export default function useCreateTransaction() {
       return transactionApi.postTransaction(transactionDTO);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [
-          [ledgerQueryKeys.recentTransactionList],
-          [ledgerQueryKeys.availableFundsData],
-        ],
-      });
+      queryClient.removeQueries();
 
       navigation.navigate('Tab', {screen: 'Ledger'});
 
