@@ -1,5 +1,5 @@
+import {Image, StyleSheet, Platform, View} from 'react-native';
 import {useSetRecoilState} from 'recoil';
-import {Image, StyleSheet, View} from 'react-native';
 import {
   getProfile,
   loginWithKakaoAccount,
@@ -69,7 +69,9 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
           variant="kakao"
           onPress={handlePressKakaoLoginButton}
         />
-        <SocialLoginButton variant="apple" onPress={() => {}} />
+        {Platform.OS === 'ios' && (
+          <SocialLoginButton variant="apple" onPress={() => {}} />
+        )}
       </View>
     </ScreenContainer>
   );
