@@ -25,6 +25,7 @@ export default function RecentTransactionOverview() {
           <TransactionList
             variant={'recent'}
             transactionList={recentTransactionList}
+            currentDate={undefined}
           />
         }
       />
