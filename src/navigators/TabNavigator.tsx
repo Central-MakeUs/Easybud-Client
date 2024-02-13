@@ -1,4 +1,4 @@
-import {TouchableOpacity} from 'react-native';
+import {SafeAreaView, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {
@@ -29,9 +29,9 @@ export default function TabNavigator() {
 
   return (
     <Tab.Navigator
-      screenOptions={({route}) => ({
-        ...screenOptions({route, bottomSize, navigation}),
-      })}>
+      screenOptions={({route}) =>
+        screenOptions({route, bottomSize, navigation})
+      }>
       <Tab.Screen
         name={'Ledger'}
         component={LedgerScreen}
@@ -79,30 +79,50 @@ const screenOptions: (props: {
     ...typographyStyles.Body3Regular,
     marginBottom: bottomSize ? 0 : 4,
   },
-  headerStyle: {
-    height: 50,
-    backgroundColor: theme.palette.gray1,
-  },
+
   headerShadowVisible: false,
   headerTitleStyle: theme.typography.Body1Semibold,
   headerTitle: '',
-  headerLeft: () => (
-    <TouchableOpacity
-      onPress={() => navigation.navigate('Tab', {screen: 'Ledger'})}>
-      <Typography type={'Body1Bold'} color={'primary'}>
-        Easybud
-      </Typography>
-    </TouchableOpacity>
+  header: () => (
+    <SafeAreaView
+      style={{
+        margin: 15,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        backgroundColor: theme.palette.gray1,
+      }}>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('Tab', {screen: 'Ledger'})}>
+        <Typography type={'Body1Bold'} color={'primary'}>
+          Easybud
+        </Typography>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
+        <Icon name={'Setting'} size={24} />
+      </TouchableOpacity>
+    </SafeAreaView>
   ),
-  headerLeftContainerStyle: {
-    paddingLeft: 15,
-  },
-  headerRightContainerStyle: {
-    paddingRight: 15,
-  },
-  headerRight: () => (
-    <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
-      <Icon name={'Setting'} size={24} />
-    </TouchableOpacity>
-  ),
+  // headerStyle: {
+  //   height: 50,
+  //   backgroundColor: theme.palette.gray1,
+  // },
+  // headerLeft: () => (
+  //   <TouchableOpacity
+  //     onPress={() => navigation.navigate('Tab', {screen: 'Ledger'})}>
+  //     <Typography type={'Body1Bold'} color={'primary'}>
+  //       Easybud
+  //     </Typography>
+  //   </TouchableOpacity>
+  // ),
+  // headerLeftContainerStyle: {
+  //   paddingLeft: 15,
+  // },
+  // headerRightContainerStyle: {
+  //   paddingRight: 15,
+  // },
+  // headerRight: () => (
+  //   <TouchableOpacity onPress={() => navigation.navigate('Setting')}>
+  //     <Icon name={'Setting'} size={24} />
+  //   </TouchableOpacity>
+  // ),
 });

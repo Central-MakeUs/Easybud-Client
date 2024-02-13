@@ -34,12 +34,20 @@ export default function AmountTextField({
   );
 
   const isButtonHidden = useMemo(() => {
-    if (balance === 0 || isEqual(amount, Math.abs(balance))) {
+    if (balance === 0) {
       return true;
     }
+    if (balance < 0 && isDebit(type) && isEqual(amount, balance)) {
+      return true;
+    }
+
+    if (balance > 0 && !isDebit(type) && isEqual(amount, Math.abs(balance))) {
+      return true;
+    }
+
     // return isDebit(type) ? balance < 0 : balance > 0;
     return false;
-  }, [amount, balance]);
+  }, [amount, balance, type]);
 
   return (
     <>

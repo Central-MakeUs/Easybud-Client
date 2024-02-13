@@ -75,9 +75,7 @@ export default function AddCardScreen() {
           <SelectFormBottomSheet
             label={'사용 기간'}
             categoryList={card.cardUsagePeriodList}
-            setCategoryList={cardUsagePeriodList =>
-              setCard(prev => ({...prev, cardUsagePeriodList}))
-            }
+            addCategory={console.log}
             isBottomSheetOpen={bottomSheet === BottomSheetType.CardUsagePeriod}
             setIsBottomSheetOpen={closeBottomSheet}
             onOpen={() => setBottomSheet(BottomSheetType.CardUsagePeriod)}
@@ -97,12 +95,7 @@ export default function AddCardScreen() {
           <SelectFormBottomSheet
             label={'결제일'}
             categoryList={card.paymentDateList}
-            setCategoryList={paymentDateList =>
-              setCard(prev => ({
-                ...prev,
-                paymentDateList,
-              }))
-            }
+            addCategory={console.log}
             isBottomSheetOpen={bottomSheet === BottomSheetType.Payment}
             setIsBottomSheetOpen={closeBottomSheet}
             onOpen={() => setBottomSheet(BottomSheetType.Payment)}

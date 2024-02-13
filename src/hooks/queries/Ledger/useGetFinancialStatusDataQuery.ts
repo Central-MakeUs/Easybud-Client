@@ -6,6 +6,7 @@ import {ledgerQueryKeys} from 'constants/queryKeys/ledger';
 export const useGetFinancialStatusDataQuery = () => {
   const {data: financialStatusData} = useQuery({
     initialData: defaultFinancialStatusData,
+    placeholderData: defaultFinancialStatusData,
     queryKey: [ledgerQueryKeys.financialStatusData],
     queryFn: ledgerApi.getFinancialStatusData,
   });

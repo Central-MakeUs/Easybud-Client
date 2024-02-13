@@ -1,4 +1,4 @@
-import React, {ReactElement, useState} from 'react';
+import React, {PropsWithChildren, ReactElement, useState} from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 import Typography from 'components/@common/Typography';
 import Icon from 'components/@common/Icon';
@@ -103,11 +103,7 @@ export function DetailButton({
 /**
  * @param children 자식 요소
  */
-type BottomElementProps = {
-  children: ReactElement;
-};
-
-export function BottomElement({children}: BottomElementProps) {
+export function BottomElement({children}: PropsWithChildren) {
   return <View>{children}</View>;
 }
 

@@ -15,7 +15,7 @@ import DebitCreditOverview from 'components/screens/CreateTransactionStack/Debit
 import UpdateButton from 'components/screens/CreateTransactionStack/UpdateButton';
 import Container from 'components/screens/CreateTransactionStack/Container';
 import {isEmpty} from 'lodash';
-import useMutateCreateTransaction from 'hooks/mutations/TransactionConfirmation/useMutateCreateTransaction';
+import useCreateTransaction from 'hooks/mutations/TransactionConfirmation/useCreateTransaction';
 
 type TransactionConfirmationScreenProps = {
   navigation: RootStackNavigationProp;
@@ -25,16 +25,9 @@ type TransactionConfirmationScreenProps = {
 export default function TransactionConfirmationScreen({
   navigation,
 }: TransactionConfirmationScreenProps) {
-  const {transaction, balance, accounts, deleteAccount, clearTransaction} =
-    useTransaction();
+  const {transaction, balance, accounts, deleteAccount} = useTransaction();
 
-  const {createTransaction, isPending} = useMutateCreateTransaction();
-
-  const handleSave = () => {
-    createTransaction(transaction);
-    clearTransaction();
-    navigation.navigate('Tab', {screen: 'Ledger'});
-  };
+  const {createTransaction, isPending} = useCreateTransaction();
 
   const navigateAddAccountScreen = () => {
     navigation.push('CreateTransactionStack', {
@@ -71,7 +64,17 @@ export default function TransactionConfirmationScreen({
     return `${summary} ${date}`;
   }, [transaction.date, transaction.summary]);
 
-  const disabledSubmit = useMemo(() => balance !== 0, [balance]);
+  const disabledSubmit = useMemo(() => {
+    // account validation
+    for (const account of accounts) {
+      const {amount, category} = account;
+      if (amount === 0 || category.tertiaryId === null) {
+        return true;
+      }
+    }
+
+    return balance !== 0;
+  }, [accounts, balance]);
 
   return (
     <Container
@@ -87,7 +90,9 @@ export default function TransactionConfirmationScreen({
           <Button variant="secondary" onPress={navigateAddAccountScreen}>
             새 계정 추가
           </Button>
-          <Button disabled={disabledSubmit || isPending} onPress={handleSave}>
+          <Button
+            disabled={disabledSubmit || isPending}
+            onPress={() => createTransaction()}>
             저장
           </Button>
         </>
@@ -107,15 +112,21 @@ export default function TransactionConfirmationScreen({
         </View>
         <DebitCreditOverview accounts={accounts} />
       </View>
-      {accounts.map((account, index) => (
-        <AccountDetails
-          key={index}
-          accountIndex={index}
-          account={account}
-          updateTransaction={navigateUpdateScreen}
-          deleteAccount={deleteAccount}
-        />
-      ))}
+      {accounts.map((account, index) => {
+        if (account.amount === 0) {
+          return null;
+        }
+
+        return (
+          <AccountDetails
+            key={index}
+            accountIndex={index}
+            account={account}
+            updateTransaction={navigateUpdateScreen}
+            deleteAccount={deleteAccount}
+          />
+        );
+      })}
     </Container>
   );
 }

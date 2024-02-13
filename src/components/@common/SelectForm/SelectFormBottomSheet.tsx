@@ -1,7 +1,6 @@
-import {Dispatch, SetStateAction, useState} from 'react';
+import {Dispatch, SetStateAction, useMemo, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {theme} from 'styles';
-import {AddCategoryText} from 'constants/components/SelectForm';
 import Typography from 'components/@common/Typography';
 import CategoryList from 'components/@common/SelectForm/CategoryList';
 import TextArea from 'components/@common/TextArea';
@@ -20,7 +19,7 @@ import BottomSheet from 'components/@common/BottomSheet/BottomSheet';
 export type SelectFormBottomSheetProps = {
   label: SelectFormProps['label'];
   categoryList: string[];
-  setCategoryList: (list: string[]) => void;
+  addCategory: (category: string) => void;
   onOpen: () => void;
   onClose: () => void;
   isBottomSheetOpen: boolean;
@@ -31,7 +30,7 @@ export type SelectFormBottomSheetProps = {
 export default function SelectFormBottomSheet({
   label,
   categoryList,
-  setCategoryList,
+  addCategory,
   isBottomSheetOpen,
   onOpen,
   onClose,
@@ -41,15 +40,20 @@ export default function SelectFormBottomSheet({
   const [inputState, setInputState] = useState(false);
   const [inputText, setInputText] = useState('');
 
-  const calculateBottomSheetHeight = () =>
-    categoryList.length >= 4 ? 270 : 200;
+  const height = useMemo(() => {
+    return categoryList.length >= 6
+      ? 500
+      : categoryList.length >= 4
+        ? 370
+        : 250;
+  }, [categoryList.length]);
 
   return (
     <BottomSheet
       isBottomSheetOpen={isBottomSheetOpen}
       onClose={onClose}
       onOpen={onOpen}
-      height={calculateBottomSheetHeight()}
+      height={height}
       setInputState={setInputState}>
       {renderBottomSheetChildren({
         label,
@@ -59,7 +63,7 @@ export default function SelectFormBottomSheet({
         setValue,
         setInputState,
         setInputText,
-        setCategoryList,
+        addCategory,
         setIsBottomSheetOpen,
       })}
     </BottomSheet>
@@ -73,11 +77,7 @@ export type RenderBottomSheetChildrenParamsType = {
   setInputState: Dispatch<SetStateAction<boolean>>;
 } & Pick<
   SelectFormBottomSheetProps,
-  | 'label'
-  | 'setValue'
-  | 'categoryList'
-  | 'setCategoryList'
-  | 'setIsBottomSheetOpen'
+  'label' | 'setValue' | 'categoryList' | 'addCategory' | 'setIsBottomSheetOpen'
 >;
 
 function renderBottomSheetChildren({
@@ -88,31 +88,27 @@ function renderBottomSheetChildren({
   setValue,
   setInputState,
   setInputText,
-  setCategoryList,
+  addCategory,
   setIsBottomSheetOpen,
 }: RenderBottomSheetChildrenParamsType) {
   const handlePressAddCategoryButton = () => {
     if (inputText.length) {
-      setCategoryList([
-        ...categoryList.slice(0, -1),
-        inputText,
-        AddCategoryText,
-      ]);
-      setValue(inputText);
-      setIsBottomSheetOpen(false);
+      addCategory(inputText);
       setInputState(false);
     }
   };
 
-  const height = categoryList.length >= 4 ? '50%' : '70%';
-
   return inputState ? (
-    <View style={[selectFormStyles.addCategoryBottomSheetContainer, {height}]}>
+    <View
+      style={[
+        selectFormStyles.addCategoryBottomSheetContainer,
+        {height: categoryList.length >= 4 ? '50%' : '70%'},
+      ]}>
       <TextArea setText={setInputText} placeholder="추가할 항목을 작성하세요" />
       <Button
         onPress={handlePressAddCategoryButton}
         disabled={!inputText.length}>
-        항목 추가하기
+        항목 추가
       </Button>
     </View>
   ) : (
@@ -138,12 +134,9 @@ const selectFormStyles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingBottom: 15,
   },
   addCategoryBottomSheetContainer: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    gap: 20,
     paddingHorizontal: 20,
   },
   bottomSheetDataListContainer: {

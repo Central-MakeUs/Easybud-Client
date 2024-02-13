@@ -34,6 +34,7 @@ export default function TransactionScreen() {
       />
       <View style={transactionScreenStyles.divider} />
       <TransactionList
+        variant="default"
         transactionList={transactionList}
         currentDate={currentDate}
       />

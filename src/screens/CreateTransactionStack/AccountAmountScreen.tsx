@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import AmountTextField from 'components/@common/TextFields/AmountTextField';
 import useAccount from 'hooks/useAccount';
@@ -20,6 +20,10 @@ export default function AccountAmountScreen({
 
   const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
 
+  useEffect(() => {
+    setUpdatedAccount(account);
+  }, [account, accountIndex]);
+
   const disabled = useMemo(
     () => updatedAccount.amount === 0,
     [updatedAccount.amount],
@@ -28,7 +32,6 @@ export default function AccountAmountScreen({
   return (
     <Container
       screen="AccountAmount"
-      accountIndex={accountIndex}
       header={{title: '금액을 입력해주세요'}}
       fixedBottomComponent={
         <>
