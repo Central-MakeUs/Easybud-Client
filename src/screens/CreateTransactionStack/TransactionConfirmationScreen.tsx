@@ -1,4 +1,4 @@
-import {useMemo} from 'react';
+import {useEffect, useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
   CreateTransactionStackScreenName,
@@ -15,7 +15,7 @@ import DebitCreditOverview from 'components/screens/CreateTransactionStack/Debit
 import UpdateButton from 'components/screens/CreateTransactionStack/UpdateButton';
 import Container from 'components/screens/CreateTransactionStack/Container';
 import {isEmpty} from 'lodash';
-import useMutateCreateTransaction from 'hooks/mutations/TransactionConfirmation/useMutateCreateTransaction';
+import useCreateTransaction from 'hooks/mutations/TransactionConfirmation/useCreateTransaction';
 
 type TransactionConfirmationScreenProps = {
   navigation: RootStackNavigationProp;
@@ -28,13 +28,14 @@ export default function TransactionConfirmationScreen({
   const {transaction, balance, accounts, deleteAccount, clearTransaction} =
     useTransaction();
 
-  const {createTransaction, isPending} = useMutateCreateTransaction();
+  const {createTransaction, isPending, isSuccess} = useCreateTransaction();
 
-  const handleSave = () => {
-    createTransaction(transaction);
-    clearTransaction();
-    navigation.navigate('Tab', {screen: 'Ledger'});
-  };
+  useEffect(() => {
+    if (isSuccess) {
+      clearTransaction();
+      navigation.navigate('Tab', {screen: 'Ledger'});
+    }
+  }, [clearTransaction, isSuccess, navigation]);
 
   const navigateAddAccountScreen = () => {
     navigation.push('CreateTransactionStack', {
@@ -87,7 +88,9 @@ export default function TransactionConfirmationScreen({
           <Button variant="secondary" onPress={navigateAddAccountScreen}>
             새 계정 추가
           </Button>
-          <Button disabled={disabledSubmit || isPending} onPress={handleSave}>
+          <Button
+            disabled={disabledSubmit || isPending}
+            onPress={() => createTransaction()}>
             저장
           </Button>
         </>

@@ -43,6 +43,7 @@ export default function TextInput({
       style={[
         styles.textFieldContainer,
         {
+          paddingBottom: 5,
           borderBottomColor:
             theme.palette[isFocused || value ? 'primary' : 'gray3'],
         },

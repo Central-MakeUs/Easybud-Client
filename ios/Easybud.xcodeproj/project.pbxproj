@@ -7,22 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		006198207AB844E88CD00F05 /* Pretendard-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 21A2529F3F3D47F98E657E91 /* Pretendard-ExtraLight.ttf */; };
 		00E356F31AD99517003FC87E /* EasybudTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* EasybudTests.m */; };
+		0B77190FEB074776AD0DF66C /* Pretendard-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF4416BE85BD4EBB96FF9A43 /* Pretendard-Medium.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		1CBA8477C938A081016F3745 /* libPods-Easybud-EasybudTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 35CB3E32A6E944EB3E8102AC /* libPods-Easybud-EasybudTests.a */; };
-		2E75A4E48D5846E3B9D366CF /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8E8FF08418A442B39BD7BDC6 /* Pretendard-Medium.otf */; };
-		7A9DAEB5F9534E73B2918975 /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FF2237D34A474E33BDDE4633 /* Pretendard-Regular.otf */; };
+		21FA69D338F34A1DA41A97DC /* Pretendard-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C215B118A90544C8BE1C9D42 /* Pretendard-Black.ttf */; };
+		33AFF9B4A6904EF0B2A3698B /* Pretendard-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 27313F080A724D85A863B4CA /* Pretendard-Bold.ttf */; };
+		4AF63EA0E66049A195202ABE /* Pretendard-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7EDBAF8C90824789A309F938 /* Pretendard-SemiBold.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		93527F9D0B314B52BF8BE316 /* PretendardVariable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 492DD12C6F2B4962AB999E75 /* PretendardVariable.ttf */; };
 		947FDFC5A8867D2A9E40D66A /* libPods-Easybud.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E41059E9DD1E2E12D72CA9BE /* libPods-Easybud.a */; };
-		A45C120B422644668AC282C2 /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = D43C9CA2971F4D66BB790253 /* Pretendard-Thin.otf */; };
-		AA6AEFAECD104FA2AB73CE52 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 1319AE6CD7224D58A31E79F2 /* Pretendard-ExtraLight.otf */; };
-		B788C5B3C3404112998B1B21 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = FE257D5D96714918877B26D6 /* Pretendard-ExtraBold.otf */; };
-		B9CD0BA99C8A4201B2D90692 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AD52489BA871409EA78A6652 /* Pretendard-Bold.otf */; };
-		DE2B4519929440B5A9514654 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 697B3BB2E8CC46DD8093C054 /* Pretendard-Light.otf */; };
-		F8488DC40BA94AA99DB35A46 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A0FCD10F881E4119B53CACB9 /* Pretendard-SemiBold.otf */; };
-		FDDF0234241544F0BDC8BBEE /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 80B01CE91A6D4A9E909B7CA3 /* Pretendard-Black.otf */; };
+		B76229C6519249598679E85D /* Pretendard-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C0AAC6EE9D234469A63D8142 /* Pretendard-ExtraBold.ttf */; };
+		CF8358D106264ADC9A39DB71 /* Pretendard-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 17A936F4BA994754B05BF4F8 /* Pretendard-Thin.ttf */; };
+		F9726AA1302F4F85BA6A6C13 /* Pretendard-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D1316FE982C48BA84DFBF29 /* Pretendard-Regular.ttf */; };
+		F99954D4190645A8B462B8D8 /* Pretendard-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC5911CC6C4F44D1A87574B6 /* Pretendard-Light.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,28 +42,29 @@
 		00E356F21AD99517003FC87E /* EasybudTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasybudTests.m; sourceTree = "<group>"; };
 		01F539B53C820CCC8B08E2E7 /* Pods-Easybud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easybud.release.xcconfig"; path = "Target Support Files/Pods-Easybud/Pods-Easybud.release.xcconfig"; sourceTree = "<group>"; };
 		0BBE3FFA2B766B9800F77D99 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
-		1319AE6CD7224D58A31E79F2 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraLight.otf"; path = "../src/assets/fonts/Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Easybud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Easybud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Easybud/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Easybud/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Easybud/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Easybud/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Easybud/main.m; sourceTree = "<group>"; };
+		17A936F4BA994754B05BF4F8 /* Pretendard-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Thin.ttf"; path = "../src/assets/fonts/Pretendard-Thin.ttf"; sourceTree = "<group>"; };
+		21A2529F3F3D47F98E657E91 /* Pretendard-ExtraLight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraLight.ttf"; path = "../src/assets/fonts/Pretendard-ExtraLight.ttf"; sourceTree = "<group>"; };
+		27313F080A724D85A863B4CA /* Pretendard-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Bold.ttf"; path = "../src/assets/fonts/Pretendard-Bold.ttf"; sourceTree = "<group>"; };
 		35CB3E32A6E944EB3E8102AC /* libPods-Easybud-EasybudTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Easybud-EasybudTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D760E9F133AA31D786EB062 /* Pods-Easybud.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easybud.debug.xcconfig"; path = "Target Support Files/Pods-Easybud/Pods-Easybud.debug.xcconfig"; sourceTree = "<group>"; };
-		697B3BB2E8CC46DD8093C054 /* Pretendard-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Light.otf"; path = "../src/assets/fonts/Pretendard-Light.otf"; sourceTree = "<group>"; };
-		80B01CE91A6D4A9E909B7CA3 /* Pretendard-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Black.otf"; path = "../src/assets/fonts/Pretendard-Black.otf"; sourceTree = "<group>"; };
+		492DD12C6F2B4962AB999E75 /* PretendardVariable.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = PretendardVariable.ttf; path = ../src/assets/fonts/PretendardVariable.ttf; sourceTree = "<group>"; };
+		7EDBAF8C90824789A309F938 /* Pretendard-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-SemiBold.ttf"; path = "../src/assets/fonts/Pretendard-SemiBold.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = Easybud/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8E8FF08418A442B39BD7BDC6 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Medium.otf"; path = "../src/assets/fonts/Pretendard-Medium.otf"; sourceTree = "<group>"; };
-		A0FCD10F881E4119B53CACB9 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-SemiBold.otf"; path = "../src/assets/fonts/Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
-		AD52489BA871409EA78A6652 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Bold.otf"; path = "../src/assets/fonts/Pretendard-Bold.otf"; sourceTree = "<group>"; };
-		D43C9CA2971F4D66BB790253 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Thin.otf"; path = "../src/assets/fonts/Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		8D1316FE982C48BA84DFBF29 /* Pretendard-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Regular.ttf"; path = "../src/assets/fonts/Pretendard-Regular.ttf"; sourceTree = "<group>"; };
+		C0AAC6EE9D234469A63D8142 /* Pretendard-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraBold.ttf"; path = "../src/assets/fonts/Pretendard-ExtraBold.ttf"; sourceTree = "<group>"; };
+		C215B118A90544C8BE1C9D42 /* Pretendard-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Black.ttf"; path = "../src/assets/fonts/Pretendard-Black.ttf"; sourceTree = "<group>"; };
+		CC5911CC6C4F44D1A87574B6 /* Pretendard-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Light.ttf"; path = "../src/assets/fonts/Pretendard-Light.ttf"; sourceTree = "<group>"; };
+		DF4416BE85BD4EBB96FF9A43 /* Pretendard-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Medium.ttf"; path = "../src/assets/fonts/Pretendard-Medium.ttf"; sourceTree = "<group>"; };
 		E41059E9DD1E2E12D72CA9BE /* libPods-Easybud.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Easybud.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E63F65BCA822A7B7B00971DF /* Pods-Easybud-EasybudTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easybud-EasybudTests.debug.xcconfig"; path = "Target Support Files/Pods-Easybud-EasybudTests/Pods-Easybud-EasybudTests.debug.xcconfig"; sourceTree = "<group>"; };
 		E8175C927A503D2E2FD59990 /* Pods-Easybud-EasybudTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easybud-EasybudTests.release.xcconfig"; path = "Target Support Files/Pods-Easybud-EasybudTests/Pods-Easybud-EasybudTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		FE257D5D96714918877B26D6 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-ExtraBold.otf"; path = "../src/assets/fonts/Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
-		FF2237D34A474E33BDDE4633 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Pretendard-Regular.otf"; path = "../src/assets/fonts/Pretendard-Regular.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,15 +107,16 @@
 		0C40686A69BA49F9A4E601DF /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				80B01CE91A6D4A9E909B7CA3 /* Pretendard-Black.otf */,
-				AD52489BA871409EA78A6652 /* Pretendard-Bold.otf */,
-				FE257D5D96714918877B26D6 /* Pretendard-ExtraBold.otf */,
-				1319AE6CD7224D58A31E79F2 /* Pretendard-ExtraLight.otf */,
-				697B3BB2E8CC46DD8093C054 /* Pretendard-Light.otf */,
-				8E8FF08418A442B39BD7BDC6 /* Pretendard-Medium.otf */,
-				FF2237D34A474E33BDDE4633 /* Pretendard-Regular.otf */,
-				A0FCD10F881E4119B53CACB9 /* Pretendard-SemiBold.otf */,
-				D43C9CA2971F4D66BB790253 /* Pretendard-Thin.otf */,
+				C215B118A90544C8BE1C9D42 /* Pretendard-Black.ttf */,
+				27313F080A724D85A863B4CA /* Pretendard-Bold.ttf */,
+				C0AAC6EE9D234469A63D8142 /* Pretendard-ExtraBold.ttf */,
+				21A2529F3F3D47F98E657E91 /* Pretendard-ExtraLight.ttf */,
+				CC5911CC6C4F44D1A87574B6 /* Pretendard-Light.ttf */,
+				DF4416BE85BD4EBB96FF9A43 /* Pretendard-Medium.ttf */,
+				8D1316FE982C48BA84DFBF29 /* Pretendard-Regular.ttf */,
+				7EDBAF8C90824789A309F938 /* Pretendard-SemiBold.ttf */,
+				17A936F4BA994754B05BF4F8 /* Pretendard-Thin.ttf */,
+				492DD12C6F2B4962AB999E75 /* PretendardVariable.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -281,15 +284,16 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				FDDF0234241544F0BDC8BBEE /* Pretendard-Black.otf in Resources */,
-				B9CD0BA99C8A4201B2D90692 /* Pretendard-Bold.otf in Resources */,
-				B788C5B3C3404112998B1B21 /* Pretendard-ExtraBold.otf in Resources */,
-				AA6AEFAECD104FA2AB73CE52 /* Pretendard-ExtraLight.otf in Resources */,
-				DE2B4519929440B5A9514654 /* Pretendard-Light.otf in Resources */,
-				2E75A4E48D5846E3B9D366CF /* Pretendard-Medium.otf in Resources */,
-				7A9DAEB5F9534E73B2918975 /* Pretendard-Regular.otf in Resources */,
-				F8488DC40BA94AA99DB35A46 /* Pretendard-SemiBold.otf in Resources */,
-				A45C120B422644668AC282C2 /* Pretendard-Thin.otf in Resources */,
+				21FA69D338F34A1DA41A97DC /* Pretendard-Black.ttf in Resources */,
+				33AFF9B4A6904EF0B2A3698B /* Pretendard-Bold.ttf in Resources */,
+				B76229C6519249598679E85D /* Pretendard-ExtraBold.ttf in Resources */,
+				006198207AB844E88CD00F05 /* Pretendard-ExtraLight.ttf in Resources */,
+				F99954D4190645A8B462B8D8 /* Pretendard-Light.ttf in Resources */,
+				0B77190FEB074776AD0DF66C /* Pretendard-Medium.ttf in Resources */,
+				F9726AA1302F4F85BA6A6C13 /* Pretendard-Regular.ttf in Resources */,
+				4AF63EA0E66049A195202ABE /* Pretendard-SemiBold.ttf in Resources */,
+				CF8358D106264ADC9A39DB71 /* Pretendard-Thin.ttf in Resources */,
+				93527F9D0B314B52BF8BE316 /* PretendardVariable.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +352,7 @@
 		};
 		436748FFC235F0383B678F96 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -478,6 +483,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E63F65BCA822A7B7B00971DF /* Pods-Easybud-EasybudTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -505,6 +511,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E8175C927A503D2E2FD59990 /* Pods-Easybud-EasybudTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = EasybudTests/Info.plist;
@@ -532,6 +539,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ANTUY43ZH8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Easybud/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -546,9 +554,13 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Easybud;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -560,6 +572,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = ANTUY43ZH8;
 				INFOPLIST_FILE = Easybud/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -573,8 +586,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = Easybud;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -613,6 +630,7 @@
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -686,6 +704,7 @@
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = i386;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
