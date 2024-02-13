@@ -87,7 +87,6 @@ const screenOptions: (props: {
     <SafeAreaView
       style={{
         margin: 15,
-        marginTop: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: theme.palette.gray1,
