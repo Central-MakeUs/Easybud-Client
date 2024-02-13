@@ -1,4 +1,4 @@
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useState} from 'react';
 import {CreateTransactionStackRouteProp} from 'navigators/types';
 import AmountTextField from 'components/@common/TextFields/AmountTextField';
 import useAccount from 'hooks/useAccount';
@@ -19,6 +19,10 @@ export default function AccountAmountScreen({
   const {account, balance} = useAccount({accountIndex});
 
   const [updatedAccount, setUpdatedAccount] = useState<NewAccount>(account);
+
+  useEffect(() => {
+    setUpdatedAccount(account);
+  }, [account, accountIndex]);
 
   const disabled = useMemo(
     () => updatedAccount.amount === 0,

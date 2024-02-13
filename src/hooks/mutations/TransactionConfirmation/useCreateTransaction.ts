@@ -16,11 +16,16 @@ export default function useCreateTransaction() {
       const transactionDTO: TransactionDTO = {
         date: transaction.date,
         summary: transaction.summary ?? '',
-        accounts: transaction.accounts.map(({amount, category, type}) => ({
-          accountType: getAccountType(type),
-          amount,
-          tertiaryCategoryId: category.tertiaryId as number,
-        })),
+        accounts: transaction.accounts
+          .filter(
+            ({amount, category}) =>
+              amount !== 0 && category.tertiaryId !== null,
+          )
+          .map(({amount, category, type}) => ({
+            accountType: getAccountType(type),
+            amount,
+            tertiaryCategoryId: category.tertiaryId as number,
+          })),
       };
 
       return transactionApi.postTransaction(transactionDTO);

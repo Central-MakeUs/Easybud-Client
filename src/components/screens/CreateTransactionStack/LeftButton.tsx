@@ -8,16 +8,26 @@ type LeftButtonProps = {
   isUpdateStep: boolean | undefined;
 } & TouchableOpacityProps;
 
-export default function LeftButton({isUpdateStep, ...props}: LeftButtonProps) {
+export default function LeftButton({
+  isUpdateStep,
+  onPress,
+  ...props
+}: LeftButtonProps) {
   const navigation = useNavigation<CreateTransactionStackNavigationProp>();
 
-  const onPress = () => {
+  const handlePress = () => {
     isUpdateStep
       ? navigation.navigate('TransactionConfirmation')
       : navigation.goBack();
   };
   return (
-    <Button {...props} variant="secondary" onPress={onPress}>
+    <Button
+      {...props}
+      variant="secondary"
+      onPress={event => {
+        onPress && onPress(event);
+        handlePress();
+      }}>
       이전
     </Button>
   );
