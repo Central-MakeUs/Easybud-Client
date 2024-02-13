@@ -26,7 +26,6 @@ export const transactionApi = {
 
   postTransaction: async (transaction: TransactionDTO) => {
     const response = await axiosApi.post(`/transactions`, transaction);
-    console.log(transaction.date);
     return response;
   },
 
