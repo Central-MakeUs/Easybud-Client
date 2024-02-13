@@ -20,14 +20,12 @@ export default function RecentTransactionOverview() {
           onPress={handlePressDetailButton}
         />
       </FinancialDataCardBase.TopElementContainer>
-      <FinancialDataCardBase.BottomElement
-        children={
-          <TransactionList
-            variant={'recent'}
-            transactionList={recentTransactionList}
-          />
-        }
-      />
+      <FinancialDataCardBase.BottomElement>
+        <TransactionList
+          variant={'recent'}
+          transactionList={recentTransactionList}
+        />
+      </FinancialDataCardBase.BottomElement>
     </FinancialDataCardBase.Container>
   );
 }
