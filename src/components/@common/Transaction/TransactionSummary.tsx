@@ -38,12 +38,25 @@ export default function TransactionSummary({
             transactionSummaryStyles.keyNoteDateContainer,
             {marginLeft: amount ? undefined : 'auto'},
           ]}>
-          <Typography type={'Body1Semibold'} color={'gray4'}>
-            {keyNote}
-          </Typography>
-          <Typography type={'Body1Semibold'} color={'gray4'}>
-            {date}
-          </Typography>
+          {amount ? (
+            <>
+              <Typography type={'Body1Semibold'} color={'gray4'}>
+                {date}
+              </Typography>
+              <Typography type={'Body1Semibold'} color={'gray4'}>
+                {keyNote}
+              </Typography>
+            </>
+          ) : (
+            <>
+              <Typography type={'Body1Semibold'} color={'gray4'}>
+                {keyNote}
+              </Typography>
+              <Typography type={'Body1Semibold'} color={'gray4'}>
+                {date}
+              </Typography>
+            </>
+          )}
         </View>
         {amount && (
           <View style={transactionSummaryStyles.amountContainer}>
