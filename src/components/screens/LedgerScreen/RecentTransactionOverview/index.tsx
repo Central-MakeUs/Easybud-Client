@@ -24,6 +24,7 @@ export default function RecentTransactionOverview() {
         <TransactionList
           variant={'recent'}
           transactionList={recentTransactionList}
+          currentDate={undefined}
         />
       </FinancialDataCardBase.BottomElement>
     </FinancialDataCardBase.Container>

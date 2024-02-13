@@ -10,17 +10,17 @@ import Typography from 'components/@common/Typography';
  * @param transactionList 거래 데이터 배열
  * @param variant 최근 거래 리스트인지 기본 거래 리스트인지 여부
  */
-export type TransactionListType = {
+export type TransactionListType<T extends TransactionListVariant> = {
   transactionList: TransactionResponseDto[];
-  variant?: TransactionListVariant;
-  currentDate?: Date;
+  variant?: T;
+  currentDate?: T extends 'default' ? Date : undefined;
 };
 
-export default function TransactionList({
+export default function TransactionList<T extends TransactionListVariant>({
   transactionList,
-  variant = 'default',
-  currentDate = new Date(),
-}: TransactionListType) {
+  variant,
+  currentDate,
+}: TransactionListType<T>) {
   const getAmount = (debitAccounts: DebitCreditEntity[]) => {
     let amount = 0;
 
@@ -60,8 +60,8 @@ export default function TransactionList({
       ) : (
         <View style={transactionListStyles.noTransactionTextContainer}>
           <Typography type={'Body1Semibold'} color={'gray6'}>
-            {new Date(currentDate).getMonth() + 1}월{' '}
-            {new Date(currentDate).getDate()}일에는 거래가 없습니다.
+            {new Date(currentDate!).getMonth() + 1}월{' '}
+            {new Date(currentDate!).getDate()}일에는 거래가 없습니다.
           </Typography>
           <Typography type={'Body1Semibold'} color={'gray6'}>
             거래 추가 후 다시 확인해주세요.
