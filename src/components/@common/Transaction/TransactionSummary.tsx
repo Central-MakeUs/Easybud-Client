@@ -44,7 +44,7 @@ export default function TransactionSummary({
                 {date}
               </Typography>
               <Typography type={'Body1Semibold'} color={'gray4'}>
-                {keyNote}
+                {keyNote.length >= 6 ? `${keyNote.slice(5)}...` : keyNote}
               </Typography>
             </>
           ) : (
