@@ -7,17 +7,12 @@ export const useGetIncomeStatusDataQuery = (
   startDate: string,
   endDate: string,
 ) => {
-  const {data: incomeStatusData = defaultIncomeStatusData} = useQuery({
+  const {data: incomeStatusData} = useQuery({
     queryKey: [ledgerQueryKeys.incomeStatusData],
     queryFn: () => ledgerApi.getIncomeStatusData(startDate, endDate),
+    placeholderData: defaultIncomeStatusData,
+    initialData: defaultIncomeStatusData,
   });
 
-  return {
-    revenue: incomeStatusData.revenue,
-    expense: incomeStatusData.expense,
-    revenuePercentage: incomeStatusData.revenuePercentage,
-    expensePercentage: incomeStatusData.expensePercentage,
-    revenueChangePercentage: incomeStatusData.revenueChangePercentage,
-    expenseChangePercentage: incomeStatusData.expenseChangePercentage,
-  };
+  return incomeStatusData;
 };
