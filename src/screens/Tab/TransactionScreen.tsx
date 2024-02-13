@@ -33,10 +33,7 @@ export default function TransactionScreen() {
         setCurrentDate={setCurrentDate}
       />
       <View style={transactionScreenStyles.divider} />
-      <TransactionList
-        transactionList={transactionList}
-        currentDate={currentDate}
-      />
+      <TransactionList transactionList={transactionList} />
     </ScreenContainer>
   );
 }

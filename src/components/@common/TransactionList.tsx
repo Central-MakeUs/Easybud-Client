@@ -13,13 +13,13 @@ import Typography from 'components/@common/Typography';
 export type TransactionListType = {
   transactionList: TransactionResponseDto[];
   variant?: TransactionListVariant;
-  currentDate: Date;
+  currentDate?: Date;
 };
 
 export default function TransactionList({
   transactionList,
   variant = 'default',
-  currentDate,
+  currentDate = new Date(),
 }: TransactionListType) {
   const getAmount = (debitAccounts: DebitCreditEntity[]) => {
     let amount = 0;
