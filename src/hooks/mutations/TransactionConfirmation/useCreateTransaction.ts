@@ -34,7 +34,7 @@ export default function useCreateTransaction() {
       return transactionApi.postTransaction(transactionDTO);
     },
     onSuccess: () => {
-      queryClient.removeQueries();
+      queryClient.refetchQueries();
 
       navigation.navigate('Tab', {screen: 'Ledger'});
     },
