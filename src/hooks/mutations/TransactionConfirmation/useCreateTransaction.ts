@@ -9,7 +9,7 @@ export default function useCreateTransaction() {
   const queryClient = useQueryClient();
 
   const navigation = useNavigation();
-  const {transaction, clearTransaction} = useTransaction();
+  const {transaction} = useTransaction();
 
   const {mutate: createTransaction, ...props} = useMutation({
     mutationFn: () => {
@@ -37,8 +37,6 @@ export default function useCreateTransaction() {
       queryClient.removeQueries();
 
       navigation.navigate('Tab', {screen: 'Ledger'});
-
-      clearTransaction();
     },
   });
 
