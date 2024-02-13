@@ -1,4 +1,4 @@
-import {useEffect, useMemo} from 'react';
+import {useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {
   CreateTransactionStackScreenName,
@@ -25,17 +25,9 @@ type TransactionConfirmationScreenProps = {
 export default function TransactionConfirmationScreen({
   navigation,
 }: TransactionConfirmationScreenProps) {
-  const {transaction, balance, accounts, deleteAccount, clearTransaction} =
-    useTransaction();
+  const {transaction, balance, accounts, deleteAccount} = useTransaction();
 
-  const {createTransaction, isPending, isSuccess} = useCreateTransaction();
-
-  useEffect(() => {
-    if (isSuccess) {
-      clearTransaction();
-      navigation.navigate('Tab', {screen: 'Ledger'});
-    }
-  }, [clearTransaction, isSuccess, navigation]);
+  const {createTransaction, isPending} = useCreateTransaction();
 
   const navigateAddAccountScreen = () => {
     navigation.push('CreateTransactionStack', {
@@ -72,7 +64,17 @@ export default function TransactionConfirmationScreen({
     return `${summary} ${date}`;
   }, [transaction.date, transaction.summary]);
 
-  const disabledSubmit = useMemo(() => balance !== 0, [balance]);
+  const disabledSubmit = useMemo(() => {
+    // account validation
+    for (const account of accounts) {
+      const {amount, category} = account;
+      if (amount === 0 || category.tertiaryId === null) {
+        return true;
+      }
+    }
+
+    return balance !== 0;
+  }, [accounts, balance]);
 
   return (
     <Container
@@ -110,15 +112,21 @@ export default function TransactionConfirmationScreen({
         </View>
         <DebitCreditOverview accounts={accounts} />
       </View>
-      {accounts.map((account, index) => (
-        <AccountDetails
-          key={index}
-          accountIndex={index}
-          account={account}
-          updateTransaction={navigateUpdateScreen}
-          deleteAccount={deleteAccount}
-        />
-      ))}
+      {accounts.map((account, index) => {
+        if (account.amount === 0) {
+          return null;
+        }
+
+        return (
+          <AccountDetails
+            key={index}
+            accountIndex={index}
+            account={account}
+            updateTransaction={navigateUpdateScreen}
+            deleteAccount={deleteAccount}
+          />
+        );
+      })}
     </Container>
   );
 }
