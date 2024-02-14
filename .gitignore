@@ -33,6 +33,7 @@ local.properties
 .cxx/
 *.keystore
 !debug.keystore
+android/gradle.properties
 
 # node.js
 #
@@ -66,3 +67,7 @@ yarn-error.log
 .eslintcache
 
 .env
+
+android/app/google-services.json
+
+android/gradle.properties
