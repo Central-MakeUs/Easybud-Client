@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React, { ReactNode } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -7,9 +7,10 @@ import {
   ActivityIndicator,
   View,
   ScrollViewProps,
+  SafeAreaView,
 } from 'react-native';
-import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import {theme} from 'styles';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { theme } from 'styles';
 
 /**
  * @param children 자식 요소
@@ -19,37 +20,47 @@ import {theme} from 'styles';
 type ScreenContainerProps = {
   children: ReactNode;
   loading?: boolean;
+  backgroundColor?: string;
   fixedBottomComponent?: ReactNode;
   style?: React.CSSProperties | Array<React.CSSProperties>;
 } & ScrollViewProps;
 
 /** Use ScrollViewProps */
 export default function ScreenContainer({
+  backgroundColor = theme.palette.gray1,
   children,
   loading,
   fixedBottomComponent,
   ...props
 }: ScreenContainerProps) {
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView style={{flex: 1, backgroundColor}}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardAvoidingView}>
-        <ScrollView
-          contentContainerStyle={[
-            styles.scrollViewContent,
-            props?.style,
-            props?.contentContainerStyle,
-          ]}
-          keyboardShouldPersistTaps="handled">
-          {loading ? (
-            <View style={styles.loadingContainer}>
-              <ActivityIndicator size="large" color={theme.palette.primary} />
+        style={[styles.keyboardAvoidingView, {backgroundColor}]}>
+        <SafeAreaView style={{flex: 1, backgroundColor}}>
+          <ScrollView
+            contentContainerStyle={[
+              styles.scrollViewContent,
+              {backgroundColor},
+              props?.style,
+              props?.contentContainerStyle,
+            ]}
+            keyboardShouldPersistTaps="handled">
+            {loading ? (
+              <View style={[styles.loadingContainer, {backgroundColor}]}>
+                <ActivityIndicator size="large" color={theme.palette.primary} />
+              </View>
+            ) : (
+              children
+            )}
+          </ScrollView>
+          {fixedBottomComponent && (
+            <View style={[styles.fixedBottomComponent, {backgroundColor}]}>
+              {fixedBottomComponent}
             </View>
-          ) : (
-            children
           )}
-        </ScrollView>
+        </SafeAreaView>
         {fixedBottomComponent && (
           <View style={styles.fixedBottomComponent}>
             {fixedBottomComponent}
@@ -63,7 +74,6 @@ export default function ScreenContainer({
 const styles = StyleSheet.create({
   keyboardAvoidingView: {flex: 1},
   scrollViewContent: {
-    backgroundColor: theme.palette.gray1,
     paddingBottom: 30,
     paddingHorizontal: 20,
     flexGrow: 1,

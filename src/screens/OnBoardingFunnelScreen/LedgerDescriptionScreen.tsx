@@ -20,6 +20,7 @@ export default function LedgerDescriptionScreen({
           다음
         </Button>
       }
+      backgroundColor={theme.palette.gray2}
       contentContainerStyle={ledgerDescriptionScreenStyles.container}>
       <View style={ledgerDescriptionScreenStyles.textContainer}>
         <Typography
