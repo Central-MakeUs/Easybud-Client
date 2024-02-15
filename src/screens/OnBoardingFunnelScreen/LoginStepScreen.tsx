@@ -58,7 +58,6 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
           : '회원'
       : '회원';
 
-    console.log('authState', idToken, username, authState);
     if (idToken && authState === appleAuth.State.AUTHORIZED) {
       authMutation.mutate(
         {type: 'APPLE', idToken},
@@ -67,7 +66,7 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
           onSuccess: ({accessToken, refreshToken, type}) => {
             setAuthData({accessToken, refreshToken});
             setUserInfo({username});
-            console.log('accessTokenaccessToken', accessToken, refreshToken);
+
             onNext(type);
           },
         },
