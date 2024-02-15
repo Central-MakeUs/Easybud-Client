@@ -1,5 +1,5 @@
-import {useSetRecoilState} from 'recoil';
 import {Image, StyleSheet, View} from 'react-native';
+import {useSetRecoilState} from 'recoil';
 import {
   getProfile,
   loginWithKakaoAccount,

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, {ReactNode} from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -9,8 +9,8 @@ import {
   ScrollViewProps,
   SafeAreaView,
 } from 'react-native';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { theme } from 'styles';
+import {GestureHandlerRootView} from 'react-native-gesture-handler';
+import {theme} from 'styles';
 
 /**
  * @param children 자식 요소
@@ -61,11 +61,6 @@ export default function ScreenContainer({
             </View>
           )}
         </SafeAreaView>
-        {fixedBottomComponent && (
-          <View style={styles.fixedBottomComponent}>
-            {fixedBottomComponent}
-          </View>
-        )}
       </KeyboardAvoidingView>
     </GestureHandlerRootView>
   );

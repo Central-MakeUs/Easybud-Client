@@ -111,10 +111,16 @@ export default function AccountCategoryScreen({
 
   const tertiaryCategoryList = useMemo(() => {
     if (secondaryCategory && secondaryCategory.subList.length > 0) {
-      return [
-        ...secondaryCategory.subList.map(secondary => secondary.name),
-        AddCategoryText,
-      ];
+      const tertiaryCategories = secondaryCategory.subList.map(
+        secondary => secondary.name,
+      );
+
+      // 소분류 카테고리 대신 카드 리스트가 내려오는 경우 항목 추가 기능 제한
+      if (secondaryCategory.id === 8) {
+        return tertiaryCategories;
+      }
+
+      return [...tertiaryCategories, AddCategoryText];
     }
     return [AddCategoryText];
   }, [secondaryCategory]);
@@ -238,8 +244,6 @@ export default function AccountCategoryScreen({
                       secondaryCategoryId: secondaryCategory.id,
                       tertiaryCategoryContent: category,
                     });
-
-                    // setValue
                   }}
                   isBottomSheetOpen={bottomSheet === BottomSheetType.Tertiary}
                   setIsBottomSheetOpen={close}
@@ -250,7 +254,10 @@ export default function AccountCategoryScreen({
                       (secondaryCategory as SecondaryCategory).subList,
                       {name: tertiaryName},
                     ) as TertiaryCategory;
-
+                    // 카드 리스트 내려오는 카테고리의 경우 항목 추가 제한
+                    if (secondaryCategory?.id === 8) {
+                      return;
+                    }
                     setUpdatedAccount(prev => ({
                       ...prev,
                       category: {...prev.category, tertiaryId: tertiary.id},
