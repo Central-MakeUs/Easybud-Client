@@ -20,32 +20,35 @@ import {theme} from 'styles';
 type ScreenContainerProps = {
   children: ReactNode;
   loading?: boolean;
+  backgroundColor?: string;
   fixedBottomComponent?: ReactNode;
   style?: React.CSSProperties | Array<React.CSSProperties>;
 } & ScrollViewProps;
 
 /** Use ScrollViewProps */
 export default function ScreenContainer({
+  backgroundColor = theme.palette.gray1,
   children,
   loading,
   fixedBottomComponent,
   ...props
 }: ScreenContainerProps) {
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView style={{flex: 1, backgroundColor}}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardAvoidingView}>
-        <SafeAreaView style={{flex: 1}}>
+        style={[styles.keyboardAvoidingView, {backgroundColor}]}>
+        <SafeAreaView style={{flex: 1, backgroundColor}}>
           <ScrollView
             contentContainerStyle={[
               styles.scrollViewContent,
+              {backgroundColor},
               props?.style,
               props?.contentContainerStyle,
             ]}
             keyboardShouldPersistTaps="handled">
             {loading ? (
-              <View style={styles.loadingContainer}>
+              <View style={[styles.loadingContainer, {backgroundColor}]}>
                 <ActivityIndicator size="large" color={theme.palette.primary} />
               </View>
             ) : (
@@ -53,7 +56,7 @@ export default function ScreenContainer({
             )}
           </ScrollView>
           {fixedBottomComponent && (
-            <View style={styles.fixedBottomComponent}>
+            <View style={[styles.fixedBottomComponent, {backgroundColor}]}>
               {fixedBottomComponent}
             </View>
           )}
@@ -66,7 +69,6 @@ export default function ScreenContainer({
 const styles = StyleSheet.create({
   keyboardAvoidingView: {flex: 1},
   scrollViewContent: {
-    backgroundColor: theme.palette.gray1,
     paddingBottom: 30,
     paddingHorizontal: 20,
     flexGrow: 1,

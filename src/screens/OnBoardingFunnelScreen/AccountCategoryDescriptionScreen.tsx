@@ -18,6 +18,7 @@ export default function AccountCategoryDescriptionScreen({
           다음
         </Button>
       }
+      backgroundColor={theme.palette.gray2}
       contentContainerStyle={accountCategoryDescriptionScreenStyles.container}>
       <View style={accountCategoryDescriptionScreenStyles.textContainer}>
         <Typography
