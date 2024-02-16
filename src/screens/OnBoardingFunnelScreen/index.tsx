@@ -14,6 +14,8 @@ export default function OnBoardingFunnelScreen() {
 
   const {setAuthData} = useInitialData();
 
+  console.log(1);
+
   const stepInfoList = {
     Step1: (
       <LoginStepScreen
