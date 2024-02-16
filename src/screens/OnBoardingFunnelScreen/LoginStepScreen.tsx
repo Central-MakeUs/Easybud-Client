@@ -40,7 +40,6 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
       },
     );
   };
-
   const handlePressAppleLoginButton = async () => {
     const {
       user,
@@ -51,11 +50,9 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
     const authState = await appleClient.getUserAuthState(user);
 
     const username = fullName
-      ? fullName.nickname
-        ? fullName.nickname
-        : fullName.familyName && fullName.givenName
-          ? `${fullName.familyName}${fullName.givenName}`
-          : '회원'
+      ? fullName?.nickname
+        ? fullName?.nickname
+        : '회원'
       : '회원';
 
     if (idToken && authState === appleAuth.State.AUTHORIZED) {
