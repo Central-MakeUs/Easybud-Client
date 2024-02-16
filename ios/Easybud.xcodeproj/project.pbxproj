@@ -42,6 +42,7 @@
 		00E356F21AD99517003FC87E /* EasybudTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EasybudTests.m; sourceTree = "<group>"; };
 		01F539B53C820CCC8B08E2E7 /* Pods-Easybud.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Easybud.release.xcconfig"; path = "Target Support Files/Pods-Easybud/Pods-Easybud.release.xcconfig"; sourceTree = "<group>"; };
 		0BBE3FFA2B766B9800F77D99 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		0BDAFB9D2B7D35530098C9EF /* Easybud.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Easybud.entitlements; path = Easybud/Easybud.entitlements; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Easybud.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Easybud.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Easybud/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = Easybud/AppDelegate.mm; sourceTree = "<group>"; };
@@ -124,6 +125,7 @@
 		13B07FAE1A68108700A75B9A /* Easybud */ = {
 			isa = PBXGroup;
 			children = (
+				0BDAFB9D2B7D35530098C9EF /* Easybud.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -541,8 +543,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Easybud/Easybud.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ANTUY43ZH8;
+				DEVELOPMENT_TEAM = 69F5355JYF;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = Easybud/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -555,7 +558,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.softsquared.cmc.easybud;
 				PRODUCT_NAME = Easybud;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -563,7 +566,7 @@
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -574,8 +577,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Easybud/Easybud.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = ANTUY43ZH8;
+				DEVELOPMENT_TEAM = 69F5355JYF;
 				INFOPLIST_FILE = Easybud/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -587,14 +591,14 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.softsquared.cmc.easybud;
 				PRODUCT_NAME = Easybud;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

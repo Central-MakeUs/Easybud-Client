@@ -254,10 +254,7 @@ export default function AccountCategoryScreen({
                       (secondaryCategory as SecondaryCategory).subList,
                       {name: tertiaryName},
                     ) as TertiaryCategory;
-                    // 카드 리스트 내려오는 카테고리의 경우 항목 추가 제한
-                    if (secondaryCategory?.id === 8) {
-                      return;
-                    }
+
                     setUpdatedAccount(prev => ({
                       ...prev,
                       category: {...prev.category, tertiaryId: tertiary.id},
