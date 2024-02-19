@@ -112,9 +112,11 @@ const styles = StyleSheet.create({
     gap: 15,
   },
   debitCreditTextContainer: {
-    paddingVertical: 3,
-    paddingHorizontal: 8,
     width: 40,
+    height: 24,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 4,
   },
   list: {
