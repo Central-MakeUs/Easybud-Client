@@ -47,7 +47,7 @@ export default function FinancialStatusOverview() {
       </FinancialDataCardBase.Container>
       <Tooltip
         isVisible={showTooltipText}
-        text={'기초 순자산을 설정하세요!'}
+        text={'최초 순자산을 설정하세요!'}
         position={{
           top: 29,
           left: 23,
