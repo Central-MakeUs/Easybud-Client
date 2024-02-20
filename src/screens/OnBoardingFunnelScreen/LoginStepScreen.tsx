@@ -48,6 +48,9 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
       identityToken: idToken,
     } = await appleClient.fetchLogin();
 
+    if (!user) {
+      return;
+    }
     const authState = await appleClient.getUserAuthState(user);
 
     const username = fullName
