@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Platform, View} from 'react-native';
+import {Image, StyleSheet, View} from 'react-native';
 import {useSetRecoilState} from 'recoil';
 import {
   getProfile,
@@ -40,6 +40,7 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
       },
     );
   };
+
   const handlePressAppleLoginButton = async () => {
     const {
       user,
@@ -72,31 +73,36 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
   };
 
   return (
-    <ScreenContainer style={loginStyles.container}>
-      <View style={loginStyles.imageContainer}>
-        <Image source={Logo} style={loginStyles.image} />
-      </View>
-      <View style={loginStyles.titleContainer}>
-        <Typography type={'Title1Semibold1'} color={'white'}>
-          가장 편한 방법으로 시작하세요
-        </Typography>
-      </View>
-      <View style={loginStyles.bodyContainer}>
-        <Typography type={'Body2Semibold'} color={'white'}>
-          1분만에{' '}
-        </Typography>
-        <Typography type={'Body2Regular'} color={'white'}>
-          빠른 회원가입
-        </Typography>
-      </View>
-      <View style={loginStyles.buttonContainer}>
-        <SocialLoginButton
-          variant="kakao"
-          onPress={handlePressKakaoLoginButton}
-        />
-        {Platform.OS === 'ios' && (
-          <SocialLoginButton variant="apple" onPress={() => {}} />
-        )}
+    <ScreenContainer
+      style={loginStyles.container}
+      backgroundColor={theme.palette.primary}>
+      <View style={{justifyContent: 'space-between', height: '100%'}}>
+        <View style={loginStyles.titleContainer}>
+          <Typography type={'Title1Semibold1'} color={'white'}>
+            가장 편한 방법으로 시작하세요
+          </Typography>
+          <View style={loginStyles.bodyContainer}>
+            <Typography type={'Body2Semibold'} color={'white'}>
+              1분만에{' '}
+            </Typography>
+            <Typography type={'Body2Regular'} color={'white'}>
+              빠른 회원가입
+            </Typography>
+          </View>
+        </View>
+        <View style={loginStyles.imageContainer}>
+          <Image source={Logo} style={loginStyles.image} />
+        </View>
+        <View style={loginStyles.buttonContainer}>
+          <SocialLoginButton
+            variant="kakao"
+            onPress={handlePressKakaoLoginButton}
+          />
+          <SocialLoginButton
+            variant="apple"
+            onPress={handlePressAppleLoginButton}
+          />
+        </View>
       </View>
     </ScreenContainer>
   );
@@ -104,7 +110,7 @@ export default function LoginStepScreen({onNext}: LoginStepScreenProps) {
 
 const loginStyles = StyleSheet.create({
   container: {
-    paddingTop: 30,
+    paddingTop: 50,
     paddingBottom: 30,
   },
   imageContainer: {
